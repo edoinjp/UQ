@@ -4,6 +4,11 @@ require 'faker'
 # Clear previous records
 puts 'Destroying all previous records'
 User.destroy_all
+puts 'All users are destroyed'
+Classroom.destroy_all
+puts 'All classrooms are destroyed'
+Lesson.destroy_all
+puts 'All lessons are destroyed'
 
 # Seed Teacher
 puts 'Creating teacher...'
@@ -35,16 +40,75 @@ puts 'All students are done!'
 # Seed Classroom
 puts 'Creating classroom...'
 classroom = Classroom.create!(
-  teacher_id: teacher.id
+  user: teacher
 )
-puts "Mr. #{classroom.teacher_id.last_name}'s classroom has been created!"
+puts "Mr. DuPaty's classroom has been created!"
 
 # Seed Lesson
 puts 'Creating a lesson...'
 lesson = Lesson.create!(
-  classroom_id: classroom.id,
+  classroom: classroom,
   title: "Oral Communication"
 )
-puts "The #{lesson.title} class has been created!"
+puts "The #{lesson.title} seed lesson has been created!"
 
+# 1st Seed Question
+puts 'Creating lesson quiz questions...'
+question_1 = Question.create!(
+  lesson: lesson,
+  description: 'What does the CEFR exam evaluate?' # Will need to change this data type
+)
+puts "The #{lesson.title} homework questions have been created!"
 
+# 1st Seed Choices
+puts 'Creating lesson quiz choices...'
+Choice.create!(
+  question: question_1,
+  description: 'It is good for your reading practice.', # Will need to change this data type
+  correct: false
+)
+Choice.create!(
+  question: question_1,
+  description: 'It is valuable in Japanese universities.', # Will need to change this data type
+  correct: false
+)
+Choice.create!(
+  question: question_1,
+  description: 'It evaluates your conversation skill.', # Will need to change this data type
+  correct: true
+)
+Choice.create!(
+  question: question_1,
+  description: 'It can help you with your listening.', # Will need to change this data type
+  correct: false
+)
+
+# 2nd Seed Question
+question_2 = Question.create!(
+  lesson: lesson,
+  description: 'Who\'s the GOAT of the NBA?' # Will need to change this data type
+)
+
+# 2nd Seed Choices
+puts 'Creating lesson quiz choices...'
+Choice.create!(
+  question: question_2,
+  description: 'Kobe Bryant', # Will need to change this data type
+  correct: false
+)
+Choice.create!(
+  question: question_2,
+  description: 'Michael Jordan', # Will need to change this data type
+  correct: true
+)
+Choice.create!(
+  question: question_2,
+  description: 'Lebron James', # Will need to change this data type
+  correct: false
+)
+Choice.create!(
+  question: question_2,
+  description: 'Wilt Chamberlain', # Will need to change this data type
+  correct: false
+)
+puts 'All choices are done!'
