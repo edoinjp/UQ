@@ -31,3 +31,10 @@ puts 'Creating students...'
   puts "#{student.first_name} has been created!"
 end
 puts 'All students are done!'
+
+# Seed Classroom
+puts 'Creating classroom...'
+classroom = Classroom.create!(
+  teacher_id: teacher.id
+)
+puts "Mr. #{classroom.teacher_id.last_name}'s classroom has been created!"
