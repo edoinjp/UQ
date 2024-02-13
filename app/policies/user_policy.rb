@@ -5,4 +5,9 @@ class UserPolicy < ApplicationPolicy
     #   scope.all
     # end
   end
+
+  def show?
+    # Ony user with attribute teacher can see other users
+    user.teacher? && record != user
+  end
 end
