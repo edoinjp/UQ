@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: "pages#home"
+  root to: "home#home"  # Root path for the home action in HomeController
 
   resources :classrooms, only: %i[index new create show]
   resources :users, only: [:show]
