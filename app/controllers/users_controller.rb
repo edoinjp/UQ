@@ -5,8 +5,9 @@ class UsersController < ApplicationController
 
   def show
     authorize @user
-    @lessons = @user.classrooms.first.lessons.first
-    @quiz_score = rand(1..5)
+    @classroom = @user.classrooms_as_student.first
+    @lessons = @classroom ? @classroom.lessons.first : nil
+    @quiz_score = @lesson ? rand(1..5) : 'N/A'
   end
 
   private

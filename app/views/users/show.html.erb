@@ -1,13 +1,9 @@
-<div class="user-profile">
-  <div class="user-details">
-    <h2><%= @user.first_name %>'s Profile</h2>
-    <p><strong>Preferred Learning Style:</strong> <%= @user.learning_style %></p>
-  </div>
+<h1><%= @user.first_name %>'s Profile</h1>
+<p>Preferred Learning Style: <%= @user.learning_style %></p>
 
-  <% @quiz_scores.each do |quiz_score| %>
-    <div class="lesson-quiz-results">
-      <h3>Lesson: <%= quiz_score[:lesson].title %></h3>
-      <p>Quiz Score: <%= quiz_score[:score] %> out of 5</p>
-    </div>
-  <% end %>
-</div>
+<% if @lesson %>
+  <h2>Lesson: <%= @lesson.title %></h2>
+  <p>Quiz Score: <%= @quiz_score %> out of 5</p>
+<% else %>
+  <p>No lesson information available.</p>
+<% end %>
