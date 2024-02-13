@@ -4,9 +4,10 @@
     <p><strong>Preferred Learning Style:</strong> <%= @user.learning_style %></p>
   </div>
 
-  <div class="lesson-quiz-results">
-    <h3>Lesson: <%= @lesson.title %></h3>
-    <p>Quiz Score: <%= @quiz_score %> out of 5</p>
-    <!-- replace @lesson and @quiz_score with actual data later -->
-  </div>
+  <% @quiz_scores.each do |quiz_score| %>
+    <div class="lesson-quiz-results">
+      <h3>Lesson: <%= quiz_score[:lesson].title %></h3>
+      <p>Quiz Score: <%= quiz_score[:score] %> out of 5</p>
+    </div>
+  <% end %>
 </div>
