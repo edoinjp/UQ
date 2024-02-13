@@ -1,4 +1,16 @@
 class ClassroomPolicy < ApplicationPolicy
+  def index?
+    user.teacher?
+  end
+
+  def new?
+    user.teacher? # Adjust this based on your user roles
+  end
+
+  def create?
+    user.teacher?
+  end
+
   class Scope < Scope
     def resolve
       if user.teacher?
@@ -9,3 +21,10 @@ class ClassroomPolicy < ApplicationPolicy
     end
   end
 end
+
+
+
+# def index?
+#   Rails.logger.debug("Current User: #{user.inspect}")
+#   user.teacher? # Adjust this based on your user roles
+# end

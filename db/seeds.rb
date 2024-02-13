@@ -23,6 +23,7 @@ teacher = User.create!(
   password: 'password',
   teacher: true
 )
+puts teacher.persisted?
 puts "Mr. #{teacher.last_name} has been created!"
 
 # Seed Students
@@ -43,7 +44,9 @@ puts 'All students are done!'
 # Seed Classroom
 puts 'Creating classroom...'
 classroom = Classroom.create!(
-  user: teacher
+  user: teacher,
+  name: "Classroom Name",
+
 )
 puts "Mr. DuPaty's classroom has been created!"
 

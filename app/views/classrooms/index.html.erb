@@ -1,7 +1,19 @@
-<!-- app/views/classrooms/index.html.erb -->
-<h1>Your Classrooms</h1>
-<ul>
-  <% @classrooms.each do |classroom| %>
-    <li><%= link_to classroom.name, classroom_path(classroom) %></li>
-  <% end %>
-</ul>
+
+
+<h1>All Classrooms</h1>
+
+<% if @classrooms.any? %>
+  <ul>
+    <% @classrooms.each do |classroom| %>
+      <li>
+        <%= link_to classroom.name, classroom_path(classroom) %>
+
+        <!-- Add other classroom details as needed -->
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No classrooms found.</p>
+<% end %>
+
+<%= link_to "Create a New Classroom", new_classroom_path %>

@@ -4,4 +4,6 @@ class Classroom < ApplicationRecord
   has_many :students, through: :participations, source: :user
 
   has_many :lessons, dependent: :destroy
+  validates :name, presence: true
+  # validates :title, presence: true
 end
