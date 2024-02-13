@@ -38,3 +38,13 @@ classroom = Classroom.create!(
   teacher_id: teacher.id
 )
 puts "Mr. #{classroom.teacher_id.last_name}'s classroom has been created!"
+
+# Seed Lesson
+puts 'Creating a lesson...'
+lesson = Lesson.create!(
+  classroom_id: classroom.id,
+  title: "Oral Communication"
+)
+puts "The #{lesson.title} class has been created!"
+
+
