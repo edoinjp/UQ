@@ -2,14 +2,17 @@
 require 'faker'
 
 # Clear previous records
+Participation.destroy_all
+
+Classroom.destroy_all
+puts 'All classrooms are destroyed'
 puts 'Destroying all previous records'
 User.destroy_all
 puts 'All users are destroyed'
-Classroom.destroy_all
-puts 'All classrooms are destroyed'
 Lesson.destroy_all
 puts 'All lessons are destroyed'
-
+Question.destroy_all
+Choice.destroy_all
 # Seed Teacher
 puts 'Creating teacher...'
 teacher = User.create!(
