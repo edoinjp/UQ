@@ -1,9 +1,23 @@
 <h1><%= @user.full_name %>'s Profile</h1>
 <p>Preferred Learning Style: <%= @user.learning_style %></p>
 
-<% if @lesson %>
-  <h2>Lesson: <%= @lesson.title %></h2>
-  <p>Quiz Score: <%= @quiz_score %> / 5</p>
+<% if @lessons_with_scores.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Lesson Name</th>
+        <th>Quiz Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @lessons_with_scores.each do |lesson_with_score| %>
+        <tr>
+          <td><%= lesson_with_score[:lesson].title %></td>
+          <td><%= lesson_with_score[:quiz_score] %> out of 5</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% else %>
-  <p>No lesson information available.</p>
+  <p>This user has no lessons.</p>
 <% end %>

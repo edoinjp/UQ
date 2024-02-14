@@ -5,13 +5,11 @@ class UsersController < ApplicationController
 
   def show
     authorize @user
-    if @user.teacher?
-      @classroom = @user.classrooms.first
-    else
-      @classroom = @user.participations.first&.classroom
+    # Get the user's classroom and lessons
+    @classrooms = @user.student? ? @user.participations.map(&:classroom) : @user.classrooms
+    @lessons_with_scores = @classrooms.map(&:lessons).flatten.map do |lesson|
+      {lesson: lesson, quiz_score: rand(0..5)}
     end
-    @lessons&.lessons&.first
-    @quiz_score = @lesson ? rand(1..5) : 'N/A'
   end
 
   private
