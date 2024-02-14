@@ -9,6 +9,10 @@ Classroom.destroy_all
 puts 'All classrooms are destroyed'
 Lesson.destroy_all
 puts 'All lessons are destroyed'
+Question.destroy_all
+puts 'All questions are destroyed'
+Choice.destroy_all
+puts 'All choices are destroyed'
 
 # Seed Teacher
 puts 'Creating teacher...'
@@ -51,6 +55,18 @@ lesson = Lesson.create!(
   title: "Oral Communication"
 )
 puts "The #{lesson.title} seed lesson has been created!"
+
+# Seed Styled Lesson [Visual]
+puts 'Creating visual lesson...'
+visual_lesson = StyledLesson.create!(
+  lesson: lesson,
+  style: 'visual',
+  
+)
+
+# Seed Styled Lesson [Aural]
+# Seed Styled Lesson [Reading]
+# Seed Styled Lesson [Kinesthetic]
 
 # 1st Seed Question
 puts 'Creating lesson quiz questions...'

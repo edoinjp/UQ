@@ -16,4 +16,8 @@ class LessonsController < ApplicationController
   def set_lesson
     @lesson = Lesson.find(params[:id])
   end
+
+  def lesson_params
+    params.require(:lesson).permit(:title, :file)
+  end
 end
