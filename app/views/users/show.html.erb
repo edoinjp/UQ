@@ -5,15 +5,15 @@
   <table>
     <thead>
       <tr>
-        <th>Lesson Name</th>
-        <th>Quiz Score</th>
+        <th class="lesson-name-header">Lesson Name</th>
+        <th class="quiz-score-header">Quiz Score</th>
       </tr>
     </thead>
     <tbody>
       <% @lessons_with_scores.each do |lesson_with_score| %>
         <tr>
-          <td><%= lesson_with_score[:lesson].title %></td>
-          <td><%= lesson_with_score[:quiz_score] %> out of 5</td>
+          <td class="lesson-name-cell"><%= lesson_with_score[:lesson].title %></td>
+          <td class="quiz-score-cell"><%= lesson_with_score[:quiz_score] %> / 5</td>
         </tr>
       <% end %>
     </tbody>
