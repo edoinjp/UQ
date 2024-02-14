@@ -1,6 +1,5 @@
 class LessonsController < ApplicationController
   before_action :authenticate_user!, :set_lesson, only: %i[show]
-  after_action :verify_authorized
 
   def index
     @lessons = policy_scope(Lesson)
@@ -17,5 +16,4 @@ class LessonsController < ApplicationController
   def set_lesson
     @lesson = Lesson.find(params[:id])
   end
-
 end
