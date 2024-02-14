@@ -3,12 +3,20 @@ class ClassroomPolicy < ApplicationPolicy
     user.teacher?
   end
 
+  def show?
+    user.teacher? || record.students.include?(user)
+  end
+
   def new?
     user.teacher? # Adjust this based on your user roles
   end
 
   def create?
     user.teacher?
+  end
+
+  def add_students?
+    user.teacher? && user == record.user
   end
 
   class Scope < Scope
@@ -21,10 +29,3 @@ class ClassroomPolicy < ApplicationPolicy
     end
   end
 end
-
-
-
-# def index?
-#   Rails.logger.debug("Current User: #{user.inspect}")
-#   user.teacher? # Adjust this based on your user roles
-# end

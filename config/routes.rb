@@ -7,4 +7,10 @@ Rails.application.routes.draw do
   resources :lessons, only: %i[index show] do
     resources :questions, only: [:index]
   end
+
+  resources :classrooms do
+    member do
+      post 'add_students'
+    end
+  end
 end

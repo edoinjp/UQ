@@ -1,6 +1,30 @@
 <h1><%= @classroom.name %></h1>
+<% if current_user.teacher? %>
+  <div>
+    <%= "#{current_user.first_name} #{current_user.last_name} (Teacher)" %>
+  </div>
+<% end %>
 
 <h2>Participants:</h2>
+
 <% @participants.each do |participant| %>
-  <p><%= participant.email %></p>
+  <p><%= "#{participant.first_name} #{participant.last_name}" %></p>
+<% end %>
+
+<% if current_user.teacher? %>
+  <h2>Add Students:</h2>
+
+  <%= form_with(model: @classroom, local: true, url: add_students_classroom_path(@classroom), method: :post) do |form| %>
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+    <!-- Display other students who are not already in the classroom and not the teacher -->
+    <% User.where.not(id: [@classroom.user_id] + [@classroom.students.pluck(:id), current_user.id].flatten).each do |user| %>
+      <div>
+        <%= form.check_box :student_ids, { multiple: true }, user.id, nil %>
+        <%= form.label "classroom_student_ids_#{user.id}", "#{user.first_name} #{user.last_name}" %>
+      </div>
+    <% end %>
+
+    <%= form.submit "Add Selected Students" %>
+  <% end %>
 <% end %>

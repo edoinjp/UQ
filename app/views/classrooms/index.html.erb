@@ -1,15 +1,14 @@
-
-
 <h1>All Classrooms</h1>
 
 <% if @classrooms.any? %>
   <ul>
     <% @classrooms.each do |classroom| %>
-      <li>
-        <%= link_to classroom.name, classroom_path(classroom) %>
-
-        <!-- Add other classroom details as needed -->
-      </li>
+      <% unless classroom.name == "Your Classroom Name Here" %>
+        <li>
+          <%= link_to classroom.name, classroom_path(classroom) %>
+          <!-- Add other classroom details as needed -->
+        </li>
+      <% end %>
     <% end %>
   </ul>
 <% else %>

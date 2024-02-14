@@ -1,5 +1,7 @@
 class ClassroomsController < ApplicationController
   before_action :authenticate_user!
+  before_action :find_classroom, only: [:show]
+  before_action :set_classroom, only: [:show, :edit, :update, :destroy, :add_students]
 
   def index
     Rails.logger.debug("Current User: #{current_user.inspect}")
@@ -8,9 +10,18 @@ class ClassroomsController < ApplicationController
   end
 
   def show
-    @classroom = find_classroom
+    authorize @classroom
     @participants = @classroom.students
+    # @classroom = find_classroom
+    # authorize @classroom
+
+    # Rails.logger.debug("Participants: #{@classroom.students.inspect}")
+    # @participants = @classroom.students
+
+    # Remove the following line as it's not needed
+    # @classroom = Classroom.find(params[:id])
   end
+
 
   def new
     authorize Classroom
@@ -25,17 +36,46 @@ class ClassroomsController < ApplicationController
     if @classroom.save
       redirect_to classrooms_path, notice: 'Classroom was successfully created.'
     else
+      Rails.logger.error("Classroom creation failed: Errors - #{ @classroom.errors.full_messages }")
       render :new
     end
   end
 
+  def add_students
+    set_classroom
+
+    # Authorize using the instance of @classroom and the action :add_students?
+    authorize @classroom, :add_students?
+
+    selected_student_ids = params.dig(:classroom, :student_ids) || []
+    @classroom.students << User.find(selected_student_ids)
+
+    redirect_to @classroom, notice: "Students added successfully."
+  end
+
+
+
   private
+  def set_classroom
+    @classroom = Classroom.find_by(id: params[:id])
+
+    unless @classroom
+      flash[:alert] = 'Classroom not found.'
+      redirect_to classrooms_path
+    end
+  end
 
   def classroom_params
-    params.require(:classroom).permit(:name) # Add other attributes as needed
+    params.require(:classroom).permit(:name, :title)
   end
 
   def find_classroom
-    Classroom.find(params[:id])
+    @classroom = Classroom.find_by(id: params[:id])
+
+    unless @classroom
+      flash[:alert] = 'Classroom not found.'
+      redirect_to classrooms_path
+    end
   end
+
 end
