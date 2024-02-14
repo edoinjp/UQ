@@ -1,9 +1,9 @@
-<h1><%= @user.first_name %>'s Profile</h1>
+<h1><%= @user.full_name %>'s Profile</h1>
 <p>Preferred Learning Style: <%= @user.learning_style %></p>
 
 <% if @lesson %>
   <h2>Lesson: <%= @lesson.title %></h2>
-  <p>Quiz Score: <%= @quiz_score %> out of 5</p>
+  <p>Quiz Score: <%= @quiz_score %> / 5</p>
 <% else %>
   <p>No lesson information available.</p>
 <% end %>
