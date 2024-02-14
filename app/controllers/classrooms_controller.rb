@@ -4,8 +4,9 @@ class ClassroomsController < ApplicationController
   before_action :set_classroom, only: [:show, :edit, :update, :destroy, :add_students]
 
   def index
-    authorize Classroom
-    @classrooms = policy_scope(Classroom)
+    Rails.logger.debug("Current User: #{current_user.inspect}")
+  authorize Classroom
+  @classrooms = policy_scope(Classroom)
   end
 
   def show

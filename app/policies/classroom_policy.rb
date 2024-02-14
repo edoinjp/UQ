@@ -1,8 +1,6 @@
 class ClassroomPolicy < ApplicationPolicy
   def index?
-    def index?
-      user.teacher?
-    end
+    true
   end
 
   def show?
