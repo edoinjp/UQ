@@ -17,6 +17,7 @@ class LessonsController < ApplicationController
     @lesson = Lesson.find(params[:id])
   end
 
+  # Strong params to help create new lessons
   def lesson_params
     params.require(:lesson).permit(:title, :file)
   end

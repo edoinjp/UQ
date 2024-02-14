@@ -4,5 +4,8 @@
 <ul>
   <% @lessons.each do |lesson| %>
     <li class="text-light fs-2"><%= lesson.title %></li>
+    <% lesson.styled_lessons.first.files.each do |slide| %>
+    <li><%= image_tag slide, alt: "Visual Slide", class: "img-fluid" %></li>
+    <% end %>
   <% end %>
 </ul>
