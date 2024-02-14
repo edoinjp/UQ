@@ -5,4 +5,8 @@ class LessonPolicy < ApplicationPolicy
       scope.all
     end
   end
+
+  def show?
+    return true # switch from application policy so everyone can see the page
+  end
 end
