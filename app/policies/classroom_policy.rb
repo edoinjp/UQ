@@ -1,10 +1,12 @@
 class ClassroomPolicy < ApplicationPolicy
   def index?
-    user.teacher?
+    def index?
+      user.teacher?
+    end
   end
 
   def show?
-    user.teacher? || record.students.include?(user)
+    user.teacher? || user == record.user
   end
 
   def new?

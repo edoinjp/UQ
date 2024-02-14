@@ -4,7 +4,6 @@ class ClassroomsController < ApplicationController
   before_action :set_classroom, only: [:show, :edit, :update, :destroy, :add_students]
 
   def index
-    Rails.logger.debug("Current User: #{current_user.inspect}")
     authorize Classroom
     @classrooms = policy_scope(Classroom)
   end
@@ -12,14 +11,6 @@ class ClassroomsController < ApplicationController
   def show
     authorize @classroom
     @participants = @classroom.students
-    # @classroom = find_classroom
-    # authorize @classroom
-
-    # Rails.logger.debug("Participants: #{@classroom.students.inspect}")
-    # @participants = @classroom.students
-
-    # Remove the following line as it's not needed
-    # @classroom = Classroom.find(params[:id])
   end
 
 
@@ -43,10 +34,8 @@ class ClassroomsController < ApplicationController
 
   def add_students
     set_classroom
-
     # Authorize using the instance of @classroom and the action :add_students?
     authorize @classroom, :add_students?
-
     selected_student_ids = params.dig(:classroom, :student_ids) || []
     @classroom.students << User.find(selected_student_ids)
 
