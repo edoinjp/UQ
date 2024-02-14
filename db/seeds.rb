@@ -3,10 +3,12 @@ require 'faker'
 
 # Clear previous records
 puts 'Destroying all previous records'
-User.destroy_all
-puts 'All users are destroyed'
+Participation.destroy_all
+puts 'All participations are destroyed'
 Classroom.destroy_all
 puts 'All classrooms are destroyed'
+User.destroy_all
+puts 'All users are destroyed'
 Lesson.destroy_all
 puts 'All lessons are destroyed'
 Question.destroy_all
