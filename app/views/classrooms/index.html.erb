@@ -1,0 +1,18 @@
+<h1>All Classrooms</h1>
+
+<% if @classrooms.any? %>
+  <ul>
+    <% @classrooms.each do |classroom| %>
+      <% unless classroom.name == "Your Classroom Name Here" %>
+        <li>
+          <%= link_to classroom.name, classroom_path(classroom) %>
+          <!-- Add other classroom details as needed -->
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No classrooms found.</p>
+<% end %>
+
+<%= link_to "Create a New Classroom", new_classroom_path %>
