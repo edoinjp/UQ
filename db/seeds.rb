@@ -63,8 +63,9 @@ puts 'Creating visual lesson...'
 visual_lesson = StyledLesson.create!(
   lesson: lesson,
   style: 'visual',
-  
+  content: ''
 )
+visual_lesson.files.attach( io: File.open(Rails.root.join('db/files/visual_lesson/lessonimg_1.jpg')))
 
 # Seed Styled Lesson [Aural]
 # Seed Styled Lesson [Reading]
