@@ -1,9 +1,16 @@
 class LessonsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_user, only: %i[index show]
+  after_action :verify_authorized
+
   def index
-    @lessons = Lesson.all
+    @lessons = policy_scope(Lesson)
   end
 
-  def styled_params
-    params.require(:styled_lesson).permit(:style, :file)
+  private
+
+  def set_user
+    @user = User.first
   end
+
 end

@@ -1,1 +1,8 @@
 <h1>Lessons Index</h1>
+
+
+<ul>
+  <% @lessons.each do |lesson| %>
+    <li><%= lesson.title %></li>
+  <% end %>
+</ul>
