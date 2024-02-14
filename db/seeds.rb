@@ -94,6 +94,19 @@ visual_lesson.files.attach(io: file8, filename: 'visual_8.jpg')
 puts 'Visual lesson has been created!'
 
 # Seed Styled Lesson [Aural]
+puts 'Creating aural lesson...'
+aural_lesson = StyledLesson.create!(
+  lesson: lesson,
+  style: 'aural',
+  content: ''
+)
+
+# Attaching audio file to aural_lesson
+file9 = File.open(Rails.root.join('db/files/aural_lesson.mp3'))
+aural_lesson.files.attach(io: file9, filename: 'aural.mp3')
+
+puts 'Aural lesson has been created!'
+
 # Seed Styled Lesson [Reading]
 # Seed Styled Lesson [Kinesthetic]
 
