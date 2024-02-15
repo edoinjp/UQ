@@ -5,4 +5,8 @@ class ResponsePolicy < ApplicationPolicy
     #   scope.all
     # end
   end
+
+  def view_quiz_results?
+    user.teacher? && record.classroom.user == user
+  end
 end
