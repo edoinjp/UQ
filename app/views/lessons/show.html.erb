@@ -7,6 +7,14 @@
 <br>
 
 <h2 class="text-light fs-2">Visual Lesson Content</h2>
-<% @lesson.styled_lessons.first.files.each do |slide| %>
+<% @visual.files.each do |slide| %>
   <li><%= image_tag slide, alt: "Visual Slide", class: "img-fluid" %></li>
+<% end %>
+
+<br>
+
+<h2 class="text-light fs-2">Aural Lesson Content</h2>
+<br>
+<% @aural.files.each do |audio| %>
+  <li><%= audio_tag(url_for(audio), controls:"") %></li>
 <% end %>

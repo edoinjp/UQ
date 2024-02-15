@@ -8,6 +8,8 @@ class LessonsController < ApplicationController
   # Authorizes show action through current lesson through prarams
   def show
     authorize(@lesson)
+    @visual = @lesson.styled_lessons.find { |x| x['style'] == 'visual' }
+    @aural = @lesson.styled_lessons.find { |x| x['style'] == 'aural' }
   end
 
   private
