@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :classrooms, dependent: :destroy
   has_many :participations, dependent: :destroy
   has_many :students, class_name: 'User', through: :participations, source: :user
+  has_many :lessons, through: :classrooms
   def full_name
     "#{first_name} #{last_name}"
   end
