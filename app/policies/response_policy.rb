@@ -6,7 +6,7 @@ class ResponsePolicy < ApplicationPolicy
     # end
   end
 
-  def view_quiz_results?
-    user.teacher? && record.classroom.user == user
+  def index?
+    user.teacher? && record.user == user
   end
 end

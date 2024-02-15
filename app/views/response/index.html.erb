@@ -9,11 +9,11 @@
     </tr>
   </thead>
   <tbody>
-    <%= @student_responses.each do |student, score_data| %>
+    <% @student_scores.each do |student, score_data| %> <!-- use <% %> for the loop -->
       <tr>
         <td><%= student.full_name %></td>
         <td><%= score_data[:correct_count] %> / <%= score_data[:total_questions] %></td>
-        <td></td>
       </tr>
+    <% end %>
   </tbody>
 </table>
