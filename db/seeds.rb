@@ -129,7 +129,7 @@ kinesthetic_lesson = StyledLesson.create!(
   content: ''
 )
 
-# Attaching an open file to kinesthetic_lesson
+# Attaching a video file to kinesthetic_lesson
 file11 = File.open(Rails.root.join('db/files/kinesthetic_lesson.mp4'))
 kinesthetic_lesson.files.attach(io: file11, filename: 'kinesthetic.mp4')
 
