@@ -6,7 +6,7 @@ class ResponsesController < ApplicationController
     authorize @lesson, policy_class: ResponsePolicy
 
     #  Gather all responses
-    @responses = Response.includes(choice: { question: :lesson }).where(choices: { questions: { lesson: @lesson } })
+    @responses = policy_scope(Response).where(choice: { question: { lesson: @lesson } })
 
     # Fake scores for demo
     @student_scores = @responses.group_by(&:user).transform_values do |responses|
