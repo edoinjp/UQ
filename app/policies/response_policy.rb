@@ -3,7 +3,7 @@ class ResponsePolicy < ApplicationPolicy
     # NOTE: Be explicit about which records you allow access to!
     def resolve
       if user.teacher?
-        scope.joins(choice: { question: :lesson }).where(lessons: { classroom: user.classrooms })
+        scope.joins(choice: { question: :lesson }).where("lessons.id" => user.lessons.ids)
       else
         scope.where(user: user)
       end
