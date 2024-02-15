@@ -1,7 +1,7 @@
 # app/controllers/application_controller.rb
 
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!
+  before_action :authenticate_user! # from Devise
   include Pundit::Authorization
 
   # Pundit: allow-list approach

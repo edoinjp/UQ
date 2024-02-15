@@ -4,9 +4,12 @@ class ApplicationPolicy
   attr_reader :user, :record
 
   def initialize(user, record)
-    @user = user
-    @record = record
+    @user = user # pundit = user | devise = current_user
+    @record = record # record => the individual model (e.g. "classroom")
   end
+
+  # true => ANYONE can do action
+  # false => NO ONE can do action
 
   def index?
     false
