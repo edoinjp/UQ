@@ -9,6 +9,7 @@
   border: 1px solid rgb(235,235,235);
   border-radius: 20px;
   width: 100%;
+  margin-top: 3%;
 }
 
 .profile-card .profile-card-content {
@@ -16,6 +17,8 @@
   padding: 0 24px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  font-size: 33px
 }
 
 .lesson-name-header, .quiz-score-header {
@@ -35,4 +38,9 @@
   border: 1px solid rgb(235,235,235);
   border-radius: 20px;
   width: 100%;
+}
+
+.learning-style {
+  color: #696F79;
+  font-size: 33px;
 }

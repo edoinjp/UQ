@@ -1,11 +1,11 @@
 <div class="student-profiles">
 
-  <div class="learning-style">
+  <div class="learning-style mt-3">
     <%= @user.learning_style.capitalize %>
   </div>
 
   <div class="profile-card">
-    <img src="" alt="avatar-large">
+    <%= image_tag @user.photo, alt: @user.full_name, class: "avatar-large" %>
     <div class="profile-card-content">
       <div class=class="profile-content-info">
         <h1><%= @user.full_name %>'s Profile</h1>
