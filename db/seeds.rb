@@ -26,10 +26,21 @@ teacher = User.create!(
   password: 'password',
   teacher: true
 )
+puts teacher.persisted?
 puts "Mr. #{teacher.last_name} has been created!"
+
+# Seed Classroom
+puts 'Creating classroom...'
+classroom = Classroom.create!(
+  user: teacher,
+  name: "Your Classroom Name Here",
+  title: "Your Classroom Title Here",
+)
+puts "Mr. DuPaty's classroom has been created!"
 
 # Seed Students
 puts 'Creating students...'
+
 20.times do
   student = User.create!(
     first_name: Faker::Name.first_name,
@@ -40,15 +51,15 @@ puts 'Creating students...'
     teacher: false
   )
   puts "#{student.first_name} has been created!"
+
+  Participation.create!(
+    user: student,
+    classroom: classroom
+  )
 end
 puts 'All students are done!'
 
-# Seed Classroom
-puts 'Creating classroom...'
-classroom = Classroom.create!(
-  user: teacher
-)
-puts "Mr. DuPaty's classroom has been created!"
+
 
 # Seed Lesson
 puts 'Creating a lesson...'
