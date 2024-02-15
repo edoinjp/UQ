@@ -1,2 +1,29 @@
 class ResponseController < ApplicationController
+  before_action :set_lesson
+
+  def index
+    # Only Teachers can access this page
+    authorize! :index, Response
+
+    # Code based on 1 Qs has correct choice and student can answer once
+    @student_responses = @lesson.questions.map do |question|
+      quesitons.choices.includes(:responses).map do |choice|
+        choice.responses.map do |response|
+          { student: response.user, question: question, correct: choice.correct }
+        end
+      end
+    end.flatten.group_by { |response| response[:student] }
+
+    # Fake scores for demo
+    @student_responses.transfrom_values! do |responses|
+      correct_answers = responses.count { |response| response[:correct] }
+      { correct_count: correct_answers, total_questions: @lesson.questions.count }
+    end
+  end
+
+  private
+
+  def set_lesson
+    @lesson = Lesson.find(params[:lesson_id])
+  end
 end
