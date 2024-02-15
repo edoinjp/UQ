@@ -1,13 +1,13 @@
 class ResponseController < ApplicationController
-  before_action :set_lesson
+  before_action :set_lesson, only: :index
 
   def index
     # Only Teachers can access this page
-    authorize! :index, Response
+    authorize @lesson, policy_class: ResponsePolicy
 
     # Code based on 1 Qs has correct choice and student can answer once
-    @student_responses = @lesson.questions.map do |question|
-      quesitons.choices.includes(:responses).map do |choice|
+    @student_responses = @lesson.questions.inculdes(choices: :responses).map do |question|
+      questions.choices.map do |choice|
         choice.responses.map do |response|
           { student: response.user, question: question, correct: choice.correct }
         end
@@ -15,7 +15,7 @@ class ResponseController < ApplicationController
     end.flatten.group_by { |response| response[:student] }
 
     # Fake scores for demo
-    @student_responses.transfrom_values! do |responses|
+    @student_responses.transform_values! do |responses|
       correct_answers = responses.count { |response| response[:correct] }
       { correct_count: correct_answers, total_questions: @lesson.questions.count }
     end
