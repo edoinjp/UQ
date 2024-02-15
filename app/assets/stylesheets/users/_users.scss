@@ -1,0 +1,40 @@
+/* app/assets/stylesheets/users.scss */
+
+.profile-card {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  background: white;
+  padding: 40px 58px;
+  margin: 80px 200px 80px 200px;
+  border: 1px solid rgb(235,235,235);
+  border-radius: 20px;
+  width: 948px;
+}
+
+.profile-card .profile-card-content {
+  flex-grow: 1;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.lesson-name-header, .quiz-score-header {
+  padding-right: 20px; /* Adjust the space as needed */
+}
+
+.lesson-name-cell, .quiz-score-cell {
+  padding-right: 20px; /* Adjust the space as needed */
+}
+
+.profile-lesson{
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  background: white;
+  padding: 40px 58px;
+  margin: 80px 200px 80px 200px;
+  border: 1px solid rgb(235,235,235);
+  border-radius: 20px;
+  width: 948px;
+}
