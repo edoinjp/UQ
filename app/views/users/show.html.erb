@@ -1,10 +1,14 @@
 <div class="student-profiles">
+
+  <div class="learning-style">
+    <%= @user.learning_style.capitalize %>
+  </div>
+
   <div class="profile-card">
     <img src="" alt="avatar-large">
     <div class="profile-card-content">
       <div class=class="profile-content-info">
         <h1><%= @user.full_name %>'s Profile</h1>
-        <p>Preferred Learning Style: <%= @user.learning_style %></p>
       </div>
       <button type="button" class="btn btn-light rounded" style="width: 162px;">vark test</button>
     </div>
