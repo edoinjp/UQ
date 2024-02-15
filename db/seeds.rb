@@ -108,7 +108,7 @@ aural_lesson.files.attach(io: file9, filename: 'aural.mp3')
 puts 'Aural lesson has been created!'
 
 # Seed Styled Lesson [Reading]
-puts 'Creating readign lesson...'
+puts 'Creating reading lesson...'
 reading_lesson = StyledLesson.create!(
   lesson: lesson,
   style: 'reading',
@@ -122,6 +122,18 @@ reading_lesson.files.attach(io: file10, filename: 'reading.docx')
 puts 'Reading lesson has been created!'
 
 # Seed Styled Lesson [Kinesthetic]
+puts 'Creating kinesthetic lesson...'
+kinesthetic_lesson = StyledLesson.create!(
+  lesson: lesson,
+  style: 'kinesthetic',
+  content: ''
+)
+
+# Attaching an open file to kinesthetic_lesson
+file11 = File.open(Rails.root.join('db/files/kinesthetic_lesson.mp4'))
+kinesthetic_lesson.files.attach(io: file11, filename: 'kinesthetic.mp4')
+
+puts 'Kinesthetic lesson has been created!'
 
 # 1st Seed Question
 puts 'Creating lesson quiz questions...'

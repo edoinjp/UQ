@@ -12,6 +12,7 @@ class LessonsController < ApplicationController
     @visual = @lesson.styled_lessons.find { |x| x['style'] == 'visual' }
     @aural = @lesson.styled_lessons.find { |x| x['style'] == 'aural' }
     @reading = @lesson.styled_lessons.find { |x| x['style'] == 'reading' }
+    @kinesthetic = @lesson.styled_lessons.find { |x| x['style'] == 'kinesthetic' }
   end
 
   private

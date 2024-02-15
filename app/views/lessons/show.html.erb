@@ -26,3 +26,11 @@
 <% @reading.files.each do |doc| %>
   <li><%= link_to doc.filename, url_for(doc), class: "message-file" %></li>
 <% end %>
+
+<br>
+
+<h2 class="text-light fs-2">Kinesthetic Lesson Content</h2>
+<br>
+<% @kinesthetic.files.each do |video| %>
+  <li><%= video_tag(url_for(video), controls:"") %></li>
+<% end %>
