@@ -1,5 +1,9 @@
 # Required Gems
 require 'faker'
+require 'open-uri'
+require 'json'
+require 'uri'
+require 'net/http'
 
 # Clear previous records
 puts 'Destroying all previous records'
@@ -26,7 +30,8 @@ teacher = User.create!(
   password: 'password',
   teacher: true
 )
-puts teacher.persisted?
+file0 = File.open(Rails.root.join('app/assets/images/profile.png'))
+teacher.photo.attach(io: file0, filename: 'teacher.jpg')
 puts "Mr. #{teacher.last_name} has been created!"
 
 # Seed Classroom
@@ -39,27 +44,33 @@ classroom = Classroom.create!(
 puts "Mr. DuPaty's classroom has been created!"
 
 # Seed Students
-puts 'Creating students...'
-
+puts 'Creating 20 students...'
 20.times do
-  student = User.create!(
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
-    learning_style: %w[visual aural reading kinesthetic].sample,
-    email: Faker::Internet.email,
-    password: 'password',
-    teacher: false
-  )
-  puts "#{student.first_name} has been created!"
+  url = URI('https://randomuser.me/api/')
+  response = Net::HTTP.get(url)
+  json = JSON.parse(response)
+  results = json['results']
+  results.each do |result|
+    student = User.create!(
+      first_name: result['name']['first'],
+      last_name: result['name']['last'],
+      learning_style: %w[visual aural reading kinesthetic].sample,
+      email: result['email'],
+      password: 'password',
+      teacher: false
+    )
+    img_url = result['picture']['large']
+    file = URI.open(img_url)
+    student.photo.attach(io: file, filename: 'user.jpg', content_type: 'image/jpg')
+    puts "User #{student.first_name} has been created..."
 
-  Participation.create!(
-    user: student,
-    classroom: classroom
-  )
+    Participation.create!(
+      user: student,
+      classroom: classroom
+    )
+  end
 end
 puts 'All students are done!'
-
-
 
 # Seed Lesson
 puts 'Creating a lesson...'
