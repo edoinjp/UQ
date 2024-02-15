@@ -7,6 +7,6 @@ class ResponsePolicy < ApplicationPolicy
   end
 
   def index?
-    user.teacher? && record.user == user
+    user.teacher? && record.classroom.user == user
   end
 end
