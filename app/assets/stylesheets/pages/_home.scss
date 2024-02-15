@@ -1,0 +1,103 @@
+// visual building of content space
+.mainbody{
+  display: flex;
+  flex-direction: row;
+  height: 840px;
+  background-image: asset-url('Frame20449.png');
+  background-size: cover;
+  align-items: center;
+  margin: 0 auto;
+  justify-content: center;
+}
+.maincontent {
+  overflow: auto;
+  width: 80%;
+  height: 90%;
+  background-color: white;
+  border-radius: 50px;
+  padding: 25px;
+
+  /* Hide scrollbar visually */
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+
+  /* Webkit browsers (Chrome, Safari) */
+  -webkit-overflow-scrolling: touch;
+
+  /* Remove scrollbar in Firefox */
+  scrollbar-width: none;
+
+  /* Remove scrollbar in Webkit browsers */
+  &::-webkit-scrollbar {
+    width: 0;
+    background: transparent; /* background color for the track */
+  }
+}
+
+// concent space end////***************
+
+// sidebar ******
+
+.sidebar{
+  color: white;
+  display: flex;
+  flex-direction: column;
+  // background-color: rgb(118, 118, 175);
+  width: 15%;
+  height: 80%;
+  align-items: center;
+  // padding: 50px;
+  }
+.username{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  background-color: orange;
+  border-radius: 5px;
+
+}
+.username h2 {
+  text-align: center;
+  margin: 0;
+  font-size: 30px;
+  align-items: center;
+  // width: 100%;
+  // height: 100%;
+}
+.sidebarul {
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  width: 100%;
+  justify-content: space-evenly;
+  text-align: center;
+}
+
+.sidebarul a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s;
+  height: 40px; /* Set a fixed height for all links */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebarul li.active {
+  height: 40px;
+  background-color: #ffffff;
+  border-radius: 190px 0px 0px 190px;
+}
+
+.sidebarul li.active a {
+  color: orange !important;
+}
+
+.sidebarul li:not(.active):hover a {
+  color: orange;
+}
+
+
+// sidebar end **************
