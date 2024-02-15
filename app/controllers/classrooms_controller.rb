@@ -4,7 +4,7 @@ class ClassroomsController < ApplicationController
   before_action :set_classroom, only: [:show, :edit, :update, :destroy, :add_students]
 
   def index
-    authorize Classroom
+
     @classrooms = policy_scope(Classroom)
   end
 
