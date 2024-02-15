@@ -5,16 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="mainbody">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="username">
+        <h2>UQ</h2>
+        <!-- Add logic to dynamically set the first letter of the username later -->
+      </div>
+      <ul class="sidebarul">
+        <li id="classes" class="<%= 'active' if controller_name == 'classes' %>">
+          <a href="#" onclick="changeContent('Classes')">Classes</a>
+        </li>
+        <li id="students" class="<%= 'active' if controller_name == 'students' %>">
+          <a href="#" onclick="changeContent('Students')">Students</a>
+        </li>
+        <li id="questions" class="<%= 'active' if controller_name == 'questions' %>">
+          <a href="#" onclick="changeContent('Questions')">Questions</a>
+        </li>
+        <li id="content" class="<%= 'active' if controller_name == 'content' %>">
+          <a href="#" onclick="changeContent('Content')">Content</a>
+        </li>
+      </ul>
+    </div>
 
-  <%= render "shared/flashes" %>
+    <!-- Main Content -->
+    <div class="maincontent">
+      <%= render "shared/flashes" %>
+      <div id="dynamicContent">
+        <%= yield %>
+      </div>
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+    </div>
 
-    <%= yield %>
+    <!-- JavaScript function to dynamically change content -->
+    <script>
+     function changeContent(page) {
+      fetch('/classrooms/index')
+        .then(response => response.text())
+        .then(content => {
+          // Use a selector to extract only the relevant content
+          var extractedContent = new DOMParser().parseFromString(content, 'text/html').querySelector('#dynamicContent').innerHTML;
+          document.getElementById('dynamicContent').innerHTML = extractedContent;
+          var sidebarLinks = document.querySelectorAll('.sidebarul li');
+          sidebarLinks.forEach(function (li) {
+            li.classList.remove('active');
+          });
+          document.getElementById(page.toLowerCase()).classList.add('active');
+        })
+        .catch(error => console.error('Error fetching content:', error));
+    }
+
+
+    </script>
+
   </body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+
 </html>

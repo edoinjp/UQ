@@ -15,4 +15,6 @@
   <p>No classrooms found.</p>
 <% end %>
 
-<%= link_to "Create a New Classroom", new_classroom_path %>
+<% unless current_user.student? %>
+  <%= link_to "Create a New Classroom", new_classroom_path %>
+<% end %>
