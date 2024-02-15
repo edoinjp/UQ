@@ -1,7 +1,4 @@
 class ClassroomPolicy < ApplicationPolicy
-  def index?
-    true
-  end
 
   def show?
     user.teacher? || user == record.user
