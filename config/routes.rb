@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   resources :classrooms, only: %i[index new create show]
   resources :users, only: [:show]
   resources :lessons, only: %i[index show] do
-    resources :questions, only: [:index]
+    resources :questions, only: [:index] do
+      resources :responses, only: %i[index]
+    end
   end
 
   resources :classrooms do
