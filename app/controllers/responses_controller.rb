@@ -8,10 +8,15 @@ class ResponsesController < ApplicationController
     #  Gather all responses
     @responses = policy_scope(Response.includes(:choice).where(choices: { question_id: @lesson.questions.ids }))
 
-    # Fake scores for demo
-    @student_scores = @responses.group_by(&:user).transform_values do |responses|
-      correct_count = responses.select { |response| response.choice.correct }.size
-      { correct_count: correct_count, total_questions: @lesson.questions.count }
+    # get all studnets who participated in the lesson
+    student_ids = @lesson.classroom.students.pluck(:id)
+
+    # For each student, generate a fake score
+    @student_scores = User.where(id: student_ids).each_with_object({}) do |student, scores|
+      scores[student] = {
+        correct_count: rand(1..@lesson.questions.count), # Random correct answers
+        total_questions: @lesson.questions.count # Total questions for the lesson
+      }
     end
   end
 
