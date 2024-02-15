@@ -18,3 +18,11 @@
 <% @aural.files.each do |audio| %>
   <li><%= audio_tag(url_for(audio), controls:"") %></li>
 <% end %>
+
+<br>
+
+<h2 class="text-light fs-2">Reading Lesson Content</h2>
+<br>
+<% @reading.files.each do |doc| %>
+  <li><%= link_to doc.filename, url_for(doc), class: "message-file" %></li>
+<% end %>
