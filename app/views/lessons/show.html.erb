@@ -1,18 +1,12 @@
-<h1 class="text-light fs-1">Test Show</h1>
+<h1 class="text-primary fs-1"><%= @lesson.title %></h2>
 
 <br>
 
-<h2 class="text-light fs-2"><%= @lesson.title %></h2>
+<h2 class="text-primary fs-2">Visual Lesson Content</h2>
+<%= render 'visual' %>
 
 <br>
-
-<h2 class="text-light fs-2">Visual Lesson Content</h2>
-<% @visual.files.each do |slide| %>
-  <li><%= image_tag slide, alt: "Visual Slide", class: "img-fluid" %></li>
-<% end %>
-
-<br>
-
+<!--
 <h2 class="text-light fs-2">Aural Lesson Content</h2>
 <br>
 <% @aural.files.each do |audio| %>
@@ -34,3 +28,4 @@
 <% @kinesthetic.files.each do |video| %>
   <li><%= video_tag(url_for(video), controls:"") %></li>
 <% end %>
+-->
