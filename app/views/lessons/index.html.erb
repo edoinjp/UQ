@@ -1,4 +1,4 @@
-<h1 class="text-primary fs-1">Lessons Index</h1>
+<h1 class="text-primary fs-1">Your Lessons</h1>
 
 
 <ul>
@@ -10,40 +10,41 @@
 </ul>
 
 <div class="row row-cols-1 row-cols-md-3 g-4">
-  <div class="col">
-    <div class="card">
-      <img src="..." class="card-img-top" alt="...">
+  <div class="col container-card">
+    <div class="content-card">
+      <%= image_tag "lessons/lesson1.jpg", class:"lesson-img" %>
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <button type="button" class="btn btn-secondary rounded-pill">TODAY</button>
+        <h5 class="lesson-name">Lesson 1 Name</h5>
+        <div class="rounded-pill bg-light">'</div>
+      </div>
+    </div>
+  </div>
+  <div class="col container-card">
+    <div class="content-card">
+      <%= image_tag "lessons/lesson2.jpg", class:"lesson-img" %>
+      <div class="card-body">
+        <h5 class="lesson-name">Lesson 2 Name</h5>
+        <div class="rounded-pill bg-light">'</div>
+      </div>
+    </div>
+  </div>
+  <!--<div class="col">
+    <div class="card h-100">
+      <%= image_tag "lessons/lesson3.jpg", class:"img-fluid" %>
+      <div class="card-body">
+        <h5 class="fs-3 my-4 text-light">Lesson 3 Name</h5>
+        <div class="rounded-pill bg-light">'</div>
       </div>
     </div>
   </div>
   <div class="col">
-    <div class="card">
-      <img src="..." class="card-img-top" alt="...">
+    <div class="card h-100">
+      <%= image_tag "lessons/lesson4.jpg", class:"img-fluid" %>
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <h5 class="fs-3 my-4 text-light">Lesson 4 Name</h5>
+        <div class="rounded-pill bg-light">'</div>
       </div>
     </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="card">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-    </div>
-  </div>
+  </div>-->
 </div>
