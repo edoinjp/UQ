@@ -4,14 +4,22 @@ class ClassroomsController < ApplicationController
   before_action :set_classroom, only: [:show, :edit, :update, :destroy, :add_students]
 
   def index
-
+    session[:return_to] = request.fullpath
     @classrooms = policy_scope(Classroom)
+
+
   end
 
   def show
+    set_classroom
     authorize @classroom
     @participants = @classroom.students
+    @controller_name = controller_name
+    @action_name = action_name
+    @classrooms = [@classroom]  # Ensure that @classrooms is set for the sidebar
   end
+
+
 
 
   def new
@@ -34,6 +42,7 @@ class ClassroomsController < ApplicationController
 
   def add_students
     set_classroom
+    @classroom = Classroom.find_by(id: params[:id])
     # Authorize using the instance of @classroom and the action :add_students?
     authorize @classroom, :add_students?
     selected_student_ids = params.dig(:classroom, :student_ids) || []
@@ -46,6 +55,7 @@ class ClassroomsController < ApplicationController
 
   private
   def set_classroom
+    puts "Parameters in set_classroom: #{params.inspect}"
     @classroom = Classroom.find_by(id: params[:id])
 
     unless @classroom

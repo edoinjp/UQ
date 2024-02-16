@@ -1,30 +1,58 @@
-<h1><%= @classroom.name %></h1>
+<div class="header-container">
+  <h1><%= @classroom.name %></h1>
+  <% if current_user.teacher? %>
+    <div class="teacher-info">
+      <%= "#{current_user.first_name} #{current_user.last_name} (Teacher)" %>
+    </div>
+  <% end %>
+</div>
+
+<div class="participant-container">
+  <% @participants.each do |participant| %>
+    <div class="participant-card">
+      <%= link_to user_path(participant) do %>
+         <% border_color = "##{SecureRandom.hex(3)}" %> <!-- Generate a random hex color -->
+        <img class="studentimg" src="https://motto-jp.com/media/wp-content/uploads/2021/02/AdobeStock_284955056.jpeg" alt="#" style="border-color: <%= border_color %>;">
+        <div><%= "#{participant.first_name} #{participant.last_name}" %></div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<%# add student ************************************** %>
 <% if current_user.teacher? %>
-  <div>
-    <%= "#{current_user.first_name} #{current_user.last_name} (Teacher)" %>
-  </div>
-<% end %>
+<script>
+    $(document).ready(function () {
+      $('.student-card').click(function () {
+        // Toggle the 'selected' class when a student card is clicked
+        $(this).toggleClass('selected');
 
-<h2>Participants:</h2>
-
-<% @participants.each do |participant| %>
-  <p><%= "#{participant.first_name} #{participant.last_name}" %></p>
-<% end %>
-
-<% if current_user.teacher? %>
-  <h2>Add Students:</h2>
+        // Toggle the checkbox inside the clicked student card
+        var checkbox = $(this).find(':checkbox');
+        checkbox.prop('checked', !checkbox.prop('checked'));
+      });
+    });
+  </script>
 
   <%= form_with(model: @classroom, local: true, url: add_students_classroom_path(@classroom), method: :post) do |form| %>
     <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 
-    <!-- Display other students who are not already in the classroom and not the teacher -->
-    <% User.where.not(id: [@classroom.user_id] + [@classroom.students.pluck(:id), current_user.id].flatten).each do |user| %>
-      <div>
-        <%= form.check_box :student_ids, { multiple: true }, user.id, nil %>
-        <%= form.label "classroom_student_ids_#{user.id}", "#{user.first_name} #{user.last_name}" %>
-      </div>
-    <% end %>
+    <div class="participant-container">
+      <!-- Display other students who are not already in the classroom and not the teacher -->
+      <% User.where.not(id: [@classroom.user_id] + [@classroom.students.pluck(:id), current_user.id].flatten).each do |user| %>
+        <div class="student-card">
+          <label>
 
-    <%= form.submit "Add Selected Students" %>
+            <%= form.check_box :student_ids, { multiple: true }, user.id, nil %>
+            <div class="student-info">
+               <% border_color = "##{SecureRandom.hex(3)}" %>
+                 <img class="studentimg" src="https://motto-jp.com/media/wp-content/uploads/2021/02/AdobeStock_284955056.jpeg" alt="#" style="border-color: <%= border_color %>;">
+              <span class="student-name"><%= "#{user.first_name} #{user.last_name}" %></span>
+            </div>
+          </label>
+        </div>
+      <% end %>
+    </div>
+      <%= form.submit "Add Selected Students", class: "btn btn-add-students mt-3", disabled: @classroom.student_ids.blank? %>
   <% end %>
 <% end %>

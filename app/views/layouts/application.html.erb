@@ -2,26 +2,56 @@
 <html>
   <head>
     <title>UQ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
   </head>
 
-  <body class="mainbody">
+  <body class="mainbody" class="<%= controller_name %>">
     <!-- Sidebar -->
     <div class="sidebar">
       <div class="username">
-        <h2>UQ</h2>
-        <!-- Add logic to dynamically set the first letter of the username later -->
+        <a href="<%= root_path %>">
+          <h2 id="colorText">UQ</h2>
+          <!-- Add logic to dynamically set the first letter of the username later -->
+        </a>
       </div>
-      <ul class="sidebarul">
-        <li id="classes" class="<%= 'active' if controller_name == 'classes' %>">
-          <a href="#" onclick="changeContent('Classes')">Classes</a>
+
+        <style>
+          /* style to display none sidebar selection */
+         <% if controller_name == 'classrooms' && action_name != 'show' %>
+            #students, #questions, #content {
+              display: none;
+            }
+          <% end %>
+        </style>
+
+       <ul class="sidebarul">
+        <li id="classes" class="<%= 'active' if controller_name == 'classrooms' %>">
+          <%= link_to "Classrooms", classrooms_path %>
         </li>
-        <li id="students" class="<%= 'active' if controller_name == 'students' %>">
-          <a href="#" onclick="changeContent('Students')">Students</a>
-        </li>
+
+        <% if params[:classroom_id].present? %>
+          <% if @classrooms.present? %>
+            <% @classrooms.each do |classroom| %>
+              <li id="students-<%= classroom.id %>" class="<%= 'active' if controller_name == 'students' && params[:classroom_id].to_i == classroom.id %>">
+                <%= link_to "students", classroom_path(classroom) %>
+                <%# this p line is for debugging %>
+              </li>
+            <% end %>
+          <% else %>
+            <p>No classrooms available.</p>
+          <% end %>
+        <% end %>
+
         <li id="questions" class="<%= 'active' if controller_name == 'questions' %>">
           <a href="#" onclick="changeContent('Questions')">Questions</a>
         </li>
@@ -32,35 +62,70 @@
     </div>
 
     <!-- Main Content -->
-    <div class="maincontent">
-      <%= render "shared/flashes" %>
-      <div id="dynamicContent">
-        <%= yield %>
-      </div>
+        <div class="maincontent ">
+          <%= render "shared/flashes" %>
+          <%= link_to raw('<i class="fas fa-arrow-left"></i>'), :back, class: 'goback-button' %>
+
+            <div id="dynamicContent">
+              <%= yield %>
+            </div>
           <p class="notice"><%= notice %></p>
           <p class="alert"><%= alert %></p>
-    </div>
+      </div>
+
+
+
 
     <!-- JavaScript function to dynamically change content -->
-    <script>
-     function changeContent(page) {
-      fetch('/classrooms/index')
-        .then(response => response.text())
-        .then(content => {
-          // Use a selector to extract only the relevant content
-          var extractedContent = new DOMParser().parseFromString(content, 'text/html').querySelector('#dynamicContent').innerHTML;
-          document.getElementById('dynamicContent').innerHTML = extractedContent;
-          var sidebarLinks = document.querySelectorAll('.sidebarul li');
-          sidebarLinks.forEach(function (li) {
-            li.classList.remove('active');
-          });
-          document.getElementById(page.toLowerCase()).classList.add('active');
-        })
-        .catch(error => console.error('Error fetching content:', error));
+<script>
+   console.log('changeContent function called');
+   var classroomId = '<%= @classroom_id %>';
+  if (classroomId !== '') {
+  // Your existing logic for updating the sidebar
     }
 
+var activeClass;
 
-    </script>
+function changeContent(page, clickedElement) {
+  // Determine the URL based on the page
+  var url;
+
+  switch (page.toLowerCase()) {
+    case 'classes':
+      url = '<%= classrooms_path %>';
+      break;
+    case 'students':
+      url = '<%= classroom_path('', return_to: session[:return_to]) %>';
+      break;
+    // Add cases for other pages as needed
+  }
+
+  fetch(url)
+    .then(response => response.text())
+    .then(content => {
+      // Use a selector to extract only the relevant content
+      var extractedContent = new DOMParser().parseFromString(content, 'text/html').querySelector('#dynamicContent').innerHTML;
+      document.getElementById('dynamicContent').innerHTML = extractedContent;
+
+      // Update the active class in the sidebar
+      if (activeClass) {
+        $(activeClass).removeClass('active');
+      }
+
+      // Set the active class for the clicked link in the sidebar
+      if (page.toLowerCase() === 'students' || window.location.href.includes('/classrooms')) {
+        $('#students').addClass('active');
+        activeClass = '#students'; // Update the active class variable
+      } else {
+        $(clickedElement).addClass('active');
+        activeClass = clickedElement; // Update the active class variable
+      }
+    })
+    .catch(error => console.error('Error fetching content:', error));
+}
+
+<script>
+
 
   </body>
 

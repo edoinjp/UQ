@@ -4,8 +4,9 @@
   <ul>
     <% @classrooms.each do |classroom| %>
         <li>
-          <%= link_to classroom.name, classroom_path(classroom) %>
+          <%= link_to classroom.name, classroom_lessons_path(classroom) %>
           <!-- Add other classroom details as needed -->
+
         </li>
 
     <% end %>
