@@ -123,10 +123,12 @@
 .sidebarul {
   display: flex;
   flex-direction: column;
-  height: 400px;
+  max-height: 400px;
   width: 100%;
-  justify-content: space-evenly;
   text-align: center;
+
+  margin-top:50px;
+  justify-content: space-evenly;
 
 }
 
@@ -138,6 +140,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+}
+.sidebarul li{
+  margin-top: 40px;
 }
 
 .sidebarul li.active {
