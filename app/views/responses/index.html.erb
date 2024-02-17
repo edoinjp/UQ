@@ -1,19 +1,24 @@
-<h1>Quiz Results for <%= @lesson.title %></h1>
+<div class="score">
 
-<table>
-  <thead>
-    <tr>
-      <th>Student Name</th>
-      <th>Correct Answers</th>
-      <th>Total Questions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @student_scores.each do |student, score_data| %>
-      <tr>
-        <td><%= student.full_name %></td>
-        <td><%= score_data[:correct_count] %> / <%= score_data[:total_questions] %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <form onsubmit="event.preventDefault();" role="search">
+    <label for="search">Search for stuff</label>
+    <input id="search" type="search" placeholder="Search..." autofocus required />
+    <button type="submit">Go</button>
+  </form>
+
+  <h1 class="quiz-title m-3">Quiz Results for <%= @lesson.title %></h1>
+
+  <% @student_scores.each do |student, score_data| %>
+    <div class="response-list">
+      <div class="response-image">
+        <%= image_tag student.photo, alt: student.full_name, class: "response-img" %>
+      </div>
+      <div class="response-list-content">
+        <div class="response-list-name">
+          <%= student.full_name %>
+        </div>
+        <div class="response-list-answer">correct <%= score_data[:correct_count] %> / <%= score_data[:total_questions] %></div>
+      </div>
+    </div>
+  <% end %>
+</div>
