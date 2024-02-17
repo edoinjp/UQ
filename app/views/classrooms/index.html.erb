@@ -1,11 +1,12 @@
-<h1>All Classrooms</h1>
+<h1 class="classs">All Classrooms</h1>
 
 <% if @classrooms.any? %>
   <ul>
     <% @classrooms.each do |classroom| %>
         <li>
-          <%= link_to classroom.name, classroom_path(classroom) %>
+          <%= link_to classroom.name, classroom_lessons_path(classroom) %>
           <!-- Add other classroom details as needed -->
+
         </li>
 
     <% end %>

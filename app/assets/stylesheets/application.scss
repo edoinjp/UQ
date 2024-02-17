@@ -8,8 +8,10 @@
 @import "font-awesome";
 
 // Your CSS partials
+@import "home/homee";
+
 @import "components/index";
 @import "pages/index";
-@import "pages/homee";
 @import "users/index";
+@import 'pages/showstudent';
 @import "responses/index";

@@ -1,4 +1,10 @@
 // visual building of content space
+.maincontent{
+  margin: 0;
+  padding: 0;
+  box-shadow: inset 0 0 15px rgba(100, 100, 255, 0.6);
+}
+
 .mainbody{
   display: flex;
   flex-direction: row;
@@ -14,7 +20,7 @@
   width: 80%;
   height: 90%;
   background-color: white;
-  border-radius: 50px;
+  border-radius: 40px;
   padding: 25px;
 
   /* Hide scrollbar visually */
@@ -34,6 +40,57 @@
   }
 }
 
+#colorText {
+  color: purple; /* Set the initial color to purple */
+  animation: colorChange 5s infinite; /* Change color every 5 seconds */
+}
+
+/*  go back button */
+.goback-button {
+  display: inline-block;
+  padding: 5px 5px;
+  color: orange;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.goback-button:hover {
+  color: #26325A;
+
+}
+
+/* Define the swing animation */
+@keyframes swingAnimation {
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(15deg);
+  }
+  40% {
+    transform: rotate(-10deg);
+  }
+  60% {
+    transform: rotate(5deg);
+  }
+  80% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+/* Apply the swing animation to the arrow icon */
+.goback-button {
+  transform-origin: top center; /* Set the rotation origin to the top center of the arrow */
+  animation: swingAnimation 2s ease-in-out ; /* Adjust the duration and iteration as needed */
+}
+
+// ***************************
+
+
 // concent space end////***************
 
 // sidebar ******
@@ -42,7 +99,6 @@
   color: white;
   display: flex;
   flex-direction: column;
-  // background-color: rgb(118, 118, 175);
   width: 15%;
   height: 80%;
   align-items: center;
@@ -63,8 +119,6 @@
   margin: 0;
   font-size: 30px;
   align-items: center;
-  // width: 100%;
-  // height: 100%;
 }
 .sidebarul {
   display: flex;

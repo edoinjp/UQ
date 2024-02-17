@@ -1,8 +1,13 @@
 class LessonsController < ApplicationController
-  before_action :authenticate_user!, :set_lesson, only: %i[show]
+  before_action :authenticate_user!
+  before_action :set_classroom, only: [:index]
+  before_action :set_lesson, only: [:show]
 
   def index
     @lessons = policy_scope(Lesson)
+    @classroom = Classroom.find(params[:classroom_id])
+    @lessons = @classroom.lessons
+    @classrooms = [@classroom]
   end
 
   # Authorizes show action through current lesson through prarams
@@ -25,5 +30,14 @@ class LessonsController < ApplicationController
   # Strong params to help create new lessons
   def lesson_params
     params.require(:lesson).permit(:title, :file)
+  end
+
+  def set_classroom
+    begin
+      @classroom = Classroom.find(params[:classroom_id])
+    rescue ActiveRecord::RecordNotFound
+      flash[:alert] = 'Classroom not found.'
+      redirect_to classrooms_path
+    end
   end
 end
