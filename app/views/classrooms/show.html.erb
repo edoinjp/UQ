@@ -11,8 +11,8 @@
   <% @participants.each do |participant| %>
     <div class="participant-card">
       <%= link_to user_path(participant) do %>
-         <% border_color = "##{SecureRandom.hex(3)}" %> <!-- Generate a random hex color -->
-        <img class="studentimg" src="https://motto-jp.com/media/wp-content/uploads/2021/02/AdobeStock_284955056.jpeg" alt="#" style="border-color: <%= border_color %>;">
+        <% border_color = "##{SecureRandom.hex(3)}" %> <!-- Generate a random hex color -->
+        <%= image_tag participant.photo, alt: "#", class: "studentimg", style: "border-color: #{border_color};" %>
         <div><%= "#{participant.first_name} #{participant.last_name}" %></div>
       <% end %>
     </div>

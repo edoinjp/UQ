@@ -27,37 +27,33 @@
 
         <style>
           /* style to display none sidebar selection */
-         <% if controller_name == 'classrooms' && action_name != 'show' %>
-            #students, #questions, #content {
+         <% if controller_name == 'classrooms' && action_name == 'index' %>
+            #students, #responses, #content {
               display: none;
             }
           <% end %>
+
         </style>
 
        <ul class="sidebarul">
-        <li id="classes" class="<%= 'active' if controller_name == 'classrooms' %>">
+        <li id="classes" class="<%= 'active' if @active_tab == "classrooms"%>">
           <%= link_to "Classrooms", classrooms_path %>
         </li>
 
-        <% if params[:classroom_id].present? %>
-          <% if @classrooms.present? %>
-            <% @classrooms.each do |classroom| %>
-              <li id="students-<%= classroom.id %>" class="<%= 'active' if controller_name == 'students' && params[:classroom_id].to_i == classroom.id %>">
-                <%= link_to "students", classroom_path(classroom) %>
+          <% if @classroom.present? %>
+              <li id="students-<%= @classroom.id %>" class="<%= 'active' if @active_tab == "students"%>">
+                <%= link_to "Students", classroom_path(@classroom) %>
                 <%# this p line is for debugging %>
               </li>
             <% end %>
-          <% else %>
-            <p>No classrooms available.</p>
-          <% end %>
-        <% end %>
 
-        <li id="questions" class="<%= 'active' if controller_name == 'questions' %>">
-          <a href="#" onclick="changeContent('Questions')">Questions</a>
+           <% if @lesson.present? %>
+         <li id="responses" class="<%= 'active' if @active_tab == "responses"%>">
+          <%= link_to "responses", lesson_responses_path(@lesson)%>
         </li>
-        <li id="content" class="<%= 'active' if controller_name == 'content' %>">
-          <a href="#" onclick="changeContent('Content')">Content</a>
-        </li>
+            <% end %>
+
+
       </ul>
     </div>
 
@@ -77,54 +73,6 @@
 
 
     <!-- JavaScript function to dynamically change content -->
-<script>
-   console.log('changeContent function called');
-   var classroomId = '<%= @classroom_id %>';
-  if (classroomId !== '') {
-  // Your existing logic for updating the sidebar
-    }
-
-var activeClass;
-
-function changeContent(page, clickedElement) {
-  // Determine the URL based on the page
-  var url;
-
-  switch (page.toLowerCase()) {
-    case 'classes':
-      url = '<%= classrooms_path %>';
-      break;
-    case 'students':
-      url = '<%= classroom_path('', return_to: session[:return_to]) %>';
-      break;
-    // Add cases for other pages as needed
-  }
-
-  fetch(url)
-    .then(response => response.text())
-    .then(content => {
-      // Use a selector to extract only the relevant content
-      var extractedContent = new DOMParser().parseFromString(content, 'text/html').querySelector('#dynamicContent').innerHTML;
-      document.getElementById('dynamicContent').innerHTML = extractedContent;
-
-      // Update the active class in the sidebar
-      if (activeClass) {
-        $(activeClass).removeClass('active');
-      }
-
-      // Set the active class for the clicked link in the sidebar
-      if (page.toLowerCase() === 'students' || window.location.href.includes('/classrooms')) {
-        $('#students').addClass('active');
-        activeClass = '#students'; // Update the active class variable
-      } else {
-        $(clickedElement).addClass('active');
-        activeClass = clickedElement; // Update the active class variable
-      }
-    })
-    .catch(error => console.error('Error fetching content:', error));
-}
-
-<script>
 
 
   </body>
