@@ -1,10 +1,14 @@
 <div class="student-profiles">
+
+  <div class="learning-style mt-3">
+   <p><%= @user.learning_style.capitalize %> type</p>
+  </div>
+
   <div class="profile-card">
-    <img src="" alt="avatar-large">
+    <%= image_tag @user.photo, alt: @user.full_name, class: "avatar-large" %>
     <div class="profile-card-content">
-      <div class=class="profile-content-info">
+      <div class="profile-content-info">
         <h1><%= @user.full_name %>'s Profile</h1>
-        <p>Preferred Learning Style: <%= @user.learning_style %></p>
       </div>
       <button type="button" class="btn btn-light rounded" style="width: 162px;">vark test</button>
     </div>
@@ -21,7 +25,7 @@
         </thead>
         <tbody>
           <% @lessons_with_scores.each do |lesson_with_score| %>
-            <tr>
+            <tr class="lesson-row">
               <td class="lesson-name-cell"><%= lesson_with_score[:lesson].title %></td>
               <td class="quiz-score-cell"><%= lesson_with_score[:quiz_score] %> / 5</td>
             </tr>
