@@ -1,6 +1,7 @@
 <div class="reading-card">
-  <% @reading.files.each do |doc| %>
-    <li><%= link_to doc.filename, url_for(doc), class: "message-file" %></li>
+  <% @reading.files.each do |pdf| %>
+    <li><%= link_to pdf.filename, url_for(pdf), class: "message-file" %></li>
   <% end %>
 </div>
+
 
