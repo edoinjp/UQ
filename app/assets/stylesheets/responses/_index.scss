@@ -2,8 +2,21 @@
   font-family: Poppins, sans-serif;
 }
 
+.response-columns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+.response-column {
+  flex: 0 0 calc(33.333% - 20px); // Subtract the gap size to account for spacing
+  max-width: calc(33.333% - 20px);
+}
+
 .score  {
-  margin-left: 24px
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
 .score h1{
@@ -18,6 +31,7 @@
   align-items: start;
   justify-content: space-between;
   gap: 20px;
+  margin-bottom: 20px;
 }
 
 .response-image {
@@ -62,6 +76,8 @@
   margin-top: 7px;
   font: 500 16px Poppins, sans-serif;
 }
+
+
 
 // .input-group .form-control {
 //   border-radius: 20px;
