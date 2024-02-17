@@ -1,0 +1,50 @@
+.index-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.your-lessons {
+  color: black;
+  font-size: 3rem;
+  margin-left: 4rem;
+  margin-bottom: 2rem;
+}
+
+.container-card {
+  height: 19rem;
+  width: 18rem;
+  background-color: #052c65;
+  border-radius: 2rem;
+  display: flex;
+  justify-content: center;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.content-card {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.lesson-img {
+  border-radius: 2rem;
+  width: 15rem;
+  height: auto;
+}
+
+.body-card-from-2nd {
+  margin-top: 3.5rem;
+}
+
+.btn {
+font-size: small;
+margin-top: 1rem;
+margin-bottom: 0.5rem;
+}
+
+.lesson-name {
+  color: white;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}

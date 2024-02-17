@@ -1,3 +1,5 @@
+<h2 class="text-primary fs-2">Visual Lesson Content</h2>
+
 <% @visual.files.each do |slide| %>
-  <li><%= image_tag slide, alt: "Visual Slide", class: "img-fluid" %></li>
+  <%= image_tag slide, alt: "Visual Slide", class: "img-fluid slide-img" %>
 <% end %>

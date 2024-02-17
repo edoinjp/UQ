@@ -1,10 +1,45 @@
-<h1 class="text-light fs-1">Lessons Index</h1>
+<h1 class="your-lessons">Your Lessons</h1>
 
-
-<ul>
-  <% @lessons.each do |lesson| %>
-    <%= link_to lesson_path(lesson) do %>
-      <li class="text-light fs-2"><%= lesson.title %></li>
+<div class="row row-cols-1 row-cols-md-3 g-4 index-container">
+  <div class="col container-card">
+    <% @lessons.each do |lesson| %>
+      <%= link_to lesson_path(lesson) do %>
+        <div class="content-card">
+          <%= image_tag "lessons/lesson1.jpg", class:"lesson-img" %>
+          <div class="body-card">
+            <button type="button" class="btn btn-secondary rounded-pill">TODAY</button>
+            <h5 class="lesson-name"><%= lesson.title %></h5>
+            <div class="rounded-pill bg-light">'</div>
+          </div>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
-</ul>
+  </div>
+  <div class="col container-card">
+    <div class="content-card">
+      <%= image_tag "lessons/lesson2.jpg", class:"lesson-img" %>
+      <div class="body-card body-card-from-2nd">
+        <h5 class="lesson-name">Lesson 2 Name</h5>
+        <div class="rounded-pill bg-light">'</div>
+      </div>
+    </div>
+  </div>
+  <div class="col container-card">
+    <div class="content-card">
+      <%= image_tag "lessons/lesson3.jpg", class:"lesson-img" %>
+      <div class="body-card body-card-from-2nd">
+        <h5 class="lesson-name">Lesson 3 Name</h5>
+        <div class="rounded-pill bg-light">'</div>
+      </div>
+    </div>
+  </div>
+  <div class="col container-card">
+    <div class="content-card">
+      <%= image_tag "lessons/lesson4.jpg", class:"lesson-img" %>
+      <div class="body-card body-card-from-2nd">
+        <h5 class="lesson-name">Lesson 4 Name</h5>
+        <div class="rounded-pill bg-light">'</div>
+      </div>
+    </div>
+  </div>
+</div>

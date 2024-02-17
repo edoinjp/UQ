@@ -1,0 +1,23 @@
+<div class=" filter_buttons" role="group" aria-label="Basic radio toggle button group">
+
+  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+  <%= link_to lesson_path(@lesson) + "?query=Visual" do %>
+    <label class="btn btn-outline-warning" for="btnradio1">Visual</label>
+  <% end %>
+
+  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+  <%= link_to lesson_path(@lesson) + "?query=Aural" do %>
+    <label class="btn btn-outline-warning" for="btnradio2">Aural</label>
+  <% end %>
+
+  <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+  <%= link_to lesson_path(@lesson) + "?query=Reading" do %>
+    <label class="btn btn-outline-warning" for="btnradio3">Reading</label>
+  <% end %>
+
+  <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off">
+  <%= link_to lesson_path(@lesson) + "?query=Kinesthetic" do %>
+    <label class="btn btn-outline-warning" for="btnradio4">Kinesthetic</label>
+
+  <% end %>
+</div>

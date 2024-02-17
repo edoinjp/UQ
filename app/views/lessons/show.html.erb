@@ -1,36 +1,24 @@
-<h1 class="text-light fs-1">Test Show</h1>
+<h1 class="text-primary fs-1"><%= @lesson.title %></h2>
 
 <br>
 
-<h2 class="text-light fs-2"><%= @lesson.title %></h2>
+<%# Filter Buttons %>
+<%= render 'style_filter' %>
+
+<%# Visual Lesson Display %>
+<%= render 'visual' %>
 
 <br>
 
-<h2 class="text-light fs-2">Visual Lesson Content</h2>
-<% @visual.files.each do |slide| %>
-  <li><%= image_tag slide, alt: "Visual Slide", class: "img-fluid" %></li>
-<% end %>
+<%# Aural Lesson Display %>
+<%= render 'aural' %>
 
 <br>
 
-<h2 class="text-light fs-2">Aural Lesson Content</h2>
-<br>
-<% @aural.files.each do |audio| %>
-  <li><%= audio_tag(url_for(audio), controls:"") %></li>
-<% end %>
+<%# Reading Lesson Display %>
+<%= render 'reading' %>
 
 <br>
 
-<h2 class="text-light fs-2">Reading Lesson Content</h2>
-<br>
-<% @reading.files.each do |doc| %>
-  <li><%= link_to doc.filename, url_for(doc), class: "message-file" %></li>
-<% end %>
-
-<br>
-
-<h2 class="text-light fs-2">Kinesthetic Lesson Content</h2>
-<br>
-<% @kinesthetic.files.each do |video| %>
-  <li><%= video_tag(url_for(video), controls:"") %></li>
-<% end %>
+<%# Kinesthetic Lesson Display  %>
+<%= render 'kinesthetic' %>
