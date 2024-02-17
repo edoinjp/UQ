@@ -8,7 +8,7 @@
             <% score_percentage = (score_data[:correct_count].to_f / score_data[:total_questions]) * 100 %>
             <div class="response-image">
               <% border_color = score_percentage > 50 ? 'green' : 'red' %> <!-- Dark green and dark red -->
-              <%= image_tag student.photo, alt: student.full_name, class: "response-img", style: "border-color: #{border_color};" %>
+              <%= cl_image_tag student.photo.key, alt: student.full_name, class: "response-img", style: "border-color: #{border_color};" %>
             </div>
           </div>
           <div class="response-list-content">

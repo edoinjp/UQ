@@ -31,7 +31,7 @@ teacher = User.create!(
   teacher: true
 )
 file0 = File.open(Rails.root.join('app/assets/images/profile.png'))
-teacher.photo.attach(io: file0, filename: 'teacher.jpg')
+teacher.photo.attach(io: file0, filename: 'teacher.jpg', content_type: 'image/png')
 puts "Mr. #{teacher.last_name} has been created!"
 
 # Seed Classroom
