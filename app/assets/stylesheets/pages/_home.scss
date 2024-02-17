@@ -163,3 +163,87 @@
 
 
 // sidebar end **************
+
+
+// classrooms index page for now here
+.classs2{
+  padding-bottom: 30px;
+}
+.classroomspage{
+  position: relative;
+  height: 100%;
+  text-decoration: none;
+  color:#333F66;
+  padding: 10px;
+}
+.allclasses{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-decoration: none;
+  height: auto;
+
+}
+.classimg{
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  margin-right: 20px;
+  object-fit: cover;
+  border: 2px solid #ff7c01;
+
+}
+
+
+.classroombox{
+  display: flex;
+  height: 300px;
+  width: 45%;
+  background-color: #333F66;
+  padding: 30px;
+  border-radius: 30px;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(to right, #3c4f95, #AA1F83, #3c4f95); /* Adjust colors as needed */
+  background-size: 200% 80%; /* Double the width for smooth animation */
+  animation: lava-lamp 6s infinite alternate;
+
+
+  /* 3D effect */
+  box-shadow: 0 3px 6px rgba(0, 17, 166, 0.391);
+}
+@keyframes lava-lamp {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.createclass{
+  text-decoration: none;
+
+}
+.classinfo1{
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+
+  align-items: center;
+
+}
+.createnewclass{
+  margin-top: 200px;
+  justify-content: center;
+  background-color: #ff8800;
+  height: 40px;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  width: 180px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
