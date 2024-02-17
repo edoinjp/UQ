@@ -6,7 +6,7 @@ class ClassroomsController < ApplicationController
   def index
     session[:return_to] = request.fullpath
     @classrooms = policy_scope(Classroom)
-
+    @active_tab = "classrooms"
 
   end
 
@@ -16,7 +16,9 @@ class ClassroomsController < ApplicationController
     @participants = @classroom.students
     @controller_name = controller_name
     @action_name = action_name
+    @active_tab = "students"
     @classrooms = [@classroom]  # Ensure that @classrooms is set for the sidebar
+
   end
 
 
