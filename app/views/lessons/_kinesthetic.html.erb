@@ -1,0 +1,8 @@
+<h2 class="text-primary fs-2">Kinesthetic Lesson Content</h2>
+<br>
+
+<div class="video-card">
+  <% @kinesthetic.files.each do |video| %>
+    <%= video_tag(url_for(video), controls:"", class:"vid-display") %>
+  <% end %>
+</div>

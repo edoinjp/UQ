@@ -1,3 +1,9 @@
+.index-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
 .your-lessons {
   color: black;
   font-size: 3rem;
@@ -6,14 +12,14 @@
 }
 
 .container-card {
-  height: 22rem;
-  width: 23rem;
+  height: 19rem;
+  width: 18rem;
   background-color: #052c65;
   border-radius: 2rem;
   display: flex;
   justify-content: center;
-  margin-left: 4rem;
-  margin-right: 4rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .content-card {
@@ -23,7 +29,7 @@
 
 .lesson-img {
   border-radius: 2rem;
-  width: 20rem;
+  width: 15rem;
   height: auto;
 }
 

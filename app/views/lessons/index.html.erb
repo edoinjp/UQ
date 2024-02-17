@@ -1,9 +1,9 @@
 <h1 class="your-lessons">Your Lessons</h1>
 
-<div class="row row-cols-1 row-cols-md-3 g-4">
-  <% @lessons.each do |lesson| %>
-    <%= link_to lesson_path(lesson) do %>
-      <div class="col container-card">
+<div class="row row-cols-1 row-cols-md-3 g-4 index-container">
+  <div class="col container-card">
+    <% @lessons.each do |lesson| %>
+      <%= link_to lesson_path(lesson) do %>
         <div class="content-card">
           <%= image_tag "lessons/lesson1.jpg", class:"lesson-img" %>
           <div class="body-card">
@@ -12,9 +12,9 @@
             <div class="rounded-pill bg-light">'</div>
           </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
   <div class="col container-card">
     <div class="content-card">
       <%= image_tag "lessons/lesson2.jpg", class:"lesson-img" %>
