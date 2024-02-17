@@ -4,19 +4,25 @@
   display: flex;
   align-items: center;
   margin-bottom: 8px;
-  background: white;
+  background-image: url("profile_card.png");
   padding: 40px 58px;
-  margin: 80px 200px 80px 200px;
   border: 1px solid rgb(235,235,235);
   border-radius: 20px;
-  width: 948px;
+  width: 100%;
+  margin-top: 3%;
 }
 
-.profile-card .profile-card-content {
+.profile-card-content {
   flex-grow: 1;
   padding: 0 24px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  font-size: 33px
+}
+
+.profile-content-info {
+  color: white;
 }
 
 .lesson-name-header, .quiz-score-header {
@@ -33,8 +39,55 @@
   margin-bottom: 8px;
   background: white;
   padding: 40px 58px;
-  margin: 80px 200px 80px 200px;
   border: 1px solid rgb(235,235,235);
   border-radius: 20px;
-  width: 948px;
+  width: 100%;
+}
+
+.learning-style {
+  color: #696F79;
+  font-size: 33px;
+  font-family: Poppins, sans-serif;
+
+  p {
+    font-family: Poppins, sans-serif;
+  }
+}
+
+.profile-titles {
+  color: #696F79;
+  font-size: 33px;
+  font-family: Poppins, sans-serif;
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile-lesson table {
+  width: 100%;
+}
+
+// .lesson-row {
+//   display: flex;
+//   justify-content: space-between;
+// }
+
+.lesson-name-cell {
+  text-align: left;
+}
+
+.quiz-score-cell {
+  text-align: right;
+}
+
+/* Optional: Adjust table header alignment */
+.lesson-name-header {
+  text-align: left;
+  // padding-bottom: 8px;
+  padding: 8px 0px;
+}
+
+.quiz-score-header {
+  text-align: right;
+  // padding-bottom: 8px;
+  padding: 8px 0px;
 }
