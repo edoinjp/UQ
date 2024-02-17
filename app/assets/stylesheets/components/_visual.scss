@@ -1,6 +1,11 @@
+.visual-card {
+  width: 65rem;
+}
+
 .slide-img {
-  width: 70%;
+  width: 60rem;
   height: auto;
   margin-left: 2rem;
   border-radius: 2rem;
+  box-shadow: 10px 10px 5px -1px rgba(0,0,0,0.75);
 }

@@ -1,8 +1,6 @@
-<h2 class="text-primary fs-2">Reading Lesson Content</h2>
-<br>
-
 <div class="reading-card">
   <% @reading.files.each do |doc| %>
     <li><%= link_to doc.filename, url_for(doc), class: "message-file" %></li>
   <% end %>
 </div>
+

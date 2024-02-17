@@ -19,12 +19,6 @@ class LessonsController < ApplicationController
     @aural = @lesson.styled_lessons.find { |x| x['style'] == 'aural' }
     @reading = @lesson.styled_lessons.find { |x| x['style'] == 'reading' }
     @kinesthetic = @lesson.styled_lessons.find { |x| x['style'] == 'kinesthetic' }
-
-    @styled_lessons = @lesson.styled_lessons
-    if params[:query].present?
-      @styled_lessons = @styled_lessons.where(style: params[:query])
-    end
-    @classroom = @lesson.classroom
   end
 
   private
