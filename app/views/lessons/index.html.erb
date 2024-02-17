@@ -5,7 +5,7 @@
     <% @lessons.each do |lesson| %>
       <%= link_to lesson_path(lesson) do %>
         <div class="content-card">
-          <%= cl_image_tag "lessons/lesson1.jpg", class:"lesson-img" %>
+          <%= image_tag "lessons/lesson1.jpg", class:"lesson-img" %>
           <div class="body-card">
             <button type="button" class="btn btn-secondary rounded-pill">TODAY</button>
             <h5 class="lesson-name"><%= lesson.title %></h5>
@@ -17,7 +17,7 @@
   </div>
   <div class="col container-card">
     <div class="content-card">
-      <%= cl_image_tag "lessons/lesson2.jpg", class:"lesson-img" %>
+      <%= image_tag "lessons/lesson2.jpg", class:"lesson-img" %>
       <div class="body-card body-card-from-2nd">
         <h5 class="lesson-name">Oral Communication II</h5>
         <div class="rounded-pill bg-light">'</div>
@@ -26,7 +26,7 @@
   </div>
   <div class="col container-card">
     <div class="content-card">
-      <%= cl_image_tag "lessons/lesson3.jpg", class:"lesson-img" %>
+      <%= image_tag "lessons/lesson3.jpg", class:"lesson-img" %>
       <div class="body-card body-card-from-2nd">
         <h5 class="lesson-name">Social Science</h5>
         <div class="rounded-pill bg-light">'</div>
@@ -35,7 +35,7 @@
   </div>
   <div class="col container-card">
     <div class="content-card">
-      <%= cl_image_tag "lessons/lesson4.jpg", class:"lesson-img" %>
+      <%= image_tag "lessons/lesson4.jpg", class:"lesson-img" %>
       <div class="body-card body-card-from-2nd">
         <h5 class="lesson-name">Language Arts</h5>
         <div class="rounded-pill bg-light">'</div>
