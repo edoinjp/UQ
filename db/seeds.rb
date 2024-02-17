@@ -138,8 +138,8 @@ reading_lesson = StyledLesson.create!(
 )
 
 # Attaching an open file to reading_lesson
-file10 = File.open(Rails.root.join('db/files/reading_lesson.docx'))
-reading_lesson.files.attach(io: file10, filename: 'reading.docx')
+file10 = File.open(Rails.root.join('db/files/reading_lesson.pdf'))
+reading_lesson.files.attach(io: file10, filename: 'reading.pdf')
 
 puts 'Reading lesson has been created!'
 
