@@ -1,20 +1,28 @@
-<h1 class="classs">All Classrooms</h1>
+<div class="classroomspage">
+  <h1 class="classs2">All Classrooms</h1>
 
-<% if @classrooms.any? %>
-  <ul>
-    <% @classrooms.each do |classroom| %>
-        <li>
-          <%= link_to classroom.name, classroom_lessons_path(classroom) %>
-          <!-- Add other classroom details as needed -->
+  <% if @classrooms.any? %>
+    <ul class="allclasses" >
+      <% @classrooms.each do |classroom| %>
+          <li class="classroombox" >
+            <div class="classinfo1">
+              <img class="classimg" src="https://www.thoughtco.com/thmb/MbIK8VYZIuh5AUctOSpqh-q4Dyg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-846997320-9ebc9320dd0e4d9aad3cb2a0dafbb8b4.jpg" alt="#">
+              <%= link_to classroom.name, classroom_lessons_path(classroom) %>
+            </div>
+            <!-- Add other classroom details as needed -->
 
-        </li>
+          </li>
 
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No classrooms found.</p>
+  <% end %>
+    <div class="createclass">
+    <div class="createnewclass">
+    <% unless current_user.student? %>
+      <%= link_to "New Classroom", new_classroom_path %>
     <% end %>
-  </ul>
-<% else %>
-  <p>No classrooms found.</p>
-<% end %>
-
-<% unless current_user.student? %>
-  <%= link_to "Create a New Classroom", new_classroom_path %>
-<% end %>
+    </div>
+    </div>
+</div>
