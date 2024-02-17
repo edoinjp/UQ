@@ -38,7 +38,7 @@ puts "Mr. #{teacher.last_name} has been created!"
 puts 'Creating classroom...'
 classroom = Classroom.create!(
   user: teacher,
-  name: "Your Classroom Name Here",
+  name: "Class 2 - B",
   title: "Your Classroom Title Here",
 )
 puts "Mr. DuPaty's classroom has been created!"
