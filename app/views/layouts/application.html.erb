@@ -47,6 +47,7 @@
               </li>
             <% end %>
 
+
            <% if @lesson.present? %>
          <li id="responses" class="<%= 'active' if @active_tab == "responses"%>">
           <%= link_to "responses", lesson_responses_path(@lesson)%>
