@@ -1,13 +1,16 @@
 .sound-bar {
-  width: 90%;
+  width: 65rem;
   height: 25rem;
   margin-bottom: 2rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
 
 .sound-card {
   background-image: asset-url("lessons/lesson1.jpg");
+  box-shadow: 10px 10px 5px -1px rgba(0,0,0,0.75);
   border-radius: 2rem;
-  width: 70%;
+  width: 80%;
   display: flex;
   justify-content: center;
   margin-left: 2rem;
