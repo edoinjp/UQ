@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   end
       resources :users, only: [:show]
       resources :lessons, only: %i[show] do
-      resources :questions, only: [:index]
-      resources :responses, only: [:index]
+        resources :questions, only: [:index]
+        resources :responses, only: [:index]
     end
 
 
