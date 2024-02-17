@@ -2,11 +2,12 @@ class ResponsesController < ApplicationController
   before_action :set_lesson, only: :index
 
   def index
+    # to dsiplay it on side bar
+    @active_tab = "responses"
     # Only Teachers can access this page
-    authorize @lesson, policy_class: ResponsePolicy
-
     #  Gather all responses
-    @responses = policy_scope(Response.includes(:choice).where(choices: { question_id: @lesson.questions.ids }))
+    @responses = policy_scope(Response)
+    # @responses = policy_scope(Response.includes(:choice).where(choices: { question_id: @lesson.questions.ids }))
 
     # get all studnets who participated in the lesson
     student_ids = @lesson.classroom.students.pluck(:id)

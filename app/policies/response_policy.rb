@@ -9,8 +9,4 @@ class ResponsePolicy < ApplicationPolicy
       end
     end
   end
-
-  def index?
-    user.teacher? && record.classroom.user == user
-  end
 end
