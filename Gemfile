@@ -58,6 +58,7 @@ gem "sassc-rails"
 # Manual Gems
 gem "pundit"
 gem "faker"
+gem "cloudinary"
 
 group :development, :test do
   gem "dotenv-rails"

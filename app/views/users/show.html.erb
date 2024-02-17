@@ -5,7 +5,7 @@
   </div>
 
   <div class="profile-card">
-    <%= image_tag @user.photo, alt: @user.full_name, class: "avatar-large" %>
+    <%= cl_image_tag @user.photo.key, alt: @user.full_name, class: "avatar-large" %>
     <div class="profile-card-content">
       <div class="profile-content-info">
         <h1><%= @user.full_name %>'s Profile</h1>

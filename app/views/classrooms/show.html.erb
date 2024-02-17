@@ -12,7 +12,7 @@
     <div class="participant-card">
       <%= link_to user_path(participant) do %>
         <% border_color = "##{SecureRandom.hex(3)}" %> <!-- Generate a random hex color -->
-        <%= image_tag participant.photo, alt: "#", class: "studentimg", style: "border-color: #{border_color};" %>
+        <%= cl_image_tag participant.photo.key, alt: "#", class: "studentimg", style: "border-color: #{border_color};" %>
         <div><%= "#{participant.first_name} #{participant.last_name}" %></div>
       <% end %>
     </div>
