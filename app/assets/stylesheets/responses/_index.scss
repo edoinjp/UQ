@@ -48,11 +48,18 @@
 
 .response-img {
   aspect-ratio: 1;
-  object-fit: auto;
+  object-fit: cover;
   object-position: center;
-  width: 72px;
+  width: 72px; // Adjust as needed
   border-radius: 50%;
+  margin: auto; // Centers the image within its container
+  display: block;
+  position: relative; // For border positioning
+  border: 3px solid transparent; // Thicker border
+  background: white; // Or any color that matches the page background
+  padding: 3px; // Space between image and border
 }
+
 .response-list-content {
   display: flex;
   flex-grow: 1;
