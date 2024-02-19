@@ -31,7 +31,7 @@ teacher = User.create!(
   teacher: true
 )
 file0 = File.open(Rails.root.join('app/assets/images/profile.png'))
-teacher.photo.attach(io: file0, filename: 'teacher.jpg', content_type: 'image/png')
+teacher.photo.attach(io: file0, filename: 'teacher.png', content_type: 'image/png')
 puts "Mr. #{teacher.last_name} has been created!"
 
 # Seed Classroom
@@ -44,33 +44,49 @@ classroom = Classroom.create!(
 puts "Mr. DuPaty's classroom has been created!"
 
 # Seed Students
-puts 'Creating 20 students...'
-20.times do
-  url = URI('https://randomuser.me/api/')
-  response = Net::HTTP.get(url)
-  json = JSON.parse(response)
-  results = json['results']
-  results.each do |result|
-    student = User.create!(
-      first_name: result['name']['first'],
-      last_name: result['name']['last'],
-      learning_style: %w[visual aural reading kinesthetic].sample,
-      email: result['email'],
-      password: 'password',
-      teacher: false
-    )
-    img_url = result['picture']['large']
-    file = URI.open(img_url)
-    student.photo.attach(io: file, filename: 'user.jpg', content_type: 'image/jpg')
-    puts "User #{student.first_name} has been created..."
+boy_avatars = %w[app/assets/images/students/boy1.jpg app/assets/images/students/boy2.jpg app/assets/images/students/boy3.jpg app/assets/images/students/boy4.jpg app/assets/images/students/boy5.jpg app/assets/images/students/boy6.jpg app/assets/images/students/boy7.jpg app/assets/images/students/boy8.jpg app/assets/images/students/boy9.jpg app/assets/images/students/boy10.jpg]
 
-    Participation.create!(
-      user: student,
-      classroom: classroom
-    )
-  end
+boy_first_names = %w[Shinji Rayji Toru Yosuke Koji Akira Shunsuke Taiga Kai Sora]
+
+girl_avatars = %w[app/assets/images/students/girl1.jpg app/assets/images/students/girl2.jpg app/assets/images/students/girl3.jpg app/assets/images/students/girl4.jpg app/assets/images/students/girl5.jpg app/assets/images/students/girl6.jpg app/assets/images/students/girl7.jpg app/assets/images/students/girl8.jpg app/assets/images/students/girl9.jpg app/assets/images/students/girl10.jpg]
+
+girl_first_names = %w[Reona Mari Aika Hikari Sakura Kaede Natsume Rin Fuuka Yukari]
+
+last_names = %w[Watanabe Fujita Nakamura Ohtani Izumi Nakamura Mori Tanaka Suzuki Honda]
+
+puts 'Creating 10 boy students...'
+
+boy_avatars.each do |path|
+  student = User.create!(
+    first_name: boy_first_names.sample,
+    last_name: last_names.sample,
+    learning_style: %w[visual aural reading kinesthetic].sample,
+    email: Faker::Internet.email,
+    password: 'password',
+    teacher: false
+  )
+  file = File.open(Rails.root.join(path))
+  student.photo.attach(io: file, filename: 'user.jpg', content_type: 'image/jpg')
+  puts "User #{student.first_name} has been created..."
 end
-puts 'All students are done!'
+
+puts 'Creating 10 girl students...'
+
+girl_avatars.each do |path|
+  student = User.create!(
+    first_name: girl_first_names.sample,
+    last_name: last_names.sample,
+    learning_style: %w[visual aural reading kinesthetic].sample,
+    email: Faker::Internet.email,
+    password: 'password',
+    teacher: false
+  )
+  file = File.open(Rails.root.join(path))
+  student.photo.attach(io: file, filename: 'user.jpg', content_type: 'image/jpg')
+  puts "User #{student.first_name} has been created..."
+end
+
+puts 'All students have been created!'
 
 # Seed Lesson
 puts 'Creating a lesson...'
