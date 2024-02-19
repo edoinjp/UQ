@@ -1,7 +1,12 @@
-<div class="reading-card">
-  <% @reading.files.each do |pdf| %>
-    <li><%= link_to pdf.filename, url_for(pdf), class: "message-file" %></li>
-  <% end %>
+<div class="reading-container">
+  <div class="reading-preview">
+    <%= image_tag "reading_lesson_img.jpg", class: "preview-img" %>
+  </div>
+
+  <div class="reading-link">
+    <% @reading.files.each do |pdf| %>
+      <%= image_tag "download_icon2.jpg", class: "download-icon" %>
+      <%= link_to pdf.filename, url_for(pdf), class: "message-file" %>
+    <% end %>
+  </div>
 </div>
-
-

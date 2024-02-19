@@ -8,3 +8,25 @@
 //   justify-content: center;
 //   margin-left: 2rem;
 // }
+
+.reading-container {
+  display: flex;
+  flex-direction: row;
+  height: 25rem;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.preview-img {
+  width: auto;
+  height: 23rem;
+}
+
+.download-icon {
+  border-radius: 100%;
+}
+
+.reading-link {
+  display: flex;
+  flex-direction: column;
+}
