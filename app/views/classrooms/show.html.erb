@@ -40,17 +40,18 @@
     <div class="participant-container">
       <!-- Display other students who are not already in the classroom and not the teacher -->
       <% User.where.not(id: [@classroom.user_id] + [@classroom.students.pluck(:id), current_user.id].flatten).each do |user| %>
-        <div class="student-card">
-          <label>
-
-            <%= form.check_box :student_ids, { multiple: true }, user.id, nil %>
-            <div class="student-info">
-               <% border_color = "##{SecureRandom.hex(3)}" %>
-                 <img class="studentimg" src="https://motto-jp.com/media/wp-content/uploads/2021/02/AdobeStock_284955056.jpeg" alt="#" style="border-color: <%= border_color %>;">
-              <span class="student-name"><%= "#{user.first_name} #{user.last_name}" %></span>
-            </div>
-          </label>
-        </div>
+        <%= link_to user_path(user) do %>
+          <div class="student-card">
+              <label>
+                <%= form.check_box :student_ids, { multiple: true }, user.id, nil %>
+                <div class="student-info">
+                  <% border_color = "##{SecureRandom.hex(3)}" %>
+                    <%= image_tag user.photo, class:"studentimg", style: "border-color: #{border_color}" %>
+                  <span class="student-name"><%= "#{user.first_name} #{user.last_name}" %></span>
+                </div>
+              </label>
+          </div>
+        <% end %>
       <% end %>
     </div>
       <%= form.submit "Add Selected Students", class: "btn btn-add-students mt-3", disabled: @classroom.student_ids.blank? %>
