@@ -4,7 +4,7 @@
 
 <div class="container d-flex flex-row-reverse">
   <!-- Nav tabs -->
-  <ul class="nav nav-tabs" id="myTabs">
+  <ul class="nav nav-tabs border border-primary" id="myTabs">
     <li class="nav-item ">
       <a class="nav-link active" id="tab1-tab" data-toggle="tab" href="#tab1"><%= image_tag "visual_icon.jpg", class: "filter-icons" %></i></a>
     </li>
@@ -20,7 +20,7 @@
   </ul>
 
   <!-- Tab panes -->
-  <div class="tab-content">
+  <div class="tab-content border border-danger">
     <div class="tab-pane fade show active" id="tab1">
       <%= render 'visual' %>
     </div>
@@ -34,4 +34,20 @@
       <%= render 'kinesthetic' %>
     </div>
   </div>
+</div>
+
+<div class="teacher-container">
+  <%= image_tag "profile.png" %>
+  <div class="teacher-container-infos">
+    <h2><%= @lesson.title %></h2>
+    <p>In this lesson, <strong>you'll</strong> be introduced to...</p>
+  </div>
+</div>
+
+<div class="student-container">
+    <% 5.times do %>
+      <div class="student-avatars">
+        <%= image_tag "profile.png" %>
+      </div>
+    <% end %>
 </div>
