@@ -1,11 +1,11 @@
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <%= image_tag @visual.files.first, class: "slide-img" %>
+      <%= cl_image_tag @visual.files.first.key, class: "slide-img" %>
     </div>
     <%= @visual.files.drop(1).each do |slide| %>
       <div class="carousel-item">
-        <%= image_tag slide, class: "slide-img" %>
+        <%= cl_image_tag slide.key, class: "slide-img" %>
       </div>
     <% end %>
   </div>

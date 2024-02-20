@@ -30,14 +30,14 @@
   <!-- Tab panes -->
   <div class="lesson-content">
     <div class="lesson-pane">
-      <% if params[:query] == 'visual' %>
+      <% if params[:query] == 'visual' && @visual.present?%>
         <%= render 'visual' %>
-      <% elsif params[:query] == 'aural' %>
+      <% elsif params[:query] == 'aural' && @aural.present? %>
         <%= render 'aural' %>
-      <% elsif params[:query] == 'reading'%>
+      <% elsif params[:query] == 'reading' && @reading.present?%>
         <%= render 'reading' %>
       <% else %>
-        <%= render 'kinesthetic' %>
+        <%= render 'kinesthetic' if @kinesthetic.present? %>
       <% end %>
     </div>
   </div>

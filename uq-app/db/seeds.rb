@@ -30,9 +30,8 @@ teacher = User.create!(
   password: 'password',
   teacher: true
 )
-file0 = File.open(Rails.root.join('app/assets/images/profile.png'))
-teacher.photo.attach(io: file0, filename: 'teacher.png', content_type: 'image/png')
-teacher.save
+file0 = Cloudinary::Uploader.upload('app/assets/images/profile.png')  # Upload teacher photo to Cloudinary
+teacher.photo.attach(io: URI.open(file0['secure_url']), filename: 'teacher.png')
 puts "Mr. #{teacher.last_name} has been created!"
 
 # Seed Classroom
@@ -40,71 +39,44 @@ puts 'Creating classroom...'
 classroom = Classroom.create!(
   user: teacher,
   name: "Class 2 - B",
-  title: "Oral Communication",
+  title: "Your Classroom Title Here",
 )
 puts "Mr. DuPaty's classroom has been created!"
 
 # Seed Students
-boy_avatars = %w[app/assets/images/students/boy1.jpg app/assets/images/students/boy2.jpg app/assets/images/students/boy3.jpg app/assets/images/students/boy4.jpg app/assets/images/students/boy5.jpg app/assets/images/students/boy6.jpg app/assets/images/students/boy7.jpg app/assets/images/students/boy8.jpg app/assets/images/students/boy9.jpg app/assets/images/students/boy10.jpg]
+puts 'Creating 20 students...'
+20.times do
+  url = URI('https://randomuser.me/api/')
+  response = Net::HTTP.get(url)
+  json = JSON.parse(response)
+  results = json['results']
+  results.each do |result|
+    student = User.create!(
+      first_name: result['name']['first'],
+      last_name: result['name']['last'],
+      learning_style: %w[visual aural reading kinesthetic].sample,
+      email: result['email'],
+      password: 'password',
+      teacher: false
+    )
+    img_url = result['picture']['large']
+    file = URI.open(img_url)
+    student.photo.attach(io: file, filename: 'user.jpg', content_type: 'image/jpg')
+    puts "User #{student.first_name} has been created..."
 
-boy_first_names = %w[Shinji Rayji Toru Yosuke Koji Akira Shunsuke Taiga Kai Sora]
-
-girl_avatars = %w[app/assets/images/students/girl1.jpg app/assets/images/students/girl2.jpg app/assets/images/students/girl3.jpg app/assets/images/students/girl4.jpg app/assets/images/students/girl5.jpg app/assets/images/students/girl6.jpg app/assets/images/students/girl7.jpg app/assets/images/students/girl8.jpg app/assets/images/students/girl9.jpg app/assets/images/students/girl10.jpg]
-
-girl_first_names = %w[Reona Mari Aika Hikari Sakura Kaede Natsume Rin Fuuka Yukari]
-
-last_names = %w[Watanabe Fujita Nakamura Ohtani Izumi Nakamura Mori Tanaka Suzuki Honda]
-
-puts 'Creating 10 boy students...'
-
-boy_avatars.each do |path|
-  student = User.create!(
-    first_name: boy_first_names.sample,
-    last_name: last_names.sample,
-    learning_style: %w[visual aural reading kinesthetic].sample,
-    email: Faker::Internet.email,
-    password: 'password',
-    teacher: false
-  )
-  file = File.open(Rails.root.join(path))
-  student.photo.attach(io: file, filename: 'user.jpg', content_type: 'image/jpg')
-  student.save
-
-  Participation.create!(
-    user: student,
-    classroom: classroom
-  )
-  puts "User #{student.first_name} has been created..."
+    Participation.create!(
+      user: student,
+      classroom: classroom
+    )
+  end
 end
-
-puts 'Creating 10 girl students...'
-
-girl_avatars.each do |path|
-  student = User.create!(
-    first_name: girl_first_names.sample,
-    last_name: last_names.sample,
-    learning_style: %w[visual aural reading kinesthetic].sample,
-    email: Faker::Internet.email,
-    password: 'password',
-    teacher: false
-  )
-  file = File.open(Rails.root.join(path))
-  student.photo.attach(io: file, filename: 'user.jpg', content_type: 'image/jpg')
-
-  Participation.create!(
-    user: student,
-    classroom: classroom
-  )
-  puts "User #{student.first_name} has been created..."
-end
-
-puts 'All students have been created!'
+puts 'All students are done!'
 
 # Seed Lesson
 puts 'Creating a lesson...'
 lesson = Lesson.create!(
   classroom: classroom,
-  title: 'Ice Breakers'
+  title: 'Oral Communication'
 )
 puts "The #{lesson.title} seed lesson has been created!"
 
@@ -140,7 +112,6 @@ visual_lesson.files.attach(io: file7, filename: 'visual_7.jpg')
 
 file8 = File.open(Rails.root.join('db/files/visual_lesson/lessonimg_8.jpg'))
 visual_lesson.files.attach(io: file8, filename: 'visual_8.jpg')
-visual_lesson.save
 
 puts 'Visual lesson has been created!'
 
@@ -155,7 +126,6 @@ aural_lesson = StyledLesson.create!(
 # Attaching audio file to aural_lesson
 file9 = File.open(Rails.root.join('db/files/aural_lesson.mp3'))
 aural_lesson.files.attach(io: file9, filename: 'aural.mp3')
-aural_lesson.save
 
 puts 'Aural lesson has been created!'
 
@@ -170,7 +140,6 @@ reading_lesson = StyledLesson.create!(
 # Attaching an open file to reading_lesson
 file10 = File.open(Rails.root.join('db/files/reading_lesson.pdf'))
 reading_lesson.files.attach(io: file10, filename: 'reading.pdf')
-reading_lesson.save
 
 puts 'Reading lesson has been created!'
 
@@ -185,7 +154,6 @@ kinesthetic_lesson = StyledLesson.create!(
 # Attaching a video file to kinesthetic_lesson
 file11 = File.open(Rails.root.join('db/files/kinesthetic_lesson.mp4'))
 kinesthetic_lesson.files.attach(io: file11, filename: 'kinesthetic.mp4')
-kinesthetic_lesson.save
 
 puts 'Kinesthetic lesson has been created!'
 
