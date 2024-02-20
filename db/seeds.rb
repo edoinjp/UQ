@@ -90,6 +90,7 @@ girl_avatars.each do |path|
   )
   file = File.open(Rails.root.join(path))
   student.photo.attach(io: file, filename: 'user.jpg', content_type: 'image/jpg')
+  student.save
 
   Participation.create!(
     user: student,
