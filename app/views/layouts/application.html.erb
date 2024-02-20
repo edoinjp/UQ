@@ -36,26 +36,22 @@
         </style>
 
        <ul class="sidebarul">
-        <li id="classes" class="<%= 'active' if @active_tab == "classrooms"%>">
-          <%= link_to "Classrooms", classrooms_path %>
-        </li>
+            <li id="classes" class="<%= 'active' if @active_tab == "classrooms"%>">
+              <%= link_to "Classrooms", classrooms_path %>
+            </li>
 
-          <% if @classroom.present? %>
+            <% if @classroom.present? && action_name != 'new' %>
               <li id="students-<%= @classroom.id %>" class="<%= 'active' if @active_tab == "students"%>">
                 <%= link_to "Students", classroom_path(@classroom) %>
-                <%# this p line is for debugging %>
               </li>
             <% end %>
 
-
-           <% if @lesson.present? %>
-         <li id="responses" class="<%= 'active' if @active_tab == "responses"%>">
-          <%= link_to "responses", lesson_responses_path(@lesson)%>
-        </li>
+            <% if @lesson.present? %>
+              <li id="responses" class="<%= 'active' if @active_tab == "responses"%>">
+                <%= link_to "responses", lesson_responses_path(@lesson) %>
+              </li>
             <% end %>
-
-
-      </ul>
+          </ul>
     </div>
 
     <!-- Main Content -->

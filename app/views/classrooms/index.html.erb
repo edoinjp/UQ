@@ -19,11 +19,11 @@
     <p>No classrooms found.</p>
   <% end %>
     <div class="createclass">
-    <div class="createnewclass">
-    <% unless current_user.student? %>
-      <%= link_to "New Classroom", new_classroom_path %>
-    <% end %>
-    </div>
+      <div class="createnewclass">
+      <% unless current_user.student? %>
+  <%= link_to "New Classroom", new_classroom_path %>
+      <% end %>
+     </div>
     </div>
 
 </div>

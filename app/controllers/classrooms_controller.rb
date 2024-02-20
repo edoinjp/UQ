@@ -1,7 +1,10 @@
 class ClassroomsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_classroom, only: [:show]
-  before_action :set_classroom, only: [:show, :edit, :update, :destroy, :add_students]
+  before_action :set_classroom, only: [:show, :edit, :update, :destroy, :add_students, :new]
+
+
+
 
   def index
     session[:return_to] = request.fullpath
@@ -44,7 +47,6 @@ class ClassroomsController < ApplicationController
 
   def add_students
     set_classroom
-    @classroom = Classroom.find_by(id: params[:id])
     # Authorize using the instance of @classroom and the action :add_students?
     authorize @classroom, :add_students?
     selected_student_ids = params.dig(:classroom, :student_ids) || []
@@ -55,16 +57,19 @@ class ClassroomsController < ApplicationController
 
 
 
+
   private
   def set_classroom
-    puts "Parameters in set_classroom: #{params.inspect}"
-    @classroom = Classroom.find_by(id: params[:id])
+    if params[:id] && action_name != 'new'
+      @classroom = Classroom.find_by(id: params[:id])
 
-    unless @classroom
-      flash[:alert] = 'Classroom not found.'
-      redirect_to classrooms_path
+      unless @classroom
+        flash[:alert] = 'Classroom not found.'
+        redirect_to classrooms_path
+      end
     end
   end
+
 
   def classroom_params
     params.require(:classroom).permit(:name, :title)

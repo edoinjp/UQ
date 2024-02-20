@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "home#home"  # Root path for the home action in HomeController
 
-  resources :classrooms, only: %i[index new create show] do
+  resources :classrooms, only: [:index, :new, :create, :show] do
     member do
       post 'add_students'
       get 'students'
