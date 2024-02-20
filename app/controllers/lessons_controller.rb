@@ -21,12 +21,10 @@ class LessonsController < ApplicationController
     @reading = @lesson.styled_lessons.find { |x| x['style'] == 'reading' }
     @kinesthetic = @lesson.styled_lessons.find { |x| x['style'] == 'kinesthetic' }
 
-    # @students = @classroom.students
-    # if params[:query].present?
-    #   @students = @students.where(learning_style: params[:query])
-    # else
-    #   @students
-    # end
+    @students = @classroom.students
+    if params[:query].present?
+      @students = @students.where(learning_style: params[:query])
+    end
   end
 
   private

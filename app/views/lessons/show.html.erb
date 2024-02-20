@@ -1,4 +1,4 @@
-<h1 class="header"><%= @lesson.title %></h2>
+<h1 class="header"><%= params[:query] ? params[:query] : @lesson.title %></h2>
 
 <br>
 
@@ -6,23 +6,33 @@
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" id="myTabs">
     <li class="nav-item ">
-      <a class="nav-link active" id="tab1-tab" data-toggle="tab" href="#tab1"><%= image_tag "visual_icon.jpg", class: "filter-icons" %></i></a>
+      <%= link_to lesson_path(@lesson) + "?query=visual" do %>
+        <a class="nav-link active" id="tab1-tab" data-toggle="tab" href="#tab1"><%= image_tag "visual_icon.jpg", class: "filter-icons" %></a>
+      <% end %>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="tab2-tab" data-toggle="tab" href="#tab2"><%= image_tag "audio_icon.jpg", class: "filter-icons" %></i></a>
+      <%= link_to lesson_path(@lesson) + "?query=aural" do %>
+        <a class="nav-link" id="tab2-tab" data-toggle="tab" href="#tab2"><%= image_tag "audio_icon.jpg", class: "filter-icons" %></a>
+      <% end %>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="tab3-tab" data-toggle="tab" href="#tab3"><%= image_tag "reading_icon.jpg", class: "filter-icons" %></a>
+      <%= link_to lesson_path(@lesson) + "?query=reading" do %>
+        <a class="nav-link" id="tab3-tab" data-toggle="tab" href="#tab3"><%= image_tag "reading_icon.jpg", class: "filter-icons" %></a>
+      <% end %>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="tab4-tab" data-toggle="tab" href="#tab4"><%= image_tag "video_icon.jpg", class: "filter-icons" %></a>
+      <%= link_to lesson_path(@lesson) + "?query=kinesthetic" do %>
+        <a class="nav-link" id="tab4-tab" data-toggle="tab" href="#tab4"><%= image_tag "video_icon.jpg", class: "filter-icons" %></a>
+      <% end %>
     </li>
   </ul>
 
   <!-- Tab panes -->
   <div class="tab-content">
     <div class="tab-pane fade show active" id="tab1">
+          <%= link_to lesson_path(@lesson) + "?query=visual" do %>
       <%= render 'visual' %>
+            <% end %>
     </div>
     <div class="tab-pane fade" id="tab2">
       <%= render 'aural' %>
@@ -45,19 +55,9 @@
 </div>
 
 <div class="student-container">
-  <div class="student-avatars">
-    <%= image_tag "students/boy1.jpg" %>
-  </div>
+  <% @students.each do |student| %>
     <div class="student-avatars">
-    <%= image_tag "students/girl1.jpg" %>
-  </div>
-    <div class="student-avatars">
-    <%= image_tag "students/boy2.jpg" %>
-  </div>
-    <div class="student-avatars">
-    <%= image_tag "students/girl2.jpg" %>
-  </div>
-    <div class="student-avatars">
-    <%= image_tag "students/boy3.jpg" %>
-  </div>
+      <%= image_tag student.photo %>
+    </div>
+  <% end %>
 </div>

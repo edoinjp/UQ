@@ -39,7 +39,7 @@ puts 'Creating classroom...'
 classroom = Classroom.create!(
   user: teacher,
   name: "Class 2 - B",
-  title: "Your Classroom Title Here",
+  title: "Oral Communication",
 )
 puts "Mr. DuPaty's classroom has been created!"
 
@@ -67,6 +67,11 @@ boy_avatars.each do |path|
   )
   file = File.open(Rails.root.join(path))
   student.photo.attach(io: file, filename: 'user.jpg', content_type: 'image/jpg')
+
+  Participation.create!(
+    user: student,
+    classroom: classroom
+  )
   puts "User #{student.first_name} has been created..."
 end
 
@@ -83,6 +88,11 @@ girl_avatars.each do |path|
   )
   file = File.open(Rails.root.join(path))
   student.photo.attach(io: file, filename: 'user.jpg', content_type: 'image/jpg')
+
+  Participation.create!(
+    user: student,
+    classroom: classroom
+  )
   puts "User #{student.first_name} has been created..."
 end
 
@@ -92,7 +102,7 @@ puts 'All students have been created!'
 puts 'Creating a lesson...'
 lesson = Lesson.create!(
   classroom: classroom,
-  title: 'Oral Communication'
+  title: 'Ice Breakers'
 )
 puts "The #{lesson.title} seed lesson has been created!"
 
