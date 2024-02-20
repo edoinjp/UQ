@@ -32,6 +32,7 @@ teacher = User.create!(
 )
 file0 = File.open(Rails.root.join('app/assets/images/profile.png'))
 teacher.photo.attach(io: file0, filename: 'teacher.png', content_type: 'image/png')
+teacher.save
 puts "Mr. #{teacher.last_name} has been created!"
 
 # Seed Classroom
@@ -67,6 +68,7 @@ boy_avatars.each do |path|
   )
   file = File.open(Rails.root.join(path))
   student.photo.attach(io: file, filename: 'user.jpg', content_type: 'image/jpg')
+  student.save
 
   Participation.create!(
     user: student,
@@ -88,6 +90,7 @@ girl_avatars.each do |path|
   )
   file = File.open(Rails.root.join(path))
   student.photo.attach(io: file, filename: 'user.jpg', content_type: 'image/jpg')
+  student.save
 
   Participation.create!(
     user: student,
@@ -138,6 +141,7 @@ visual_lesson.files.attach(io: file7, filename: 'visual_7.jpg')
 
 file8 = File.open(Rails.root.join('db/files/visual_lesson/lessonimg_8.jpg'))
 visual_lesson.files.attach(io: file8, filename: 'visual_8.jpg')
+visual_lesson.save
 
 puts 'Visual lesson has been created!'
 
@@ -152,6 +156,7 @@ aural_lesson = StyledLesson.create!(
 # Attaching audio file to aural_lesson
 file9 = File.open(Rails.root.join('db/files/aural_lesson.mp3'))
 aural_lesson.files.attach(io: file9, filename: 'aural.mp3')
+aural_lesson.save
 
 puts 'Aural lesson has been created!'
 
@@ -166,6 +171,7 @@ reading_lesson = StyledLesson.create!(
 # Attaching an open file to reading_lesson
 file10 = File.open(Rails.root.join('db/files/reading_lesson.pdf'))
 reading_lesson.files.attach(io: file10, filename: 'reading.pdf')
+reading_lesson.save
 
 puts 'Reading lesson has been created!'
 
@@ -180,6 +186,7 @@ kinesthetic_lesson = StyledLesson.create!(
 # Attaching a video file to kinesthetic_lesson
 file11 = File.open(Rails.root.join('db/files/kinesthetic_lesson.mp4'))
 kinesthetic_lesson.files.attach(io: file11, filename: 'kinesthetic.mp4')
+kinesthetic_lesson.save
 
 puts 'Kinesthetic lesson has been created!'
 

@@ -1,5 +1,5 @@
 <div class="video-card">
   <% @kinesthetic.files.each do |video| %>
-    <%= video_tag(url_for(video), controls:"", class:"vid-display") %>
+    <%= cl_video_tag video.key, controls:"", class:"vid-display" %>
   <% end %>
 </div>

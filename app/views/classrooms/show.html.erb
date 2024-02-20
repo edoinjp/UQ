@@ -46,7 +46,7 @@
                 <%= form.check_box :student_ids, { multiple: true }, user.id, nil %>
                 <div class="student-info">
                   <% border_color = "##{SecureRandom.hex(3)}" %>
-                    <%= image_tag user.photo, class:"studentimg", style: "border-color: #{border_color}" %>
+                    <%= cl_image_tag user.photo.key, class:"studentimg", style: "border-color: #{border_color}" %>
                   <span class="student-name"><%= "#{user.first_name} #{user.last_name}" %></span>
                 </div>
               </label>
