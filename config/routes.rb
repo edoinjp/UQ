@@ -9,11 +9,13 @@ Rails.application.routes.draw do
     end
     resources :lessons, only: %i[index]
   end
-      resources :users, only: [:show]
-      resources :lessons, only: %i[show] do
-        resources :questions, only: [:index]
-        resources :responses, only: [:index]
-    end
 
+  resources :users, only: [:show]
+  get 'vark', to: 'users#test'
+  post 'vark', to: 'users#submit'
 
+  resources :lessons, only: %i[show] do
+    resources :questions, only: [:index]
+    resources :responses, only: [:index]
+  end
 end

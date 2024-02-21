@@ -10,4 +10,8 @@ class UserPolicy < ApplicationPolicy
     # Ony user with attribute teacher can see other users
     user.teacher? && record != user
   end
+
+  def test?
+    true
+  end
 end

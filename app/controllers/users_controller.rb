@@ -12,6 +12,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def test
+    @user = User.new
+    authorize @user
+  end
+
   private
 
   def set_user
