@@ -1,15 +1,18 @@
-import { Controller } from "@hotwired/stimulus"
+  static targets = [
+    "quiz",
+    "answerEls",
+    "questionEl",
+    "a_text",
+    "b_text",
+    "c_text",
+    "d_text",
+    "submit"
+  ]
 
-// Connects to data-controller="vark"
-export default class extends Controller {
-  connect() {
-    console.log("Hello from vark_controller")
-  }
-}
+
 
 const quizData = [
   {
-    remaining: "Question 1/4",
     question: "I want to find out more about a tour that I am going on. I would:",
     a: "read about the tour on the itinerary",
     b: "use a map and see where the places are",
@@ -21,7 +24,6 @@ const quizData = [
     kinesthetic: "c",
   },
   {
-    remaining: "Question 2/4",
     question: "When I am learning I:",
     a: "like to talk things through",
     b: "read books, articles and handouts",
@@ -33,7 +35,6 @@ const quizData = [
     kinesthetic: "d",
   },
   {
-    remaining: "Question 3/4",
     question: "When finding my way, I:",
     a: "head in the general direction to see if I can find my destination without instructions",
     b: "like to read instructions from GPS or instructions that have been written",
@@ -45,7 +46,6 @@ const quizData = [
     kinesthetic: "a",
   },
   {
-    remaining: "Question 4/4",
     question: "I want to save more money and to decide between a range of options. I would:",
     a: "consider examples of each option using my financial information",
     b: "talk with an expert about the options",
@@ -58,8 +58,7 @@ const quizData = [
   },
 ];
 
-const questions_remaining = document.getElementById('remaining')
-const quiz = document.getElementById('quiz')
+const quiz = docutment.getElementById('quiz')
 const answerEls = document.querySelectorAll('.answer')
 const questionEl = document.getElementById('question')
 const a_text = document.getElementById('a_text')
@@ -82,7 +81,6 @@ function loadQuiz() {
 
   const currentQuizData = quizData[currentQuiz]
 
-  questions_remaining.innerText = currentQuizData.remaining
   questionEl.innerText = currentQuizData.question
   a_text.innerText = currentQuizData.a
   b_text.innerText = currentQuizData.b
@@ -120,17 +118,17 @@ submitBtn.addEventListener('click', () => {
       kinestheticScore++
     }
 
-    console.log(currentQuiz++);
+    currentQuiz++
 
     if(currentQuiz < quizData.length) {
       loadQuiz()
     } else {
-      quiz.innerHTML = `
-      <h2 id="results">
-        Visual Score: ${visualScore} <br><br>
-        Aural Score: ${auralScore} <br><br>
-        Reading Score: ${readingScore} <br><br>
-        Kinesthetic Score: ${kinestheticScore} <br><br>
+      quiz.innerHTML `
+      <h2>
+        Visual Score: ${visualScore}
+        Aural Score: ${auralScore}
+        Reading Score: ${readingScore}
+        Kinesthetic Score: ${kinestheticScore}
       </h2>
 
       <button onclick="location.reload()">Reload</button>
