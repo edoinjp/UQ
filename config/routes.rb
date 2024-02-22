@@ -9,11 +9,13 @@ Rails.application.routes.draw do
     end
     resources :lessons, only: %i[index]
   end
-      resources :users, only: [:show]
-      resources :lessons, only: %i[show] do
-        resources :questions, only: [:index]
-        resources :responses, only: [:index]
+
+  resources :users, only: [:show]
+  resources :lessons, only: %i[show] do
+    resources :questions, only: [:index]
+    resources :responses, only: [:index]
+    member do
+      get 'generate_content'
     end
-
-
+  end
 end
