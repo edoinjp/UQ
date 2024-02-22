@@ -1,0 +1,40 @@
+<div class="container chatroom bg-light p-4 rounded" style="background: #f8f9fa;"
+  data-controller="chatroom-subscription"
+  data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>">
+
+  <div class="row">
+    <div class="col-md-3">
+      <h3 class="text-info mb-4">Students in <%= @classroom.name %></h3>
+      <ul class="list-group">
+        <% @students.each do |student| %>
+          <li class="list-group-item bg-secondary text-dark mb-2"><%= student.first_name %></li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="col-md-9">
+      <h1 class="text-primary">#<%= @chatroom.name %></h1>
+
+      <div class="messages mt-4 text-dark" id="messages" data-chatroom-subscription-target="messages">
+        <% if @chatroom %>
+          <%= render partial: "messages/message", collection: @chatroom.messages %>
+        <% else %>
+          <p class="alert alert-warning">No associated chatroom found.</p>
+        <% end %>
+      </div>
+
+      <div class="sticky-bottom mt-4">
+        <% if @chatroom %>
+          <%= simple_form_for [@chatroom, @message], html: {class: "d-flex"} do |f| %>
+            <%= f.input :content,
+              label: false,
+              placeholder: "Type a message...",
+              wrapper_html: {class: "flex-grow-1 form-control mr-2", style: "resize: none;"}
+            %>
+            <%= f.submit "Send", class: "btn btn-primary" %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

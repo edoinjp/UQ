@@ -6,6 +6,9 @@ require 'uri'
 require 'net/http'
 
 # Clear previous records
+puts "delete all messeges"
+Message.destroy_all
+
 puts 'Destroying all previous records'
 Participation.destroy_all
 puts 'All participations are destroyed'
