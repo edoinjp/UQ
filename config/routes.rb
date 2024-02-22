@@ -14,8 +14,6 @@ Rails.application.routes.draw do
   resources :lessons, only: %i[show] do
     resources :questions, only: [:index]
     resources :responses, only: [:index]
-    member do
-      get 'generate_content'
-    end
+    get 'generate_content', on: :member
   end
 end

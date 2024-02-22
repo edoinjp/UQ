@@ -19,16 +19,6 @@ class ResponsesController < ApplicationController
         total_questions: @lesson.questions.count # Total questions for the lesson
       }
     end
-
-    def generate_content
-      client = OpenAI::Client.new
-      prompt = "Prompt for generating content" # Replace with my prompt
-      response = client.chat(parameters: {
-        model: "gpt-3.5-turbo",
-        messages: [{ role: "user", content: prompt}]
-      })
-      @content = response[:choices].first[:message][:content]
-    end
   end
 
   private
