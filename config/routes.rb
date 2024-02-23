@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       post 'add_students'
       get 'students'
     end
+
     resources :lessons, only: %i[index]
   end
 
@@ -14,8 +15,15 @@ Rails.application.routes.draw do
   get 'vark', to: 'users#test'
   post 'vark', to: 'users#submit'
 
+  resources :users, only: [:show]
   resources :lessons, only: %i[show] do
     resources :questions, only: [:index]
     resources :responses, only: [:index]
   end
+
+  resources :chatrooms, only: :show do
+    resources :messages, only: :create
+  end
+
+  mount ActionCable.server => "/cable"
 end

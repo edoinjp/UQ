@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user! # from Devise
   before_action :configure_permitted_parameters, if: :devise_controller?
   include Pundit::Authorization
+  before_action :load_chatrooms
 
   # Pundit: allow-list approach
   after_action :verify_authorized, except: :index, unless: :skip_pundit?
@@ -13,6 +14,9 @@ class ApplicationController < ActionController::Base
   # def home
   #    render 'home'
   # end
+  def load_chatrooms
+    @chatrooms = Chatroom.all
+  end
 
   private
 

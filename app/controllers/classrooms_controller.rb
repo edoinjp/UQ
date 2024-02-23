@@ -38,12 +38,16 @@ class ClassroomsController < ApplicationController
     @classroom = current_user.classrooms.build(classroom_params)
 
     if @classroom.save
+      # Create a chatroom associated with the new classroom
+      Chatroom.create(name: 'General Chat', classroom: @classroom)
+
       redirect_to classrooms_path, notice: 'Classroom was successfully created.'
     else
       Rails.logger.error("Classroom creation failed: Errors - #{ @classroom.errors.full_messages }")
       render :new
     end
   end
+
 
   def add_students
     set_classroom

@@ -1,6 +1,7 @@
 class User < ApplicationRecord
-
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
+  belongs_to :classroom, optional: true
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
   has_many :classrooms, dependent: :destroy
   has_many :participations, dependent: :destroy
   has_many :students, class_name: 'User', through: :participations, source: :user
@@ -15,7 +16,7 @@ class User < ApplicationRecord
   def teacher?
     teacher == true
   end
-  
+
   def student?
     !teacher?
   end
