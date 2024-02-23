@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:show]
-  resources :lessons, only: %i[show] do
+  resources :lessons, only: %i[show index new create] do
     resources :questions, only: [:index]
     resources :responses, only: [:index]
     get 'generate_content', on: :member
