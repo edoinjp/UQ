@@ -1,6 +1,4 @@
 <%= simple_form_for([@classroom, @lesson]) do |form| %>
   <%= form.input :title, label: "Title", input_html: { class: "form-control" } %>
-  <%= form.input :teacher_id %>
-  <%= form.input :classroom_id %>
   <%= form.button :submit %>
 <% end %>

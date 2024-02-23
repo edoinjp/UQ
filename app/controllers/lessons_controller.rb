@@ -1,6 +1,6 @@
 class LessonsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_classroom, only: [:index]
+  before_action :set_classroom, only: [:index, :new, :create]
   before_action :set_lesson, only: [:show]
 
   def index
@@ -29,10 +29,12 @@ class LessonsController < ApplicationController
     # @paragraph = @openai_api.generate_content(@lesson.title)
   end
 
-  def def new
+  def new
     @classroom = Classroom.find(params[:classroom_id])
-    @lesson = @classon.lessons.new
+    @lesson = @classroom.lessons.new
     authorize(@lesson)
+    Rails.logger.info("Classroom: #{@classroom}")
+    Rails.logger.info("Lesson: #{@lesson}")
   end
 
 
@@ -72,6 +74,5 @@ class LessonsController < ApplicationController
   def generate_content_for_lesson(lesson)
     openai_api = OpenaiApi.new
     paragraph = openai_api.generate_content(lesson.title)
-    lesson.update(content: paragraph)
   end
 end

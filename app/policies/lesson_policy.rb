@@ -9,4 +9,13 @@ class LessonPolicy < ApplicationPolicy
   def show?
     true # switch from application policy so everyone can see the page
   end
+
+  def new?
+    user.teacher?
+  end
+
+  def create?
+    user.teacher?
+  end
+
 end

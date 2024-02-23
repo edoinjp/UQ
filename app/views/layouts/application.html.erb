@@ -46,11 +46,15 @@
               </li>
             <% end %>
 
-            <% if @lesson.present? %>
+            <%
+=begin%>
+ <% if @lesson.present? %>
               <li id="responses" class="<%= 'active' if @active_tab == "responses"%>">
                 <%= link_to "responses", lesson_responses_path(@lesson) %>
               </li>
             <% end %>
+<%
+=end%>
              <li>
             <ul>
               <% if @chatrooms.present? %>
