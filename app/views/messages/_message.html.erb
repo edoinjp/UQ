@@ -1,0 +1,8 @@
+<!-- app/views/messages/_message.html.erb -->
+<div id="message-<%= message.id %>" class="mb-3 bg-light text-dark p-3 rounded message" style="width: 100%;">
+  <small class="text-muted">
+    <strong><%= message.user.first_name %></strong>
+    <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
+  </small>
+  <p class="mb-0 text-dark"><strong>Sender: <%= message.user.first_name %></strong><br><%= message.content %></p>
+</div>
