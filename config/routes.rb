@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'registrations' }
   root to: "home#home"  # Root path for the home action in HomeController
 
   resources :classrooms, only: [:index, :new, :create, :show] do
