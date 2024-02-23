@@ -29,7 +29,16 @@ class LessonsController < ApplicationController
     # @paragraph = @openai_api.generate_content(@lesson.title)
   end
 
+  def create
+    @lesson = classroom.lessons.new(lesson_params)
+    authorize(@lesson)
 
+    if @lesson.save
+      generate_content_for_lesson(@lesson)
+      redirect_to classroom_lesson_path(@lesson.classroom, @lesson), notice: 'Lesson was successfully created.'
+    else
+      render :new
+    end
 
   private
 
