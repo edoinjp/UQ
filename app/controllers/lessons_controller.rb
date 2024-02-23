@@ -29,8 +29,15 @@ class LessonsController < ApplicationController
     # @paragraph = @openai_api.generate_content(@lesson.title)
   end
 
+  def def new
+    @classroom = Classroom.find(params[:classroom_id])
+    @lesson = @classon.lessons.new
+    authorize(@lesson)
+  end
+
+
   def create
-    @lesson = classroom.lessons.new(lesson_params)
+    @lesson = @classroom.lessons.new(lesson_params)
     authorize(@lesson)
 
     if @lesson.save
