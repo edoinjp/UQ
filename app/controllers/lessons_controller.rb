@@ -33,8 +33,6 @@ class LessonsController < ApplicationController
     @classroom = Classroom.find(params[:classroom_id])
     @lesson = @classroom.lessons.new
     authorize(@lesson)
-    Rails.logger.info("Classroom: #{@classroom}")
-    Rails.logger.info("Lesson: #{@lesson}")
   end
 
 
@@ -43,8 +41,7 @@ class LessonsController < ApplicationController
     authorize(@lesson)
 
     if @lesson.save
-      generate_content_for_lesson(@lesson)
-      redirect_to classroom_lesson_path(@lesson.classroom, @lesson), notice: 'Lesson was successfully created.'
+      redirect_to classroom_lessons_path(@lesson.classroom, @lesson), notice: 'Lesson was successfully created.'
     else
       render :new
     end
@@ -59,7 +56,7 @@ class LessonsController < ApplicationController
 
   # Strong params to help create new lessons
   def lesson_params
-    params.require(:lesson).permit(:title, :file)
+    params.require(:lesson).permit(:title, :file, :picture)
   end
 
   def set_classroom
@@ -71,8 +68,15 @@ class LessonsController < ApplicationController
     end
   end
 
-  def generate_content_for_lesson(lesson)
-    openai_api = OpenaiApi.new
-    paragraph = openai_api.generate_content(lesson.title)
+  def create_styled_lessons(lesson)
+    styles = ['visual', 'aural', 'reading', 'kinesthetic']
+    styles.each do |style|
+      content = openai_api.generate_content(lesson.title, style)
+      lesson.styled_lessons.create(style: style, content: content)
+    end
+  end
+
+  def openai_api
+    @openai_api ||= OpenaiApi.new
   end
 end
