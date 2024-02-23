@@ -9,13 +9,13 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_importmap_tags %>
 
-    <%# <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> %>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </head>
 
-  <body class="mainbody" class="<%= controller_name %>">
+  <body class="mainbody " class="<%= controller_name %>">
     <!-- Sidebar -->
     <div class="sidebar">
       <div class="username">
@@ -34,50 +34,65 @@
           <% end %>
 
         </style>
+        <div class="sidebar d-flex flex-column">
+            <ul class="sidebarul ">
+                  <li id="classes" class="<%= 'active' if @active_tab == "classrooms"%>">
+                    <%= link_to "Classrooms", classrooms_path %>
+                  </li>
 
-       <ul class="sidebarul">
-            <li id="classes" class="<%= 'active' if @active_tab == "classrooms"%>">
-              <%= link_to "Classrooms", classrooms_path %>
-            </li>
+                  <% if @classroom.present? && action_name != 'new' %>
+                    <li id="students-<%= @classroom.id %>" class="<%= 'active' if @active_tab == "students"%>">
+                      <%= link_to "Students", classroom_path(@classroom) %>
+                    </li>
+                  <% end %>
 
-            <% if @classroom.present? && action_name != 'new' %>
-              <li id="students-<%= @classroom.id %>" class="<%= 'active' if @active_tab == "students"%>">
-                <%= link_to "Students", classroom_path(@classroom) %>
-              </li>
-            <% end %>
+                  <% if @lesson.present? %>
+                    <li id="responses" class="<%= 'active' if @active_tab == "responses"%>">
+                      <%= link_to "responses", lesson_responses_path(@lesson) %>
+                    </li>
+                  <% end %>
+                  <li>
+                  <ul>
+                    <% if @chatrooms.present? %>
+                      <% @chatrooms.each do |chatroom| %>
+                        <li><%= link_to chatroom.name, chatroom_path(chatroom) %></li>
+                      <% end %>
+                    <% else %>
+                      <li>No chatrooms available</li>
+                    <% end %>
+                  </ul>
+                </li>
+              </ul>
+    </div>
+          <%# sidebar hidden %>
+          <script>
+            $(document).ready(function () {
+              $("#sidebarToggle").on("click", function () {
+                $(".sidebar").toggleClass("sidebar-hidden");
+                $(".maincontent").toggleClass("maincontent-hidden");
 
-            <% if @lesson.present? %>
-              <li id="responses" class="<%= 'active' if @active_tab == "responses"%>">
-                <%= link_to "responses", lesson_responses_path(@lesson) %>
-              </li>
-            <% end %>
-             <li>
-            <ul>
-              <% if @chatrooms.present? %>
-                <% @chatrooms.each do |chatroom| %>
-                  <li><%= link_to chatroom.name, chatroom_path(chatroom) %></li>
-                <% end %>
-              <% else %>
-                <li>No chatrooms available</li>
-              <% end %>
-            </ul>
-          </li>
-
-        </ul>
-
+              });
+            });
+          </script>
 
     </div>
 
+
     <!-- Main Content -->
         <div class="maincontent ">
-          <%= render "shared/flashes" %>
-          <%= link_to raw('<i class="fas fa-arrow-left"></i>'), :back, class: 'goback-button' %>
+            <button class="btn btn-white mt-auto d-block" id="sidebarToggle">
+            <i class="fas fa-chevron-left rotate-icon goback "></i>
+          </button>
 
+          <%= render "shared/flashes" %>
+          <%= link_to raw('<i class="fa-solid fa-arrow-left"> </i>'), :back, class: 'goback-button' %>
             <div id="dynamicContent">
               <%= yield %>
             </div>
+
           <p class="notice"><%= notice %></p>
           <p class="alert"><%= alert %></p>
+
       </div>
 
 
