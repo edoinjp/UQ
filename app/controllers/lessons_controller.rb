@@ -71,8 +71,16 @@ class LessonsController < ApplicationController
   def create_styled_lessons(lesson)
     styles = ['visual', 'aural', 'reading', 'kinesthetic']
     styles.each do |style|
-      content = openai_api.generate_content(lesson.title, style)
-      lesson.styled_lessons.create(style: style, content: content)
+      styled_lesson = styled_lessons.create(style: style)
+      if style == 'visual'
+        image_content = generate_images.generate_images(lesson.title)
+      elsif style == 'aural'
+        audio_content = generate_audio.generate_audio(lesson.title)
+      elsif style == 'reading'
+        reading_content = generate_reading.generate_reading(lesson.title)
+      elsif style == 'kinesthetic'
+        kinesthetic_content = generate_kinesthetic.generate_kinesthetic(lesson.title)
+      end
     end
   end
 
