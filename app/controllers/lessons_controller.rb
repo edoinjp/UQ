@@ -39,6 +39,7 @@ class LessonsController < ApplicationController
     else
       render :new
     end
+  end
 
   private
 
@@ -59,5 +60,11 @@ class LessonsController < ApplicationController
       flash[:alert] = 'Classroom not found.'
       redirect_to classrooms_path
     end
+  end
+
+  def generate_content_for_lesson(lesson)
+    openai_api = OpenaiApi.new
+    paragraph = openai_api.generate_content(lesson.title)
+    lesson.update(content: paragraph)
   end
 end
