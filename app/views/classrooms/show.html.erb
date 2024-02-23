@@ -19,9 +19,9 @@
   <% end %>
 </div>
 
-<%# add student ************************************** %>
+<%# Add student section for teachers %>
 <% if current_user.teacher? %>
-<script>
+  <script>
     $(document).ready(function () {
       $('.student-card').click(function () {
         // Toggle the 'selected' class when a student card is clicked
@@ -42,18 +42,18 @@
       <% User.where.not(id: [@classroom.user_id] + [@classroom.students.pluck(:id), current_user.id].flatten).each do |user| %>
         <%= link_to user_path(user) do %>
           <div class="student-card">
-              <label>
-                <%= form.check_box :student_ids, { multiple: true }, user.id, nil %>
-                <div class="student-info">
-                  <% border_color = "##{SecureRandom.hex(3)}" %>
-                    <%= cl_image_tag user.photo.key, class:"studentimg", style: "border-color: #{border_color}" %>
-                  <span class="student-name"><%= "#{user.first_name} #{user.last_name}" %></span>
-                </div>
-              </label>
+            <label>
+              <%= form.check_box :student_ids, { multiple: true }, user.id, nil %>
+              <div class="student-info">
+                <% border_color = "##{SecureRandom.hex(3)}" %>
+                <%= cl_image_tag user.photo.key, class:"studentimg", style: "border-color: #{border_color}" %>
+                <span class="student-name"><%= "#{user.first_name} #{user.last_name}" %></span>
+              </div>
+            </label>
           </div>
         <% end %>
       <% end %>
     </div>
-      <%= form.submit "Add Selected Students", class: "btn btn-add-students mt-3", disabled: @classroom.student_ids.blank? %>
+    <%= form.submit "Add Selected Students", class: "btn btn-add-students mt-3", disabled: @classroom.student_ids.blank? %>
   <% end %>
 <% end %>

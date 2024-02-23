@@ -10,10 +10,10 @@ Rails.application.routes.draw do
 
     resources :lessons, only: %i[index]
   end
-      resources :users, only: [:show]
-      resources :lessons, only: %i[show] do
-        resources :questions, only: [:index]
-        resources :responses, only: [:index]
+    resources :users, only: [:show]
+    resources :lessons, only: %i[show] do
+       resources :questions, only: [:index]
+       resources :responses, only: [:index]
     end
 
     resources :chatrooms, only: :show do
