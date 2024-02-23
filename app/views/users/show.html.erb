@@ -3,7 +3,6 @@
   <div class="learning-style mt-3">
    <p><%= @user.learning_style.capitalize %> type</p>
   </div>
-
   <div class="profile-card">
     <%= cl_image_tag @user.photo.key, alt: @user.full_name, class: "avatar-large" %>
     <div class="profile-card-content">

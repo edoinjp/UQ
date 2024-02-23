@@ -28,7 +28,7 @@
         <style>
           /* style to display none sidebar selection */
          <% if controller_name == 'classrooms' && action_name == 'index' %>
-            #students, #responses, #content {
+            #students, #responses, #content , #chatroom{
               display: none;
             }
           <% end %>
@@ -36,36 +36,64 @@
         </style>
         <div class="sidebar d-flex flex-column">
             <ul class="sidebarul ">
-                  <li id="classes" class="<%= 'active' if @active_tab == "classrooms"%>">
-                    <%= link_to "Classrooms", classrooms_path %>
-                  </li>
-
-                  <% if @classroom.present? && action_name != 'new' %>
-                    <li id="students-<%= @classroom.id %>" class="<%= 'active' if @active_tab == "students"%>">
-                      <%= link_to "Students", classroom_path(@classroom) %>
-                    </li>
+                   <%# classrooms %>
+                 <li id="classes" class="<%= 'active' if @active_tab == "classrooms"%>">
+                  <%= link_to classrooms_path do %>
+                    <i class="fas fa-graduation-cap"></i>
+                    &nbsp;Classrooms
                   <% end %>
-
-                  <% if @lesson.present? %>
-                    <li id="responses" class="<%= 'active' if @active_tab == "responses"%>">
-                      <%= link_to "responses", lesson_responses_path(@lesson) %>
-                    </li>
-                  <% end %>
-                  <li>
-                  <ul>
-                    <% if @chatrooms.present? %>
-                      <% @chatrooms.each do |chatroom| %>
-                        <li><%= link_to chatroom.name, chatroom_path(chatroom) %></li>
-                      <% end %>
-                    <% else %>
-                      <li>No chatrooms available</li>
-                    <% end %>
-                  </ul>
                 </li>
-              </ul>
-    </div>
+                  <%# lessons %>
+                 <% if @classroom.present? && @classroom.lessons.any? %>
+                    <li id="classroom-lessons" class="<%= 'active' if @active_tab == 'classroom_lessons' %>">
+                      <%= link_to classroom_lessons_path(@classroom) do %>
+                       <i class="fa-solid fa-book-open"></i>
+                       &nbsp;Lessons
+                      <% end %>
+                    </li>
+                  <% end %>
+                 <%# students %>
+                  <% if @classroom.present? && action_name != 'new' %>
+                  <li id="students-<%= @classroom.id %>" class="<%= 'active' if @active_tab == "students"%>">
+                    <%= link_to classroom_path(@classroom) do %>
+                      <i class="fa-solid fa-user"></i>
+                      &nbsp;Students
+                    <% end %>
+                  </li>
+                <% end %>
+
+                 <%# responses %>
+                </li>
+             <% if @classroom.present? %>
+               <% if @classroom.lessons.present? %>
+                <li id="responses" class="<%= 'active' if @active_tab == 'responses' %>">
+                  <% if @lesson.present? %>
+                    <%= link_to lesson_responses_path(@lesson) do %>
+                      <i class="fas fa-chart-bar"></i>
+                      &nbsp;Responses
+                    <% end %>
+                  <% else %>
+                    <%= link_to lesson_responses_path(lesson_id: @classroom.lessons.pluck(:id)) do %>
+                      <i class="fas fa-chart-bar"></i>
+                      &nbsp;All Responses
+                    <% end %>
+                  <% end %>
+                </li>
+                <% end %>
+             <% end %>
+             <%# chat %>
+                <% if @classroom.present? && (current_classroom_chatroom = @classroom.chatroom).present? %>
+                <li id="chatroom" class="<%= 'active' if @active_tab == 'chatroom' %>">
+                  <%= link_to chatroom_path(current_classroom_chatroom) do %>
+                 <i class="fa-solid fa-comment-dots"></i>
+                    &nbsp;Chat
+                  <% end %>
+         <% end %>
+            </ul>
+       </div>
           <%# sidebar hidden %>
           <script>
+
             $(document).ready(function () {
               $("#sidebarToggle").on("click", function () {
                 $(".sidebar").toggleClass("sidebar-hidden");
@@ -75,9 +103,7 @@
             });
           </script>
 
-    </div>
-
-
+         </div>
     <!-- Main Content -->
         <div class="maincontent ">
             <button class="btn btn-white mt-auto d-block" id="sidebarToggle">
@@ -94,12 +120,6 @@
           <p class="alert"><%= alert %></p>
 
       </div>
-
-
-
-
-    <!-- JavaScript function to dynamically change content -->
-
 
   </body>
 
