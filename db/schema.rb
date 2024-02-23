@@ -46,7 +46,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_21_070134) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "classroom_id"
+    t.bigint "classroom_id", null: false
     t.index ["classroom_id"], name: "index_chatrooms_on_classroom_id"
   end
 
