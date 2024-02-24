@@ -1,9 +1,6 @@
 <div class="classroomspage">
   <h1 class="classs2">My Classrooms</h1>
 
-  <h2>Hi <%= current_user.email %></h2>
-  <h2><%= user_signed_in? %></h2>
-
   <% if @classrooms.any? %>
     <ul class="allclasses" >
        <div class="createclass">
