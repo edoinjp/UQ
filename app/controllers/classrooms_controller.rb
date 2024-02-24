@@ -22,10 +22,8 @@ class ClassroomsController < ApplicationController
     @active_tab = "students"
     @classrooms = [@classroom]  # Ensure that @classrooms is set for the sidebar
 
+
   end
-
-
-
 
   def new
     authorize Classroom
