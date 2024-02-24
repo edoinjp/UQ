@@ -15,7 +15,7 @@
     <div class="col-md-9">
       <h1 class="text-primary">#<%= @chatroom.name %></h1>
 
-      <div class="messages mt-4 text-dark" id="messages" data-chatroom-subscription-target="messages">
+      <div class=" messages mt-4 text-dark col-md-9" id="messages" data-chatroom-subscription-target="messages">
         <% if @chatroom %>
           <%= render partial: "messages/message", collection: @chatroom.messages %>
         <% else %>
