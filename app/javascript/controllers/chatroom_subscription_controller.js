@@ -25,7 +25,6 @@ export default class extends Controller {
 
     // Get the last message element
     const lastMessage = this.messagesTarget.lastElementChild;
-
     // Scroll the last message into view
     lastMessage.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }
