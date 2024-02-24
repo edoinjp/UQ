@@ -37,10 +37,13 @@ class LessonsController < ApplicationController
 
 
   def create
-    @lesson = @classroom.lessons.new(lesson_params)
+    @lesson = Lesson.new(lesson_params)
+    @classroom = Classroom.find(params[:classroom_id])
+    @lesson.classroom = @classroom
     authorize(@lesson)
 
     if @lesson.save
+      @lesson.create_styled_lessons
       redirect_to classroom_lessons_path(@lesson.classroom, @lesson), notice: 'Lesson was successfully created.'
     else
       render :new
@@ -56,7 +59,7 @@ class LessonsController < ApplicationController
 
   # Strong params to help create new lessons
   def lesson_params
-    params.require(:lesson).permit(:title, :file, :picture)
+    params.require(:lesson).permit(:title, :content)
   end
 
   def set_classroom
@@ -65,22 +68,6 @@ class LessonsController < ApplicationController
     rescue ActiveRecord::RecordNotFound
       flash[:alert] = 'Classroom not found.'
       redirect_to classrooms_path
-    end
-  end
-
-  def create_styled_lessons(lesson)
-    styles = ['visual', 'aural', 'reading', 'kinesthetic']
-    styles.each do |style|
-      styled_lesson = styled_lessons.create(style: style)
-      if style == 'visual'
-        image_content = generate_images.generate_images(lesson.title)
-      elsif style == 'aural'
-        audio_content = generate_audio.generate_audio(lesson.title)
-      elsif style == 'reading'
-        reading_content = generate_reading.generate_reading(lesson.title)
-      elsif style == 'kinesthetic'
-        kinesthetic_content = generate_kinesthetic.generate_kinesthetic(lesson.title)
-      end
     end
   end
 

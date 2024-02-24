@@ -60,6 +60,7 @@ gem "pundit"
 gem "faker"
 gem "cloudinary"
 gem 'ruby-openai'
+gem 'redcarpet'
 
 group :development, :test do
   gem "dotenv-rails"
