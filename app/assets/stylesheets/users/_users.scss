@@ -91,3 +91,22 @@
   // padding-bottom: 8px;
   padding: 8px 0px;
 }
+
+
+.profile-lesson-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 60vh;
+}
+
+.profile-lesson {
+  width: 30%;
+  height: auto;
+}
+
+.student-chart {
+  width: 50%;
+  height: auto;
+}

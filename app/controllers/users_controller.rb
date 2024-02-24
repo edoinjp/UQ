@@ -10,6 +10,19 @@ class UsersController < ApplicationController
     @lessons_with_scores = @classrooms.map(&:lessons).flatten.map do |lesson|
       {lesson: lesson, quiz_score: rand(0..5)}
     end
+
+    additional_lesson_titles = ["Oral Communication II", "Social Science", "Language Arts"]
+    additional_lesson_titles.each do |title|
+      @lessons_with_scores << { lesson: OpenStruct.new(title: title), quiz_score: rand(0..5) }
+    end
+
+    # Chartkick setup for the chart display logic
+    # [{:lesson=>#<Lesson id: 24, title: "Ice Breakers", classroom_id: 30, created_at: "2024-02-24 04:13:13.492922000 +0000", updated_at: "2024-02-24 04:13:13.492922000 +0000">, :quiz_score=>0}]
+    @chart_data = {}
+    @lessons_with_scores.each do |lesson_result|
+      @chart_data[lesson_result[:lesson].title] = lesson_result[:quiz_score]
+    end
+
   end
 
   private

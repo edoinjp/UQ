@@ -60,6 +60,7 @@ gem "pundit"
 gem "faker"
 gem "cloudinary"
 gem "chartkick"
+gem "groupdate"
 
 group :development, :test do
   gem "dotenv-rails"
