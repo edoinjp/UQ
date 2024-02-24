@@ -9,10 +9,7 @@ export default class extends Controller {
       plugins: [RevealMarkdown]
   })
   deck.initialize({ embedded: true,
-  width: 720,
-  height: 300,
-  // margin: 0.2,
-  maxScale: 0.5
+  maxScale: 1
 })
   // Change the size of our presentation
   document.querySelector( '.reveal' ).style.width = '720px';
