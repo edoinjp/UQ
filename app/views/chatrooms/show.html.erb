@@ -2,19 +2,8 @@
   data-controller="chatroom-subscription"
   data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>">
 
-  <div class="row">
-    <div class="col-md-3">
-      <h3 class="text-info mb-4">Students in <%= @classroom.name %></h3>
-      <ul class="list-group">
-        <% @students.each do |student| %>
-          <li class="list-group-item bg-secondary text-dark mb-2"><%= student.first_name %></li>
-        <% end %>
-      </ul>
-    </div>
-
     <div class="col-md-9">
-      <h1 class="text-primary">#<%= @chatroom.name %></h1>
-
+     <h3 class="text-info mb-4"><%= @classroom.name %> general chat</h3>
       <div class="messages mt-4 text-dark" id="messages" data-chatroom-subscription-target="messages">
         <% if @chatroom %>
           <%= render partial: "messages/message", collection: @chatroom.messages %>

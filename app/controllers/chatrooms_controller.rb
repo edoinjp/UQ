@@ -6,7 +6,11 @@ class ChatroomsController < ApplicationController
     skip_authorization
     @active_tab = "chatroom"
     @chatroom = Chatroom.find(params[:id])
+    if current_user.teacher?
     @classroom = current_user.classrooms.find_by(id: @chatroom.classroom_id)
+      else
+       @classroom = current_user.participations.first.classroom
+      end
     if @classroom
       @students = @classroom.students
       @responses = Response.where(lesson_id: @classroom.lessons.pluck(:id))
