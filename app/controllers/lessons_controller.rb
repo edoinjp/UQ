@@ -50,6 +50,36 @@ class LessonsController < ApplicationController
     end
   end
 
+  def download_pdf
+    @lesson = Lesson.find(params[:id])
+    authorize @lesson
+
+    # respond_to do |format|
+    #   format.html {
+    #   }
+    #   format.pdf do
+    #     render pdf: "lesson_content",
+    #     partial: "lessons/reading_content",
+    #     locals: { reading: @reading },
+    #     layout: false
+    #   end
+    file = Tempfile.new(["pdf file", ".pdf"])
+    file.write(pdf_as_string)
+    file.rewind
+    f = File.new("text.pdf", "w")
+    f.write(pdf_as_string)
+    f.rewind
+    render(
+      pdf: "lesson_content",
+      locals: { reading: @lesson },
+      template: "lessons/_reading_content",
+      # layout: "pdf.html",
+      disposition: "attachment",
+      format: "html"
+      )
+  end
+
+
   private
 
   # Use callbacks to share common setup or contraints between actions
@@ -73,5 +103,9 @@ class LessonsController < ApplicationController
 
   def openai_api
     @openai_api ||= OpenaiApi.new
+  end
+
+  def pdf_as_string
+    render_to_string partial: "lessons/reading_content", layout: false, locals: { reading: @lesson }, formats: :html
   end
 end

@@ -18,4 +18,8 @@ class LessonPolicy < ApplicationPolicy
     user.teacher?
   end
 
+  def download_pdf?
+    true
+  end
+
 end

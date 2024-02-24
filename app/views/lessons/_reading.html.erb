@@ -1,6 +1,9 @@
 <div class="reading-container">
   <div class="reading-preview">
-    <%= @reading.content.html_safe %>
+    <%= render "reading_content", reading: @reading %>
+  </div>
+  <div>
+    <%= link_to 'Download as PDF', download_pdf_lesson_path(@lesson) %>
   </div>
 
   <div class="reading-link">
