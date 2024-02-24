@@ -1,4 +1,17 @@
+<div class="reveal" data-controller="slides">
+  <div class="slides">
+    <section data-markdown>
+    <textarea data-template>
+
+      <%= @lesson.content %>
+    </textarea>
+    </section>
+  </div>
+</div>
+
+<% if false %>
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+
   <div class="carousel-inner">
   <% if @visual.files.exists? %>
     <div class="carousel-inner">
@@ -22,3 +35,5 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
+
+<% end %>
