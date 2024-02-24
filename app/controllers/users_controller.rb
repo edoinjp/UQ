@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
     # Choose the first classroom from the list / this logic is not correct because : =>
     # its getting first classroom currently this is only way to display sidebar on users show page
-    @classroom = @classrooms.first if @classrooms.present?
+    # @classroom = @classrooms.first if @classrooms.present?
 
     @lessons_with_scores = @classrooms.map(&:lessons).flatten.map do |lesson|
       {lesson: lesson, quiz_score: rand(0..5)}

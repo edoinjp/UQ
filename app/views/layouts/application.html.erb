@@ -64,23 +64,14 @@
 
                  <%# responses %>
                 </li>
-             <% if @classroom.present? %>
-               <% if @classroom.lessons.present? %>
+              <% if @classroom.present? && @lesson.present? %>
                 <li id="responses" class="<%= 'active' if @active_tab == 'responses' %>">
-                  <% if @lesson.present? %>
-                    <%= link_to lesson_responses_path(@lesson) do %>
-                      <i class="fas fa-chart-bar"></i>
-                      &nbsp;Responses
-                    <% end %>
-                  <% else %>
-                    <%= link_to lesson_responses_path(lesson_id: @classroom.lessons.pluck(:id)) do %>
-                      <i class="fas fa-chart-bar"></i>
-                      &nbsp;All Responses
-                    <% end %>
+                  <%= link_to lesson_responses_path(@lesson) do %>
+                    <i class="fas fa-chart-bar"></i>
+                    &nbsp;Responses
                   <% end %>
                 </li>
-                <% end %>
-             <% end %>
+              <% end %>
              <%# chat %>
                 <% if @classroom.present? && (current_classroom_chatroom = @classroom.chatroom).present? %>
                 <li id="chatroom" class="<%= 'active' if @active_tab == 'chatroom' %>">
