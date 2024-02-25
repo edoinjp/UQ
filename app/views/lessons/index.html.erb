@@ -1,44 +1,92 @@
-<h1 class="your-lessons">Your Lessons</h1>
+<h1 class="your-lessons">My Lessons</h1>
 
 <div class="row row-cols-1 row-cols-md-3 g-4 index-container">
+
+
   <div class="col container-card">
     <% @lessons.each do |lesson| %>
-      <%= link_to lesson_path(lesson) + "?query=visual" do %>
-        <div class="content-card">
-          <%= image_tag "lessons/lesson1.jpg", class:"lesson-img" %>
-          <div class="body-card">
-            <button type="button" class="btn btn-secondary rounded-pill">TODAY</button>
-            <h5 class="lesson-name"><%= lesson.title %></h5>
-            <div class="rounded-pill bg-light">'</div>
+          <div class="content-card">
+              <button type="button" class="btn today btn-secondary rounded-pill">Today</button>
+        <%= link_to lesson_path(lesson) + "?query=visual" do %>
+          <%= image_tag "lessons/lesson1.jpg", class: "lesson-img" %>
+            <div class="body-card body-card-from-2nd">
+              <h5 class="lesson-name"><%= lesson.title %></h5>
+            </div>
+        <% end %>
+        <!-- Three dots dropdown container -->
+        <div class="dropdown-container">
+          <!-- Three dots icon (you can replace this with your own icon) -->
+          <div class="dropdown-icon" onclick="toggleDropdown(this)">&#8226;&#8226;&#8226;</div>
+          <!-- Dropdown content (Edit and Copy Link) -->
+          <div class="dropdown-content">
+            <span class="dropdown-item">Edit</span>
+            <span class="dropdown-item">delete</span>
+            <span class="dropdown-item">Copy Link</span>
           </div>
         </div>
-      <% end %>
+      </div>
     <% end %>
   </div>
+
+  <!-- Lesson 2 -->
   <div class="col container-card">
     <div class="content-card">
       <%= image_tag "lessons/lesson2.jpg", class:"lesson-img" %>
       <div class="body-card body-card-from-2nd">
         <h5 class="lesson-name">Oral Communication II</h5>
-        <div class="rounded-pill bg-light">'</div>
+      </div>
+      <!-- Three dots dropdown container -->
+      <div class="dropdown-container">
+        <!-- Three dots icon (you can replace this with your own icon) -->
+        <div class="dropdown-icon" onclick="toggleDropdown(this)">&#8226;&#8226;&#8226;</div>
+        <!-- Dropdown content (Edit and Copy Link) -->
+        <div class="dropdown-content">
+          <span class="dropdown-item">Edit</span>
+          <span class="dropdown-item">delete</span>
+          <span class="dropdown-item">Copy Link</span>
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- Lesson 3 -->
   <div class="col container-card">
     <div class="content-card">
       <%= image_tag "lessons/lesson3.jpg", class:"lesson-img" %>
       <div class="body-card body-card-from-2nd">
         <h5 class="lesson-name">Social Science</h5>
-        <div class="rounded-pill bg-light">'</div>
+      </div>
+      <!-- Three dots dropdown container -->
+      <div class="dropdown-container">
+        <!-- Three dots icon (you can replace this with your own icon) -->
+        <div class="dropdown-icon" onclick="toggleDropdown(this)">&#8226;&#8226;&#8226;</div>
+        <!-- Dropdown content (Edit and Copy Link) -->
+        <div class="dropdown-content">
+          <span class="dropdown-item">Edit</span>
+          <span class="dropdown-item">delete</span>
+          <span class="dropdown-item">Copy Link</span>
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- Lesson 4 -->
   <div class="col container-card">
     <div class="content-card">
       <%= image_tag "lessons/lesson4.jpg", class:"lesson-img" %>
       <div class="body-card body-card-from-2nd">
         <h5 class="lesson-name">Language Arts</h5>
-        <div class="rounded-pill bg-light">'</div>
+      </div>
+      <!-- Three dots dropdown container -->
+      <div class="dropdown-container">
+        <!-- Three dots icon (you can replace this with your own icon) -->
+        <div class="dropdown-icon" onclick="toggleDropdown(this)">&#8226;&#8226;&#8226;</div>
+        <!-- Dropdown content (Edit and Copy Link) -->
+        <div class="dropdown-content">
+          <span class="dropdown-item">Edit</span>
+          <span class="dropdown-item">delete</span>
+          <span class="dropdown-item">Copy Link</span>
+        </div>
       </div>
     </div>
   </div>

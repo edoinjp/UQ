@@ -1,20 +1,46 @@
-<h2>Log in</h2>
+<style>
+  .custom-card {
+    background-color: #2e3c68; /* Use your preferred shade of blue */
+  }
+</style>
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: false,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
-    <%= f.input :password,
-                required: false,
-                input_html: { autocomplete: "current-password" } %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card p-4 custom-card text-light">
+        <h2 class="text-center mb-4">Log in</h2>
+
+        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'simple-form' }) do |f| %>
+          <div class="mb-3">
+            <%= f.input :email,
+                        required: false,
+                        autofocus: true,
+                        input_html: { autocomplete: "email", class: 'form-control' },
+                        label_html: { class: 'form-label' },
+                        wrapper_html: { class: 'mb-3' } %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.input :password,
+                        required: false,
+                        input_html: { autocomplete: "current-password", class: 'form-control' },
+                        label_html: { class: 'form-label' },
+                        wrapper_html: { class: 'mb-3' } %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.input :remember_me, as: :boolean, input_html: { class: 'form-check-input' } if devise_mapping.rememberable? %>
+          </div>
+
+          <div class="d-grid">
+            <%= f.button :submit, "Log in", class: 'btn btn-warning' %>
+          </div>
+        <% end %>
+
+        <div class="mt-3 text-center">
+          <%= render "devise/shared/links" %>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

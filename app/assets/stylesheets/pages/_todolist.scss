@@ -1,0 +1,43 @@
+
+.todolist {
+  position: fixed;
+  bottom: 55px;
+  right: 45px;
+  z-index: 9999;
+}
+
+.todolist.dropup .btn-primary {
+  border-radius: 10px; /* Make it round */
+  background-color: #004080; /* Use your desired darker blue color */
+  border: 1px solid #004080; /* Matching border color */
+  color: #fff; /* Set text color to white */
+}
+
+.todolist.dropup .dropdown-menu {
+  width: 350px; /* Set your desired width */
+  right: 0;
+  left: auto;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add box shadow for elevation effect */
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #333;
+}
+
+.todo-item input[type="checkbox"] {
+  margin-right: 10px;
+  transform: scale(1.5);
+}
+
+.todo-item:hover {
+  background-color: #e9ecef; /* Apply hover effect */
+}
+
+.checked {
+  text-decoration: line-through;
+}
