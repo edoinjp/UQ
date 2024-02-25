@@ -8,10 +8,12 @@ class LessonsController < ApplicationController
     @classroom = Classroom.find(params[:classroom_id])
     @lessons = @classroom.lessons
     @classrooms = [@classroom]
+    @active_tab = "classroom_lessons"
   end
 
   # Authorizes show action through current lesson through prarams
   def show
+    @active_tab = "classroom_lessons"
     @classroom = @lesson.classroom
 
     authorize(@lesson)

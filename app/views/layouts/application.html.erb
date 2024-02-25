@@ -11,13 +11,13 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_importmap_tags %>
 
-    <%# <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> %>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </head>
 
-  <body class="mainbody" class="<%= controller_name %>">
+  <body class="mainbody " class="<%= controller_name %>">
     <!-- Sidebar -->
     <div class="sidebar">
       <div class="username">
@@ -30,67 +30,89 @@
         <style>
           /* style to display none sidebar selection */
          <% if controller_name == 'classrooms' && action_name == 'index' %>
-            #students, #responses, #content {
+            #students, #responses, #content , #chatroom{
               display: none;
             }
           <% end %>
 
         </style>
-
-       <ul class="sidebarul">
-            <li id="classes" class="<%= 'active' if @active_tab == "classrooms"%>">
-              <%= link_to "Classrooms", classrooms_path %>
-            </li>
-
-            <% if @classroom.present? && action_name != 'new' %>
-              <li id="students-<%= @classroom.id %>" class="<%= 'active' if @active_tab == "students"%>">
-                <%= link_to "Students", classroom_path(@classroom) %>
-              </li>
-            <% end %>
-
-            <%
-=begin%>
- <% if @lesson.present? %>
-              <li id="responses" class="<%= 'active' if @active_tab == "responses"%>">
-                <%= link_to "responses", lesson_responses_path(@lesson) %>
-              </li>
-            <% end %>
-<%
-=end%>
-             <li>
-            <ul>
-              <% if @chatrooms.present? %>
-                <% @chatrooms.each do |chatroom| %>
-                  <li><%= link_to chatroom.name, chatroom_path(chatroom) %></li>
+        <div class="sidebar d-flex flex-column">
+            <ul class="sidebarul ">
+                   <%# classrooms %>
+                 <li id="classes" class="<%= 'active' if @active_tab == "classrooms"%>">
+                  <%= link_to classrooms_path do %>
+                    <i class="fas fa-graduation-cap"></i>
+                    &nbsp;Classrooms
+                  <% end %>
+                </li>
+                  <%# lessons %>
+                 <% if @classroom.present? && @classroom.lessons.any? %>
+                    <li id="classroom-lessons" class="<%= 'active' if @active_tab == 'classroom_lessons' %>">
+                      <%= link_to classroom_lessons_path(@classroom) do %>
+                       <i class="fa-solid fa-book-open"></i>
+                       &nbsp;Lessons
+                      <% end %>
+                    </li>
+                  <% end %>
+                 <%# students %>
+                  <% if @classroom.present? && action_name != 'new' %>
+                  <li id="students-<%= @classroom.id %>" class="<%= 'active' if @active_tab == "students"%>">
+                    <%= link_to classroom_path(@classroom) do %>
+                      <i class="fa-solid fa-user"></i>
+                      &nbsp;Students
+                    <% end %>
+                  </li>
                 <% end %>
-              <% else %>
-                <li>No chatrooms available</li>
+
+                 <%# responses %>
+                </li>
+              <% if @classroom.present? && @lesson.present? %>
+                <li id="responses" class="<%= 'active' if @active_tab == 'responses' %>">
+                  <%= link_to lesson_responses_path(@lesson) do %>
+                    <i class="fas fa-chart-bar"></i>
+                    &nbsp;Responses
+                  <% end %>
+                </li>
               <% end %>
+             <%# chat %>
+                <% if @classroom.present? && (current_classroom_chatroom = @classroom.chatroom).present? %>
+                <li id="chatroom" class="<%= 'active' if @active_tab == 'chatroom' %>">
+                  <%= link_to chatroom_path(current_classroom_chatroom) do %>
+                 <i class="fa-solid fa-comment-dots"></i>
+                    &nbsp;Chat
+                  <% end %>
+         <% end %>
             </ul>
-          </li>
+       </div>
+          <%# sidebar hidden %>
+          <script>
 
-        </ul>
+            $(document).ready(function () {
+              $("#sidebarToggle").on("click", function () {
+                $(".sidebar").toggleClass("sidebar-hidden");
+                $(".maincontent").toggleClass("maincontent-hidden");
 
+              });
+            });
+          </script>
 
-    </div>
-
+         </div>
     <!-- Main Content -->
         <div class="maincontent ">
-          <%= render "shared/flashes" %>
-          <%= link_to raw('<i class="fas fa-arrow-left"></i>'), :back, class: 'goback-button' %>
+            <button class="btn btn-white mt-auto d-block" id="sidebarToggle">
+            <i class="fas fa-chevron-left rotate-icon goback "></i>
+          </button>
 
+          <%= render "shared/flashes" %>
+          <%= link_to raw('<i class="fa-solid fa-arrow-left"> </i>'), :back, class: 'goback-button' %>
             <div id="dynamicContent">
               <%= yield %>
             </div>
+
           <p class="notice"><%= notice %></p>
           <p class="alert"><%= alert %></p>
+
       </div>
-
-
-
-
-    <!-- JavaScript function to dynamically change content -->
-
 
   </body>
 

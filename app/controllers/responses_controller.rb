@@ -2,6 +2,8 @@ class ResponsesController < ApplicationController
   before_action :set_lesson, only: :index
 
   def index
+    @active_tab = "responses"
+    @classroom = @lesson.classroom
     # to dsiplay it on side bar
     @active_tab = "responses"
     # Only Teachers can access this page
