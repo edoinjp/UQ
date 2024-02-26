@@ -6,10 +6,13 @@ import RevealMarkdown from "https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdo
 export default class extends Controller {
   connect() {
     const deck = new Reveal({
-      plugins: [RevealMarkdown]
+      plugins: [ RevealMarkdown ]
   })
   deck.initialize({ embedded: true,
-  maxScale: 1
+  maxScale: 0.5,
+  height: 400,
+  width: 720,
+
 })
   // Change the size of our presentation
   document.querySelector( '.reveal' ).style.width = '720px';
