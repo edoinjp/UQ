@@ -1,29 +1,34 @@
-<div class="container chatroom bg-light p-4 rounded" style="background: #f8f9fa; max-height: 95vh; overflow-y: auto; width: 100vw; max-width: 100vw;"
+<div class="container chatroom p-4 rounded" style="max-height: 95vh; overflow-y: auto; width: 100%; max-width: 100vw;"
   data-controller="chatroom-subscription"
   data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>">
 
-    <div class="col-md-9">
-     <h3 class="text-info mb-4"><%= @classroom.name %> general chat</h3>
-      <div class="messages mt-4 text-dark" id="messages" data-chatroom-subscription-target="messages">
-        <% if @chatroom %>
-          <%= render partial: "messages/message", collection: @chatroom.messages %>
-        <% else %>
-          <p class="alert alert-warning">No associated chatroom found.</p>
-        <% end %>
-      </div>
-
-      <div class="sticky-bottom mt-4">
-        <% if @chatroom %>
-          <%= simple_form_for [@chatroom, @message], html: {class: "d-flex"} do |f| %>
-            <%= f.input :content,
-              label: false,
-              placeholder: "Type a message...",
-              wrapper_html: {class: "flex-grow-1 form-control mr-2", style: "resize: none;"}
-            %>
-            <%= f.submit "Send", class: "btn btn-primary" %>
-          <% end %>
-        <% end %>
-      </div>
+  <div> <!-- Adjusted to 12 columns for wider appearance -->
+    <h3 class="text-info mb-4"><%= @classroom.name %> general chat</h3>
+    <div class="messages mt-4 text-dark" id="messages" data-chatroom-subscription-target="messages">
+      <% if @chatroom %>
+        <%= render partial: "messages/message", collection: @chatroom.messages %>
+      <% else %>
+        <p class="alert alert-warning">No associated chatroom found.</p>
+      <% end %>
     </div>
+<div class="sticky-bottom">
+  <% if @chatroom %>
+    <%= simple_form_for [@chatroom, @message], html: { class: "d-flex" } do |f| %>
+      <div class="input-group" style="width: 600px; position: relative; background-color: rgba(24, 119, 242, 0.7); border-radius: 20px; padding: 1px;">
+        <%= f.input :content,
+          label: false,
+          placeholder: "Type a message...",
+          wrapper_html: { class: "message-input form-control", style: "resize: none; height: 120px; color: white; border: none; padding: 10px; width: calc(100% - 80px); background-color: transparent;" }
+        %>
+        <div class="send-button" style="position: absolute; top: 50%; right: 0; transform: translateY(-50%); padding: 15px;">
+          <%= f.submit "Send", class: "btn btn-primary send", style: "border: none; background-color: transparent; color: #1877f2; height: 100%;" %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+
+
   </div>
 </div>
