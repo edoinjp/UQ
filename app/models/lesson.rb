@@ -27,6 +27,10 @@ class Lesson < ApplicationRecord
         markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
         styled_lesson.content = markdown.render(self.content)
         styled_lesson.save
+      elsif style == 'kinesthetic'
+        generated_content = openai_api.generate_content(self.content, style: style)
+        styled_lesson.content = generated_content
+        styled_lesson.save
       end
     end
   end
