@@ -2,6 +2,7 @@
 
 body{
   overflow: hidden;
+
 }
 .mainbody{
   display: flex;
@@ -71,39 +72,6 @@ body{
 .goback-button:hover {
   color: orange;
 }
-
-
-// /* Define the swing animation */
-// @keyframes swingAnimation {
-//   0% {
-//     transform: rotate(0deg);
-//   }
-//   20% {
-//     transform: rotate(15deg);
-//   }
-//   40% {
-//     transform: rotate(-10deg);
-//   }
-//   60% {
-//     transform: rotate(5deg);
-//   }
-//   80% {
-//     transform: rotate(-5deg);
-//   }
-//   100% {
-//     transform: rotate(0deg);
-//   }
-// }
-
-// /* Apply the swing animation to the arrow icon */
-// .goback-button {
-//   transform-origin: top center; /* Set the rotation origin to the top center of the arrow */
-//   animation: swingAnimation 2s ease-in-out ; /* Adjust the duration and iteration as needed */
-// }
-
-// ***************************
-
-
 // concent space end////***************
 
 // sidebar ******
@@ -181,24 +149,24 @@ body{
 
 // classrooms index page for now here
 .classs2{
-  padding-bottom: 30px;
-  padding-left: 10px;
-  color:#333f66c5;
-  font-size: 24px;
+  color: #2e3c68ba;
+  font-size: 2rem;
+  margin-left: 3.5rem;
 }
 .classroomspage{
-  margin: 20px;
+  padding: 50px;
   position: relative;
   height: 100%;
   text-decoration: none;
   color:#333F66;
-  padding: 10px;
+
   overflow-x: hidden;
+  justify-content: center;
 }
 .allclasses {
   display: flex;
   flex-wrap: wrap; /* Allow items to wrap to the next line */
-  gap: 15px; /* Adjust the gap between items as needed */
+  gap: 25px; /* Adjust the gap between items as needed */
   text-decoration: none;
   max-width: 100%; /* Set a maximum width to prevent stretching */
   // justify-content: space-between; /* Distribute items evenly along the main axis */
@@ -264,6 +232,9 @@ body{
 a{
   color: white;
 }
+.classroombox {
+  position: relative;
+}
 
 
 // sidebar slider/
@@ -294,14 +265,54 @@ a{
   margin-left: 220px;
 }
 
-// addclassroom
-.addclassroom{
-  background-color: #333f66ab;
-  align-items: center;
-  text-align: center;
+// messeges styling
+.chatroom{
+  display: flex;
   justify-content: center;
-  font-size: 20px;
+  // background-color: brown;
+  // align-items: center;
+  // text-align: center;
+  margin: 0 auto;
+  width: 90%;
 }
-#messages{
-  margin-bottom: 100px;
+
+// .message {
+//   margin: 50px;
+//   background-color: #ffffff; /* Set the background color */
+//   padding: 10px;
+//   border-radius: 15px; /* Apply border-radius for rounded corners */
+// }
+.messige {
+  margin: 0 auto;
+  height: auto;
+  margin-top: 15px;
+  padding: 15px;
+  border-radius: 0 15px 15px 15px;
+  border: 1px solid #93a3d6;
+  background-color: rgba(127, 177, 242, 0.5); /* Adjust the alpha value for transparency */
+}
+.sticky-bottom{
+  max-width: 600px;
+  margin: 0 auto;
+
+}
+.send{
+  margin-top: 40px;
+  border-radius: 20px;
+}
+
+
+/* Adjust the width of the input field */
+.input-group{
+  background-color: transparent;
+/* Add padding for better appearance */
+  border-radius: 8px; /* Apply border-radius for rounded corners */
+  border: 1px solid #cccccc; /* Add a border for better visibility */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+#message_content{
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  border: 1px solid #cccccc;
 }

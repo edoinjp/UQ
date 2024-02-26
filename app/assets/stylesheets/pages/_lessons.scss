@@ -1,21 +1,34 @@
 .index-container {
+  margin: 0 auto;
   display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
+  flex-wrap: wrap;
+
+  text-decoration: none;
+  max-width: 97%;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+}
+
+
+.container-card:hover {
+
+  transform: scale(1.02);
+
 }
 
 .your-lessons {
-  color: black;
-  font-size: 3rem;
-  margin-left: 4rem;
-  margin-bottom: 2rem;
+  color: #2e3c68ba;
+  font-size: 2rem;
+  margin-left: 3.5rem;
+
 }
 
 .container-card {
+  box-shadow: 0 3px 6px rgba(0, 17, 166, 0.391);
   height: 19rem;
-  width: 18rem;
-  background-color: #052c65;
-  border-radius: 2rem;
+  width: 320px;
+  background-color: #2e3c68;
+  border-radius: 20px;
   display: flex;
   justify-content: center;
   margin-left: 1rem;
@@ -23,28 +36,29 @@
 }
 
 .content-card {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin: 0.5rem;
 }
 
 .lesson-img {
-  border-radius: 2rem;
-  width: 15rem;
-  height: auto;
+  border-radius: 15px;
+  width: 19rem;
+  height: 180px;
 }
 
-.body-card-from-2nd {
-  margin-top: 3.5rem;
-}
 
-.btn {
-font-size: small;
-margin-top: 1rem;
-margin-bottom: 0.5rem;
+.today{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: inline-block;
+  cursor: pointer;
+  background-color: rgb(255, 25, 0);
+  border: none;
+
 }
 
 .lesson-name {
   color: white;
   font-size: 1.5rem;
-  margin-bottom: 1rem;
+  margin: 1rem;
 }

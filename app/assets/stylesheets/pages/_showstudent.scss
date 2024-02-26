@@ -4,26 +4,39 @@ body{
 }
 .header-container {
   margin: 0 auto;
-  width: 90%;
+  width: 91%;
   display: flex;
   justify-content: space-between;
-  height: 80px;
+  height: 150px;
   color: white;
   align-items: center;
-  border-radius: 15px;
-  padding: 15px;
+  border-radius: 10px;
+  padding: 45px;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(to right, #3c4f95, #AA1F83, #3c4f95); /* Adjust colors as needed */
+  background: linear-gradient(to right, #333F66, #ec7926e8, #333F66); /* Adjust colors as needed */
   background-size: 200% 80%; /* Double the width for smooth animation */
-  animation: lava-lamp 6s infinite alternate;
-
+  animation: lava-lamp 15s infinite alternate;
 
   /* 3D effect */
   box-shadow: 0 3px 6px rgba(0, 17, 166, 0.391);
 
 }
 
+
+.teacher-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.teacher-info img {
+  border: 2px solid #ff992c;
+  width: 60px; /* Set the width of the image as per your design */
+  height: 60px; /* Maintain the aspect ratio of the image */
+  margin-right: 18px; /* Adjust the margin to create space between text and image */
+  border-radius: 50%; /* Optional: Apply a border-radius for a circular image */
+}
 @keyframes lava-lamp {
   0% {
     background-position: 100% 50%;
@@ -33,6 +46,11 @@ body{
   }
 }
 
+.teacher-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
 
 
 
@@ -47,7 +65,6 @@ body{
 }
 
 .participant-card {
-
   padding: 10px;
   margin: 5px;
   text-align: center;
@@ -57,6 +74,7 @@ body{
   &:hover {
     transform: scale(1.02); /* Zoom in on hover */
   }
+
 }
 
 
@@ -149,3 +167,67 @@ body{
 
 }
 // end for classrooms show page all students end // @@@@@@@@@@@@@@@@@@@@
+
+
+// drop box 3 dots
+
+.content-card {
+  position: relative;
+}
+
+.dropdown-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px; /* Add rounded corners for a softer look */
+  border: 1px solid #ccc; /* Add a border for separation */
+  z-index: 1;
+}
+
+.dropdown-container:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-item {
+  display: block;
+  padding: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Add a smooth transition effect */
+}
+
+.dropdown-item:hover {
+  background-color: #f0f0f0;
+  color: #ff8400; /* Change text color on hover for better contrast */
+}
+
+/* Style the dropdown icon */
+.dropdown-icon {
+  cursor: pointer;
+  color: #333;
+  font-size: 1.5rem;
+  transition: color 0.3s ease; /* Add a smooth transition effect */
+}
+
+.dropdown-container:hover .dropdown-icon {
+  color: #ff8706; /* Change icon color on hover */
+}
+.dropdown-icon {
+  font-size: 18px;
+  line-height: 18px;
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: transparent; /* Set the background color to transparent */
+  border: none; /* Remove border */
+  font-size: 1.5rem; /* Adjust font size as needed */
+  color: rgb(212, 212, 212); /* Set the color to white */
+}
