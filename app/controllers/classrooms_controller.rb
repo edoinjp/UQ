@@ -22,6 +22,16 @@ class ClassroomsController < ApplicationController
     @active_tab = "students"
     @classrooms = [@classroom]  # Ensure that @classrooms is set for the sidebar
 
+    @lessons_with_scores = @classrooms.map(&:lessons).flatten.map do |lesson|
+      {lesson: lesson, quiz_score: rand(0..5)}
+    end
+
+    additional_lesson_titles = ["Oral Communication II", "Social Science", "Language Arts"]
+    additional_lesson_titles.each do |title|
+      @lessons_with_scores << { lesson: OpenStruct.new(title: title), quiz_score: rand(0..5) }
+    end
+
+
   end
 
 

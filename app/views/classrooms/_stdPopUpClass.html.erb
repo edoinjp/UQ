@@ -1,14 +1,15 @@
 <!-- Button trigger modal -->
-<button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  <%= cl_image_tag participant.photo.key, alt: "#", class: "studentimg", style: "border-color: #{border_color};" %>
-</button>
-
-<a href="#myModal" role="button" data-toggle="modal">
-
-</a>
+<% @participants.each do |participant| %>
+  <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#<%= participant.first_name %>">
+    <div class="participant-card">
+      <% border_color = "##{SecureRandom.hex(3)}" %> <!-- Generate a random hex color -->
+      <%= cl_image_tag participant.photo.key, alt: "#", class: "studentimg", style: "border-color: #{border_color};" %>
+      <div class="text-light mt-5"><%= "#{participant.first_name} #{participant.last_name}" %></div>
+    </div>
+  </button>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="<%= participant.first_name %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
     <div class="modal-content">
       <div class="modal-header">
@@ -18,12 +19,12 @@
       <div class="modal-body">
 
         <div class="profile-card">
-          <%= cl_image_tag @user.photo.key, alt: @user.full_name, class: "avatar-large" %>
+          <%= cl_image_tag participant.photo.key, alt: participant.full_name, class: "avatar-large" %>
           <div class="profile-card-content">
             <div class="profile-content-info">
-              <h1><%= @user.full_name %>'s Profile</h1>
+              <h1><%= participant.full_name %>'s Profile</h1>
             </div>
-            <button type="button" class="btn btn-light rounded" style="width: 162px;"><%= @user.learning_style.capitalize %></button>
+            <button type="button" class="btn btn-light rounded" style="width: 162px;"><%= participant.learning_style.capitalize %></button>
           </div>
         </div>
 
@@ -66,3 +67,5 @@
     </div>
   </div>
 </div>
+
+<% end %>
