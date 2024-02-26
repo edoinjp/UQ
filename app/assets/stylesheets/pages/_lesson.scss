@@ -86,3 +86,18 @@
   object-fit: cover;
   border-radius: 100%;
 }
+
+.lesson-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 1rem;
+}
+
+.pdf-download {
+  margin: 1rem;
+}
+
+.reading-preview {
+  margin: 1rem;
+}
