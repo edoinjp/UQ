@@ -44,7 +44,7 @@ class OpenaiApi
 
   # Kinesthetic generation
   def generate_content(text, style:)
-    prompt = " Create a #{style} lesson activity based on the following content: #{text}, the activity should be engaging and interactive and can be done at home by themselves at home as this is a flipped classroom style learning. The output should be the activity and the lesson content."
+    prompt = " Create a #{style} speaking activity that a child can do at home in 10 minutes. Add a clear explanation of how to do it with simple vocabulary based on the following content: #{text}"
     response = @client.chat(parameters: {
       model: "gpt-3.5-turbo",
       messages: [{ role: "user", content: prompt}]
