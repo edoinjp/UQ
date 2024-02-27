@@ -17,7 +17,6 @@ class UsersController < ApplicationController
     end
 
     # Chartkick setup for the chart display logic
-    # [{:lesson=>#<Lesson id: 24, title: "Ice Breakers", classroom_id: 30, created_at: "2024-02-24 04:13:13.492922000 +0000", updated_at: "2024-02-24 04:13:13.492922000 +0000">, :quiz_score=>0}]
     @chart_data = {}
     @lessons_with_scores.each do |lesson_result|
       @chart_data[lesson_result[:lesson].title] = lesson_result[:quiz_score]

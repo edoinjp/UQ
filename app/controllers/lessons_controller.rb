@@ -41,6 +41,21 @@ class LessonsController < ApplicationController
     if params[:query].present?
       @students = @students.where(learning_style: params[:query])
     end
+
+    @lessons_with_scores = [@classroom].map(&:lessons).flatten.map do |lesson|
+      {lesson: lesson, quiz_score: rand(0..5)}
+    end
+
+    additional_lesson_titles = ["Oral Communication II", "Social Science", "Language Arts"]
+    additional_lesson_titles.each do |title|
+      @lessons_with_scores << { lesson: OpenStruct.new(title: title), quiz_score: rand(0..5) }
+    end
+
+    @chart_data = {}
+    @lessons_with_scores.each do |lesson_result|
+      @chart_data[lesson_result[:lesson].title] = lesson_result[:quiz_score]
+    end
+
   end
 
   private
