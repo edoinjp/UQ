@@ -18,7 +18,7 @@ class UsersController < ApplicationController
       {lesson: lesson, quiz_score: rand(0..5)}
     end
 
-    additional_lesson_titles = ["Fake Lesson 1", "Fake Lesson 2", "Fake Lesson 3"]
+    additional_lesson_titles = ["Oral Communication II", "Social Science", "Language Arts"]
     additional_lesson_titles.each do |title|
       @lessons_with_scores << { lesson: OpenStruct.new(title: title), quiz_score: rand(0..5) }
     end
