@@ -3,4 +3,7 @@ class StyledLesson < ApplicationRecord
 
   # Attaches all types of content for the differentiated lesson
   has_many_attached :files, dependent: :destroy
+
+  # after_create :generate_content
+
 end

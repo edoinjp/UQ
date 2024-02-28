@@ -1,6 +1,11 @@
 <div class="reading-container">
-  <div class="reading-preview">
-    <%= image_tag "reading_lesson_img.jpg", class: "preview-img" %>
+  <div class="reading-content">
+    <div class="pdf-download">
+      <i class="fa-regular fa-file-pdf" style="color: #74C0FC;"> <%= link_to 'Download as PDF', download_pdf_lesson_path(@lesson) %> </i>
+    </div>
+    <div class="reading-preview">
+      <%= render "reading_content", reading: @reading %>
+    </div>
   </div>
 
   <div class="reading-link">
