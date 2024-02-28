@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lesson Content</title>
+    <style>
+      <meta charset='utf-8' />
+      <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+    </style>
+  </head>
+  <body>
+    <%= @lesson.content.html_safe %>
+  </body>
+</html>

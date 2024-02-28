@@ -5,6 +5,10 @@
 }
 
 .lesson-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 1rem;
   width: 45rem;
   height: 25rem;
   border-radius: 2rem;
@@ -85,4 +89,13 @@
   width: 2.5rem;
   object-fit: cover;
   border-radius: 100%;
+}
+
+
+.pdf-download {
+  margin: 1rem;
+}
+
+.reading-preview {
+  margin: 1rem;
 }
