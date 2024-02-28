@@ -1,5 +1,12 @@
 <div class="score">
   <h1 class="quiz-title m-3">Quiz Results for <%= @lesson.title %></h1>
+
+  <div class="average-chart">
+    <%= line_chart @chart_data_all.map { |style|
+      {name: style[:name], data: style[:data]}
+    } %>
+  </div>
+
   <div class="response-columns">
     <% @student_scores.each do |student, score_data| %>
       <div class="response-column">
@@ -27,6 +34,7 @@
     <% end %>
   </div>
 </div>
+
 <%# Search Function eliminated, may be used for later %>
 <%# <form onsubmit="event.preventDefault();" role="search">
     <label for="search">Search for stuff</label>

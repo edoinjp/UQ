@@ -8,22 +8,6 @@ class LessonsController < ApplicationController
     @classroom = Classroom.find(params[:classroom_id])
     @lessons = @classroom.lessons
     @classrooms = [@classroom]
-
-    @lessons_with_scores = @classrooms.map(&:lessons).flatten.map do |lesson|
-      {lesson: lesson, quiz_score: rand(0..5)}
-    end
-
-    additional_lesson_titles = ['Oral Communication II', 'Social Science', 'Language Arts']
-    additional_lesson_titles.each do |title|
-      @lessons_with_scores << { lesson: OpenStruct.new(title: title), quiz_score: rand(0..5) }
-    end
-
-    @chart_data_all = [
-      {name: 'Visual', data: {'Ice Breakers': rand(0..5), 'Oral Communication II': rand(0..5), 'Social Science': rand(0..5), 'Language Arts': rand(0..5)}},
-      {name: 'Aural', data: {'Ice Breakers': rand(0..5), 'Oral Communication II': rand(0..5), 'Social Science': rand(0..5), 'Language Arts': rand(0..5)}},
-      {name: 'Reading', data: {'Ice Breakers': rand(0..5), 'Oral Communication II': rand(0..5), 'Social Science': rand(0..5), 'Language Arts': rand(0..5)}},
-      {name: 'Kinesthetic', data: {'Ice Breakers': rand(0..5), 'Oral Communication II': rand(0..5), 'Social Science': rand(0..5), 'Language Arts': rand(0..5)}}
-    ]
   end
 
   # Authorizes show action through current lesson through prarams
