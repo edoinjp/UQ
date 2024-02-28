@@ -3,7 +3,7 @@ class ResponsesController < ApplicationController
 
   def index
     # to dsiplay it on side bar
-    @active_tab = "responses"
+    @active_tab = 'responses'
     # Only Teachers can access this page
     #  Gather all responses
     @responses = policy_scope(Response)
@@ -18,6 +18,7 @@ class ResponsesController < ApplicationController
         correct_count: rand(1..@lesson.questions.count), # Random correct answers
         total_questions: @lesson.questions.count # Total questions for the lesson
       }
+    end
 
     @lessons_with_scores = [@lesson.classroom].map(&:lessons).flatten.map do |lesson|
       {lesson: lesson, quiz_score: rand(0..5)}
@@ -28,13 +29,19 @@ class ResponsesController < ApplicationController
       @lessons_with_scores << { lesson: OpenStruct.new(title: title), quiz_score: rand(0..5) }
     end
 
+    # Chartkick setup for the chart display logic
+    @chart_data = {}
+    @lessons_with_scores.each do |lesson_result|
+      @chart_data[lesson_result[:lesson].title] = lesson_result[:quiz_score]
+    end
+
     @chart_data_all = [
       {name: 'Visual', data: {'Ice Breakers': rand(0..5), 'Oral Communication II': rand(0..5), 'Social Science': rand(0..5), 'Language Arts': rand(0..5)}},
       {name: 'Aural', data: {'Ice Breakers': rand(0..5), 'Oral Communication II': rand(0..5), 'Social Science': rand(0..5), 'Language Arts': rand(0..5)}},
       {name: 'Reading', data: {'Ice Breakers': rand(0..5), 'Oral Communication II': rand(0..5), 'Social Science': rand(0..5), 'Language Arts': rand(0..5)}},
       {name: 'Kinesthetic', data: {'Ice Breakers': rand(0..5), 'Oral Communication II': rand(0..5), 'Social Science': rand(0..5), 'Language Arts': rand(0..5)}}
     ]
-    end
+
   end
 
   private
@@ -42,4 +49,5 @@ class ResponsesController < ApplicationController
   def set_lesson
     @lesson = Lesson.find(params[:lesson_id])
   end
+
 end
