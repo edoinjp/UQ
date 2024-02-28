@@ -12,9 +12,11 @@ class User < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+
   def teacher?
     teacher == true
   end
+
   def student?
     !teacher?
   end
