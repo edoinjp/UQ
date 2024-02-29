@@ -62,3 +62,15 @@
 <div class="mt-4 w-25">
   <%= @lesson.content %>
 </div>
+
+<div class="help-container">
+  <h1>Lesson Assist</h1>
+  <section class="help-conversation">
+  </section>
+  <%= form_with do |form| %>
+    <div class="help-input">
+      <%= form.text_area :message, id: 'prompt' %>
+      <%= form.submit 'Send' %>
+    </div>
+  <% end %>
+</div>
