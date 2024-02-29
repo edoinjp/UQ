@@ -27,6 +27,7 @@ class LessonsController < ApplicationController
     if params[:query].present?
       @students = @students.where(learning_style: params[:query])
     end
+
     # @openai_api = OpenaiApi.new
     # @paragraph = @openai_api.generate_content(@lesson.title)
   end
