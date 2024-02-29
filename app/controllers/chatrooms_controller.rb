@@ -2,6 +2,13 @@
 class ChatroomsController < ApplicationController
   before_action :set_chatroom, only: [:show]
 
+  def create
+    skip_authorization
+    @chatroom = Chatroom.find_by(users || )
+    chatroom.new
+
+  end
+
   def show
     skip_authorization
     @active_tab = "chatroom"

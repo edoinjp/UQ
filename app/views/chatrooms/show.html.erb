@@ -2,33 +2,52 @@
   data-controller="chatroom-subscription"
   data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>">
 
-  <div> <!-- Adjusted to 12 columns for wider appearance -->
-    <h3 class="text-info mb-4"><%= @classroom.name %> general chat</h3>
-    <div class="messages mt-4 text-dark" id="messages" data-chatroom-subscription-target="messages">
-      <% if @chatroom %>
-        <%= render partial: "messages/message", collection: @chatroom.messages %>
-      <% else %>
-        <p class="alert alert-warning">No associated chatroom found.</p>
-      <% end %>
-    </div>
-<div class="sticky-bottom">
-  <% if @chatroom %>
-    <%= simple_form_for [@chatroom, @message], html: { class: "d-flex" } do |f| %>
-      <div class="input-group" style="width: 600px; position: relative; background-color: rgba(24, 119, 242, 0.7); border-radius: 20px; padding: 1px;">
-        <%= f.input :content,
-          label: false,
-          placeholder: "Type a message...",
-          wrapper_html: { class: "message-input form-control", style: "resize: none; height: 120px; color: white; border: none; padding: 10px; width: calc(100% - 80px); background-color: transparent;" }
-        %>
-        <div class="send-button" style="position: absolute; top: 50%; right: 0; transform: translateY(-50%); padding: 15px;">
-          <%= f.submit "Send", class: "btn btn-primary send", style: "border: none; background-color: transparent; color: #1877f2; height: 100%;" %>
-        </div>
+  <div d class="row">
       </div>
-    <% end %>
-  <% end %>
-</div>
+    <div class="col-md-8">
+      <h3 class="text-info mb-4"><%= @classroom.name %> general chat</h3>
+
+     <% if @chatroom %>
+        <h3 class="text-info mb-4">Direct chat with <%= @chatroom.name %></h3>
+      <% else %>
+        <h3 class="text-info mb-4"><%= @classroom.name %> general chat</h3>
+      <% end %>
 
 
+      <div class="messages mt-4 text-dark" id="messages" data-chatroom-subscription-target="messages">
+        <% if @chatroom %>
+          <%= render partial: "messages/message", collection: @chatroom.messages %>
+        <% else %>
+          <p class="alert alert-warning">No associated chatroom found.</p>
+        <% end %>
+      </div>
 
+      <div class="sticky-bottom">
+        <% if @chatroom %>
+          <%= simple_form_for [@chatroom, @message], html: { class: "d-flex" } do |f| %>
+            <div class="input-group" style="width: 600px; position: relative; background-color: rgba(24, 119, 242, 0.7); border-radius: 20px; padding: 1px;">
+              <%= f.input :content,
+                label: false,
+                placeholder: "Type a message...",
+                wrapper_html: { class: "message-input form-control", style: "resize: none; height: 120px; color: white; border: none; padding: 10px; width: calc(100% - 80px); background-color: transparent;" }
+              %>
+              <div class="send-button" style="position: absolute; top: 50%; right: 0; transform: translateY(-50%); padding: 15px;">
+                <%= f.submit "Send", class: "btn btn-primary send", style: "border: none; background-color: transparent; color: #1877f2; height: 100%;" %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+
+    </div>
+
+         <div class="col-md-4">
+          <h4 class="text-info mb-4">Students in <%= @classroom.name %></h4>
+          <% @students.each do |student| %>
+           <p data-target="chatroom-subscription.studentId" data-action="click->chatroom-subscription#switchToDirectMessage" data-id="<%= student.id %>" style="color: black;">
+            <%= student.full_name %>
+          </p>
+          <% end %>
+        </div>
   </div>
 </div>
