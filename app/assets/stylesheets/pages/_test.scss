@@ -26,7 +26,7 @@
   padding: 4rem;
 }
 
-h2{
+.vark-headers{
   font-size: 1.5rem;
   font-weight: bold;
   padding: 1rem;
@@ -34,21 +34,21 @@ h2{
   margin: 0;
 }
 
-ul{
+.vark-choice-container{
   list-style-type: none;
   padding: 0;
 }
 
-ul li{
+.vark-choice{
   font-size: 1.2rem;
   margin: 1rem 0;
 }
 
-ul li label{
+.vark-label{
   cursor: pointer;
 }
 
-button{
+.vark-button{
   background-color: #03cae4;
   color: #fff;
   border: none;
@@ -60,11 +60,11 @@ button{
   padding: 1.3rem;
 }
 
-button:hover{
+.vark-button:hover{
   background-color: #04adc4;
 }
 
-button:focus{
+.vark-button:focus{
   outline: none;
   background-color: #44b927;
 }
