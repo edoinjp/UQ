@@ -8,17 +8,22 @@ Rails.application.routes.draw do
       get 'students'
     end
 
-    resources :lessons, only: %i[index]
+    resources :lessons, only: %i[index new create]
   end
-    resources :users, only: [:show]
-    resources :lessons, only: %i[show] do
-       resources :questions, only: [:index]
-       resources :responses, only: [:index]
-    end
 
-    resources :chatrooms, only: :show do
-      resources :messages, only: :create
-    end
+  resources :users, only: [:show]
+  get 'vark', to: 'users#test'
+  post 'vark', to: 'users#submit'
+  resources :lessons, only: %i[show] do
+    resources :questions, only: [:index]
+    resources :responses, only: [:index]
+    get 'generate_content', on: :member
+    get 'download_pdf', on: :member
+  end
+
+  resources :chatrooms, only: :show do
+    resources :messages, only: :create
+  end
 
   mount ActionCable.server => "/cable"
 end

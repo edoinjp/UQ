@@ -4,9 +4,16 @@ class UsersController < ApplicationController
   after_action :verify_authorized
 
   def show
+    @active_tab = "students"
     authorize @user
-    # Get the user's classroom and lessons
+
+    # Get the user's classrooms
     @classrooms = @user.student? ? @user.participations.map(&:classroom) : @user.classrooms
+
+    # Choose the first classroom from the list / this logic is not correct because : =>
+    # its getting first classroom currently this is only way to display sidebar on users show page
+    # @classroom = @classrooms.first if @classrooms.present?
+
     @lessons_with_scores = @classrooms.map(&:lessons).flatten.map do |lesson|
       {lesson: lesson, quiz_score: rand(0..5)}
     end
@@ -22,6 +29,11 @@ class UsersController < ApplicationController
       @chart_data[lesson_result[:lesson].title] = lesson_result[:quiz_score]
     end
 
+  end
+
+  def test
+    @user = User.new
+    authorize @user
   end
 
   private

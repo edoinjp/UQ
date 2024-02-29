@@ -103,7 +103,9 @@ girl_avatars.each do |path|
 end
 
 puts 'All students have been created!'
-
+chatroom = Chatroom.create!(
+  classroom: classroom
+)
 # Seed Lesson
 puts 'Creating a lesson...'
 lesson = Lesson.create!(

@@ -1,5 +1,7 @@
 <div class="video-card">
-  <% @kinesthetic.files.each do |video| %>
-    <%= cl_video_tag video.key, controls:"", class:"vid-display" %>
-  <% end %>
+  <div class="kinesthetic-content">
+    <div class="kinesthetic-preview">
+      <%= render "kinesthetic_content", kinesthetic: @kinesthetic %>
+    </div>
+  </div>
 </div>

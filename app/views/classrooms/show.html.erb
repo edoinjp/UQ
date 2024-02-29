@@ -2,7 +2,8 @@
   <h1><%= @classroom.name %></h1>
   <% if current_user.teacher? %>
     <div class="teacher-info">
-      <%= "#{current_user.first_name} #{current_user.last_name} (Teacher)" %>
+        <%= image_tag "profile.png" %><!-- Replace with the actual path to the teacher's image -->
+      <%= "#{current_user.first_name} #{current_user.last_name}" %>
     </div>
   <% end %>
 </div>

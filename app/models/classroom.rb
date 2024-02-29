@@ -1,6 +1,6 @@
 class Classroom < ApplicationRecord
 belongs_to :user
-  has_one :chatroom
+  has_one :chatroom, dependent: :destroy
   has_many :participations, dependent: :destroy
   has_many :students, through: :participations, source: :user
   has_many :lessons, dependent: :destroy

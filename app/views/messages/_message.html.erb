@@ -1,8 +1,12 @@
-<!-- app/views/messages/_message.html.erb -->
-<div id="message-<%= message.id %>" class="mb-3 bg-light text-dark p-3 rounded message" style="width: 100%;">
+<div id="message-<%= message.id %>" style="width: 100%;">
+  <br>
   <small class="text-muted">
-    <strong><%= message.user.first_name %></strong>
+    <% if current_user.teacher? %>
+      <strong><%= message.user.first_name %></strong>
+    <% elsif message.user.teacher? %>
+      <strong>Teacher</strong> <!-- Display a generic label for non-teacher users -->
+    <% end %>
     <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
   </small>
-  <p class="mb-0 text-dark"><strong>Sender: <%= message.user.first_name %></strong><br><%= message.content %></p>
+  <p class="messige mb-0 text-dark"><br><%= message.content %></p>
 </div>
