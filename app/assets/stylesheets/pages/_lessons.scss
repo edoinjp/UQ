@@ -11,9 +11,21 @@
 
 
 .container-card:hover {
-
   transform: scale(1.02);
+}
 
+.new-lesson {
+  border-radius: 10px;
+  background-color: #004080;
+  border: 1px solid #004080;
+  color: white;
+  padding: 8px;
+}
+
+.my-lessons-index {
+  display: flex;
+  justify-content: space-between;
+  max-width: 80%;
 }
 
 .your-lessons {
