@@ -23,10 +23,29 @@ class LessonsController < ApplicationController
     @reading = @lesson.styled_lessons.find { |x| x['style'] == 'reading' }
     @kinesthetic = @lesson.styled_lessons.find { |x| x['style'] == 'kinesthetic' }
 
+    # Logic to have student avatars appear according the the lesson style
     @students = @classroom.students
     if params[:query].present?
       @students = @students.where(learning_style: params[:query])
     end
+
+    # Creates quiz scores for each seeded lesson
+    @lessons_with_scores = [@classroom].map(&:lessons).flatten.map do |lesson|
+      {lesson: lesson, quiz_score: rand(0..5)}
+    end
+
+    # Creates additional lessons on top of the seeded ones
+    additional_lesson_titles = ["Oral Communication II", "Social Science", "Language Arts"]
+    additional_lesson_titles.each do |title|
+      @lessons_with_scores << { lesson: OpenStruct.new(title: title), quiz_score: rand(0..5) }
+    end
+
+    # Creates the individual student progress charts in the pop-up
+    @chart_data = {}
+    @lessons_with_scores.each do |lesson_result|
+      @chart_data[lesson_result[:lesson].title] = lesson_result[:quiz_score]
+    end
+
     # @openai_api = OpenaiApi.new
     # @paragraph = @openai_api.generate_content(@lesson.title)
   end
