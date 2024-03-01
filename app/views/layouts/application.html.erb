@@ -55,18 +55,17 @@
                     </li>
                   <% end %>
                  <%# students %>
-                  <% if @classroom.present? && action_name != 'new' %>
-                  <li id="students-<%= @classroom.id %>" class="<%= 'active' if @active_tab == "students"%>">
-                    <%= link_to classroom_path(@classroom) do %>
-                      <i class="fa-solid fa-user"></i>
-                      &nbsp;Students
-                    <% end %>
-                  </li>
-                <% end %>
-
-                 <%# responses %>
+              <% if @classroom.present? && action_name != 'new' && current_user.teacher? %>
+                <li id="students-<%= @classroom.id %>" class="<%= 'active' if @active_tab == "students" %>">
+                  <%= link_to classroom_path(@classroom) do %>
+                    <i class="fa-solid fa-user"></i>
+                    &nbsp;Students
+                  <% end %>
                 </li>
-              <% if @classroom.present? && @lesson.present? && @lesson.persisted? %>
+              <% end %>
+
+              <%# responses %>
+              <% if @classroom.present? && @lesson.present? && @lesson.persisted? && current_user.teacher? %>
                 <li id="responses" class="<%= 'active' if @active_tab == 'responses' %>">
                   <%= link_to lesson_responses_path(@lesson) do %>
                     <i class="fas fa-chart-bar"></i>
@@ -100,12 +99,13 @@
          </div>
     <!-- Main Content @@@@@@@@@@@@@@@@@@@@ -->
         <div class="maincontent ">
+          <br>
             <button class="btn btn-white mt-auto d-block" id="sidebarToggle">
             <i class="fas fa-chevron-left rotate-icon goback "></i>
           </button>
 
           <%= render "shared/flashes" %>
-          <%= link_to raw('<i class="fa-solid fa-arrow-left"> </i>'), :back, class: 'goback-button' %>
+          <%= link_to raw('<i class="fa-solid fa-angles-left"></i> </i>'), :back, class: 'goback-button' %>
 
 
                   <%# todo list @@@@@@@@@@@@@@@@@@@ %>
@@ -154,6 +154,9 @@
                           left: auto;
                           padding: 10px;
                           box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                          border: 2px solid #004080;
+                          background-color: #5eadfba1;
+                          border-radius: 20px;
                         }
 
                         .todo-item {
@@ -172,9 +175,9 @@
                           transform: scale(1.5);
                         }
 
-                        .todo-item:hover {
+                        /* .todo-item:hover {
                           background-color: #e9ecef;
-                        }
+                        } */
 
                         .checked {
                           text-decoration: line-through;
@@ -194,9 +197,9 @@
                           transform: scale(1.5);
                         }
 
-                        .todo-link:hover {
+                        /* .todo-link:hover {
                           background-color: #e9ecef;
-                        }
+                        } */
 
                         .checked {
                           text-decoration: line-through;

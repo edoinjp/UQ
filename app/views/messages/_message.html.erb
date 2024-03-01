@@ -4,9 +4,10 @@
     <% if current_user.teacher? %>
       <strong><%= message.user.first_name %></strong>
     <% elsif message.user.teacher? %>
-      <strong>Teacher</strong> <!-- Display a generic label for non-teacher users -->
+      <strong style="color: orange;">Teacher</strong> <!-- Display a generic label for non-teacher users -->
     <% end %>
-    <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
   </small>
   <p class="messige mb-0 text-dark"><br><%= message.content %></p>
+  <br>
+  <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
 </div>
