@@ -1,32 +1,18 @@
 <div class="score">
   <h1 class="quiz-title m-3">Quiz Results for <%= @lesson.title %></h1>
+
+  <div class="average-chart">
+    <%= line_chart @chart_data_all.map { |style|
+      {name: style[:name], data: style[:data]}
+    } %>
+  </div>
+
   <div class="response-columns">
-    <% @student_scores.each do |student, score_data| %>
-      <div class="response-column">
-        <div class="response-list">
-          <div class="response-image">
-            <% score_percentage = (score_data[:correct_count].to_f / score_data[:total_questions]) * 100 %>
-            <div class="response-image">
-              <% border_color = score_percentage > 50 ? 'green' : 'red' %> <!-- Dark green and dark red -->
-              <%= cl_image_tag student.photo.key, alt: student.full_name, class: "response-img", style: "border-color: #{border_color};" %>
-            </div>
-          </div>
-          <div class="response-list-content">
-            <%= link_to user_path(student) do %>
-              <div class="response-list-name">
-                <%= student.full_name %> /
-                <%= student.learning_style.capitalize %>
-              </div>
-            <% end %>
-            <div class="response-list-answer">
-              correct <%= score_data[:correct_count] %> / <%= score_data[:total_questions] %>
-            </div>
-          </div>
-        </div>
-      </div>
-    <% end %>
+    <%# Student Index Iteration with Pop-Ups %>
+    <%= render "stdPopUpRes", student_scores: @student_scores %>
   </div>
 </div>
+
 <%# Search Function eliminated, may be used for later %>
 <%# <form onsubmit="event.preventDefault();" role="search">
     <label for="search">Search for stuff</label>
