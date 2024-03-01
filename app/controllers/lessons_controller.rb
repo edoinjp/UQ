@@ -100,7 +100,6 @@ class LessonsController < ApplicationController
       )
   end
 
-
   private
 
   # Use callbacks to share common setup or contraints between actions

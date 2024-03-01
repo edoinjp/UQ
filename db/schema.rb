@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema[7.0].define(version: 2024_02_29_133928) do
+=======
 ActiveRecord::Schema[7.0].define(version: 2024_02_29_122854) do
+>>>>>>> master
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -147,6 +151,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_29_122854) do
     t.bigint "lesson_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "supplementary"
+    t.string "visual_image_url"
     t.index ["lesson_id"], name: "index_styled_lessons_on_lesson_id"
   end
 
