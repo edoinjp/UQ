@@ -50,7 +50,9 @@ class LessonsController < ApplicationController
         }
       )
     ensure
-      sse.close # Makes sure it closes
+      if !sse.closed?
+        sse.close # Makes sure it closes
+      end
     end
 
 
