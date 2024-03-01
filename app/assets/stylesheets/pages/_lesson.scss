@@ -99,3 +99,32 @@
 .reading-preview {
   margin: 1rem;
 }
+
+.help-container {
+  display: flex;
+  flex-direction: column;
+  height: 30rem;
+  width: 25%;
+  border: solid;
+  border-color: #052c65;
+  border-radius: 2rem;
+}
+
+#help-header {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  font-weight: bold;
+  font-size: large;
+}
+
+.help-conversation {
+  flex-grow: 1; // takes up all available space
+  overflow-y: auto;
+}
+
+.help-input {
+  flex-shrink: 0; // prevents the input from shrinking
+  display: flex;
+  justify-content: center;
+}
