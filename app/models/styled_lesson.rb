@@ -3,6 +3,7 @@ class StyledLesson < ApplicationRecord
 
   # Attaches all types of content for the differentiated lesson
   has_many_attached :files, dependent: :destroy
+  has_many_attached :images, dependent: :destroy
 
   # Scope for supplementary lessons
   scope :supplemnetary, -> { where(supplementary: true) }

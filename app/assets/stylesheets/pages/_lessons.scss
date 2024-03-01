@@ -9,9 +9,21 @@
 
 
 .container-card:hover {
-
   transform: scale(1.02);
+}
 
+.new-lesson {
+  border-radius: 10px;
+  background-color: #004080;
+  border: 1px solid #004080;
+  color: white;
+  padding: 8px;
+}
+
+.my-lessons-index {
+  display: flex;
+  justify-content: space-between;
+  max-width: 80%;
 }
 
 .your-lessons {
@@ -64,4 +76,37 @@
   height: auto;
   margin-top: 16px;
   margin-bottom: 16px;
+}
+
+.lesson-form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.lesson-form-group {
+  margin-bottom: 20px;
+  margin-top: 8px;
+}
+
+.form-control{
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
+
+.form-control-instruction {
+  color: rgb(168, 168, 168);
+}
+
+
+.btn-lesson {
+  background-color: #004080;
+  border-color: #004080;
+  color: white;
+  border-radius: 10px;
+}
+
+.btn-lesson:hover {
+  background-color: #003973;
+  border-color: #003973;
+  color: rgb(234, 233, 233);
 }
