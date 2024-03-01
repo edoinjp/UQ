@@ -79,3 +79,36 @@
   width: 50%;
   height: auto;
 }
+
+.lesson-form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.lesson-form-group {
+  margin-bottom: 20px;
+  margin-top: 8px;
+}
+
+.form-control{
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
+
+.form-control-instruction {
+  color: rgb(168, 168, 168);
+}
+
+
+.btn-lesson {
+  background-color: #004080;
+  border-color: #004080;
+  color: white;
+  border-radius: 10px;
+}
+
+.btn-lesson:hover {
+  background-color: #003973;
+  border-color: #003973;
+  color: rgb(234, 233, 233);
+}
