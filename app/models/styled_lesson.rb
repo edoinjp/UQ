@@ -5,6 +5,6 @@ class StyledLesson < ApplicationRecord
   has_many_attached :files, dependent: :destroy
   has_many_attached :images, dependent: :destroy
 
-  # after_create :generate_content
-
+  # Scope for supplementary lessons
+  scope :supplemnetary, -> { where(supplementary: true) }
 end

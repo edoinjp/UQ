@@ -14,13 +14,27 @@ class UsersController < ApplicationController
     # its getting first classroom currently this is only way to display sidebar on users show page
     # @classroom = @classrooms.first if @classrooms.present?
 
-    @lessons_with_scores = @classrooms.map(&:lessons).flatten.map do |lesson|
-      {lesson: lesson, quiz_score: rand(0..5)}
-    end
+    # Initialize an empty hash to store lesson scores for the user
+    @lessons_with_scores = {}
 
-    additional_lesson_titles = ["Oral Communication II", "Social Science", "Language Arts"]
-    additional_lesson_titles.each do |title|
-      @lessons_with_scores << { lesson: OpenStruct.new(title: title), quiz_score: rand(0..5) }
+    # Iterate over each classroom and its lessons to calculate the correct count
+    @classrooms.each do |classroom|
+      classroom.lessons.each do |lesson|
+        # Assuming each lesson has a score associated with it
+        lesson_score = lesson.scores.find_by(user_id: @user.id)
+        if lesson_score.present?
+          @lessons_with_scores[lesson] = {
+            correct_count: lesson_score.correct_count, # Assuming 'correct_count' is the attribute for correct answers
+            total_questions: lesson.questions.count
+          }
+        else
+          # Handle the case where the user hasn't attempted the lesson
+          @lessons_with_scores[lesson] = {
+            correct_count: 0,
+            total_questions: lesson.questions.count
+          }
+        end
+      end
     end
 
     # Chartkick setup for the chart display logic
