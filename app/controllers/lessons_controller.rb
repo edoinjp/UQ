@@ -43,7 +43,7 @@ class LessonsController < ApplicationController
           stream: proc do |chunk| # Creates a procedure to handle incoming steam from API
             content = chunk.dig('choices', 0, 'delta', 'content') # Fetches content from API response
             return if content.nil? # Return from procedure once theres no more content
-            see.write(object{ message: content }) # Writes the response to the message event
+            see.write(object{message: content}) # Writes the response to the message event
           end
         }
       )

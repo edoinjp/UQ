@@ -63,13 +63,13 @@
   <%= @lesson.content %>
 </div>-->
 
-<div class="help-container">
+<div class="help-container" data-controller="help-chat">
   <h1 id="help-header">Lesson Assist</h1>
-  <section class="help-conversation">
+  <section class="help-conversation" data-help-chat-target="conversation">
   </section>
-  <%= form_with do |form| %>
+  <%= form_with data: { action: "help-chat#generateResponse" } do |form| %>
     <div class="help-input">
-      <%= form.text_area :message, id: 'prompt' %>
+      <%= form.text_area :message, id: 'prompt', data: { chat_target: "prompt" } %>
       <%= form.submit 'Ask' %>
     </div>
   <% end %>
