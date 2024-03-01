@@ -69,7 +69,7 @@ boy_avatars.each do |path|
     email: Faker::Internet.email,
     password: 'password',
     teacher: false,
-    scores: {
+    score: {
       'Ice Breakers' => rand(0..5),
       'Oral Communication II' => rand(0..5),
       'Social Science' => rand(0..5),
@@ -97,7 +97,7 @@ girl_avatars.each do |path|
     email: Faker::Internet.email,
     password: 'password',
     teacher: false,
-    scores: {
+    score: {
       'Ice Breakers' => rand(0..5),
       'Oral Communication II' => rand(0..5),
       'Social Science' => rand(0..5),
