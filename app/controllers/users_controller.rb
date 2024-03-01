@@ -22,6 +22,13 @@ class UsersController < ApplicationController
     additional_lesson_titles.each do |title|
       @lessons_with_scores << { lesson: OpenStruct.new(title: title), quiz_score: rand(0..5) }
     end
+
+    # Chartkick setup for the chart display logic
+    @chart_data = {}
+    @lessons_with_scores.each do |lesson_result|
+      @chart_data[lesson_result[:lesson].title] = lesson_result[:quiz_score]
+    end
+
   end
 
   def test
