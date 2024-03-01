@@ -11,20 +11,32 @@ class ResponsesController < ApplicationController
     @responses = policy_scope(Response)
     # @responses = policy_scope(Response.includes(:choice).where(choices: { question_id: @lesson.questions.ids }))
 
-    # get all studnets who participated in the lesson
-    student_ids = @lesson.classroom.students.pluck(:id)
+    # Get all students who participated in the lesson
+    students = @lesson.classroom.students
 
-    # For each student, generate a fake score
-    @student_scores = User.where(id: student_ids).each_with_object({}) do |student, scores|
-      scores[student] = {
-        correct_count: rand(1..@lesson.questions.count), # Random correct answers
-        total_questions: @lesson.questions.count # Total questions for the lesson
-      }
+    # Initialize @student_scores as an empty hash
+    @student_scores = {}
+
+    # For each student, fetch the correct answer count from the database
+    students.each do |student|
+      lesson_score = student.score[@lesson.title] # Assuming 'title' is the lesson title
+      if lesson_score.present?
+        @student_scores[student] = {
+          correct_count: lesson_score, # Assign the score value directly
+          total_questions: @lesson.questions.count
+        }
+      else
+        # Handle the case where the score for the lesson is not present for the student
+        @student_scores[student] = {
+          correct_count: 0,
+          total_questions: @lesson.questions.count
+        }
+      end
     end
 
     # Creates quiz scores for each seeded lesson
     @lessons_with_scores = [@lesson.classroom].map(&:lessons).flatten.map do |lesson|
-      {lesson: lesson, quiz_score: rand(0..5)}
+      { lesson: lesson, quiz_score: rand(0..5) }
     end
 
     # Creates additional lessons on top of the seeded ones
@@ -32,7 +44,6 @@ class ResponsesController < ApplicationController
     additional_lesson_titles.each do |title|
       @lessons_with_scores << { lesson: OpenStruct.new(title: title), quiz_score: rand(0..5) }
     end
-
     # Creates the individual student progress charts in the pop-up
     @chart_data = {}
     @lessons_with_scores.each do |lesson_result|

@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :participations, dependent: :destroy
   has_many :students, class_name: 'User', through: :participations, source: :user
   has_many :lessons, through: :classrooms
+  has_many :responses, dependent: :destroy
   # To attach avatar photos to all user seeds
   has_one_attached :photo
 
