@@ -114,13 +114,13 @@
                       To-Do
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <p>My to-do ist</p>
+                          <p >My to-do ist</p>
                       <div class="dropdown-divider"></div>
                       <div class="dropdown-item">
                         <div class="input-group">
                           <input type="text" class="form-control" placeholder="Add a new to-do" id="newTodoInput">
                           <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" onclick="addTodo()">Add</button>
+                            <button class="btn btn-outline-secondary todobutton" type="button" onclick="addTodo()">Add</button>
                           </div>
                         </div>
                       </div>
@@ -140,6 +140,13 @@
                           right: 45px;
                           z-index: 9999;
                         }
+                        .dropdown-menu p {
+                            text-align: center;
+                          margin:0 auto;
+                          color: #ffffff;
+                          /* font-size: 14px; */
+                        }
+
 
                         .todolist.dropup .btn-primary {
                           border-radius: 10px;
@@ -155,16 +162,17 @@
                           padding: 10px;
                           box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
                           border: 2px solid #004080;
-                          background-color: #5eadfba1;
+                          background-color: #26325A;
                           border-radius: 20px;
+                          color:white;
                         }
 
                         .todo-item {
+                           color:white;
                           display: flex;
                           align-items: center;
                           margin-bottom: 5px;
                           font-size: 14px;
-                          color: #333;
                           word-wrap: break-word; /* Allow text to wrap within words */
                           overflow-wrap: break-word; /* Handle overflow situations */
                           max-width: 100%; /* Limit the maximum width to 100% of the container */
@@ -173,15 +181,15 @@
                         .todo-item input[type="checkbox"] {
                           margin-right: 10px;
                           transform: scale(1.5);
+
                         }
 
-                        /* .todo-item:hover {
+                        .todo-item:hover {
                           background-color: #e9ecef;
-                        } */
+                        }
 
                         .checked {
                           text-decoration: line-through;
-
                         }
                         .todo-link {
                           white-space: normal; /* Allow text to wrap within the box */
@@ -190,19 +198,30 @@
                           display: flex;
                           align-items: center;
                           padding-right: 1rem; /* Adjust as needed */
+
                         }
 
                         .todo-link input[type="checkbox"] {
                           margin-right: 10px;
                           transform: scale(1.5);
+                           background-color: #5eadfba1;
                         }
 
-                        /* .todo-link:hover {
-                          background-color: #e9ecef;
-                        } */
+                        .todo-link:hover {
+                           background-color: #5eadfba1;
+                        }
 
                         .checked {
                           text-decoration: line-through;
+                           background-color: #5eadfba1;
+                        }
+
+                        .dropdown-item:hover {
+                            background-color: #26325A;
+                        }
+                        .todobutton{
+                           background-color: orange;
+                           color:white;
                         }
                     </style>
 
