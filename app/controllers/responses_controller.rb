@@ -23,13 +23,15 @@ class ResponsesController < ApplicationController
       if lesson_score.present?
         @student_scores[student] = {
           correct_count: lesson_score, # Assign the score value directly
-          total_questions: @lesson.questions.count
+          # total_questions: @lesson.questions.count Use this later when 5 total questions are available
+          total_questions: 5
         }
       else
         # Handle the case where the score for the lesson is not present for the student
         @student_scores[student] = {
           correct_count: 0,
-          total_questions: @lesson.questions.count
+          # total_questions: @lesson.questions.count Use this later when 5 total questions are available
+          total_questions: 5
         }
       end
     end
