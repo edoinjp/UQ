@@ -10,14 +10,15 @@ class Lesson < ApplicationRecord
   end
 
 
-  def create_styled_lessons
+  def create_styled_lessons(supplementary: false)
     styles = %w[aural kinesthetic reading visual]
     @openai_api = OpenaiApi.new
     # @image_service = GenerateImages.new
     styles.each do |style|
-      styled_lesson = styled_lessons.create(style: style)
+      styled_lesson = styled_lessons.create(style: style, supplementary: supplementary)
 
       if style == 'visual'
+
         # image_file = openai_api.generate_images(self.content)
         # styled_lesson.images.attach(io: image_file, filename: "#{self.title.parameterize}-#{style}.jpg") if image_file.present?
       elsif style == 'aural'

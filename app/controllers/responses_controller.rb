@@ -1,5 +1,5 @@
 class ResponsesController < ApplicationController
-  before_action :set_lesson, only: :index
+  before_action :set_lesson, only: [:index, :create_supplementary_lessons]
 
   def index
     @active_tab = "responses"
@@ -66,7 +66,21 @@ class ResponsesController < ApplicationController
       {name: 'Reading', data: {'Ice Breakers': rand(0..5), 'Oral Communication II': rand(0..5), 'Social Science': rand(0..5), 'Language Arts': rand(0..5)}},
       {name: 'Kinesthetic', data: {'Ice Breakers': rand(0..5), 'Oral Communication II': rand(0..5), 'Social Science': rand(0..5), 'Language Arts': rand(0..5)}}
     ]
+  end
 
+  def create_supplementary_lessons
+    threshold = 50
+    students_needing_help = @student_scores.select do |student, data|
+      score_percentage = (data[:correct_count].to_f / data[:total_questions]) * 100
+      score_percentage < threshold
+    end.keys
+
+    students_needing_help.each do |student|
+      content = "Supplementary content for #{student.first_name} based on performance in #{@lesson.title}"
+      @lesson.styled_lessons.create!(content: content, supplementary: true, style: 'custom')
+    end
+
+    redirect_to lesson_responses_path(@lesson), notice: "Supplementary lessons created for students scoring below #{threshold}%."
   end
 
   private

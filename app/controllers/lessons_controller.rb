@@ -1,7 +1,7 @@
 class LessonsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_classroom, only: [:index, :new, :create]
-  before_action :set_lesson, only: [:show]
+  before_action :set_lesson, only: [:show, :create_supplementary, :new_supplementary]
 
   def index
     @lessons = policy_scope(Lesson)
@@ -56,6 +56,15 @@ class LessonsController < ApplicationController
     authorize(@lesson)
   end
 
+  def create_supplementary
+    authorize(@lesson)
+    @lesson.create_styled_lessons(supplementary: true)
+    redirect_to classroom_lessons_path(@lesson.classroom, @lesson), notice: 'Lesson was successfully created.'
+  end
+
+  def new_supplementary
+    authorize(@lesson)
+  end
 
   def create
     @lesson = Lesson.new(lesson_params)

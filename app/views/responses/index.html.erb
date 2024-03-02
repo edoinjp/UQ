@@ -1,18 +1,17 @@
 <div class="score">
   <h1 class="quiz-title m-3">Quiz Results for <%= @lesson.title %></h1>
-
+  <%#= link_to 'Create Supplementary Lessons', create_supplementary_lessons_lessons_path(lesson_id: @lesson.id), method: :post, class: "btn btn-primary" %>
+  <%= link_to 'Create Supplementary Lesson', new_supplementary_lesson_path(id: @lesson.id), class: "btn btn-primary" %>
   <div class="average-chart">
     <%= line_chart @chart_data_all.map { |style|
       {name: style[:name], data: style[:data]}
     } %>
   </div>
-
   <div class="response-columns">
     <%# Student Index Iteration with Pop-Ups %>
     <%= render "stdPopUpRes", student_scores: @student_scores %>
   </div>
 </div>
-
 <%# Search Function eliminated, may be used for later %>
 <%# <form onsubmit="event.preventDefault();" role="search">
     <label for="search">Search for stuff</label>
