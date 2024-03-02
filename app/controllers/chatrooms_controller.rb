@@ -18,7 +18,6 @@ class ChatroomsController < ApplicationController
 
 
   def show
-    @users = User.all
     skip_authorization
     @active_tab = "chatroom"
     @chatroom = Chatroom.find(params[:id])
