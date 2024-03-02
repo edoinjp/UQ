@@ -23,7 +23,7 @@ class OpenaiApi
         prompt: prompt, size: "256x256"
       })
       image_url = response["data"][0]["url"]
-      URI.open(image_url)
+      open_uri(image_url)
     end
   end
 
@@ -57,5 +57,11 @@ class OpenaiApi
       })
       response["choices"].first["message"]["content"]
     end
+  end
+
+  private
+
+  def open_uri(url)
+    open(url)
   end
 end

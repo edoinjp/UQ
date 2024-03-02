@@ -3,10 +3,9 @@
 }
 
 .response-columns {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: 20px;
+  display: grid; // Switch to grid display
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); // This will create as many 300px columns as can fit
+  gap: 1rem;
 }
 
 .response-column {
@@ -17,6 +16,8 @@
 .score  {
   margin: 0 auto;
   padding: 0 24px;
+  display: flex;
+  flex-direction: column;
 }
 
 .score h1{

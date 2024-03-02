@@ -52,11 +52,7 @@
 </div>
 
 <div class="student-container">
-  <% @students.each do |student| %>
-    <div class="student-avatars">
-      <%= image_tag student.photo %>
-    </div>
-  <% end %>
+  <%= render "stdPopUpLesson", students: @students %>
 </div>
 
 <!--<div class="mt-4 w-25">

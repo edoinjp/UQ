@@ -1,0 +1,87 @@
+<!-- Button trigger modal -->
+<% @student_scores.each do |student, score_data| %>
+  <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#<%= student.first_name %>">
+    <div class="response-column">
+      <div class="response-list">
+        <div class="response-image">
+          <% score_percentage = (score_data[:correct_count].to_f / score_data[:total_questions]) * 100 %>
+          <div class="response-image">
+            <% border_color = score_percentage > 50 ? 'green' : 'red' %> <!-- Dark green and dark red -->
+            <%= cl_image_tag student.photo.key, alt: student.full_name, class: "response-img", style: "border-color: #{border_color};" %>
+          </div>
+        </div>
+        
+        <div class="response-list-content">
+          <div class="response-list-name">
+            <%= student.full_name %> /
+            <%= student.learning_style.capitalize %>
+          </div>
+          <div class="response-list-answer">
+            correct <%= score_data[:correct_count] %> / <%= score_data[:total_questions] %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="<%= student.first_name %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel"><%= 'Check Up' %></h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <div class="profile-card">
+            <%= cl_image_tag student.photo.key, alt: student.full_name, class: "avatar-large" %>
+            <div class="profile-card-content">
+              <div class="profile-content-info">
+                <h1><%= student.full_name %>'s Profile</h1>
+              </div>
+              <button type="button" class="btn btn-light rounded" style="width: 162px;"><%= student.learning_style.capitalize %></button>
+            </div>
+          </div>
+
+          <div class="profile-lesson-container">
+            <div class="profile-lesson">
+              <% if @lessons_with_scores.any? %>
+                <table>
+                  <thead>
+                    <tr>
+                      <th class="lesson-name-header">Lesson Name</th>
+                      <th class="quiz-score-header">Quiz Score</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @lessons_with_scores.each do |lesson_with_score| %>
+                      <tr class="lesson-row">
+                        <td class="lesson-name-cell"><%= lesson_with_score[:lesson].title %></td>
+                        <td class="quiz-score-cell"><%= lesson_with_score[:quiz_score] %> / 5</td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              <% else %>
+                <p>This user has no lessons.</p>
+              <% end %>
+            </div>
+
+
+          <div class="student-chart">
+            <%= column_chart(@chart_data, max: 5)%>
+          </div>
+
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>

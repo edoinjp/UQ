@@ -77,16 +77,13 @@
 
 .student-container {
   margin-left: 1.5rem;
+  margin-right: 1.5rem;
 }
 
-.student-avatars {
+.student-avatars .studentimg {
   display: inline-flex;
-  margin-top: 1rem;
-}
-
-.student-avatars img {
-  height: 100%;
-  width: 2.5rem;
+  height: 3rem;
+  width: 3rem;
   object-fit: cover;
   border-radius: 100%;
 }
