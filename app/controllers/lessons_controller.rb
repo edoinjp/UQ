@@ -30,33 +30,6 @@ class LessonsController < ApplicationController
       @students = @students.where(learning_style: params[:query])
     end
 
-    # AI Chat Helper Code
-    response.headers['Content-Type'] = 'text/event-stream'
-    response.headers['Last-Modified'] = Time.now.httpdate # Helps prevent bug from streaming output
-    sse = SSE.new(response.stream, event: 'message') # Variable for Server Sent Event
-    client = OpenAI::Client.new(access_token: ENV['OPENAI_ACCESS_TOKEN'])
-
-    begin
-      client.chat( # Calls the chat API
-        parameters: {
-          model: 'gpt-3.5-turbo',
-          messages: [{ role: 'user', content: params[:prompt] }], # Prompt to pass as a query parameter
-          stream: proc do |chunk| # Creates a procedure to handle incoming steam from API
-            content = chunk.dig('choices', 0, 'delta', 'content') # Fetches content from API response
-            if content.nil? # Return from procedure once theres no more content
-              return
-            end
-            sse.write({ message: content }) # Writes the response to the message event
-          end
-        }
-      )
-    ensure
-      if !sse.closed?
-        sse.close # Makes sure it closes
-      end
-    end
-
-
     # Creates quiz scores for each seeded lesson
     @lessons_with_scores = [@classroom].map(&:lessons).flatten.map do |lesson|
       {lesson: lesson, quiz_score: rand(0..5)}
@@ -76,6 +49,17 @@ class LessonsController < ApplicationController
 
     # @openai_api = OpenaiApi.new
     # @paragraph = @openai_api.generate_content(@lesson.title)
+  end
+
+
+  def generate_response
+    question = params[:question] || 'Hi'
+    @response = OpenaiApi.new.generate_response(question)
+
+    respond_to do |format|
+      format.html # Follow regular flow of Rails
+      format.text { render partial: 'lessons/response', locals: {response: @response}, formats: [:html] }
+    end
   end
 
   def new

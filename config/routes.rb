@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :questions, only: [:index]
     resources :responses, only: [:index]
     get 'generate_content', on: :member
+    get 'generate_response', on: :member
     get 'download_pdf', on: :member
   end
 

@@ -74,7 +74,7 @@ let auralScore = 0
 let readingScore = 0
 let kinestheticScore = 0
 
-loadQuiz()
+// loadQuiz()
 
 function loadQuiz() {
 
@@ -104,6 +104,7 @@ function getSelected() {
   return answer
 }
 
+/*
 submitBtn.addEventListener('click', () => {
   const answer = getSelected()
   if(answer) {
@@ -138,3 +139,4 @@ submitBtn.addEventListener('click', () => {
     }
   }
 })
+*/

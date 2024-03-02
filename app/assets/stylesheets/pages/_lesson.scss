@@ -97,31 +97,22 @@
   margin: 1rem;
 }
 
-.help-container {
+.help-chat-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   height: 30rem;
-  width: 25%;
+  width: 20rem;
   border: solid;
   border-color: #052c65;
   border-radius: 2rem;
 }
 
-#help-header {
-  display: flex;
-  justify-content: center;
-  margin-top: 1rem;
-  font-weight: bold;
-  font-size: large;
+.help-response-container {
+  width: 90%;
 }
 
-.help-conversation {
-  flex-grow: 1; // takes up all available space
-  overflow-y: auto;
-}
-
-.help-input {
-  flex-shrink: 0; // prevents the input from shrinking
-  display: flex;
-  justify-content: center;
+.help-question-container {
+  width: 100%;
+  border: solid;
 }

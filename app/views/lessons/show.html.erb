@@ -55,18 +55,22 @@
   <%= render "stdPopUpLesson", students: @students %>
 </div>
 
-<!--<div class="mt-4 w-25">
-  <%= @lesson.content %>
-</div>-->
+<div class="help-chat-container" data-controller="help-chat">
 
-<div class="help-container" data-controller="help-chat">
-  <h1 id="help-header">Lesson Assist</h1>
-  <section class="help-conversation" data-help-chat-target="conversation">
-  </section>
-  <%= form_with data: { action: "help-chat#generateResponse" } do |form| %>
-    <div class="help-input">
-      <%= form.text_area :message, id: 'prompt', data: { chat_target: "prompt" } %>
-      <%= form.submit 'Ask' %>
-    </div>
-  <% end %>
+  <div class="help-response-container">
+    <ul data-help-chat-target="list"></ul>
+  </div>
+
+  <div class="help-question-container">
+    <%= form_with url: generate_response_lesson_path(@lesson), method: :get, html: {class:
+      "mb-4", data: {help_chat_target: "form", action: "submit->help-chat#update"}} do |f| %>
+      <%= f.text_field :question, class: "form-control", placeholder:
+        "Question", value: params[:question],
+        data: {
+          help_chat_target: "input"
+        } %>
+      <%= f.submit %>
+    <% end %>
+  </div>
+
 </div>
