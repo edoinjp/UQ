@@ -27,31 +27,14 @@ export default class extends Controller {
     lastMessage.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }
 
-  switchToDirectMessage(event) {
-    console.log("Clicked on a student", event.currentTarget.dataset.id);
-    event.preventDefault();
-
-
-    // @@ Retrieve student ID from the clicked element
-    const studentId = event.currentTarget.dataset.id;
-
-
-
-    // @@  Unsubscribe from the current channel
-    console.log("Unsubscribing from the current channel");
-    this.channel.unsubscribe();
-
-    // @@  Subscribe to the new channel (direct chat with the selected student)
-    console.log(`Subscribing to the new channel with chatroom ID ${studentId}`);
+  connect() {
     this.channel = createConsumer().subscriptions.create(
-      { channel: "ChatroomChannel", id: studentId},
-      {
-        received: data => this.insertMessageAndScrollDown(data),
-      }
-    );
-
-    console.log(`Switched to direct chat with student ID ${studentId}.`);
+      { channel: "ChatroomChannel", id: this.chatroomIdValue },
+      { received: data => this.messagesTarget.insertAdjacentHTML("beforeend", data) }
+    )
+    console.log(`Subscribed to the chatroom with the id ${this.chatroomIdValue}.`)
   }
+
 
 
 }

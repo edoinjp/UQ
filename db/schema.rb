@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_29_122854) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_01_143100) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -147,6 +147,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_29_122854) do
     t.bigint "lesson_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "supplementary"
+    t.string "visual_image_url"
     t.index ["lesson_id"], name: "index_styled_lessons_on_lesson_id"
   end
 
@@ -163,6 +165,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_29_122854) do
     t.string "learning_style"
     t.boolean "teacher"
     t.string "nickname"
+    t.json "score", default: {}
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

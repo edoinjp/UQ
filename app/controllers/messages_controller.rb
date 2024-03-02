@@ -3,6 +3,9 @@ class MessagesController < ApplicationController
   def create
     skip_authorization
     @chatroom = Chatroom.find(params[:chatroom_id])
+    @message = Message.new(message_params)
+    @message.chatroom = @chatroom
+    @message.user = current_user
 
     if params[:direct_message]
       recipient = User.find(params[:direct_message][:recipient_id])
@@ -18,10 +21,6 @@ class MessagesController < ApplicationController
         render "direct_messages/show", status: :unprocessable_entity
       end
     else
-      @message = Message.new(message_params)
-      @message.chatroom = @chatroom
-      @message.user = current_user
-
       if @message.save
         ChatroomChannel.broadcast_to(
           @chatroom,

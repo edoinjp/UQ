@@ -40,14 +40,18 @@
       </div>
 
     </div>
-
          <div class="col-md-4">
-          <h4 class="text-info mb-4">Students in <%= @classroom.name %></h4>
-          <% @students.each do |student| %>
-           <p data-target="chatroom-subscription.studentId" data-action="click->chatroom-subscription#switchToDirectMessage" data-id="<%= student.id %>" style="color: black;">
-            <%= student.full_name %>
+          <h4 class="text-info mb-4">users in <%= @classroom.name %></h4>
+          <% @users.each do |user| %>
+           <p data-target="chatroom-subscription.userId" data-action="click->chatroom-subscription#switchToDirectMessage" data-id="<%= user.id %>" style="color: black;">
+              <%= simple_form_for [user, Chatroom.new] do |f| %>
+              <%= f.input :classroom_id, input_html: {value: @classroom.id}, as: :hidden %>
+              <%= f.submit "Talk to #{user.full_name}" %>
+            <% end %>
           </p>
           <% end %>
         </div>
+
+
   </div>
 </div>
