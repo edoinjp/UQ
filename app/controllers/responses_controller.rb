@@ -20,11 +20,17 @@ class ResponsesController < ApplicationController
     # For each student, fetch the correct answer count from the database
     students.each do |student|
       lesson_score = student.score[@lesson.title] # Assuming 'title' is the lesson title
+      # all_lessons = @classroom.lessons
+      # all_scores = {}
+      # all_lessons.each do |lesson|
+      #   all_scores[lesson.title] = student.score.
+      # end
       if lesson_score.present?
         @student_scores[student] = {
           correct_count: lesson_score, # Assign the score value directly
           # total_questions: @lesson.questions.count Use this later when 5 total questions are available
-          total_questions: 5
+          total_questions: 5,
+          history: student.score
         }
       else
         # Handle the case where the score for the lesson is not present for the student
@@ -35,6 +41,7 @@ class ResponsesController < ApplicationController
         }
       end
     end
+
 
     # Creates quiz scores for each seeded lesson
     @lessons_with_scores = [@lesson.classroom].map(&:lessons).flatten.map do |lesson|

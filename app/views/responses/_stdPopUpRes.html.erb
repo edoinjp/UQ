@@ -10,7 +10,6 @@
             <%= cl_image_tag student.photo.key, alt: student.full_name, class: "response-img", style: "border-color: #{border_color};" %>
           </div>
         </div>
-        
         <div class="response-list-content">
           <div class="response-list-name">
             <%= student.full_name %> /
@@ -23,7 +22,6 @@
       </div>
     </div>
   </button>
-
   <!-- Modal -->
   <div class="modal fade" id="<%= student.first_name %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
@@ -33,7 +31,6 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-
           <div class="profile-card">
             <%= cl_image_tag student.photo.key, alt: student.full_name, class: "avatar-large" %>
             <div class="profile-card-content">
@@ -43,10 +40,9 @@
               <button type="button" class="btn btn-light rounded" style="width: 162px;"><%= student.learning_style.capitalize %></button>
             </div>
           </div>
-
           <div class="profile-lesson-container">
             <div class="profile-lesson">
-              <% if @lessons_with_scores.any? %>
+              <% if score_data[:history].any? %>
                 <table>
                   <thead>
                     <tr>
@@ -55,10 +51,10 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <% @lessons_with_scores.each do |lesson_with_score| %>
+                    <% score_data[:history].each do |lesson, score| %>
                       <tr class="lesson-row">
-                        <td class="lesson-name-cell"><%= lesson_with_score[:lesson].title %></td>
-                        <td class="quiz-score-cell"><%= lesson_with_score[:quiz_score] %> / 5</td>
+                        <td class="lesson-name-cell"><%= lesson %></td>
+                        <td class="quiz-score-cell"><%= score %> / 5</td>
                       </tr>
                     <% end %>
                   </tbody>
@@ -67,13 +63,9 @@
                 <p>This user has no lessons.</p>
               <% end %>
             </div>
-
-
-          <div class="student-chart">
-            <%= column_chart(@chart_data, max: 5)%>
-          </div>
-
-
+            <div class="student-chart">
+              <%= column_chart(@chart_data, max: 5)%>
+            </div>
           </div>
         </div>
         <div class="modal-footer">
@@ -83,5 +75,4 @@
       </div>
     </div>
   </div>
-
 <% end %>
