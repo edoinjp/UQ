@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:show]
+  get 'vark', to: 'users#test'
+  post 'vark', to: 'users#submit'
   resources :lessons, only: %i[show] do
     resources :questions, only: [:index]
     resources :responses, only: [:index]

@@ -6,13 +6,11 @@
       </div>
     <div class="col-md-8">
       <h3 class="text-info mb-4"><%= @classroom.name %> general chat</h3>
-
      <% if @chatroom %>
         <h3 class="text-info mb-4">Direct chat with <%= @chatroom.name %></h3>
       <% else %>
         <h3 class="text-info mb-4"><%= @classroom.name %> general chat</h3>
       <% end %>
-
 
       <div class="messages mt-4 text-dark" id="messages" data-chatroom-subscription-target="messages">
         <% if @chatroom %>
@@ -58,7 +56,5 @@
           </p>
           <% end %>
         </div>
-
-
   </div>
 </div>

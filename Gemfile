@@ -59,10 +59,13 @@ gem "sassc-rails"
 gem "pundit"
 gem "faker"
 gem "cloudinary"
+gem "chartkick"
+gem "groupdate"
 gem 'ruby-openai'
 gem 'redcarpet'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
+
 
 group :development, :test do
   gem "dotenv-rails"

@@ -1,9 +1,6 @@
 // visual building of content space
 
-body{
-  overflow: hidden;
 
-}
 .mainbody{
   display: flex;
   flex-direction: row;
@@ -46,12 +43,6 @@ body{
 }
 
 /*  go back button */
-#sidebarToggle{
-  padding: 15px 15px;
-  font-size: 15px;
-  color: #26325A;
-  border: none;
-}
 .goback-button {
   display: inline-block;
   padding: 10px 10px;
@@ -60,10 +51,21 @@ body{
   transition: background-color 0.3s ease;
   margin-bottom: 20px;
   font-size: 20px;
-
   position: fixed;
-  top: 10px; /* Adjust the top value as needed */
+  top: 30px; /* Adjust the top value as needed */
   right: 10px; /* Adjust the right value as needed */
+}
+// sidebar togle
+#sidebarToggle{
+  font-size: 15px;
+  width: 8px;
+  height: 45px;
+  color: whitesmoke;
+  background-color: #26325A;
+  border: none;
+  border-radius: 0px 11px 11px 0px;
+  margin-left: -12.5px;
+  margin-bottom: 15px;
 }
 #sidebarToggle:active {
   color: orange;
@@ -265,7 +267,7 @@ a{
   margin-left: 220px;
 }
 
-// messeges styling
+// messeges styling @@@@@@@@@@@@
 .chatroom{
   display: flex;
   justify-content: center;
@@ -275,21 +277,20 @@ a{
   margin: 0 auto;
   width: 90%;
 }
+.chatsize{
+  width: 80%;
+}
+#messages{
+  width: 80%;
+  margin: auto;
+  border-left: 1px solid #8f8f8f58;  // Set the color as needed
+  border-right: 1px solid #8f8f8f58;
+  padding: 20px;
+}
 
-// .message {
-//   margin: 50px;
-//   background-color: #ffffff; /* Set the background color */
-//   padding: 10px;
-//   border-radius: 15px; /* Apply border-radius for rounded corners */
-// }
-.messige {
-  margin: 0 auto;
-  height: auto;
-  margin-top: 15px;
-  padding: 15px;
-  border-radius: 0 15px 15px 15px;
-  border: 1px solid #93a3d6;
-  background-color: rgba(127, 177, 242, 0.5); /* Adjust the alpha value for transparency */
+.clasname {
+  width: 80%;
+  margin: 0 auto; // This centers the element horizontally
 }
 .sticky-bottom{
   max-width: 600px;
@@ -297,22 +298,49 @@ a{
 
 }
 .send{
-  margin-top: 40px;
+  margin-top: 80px;
   border-radius: 20px;
 }
 
-
-/* Adjust the width of the input field */
 .input-group{
+  margin-top: 50px;
   background-color: transparent;
-/* Add padding for better appearance */
-  border-radius: 8px; /* Apply border-radius for rounded corners */
+  border-radius: 10px; /* Apply border-radius for rounded corners */
   border: 1px solid #cccccc; /* Add a border for better visibility */
   box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 #message_content{
   width: 100%;
   height: 100%;
-  border-radius: 10px;
+  border-radius: 15px;
   border: 1px solid #cccccc;
 }
+
+.messages {
+  // your existing styles
+
+  .message {
+    text-align: right; // Default alignment for all messages
+
+    &.sent {
+      text-align: left; // Align to the right if the sender is the current user
+    }
+
+    // additional styling as needed
+  }
+}
+.messige {
+  margin: 0 auto;
+  height: auto;
+  margin-top: 15px;
+  padding: 15px;
+  border-radius: 0 15px 15px 15px;
+  border: 1px solid #93a3d6;
+  background-color: rgba(144, 185, 240, 0.252); /* Adjust the alpha value for transparency */
+}
+.sent .messige {
+  background-color: #5eadfba1; /* Dark blue background for sender's messages */
+  color: white; /* Adjust text color for better visibility */
+}
+
+// chatroom page end

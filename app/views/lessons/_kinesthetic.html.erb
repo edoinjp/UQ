@@ -1,7 +1,20 @@
 <div class="video-card">
   <div class="kinesthetic-content">
-    <div class="kinesthetic-preview">
-      <%= render "kinesthetic_content", kinesthetic: @kinesthetic %>
-    </div>
+    <% if @kinesthetic.present? && @kinesthetic.files.exists? %>
+      <!-- Display pre-seeded files if AI content doesn't exist -->
+      <div class="kinesthetic-preview">
+        <% @kinesthetic.files.each do |video| %>
+          <%= cl_video_tag video.key, controls:"", class:"sound-bar" %>
+        <% end %>
+      </div>
+    <% elsif @kinesthetic.present? && @kinesthetic.content.present? %>
+      <!-- Display AI-generated content -->
+      <div class="kinesthetic-preview">
+        <%= render "kinesthetic_content", kinesthetic: @kinesthetic %>
+      </div>
+    <% else %>
+      <!-- Handle the case where there is no AI content or pre-seeded files -->
+      <p>No kinesthetic aids are available for this lesson.</p>
+    <% end %>
   </div>
 </div>

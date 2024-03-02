@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :chatroom_users
   has_many :chatrooms, through: :chatroom_users
   has_many :messages
+  has_many :responses, dependent: :destroy
 
   # To attach avatar photos to all user seeds
   has_one_attached :photo
@@ -18,9 +19,11 @@ class User < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+
   def teacher?
     teacher == true
   end
+
   def student?
     !teacher?
   end

@@ -4,7 +4,7 @@
    <p><%= @user.learning_style.capitalize %> type</p>
   </div>
   <div class="profile-card">
-    <%= cl_image_tag @user.photo.key, alt: @user.full_name, class: "avatar-large" %>
+    <%= render 'stdPopUpUsers' %>
     <div class="profile-card-content">
       <div class="profile-content-info">
         <h1><%= @user.full_name %> Profile</h1>
@@ -13,26 +13,38 @@
     </div>
   </div>
 
-  <div class="profile-lesson">
-    <% if @lessons_with_scores.any? %>
-      <table>
-        <thead>
-          <tr>
-            <th class="lesson-name-header">Lesson Name</th>
-            <th class="quiz-score-header">Quiz Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @lessons_with_scores.each do |lesson_with_score| %>
-            <tr class="lesson-row">
-              <td class="lesson-name-cell"><%= lesson_with_score[:lesson].title %></td>
-              <td class="quiz-score-cell"><%= lesson_with_score[:quiz_score] %> / 5</td>
+  <div class="profile-lesson-container">
+    <div class="profile-lesson">
+      <% if @lessons_with_scores.any? %>
+        <table>
+          <thead>
+            <tr>
+              <th class="lesson-name-header">Lesson Name</th>
+              <th class="quiz-score-header">Quiz Score</th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
-    <% else %>
-      <p>This user has no lessons.</p>
-    <% end %>
+          </thead>
+          <tbody>
+            <% @lessons_with_scores.each do |lesson_with_score| %>
+              <tr class="lesson-row">
+                <td class="lesson-name-cell"><%= lesson_with_score[:lesson].title %></td>
+                <td class="quiz-score-cell"><%= lesson_with_score[:quiz_score] %> / 5</td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p>This user has no lessons.</p>
+      <% end %>
+    </div>
+
+
+  <div class="student-chart">
+    <%= column_chart(@chart_data, max: 5)%>
   </div>
+
+
+  </div>
+
+
+
 </div>

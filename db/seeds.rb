@@ -58,6 +58,7 @@ girl_first_names = %w[Reona Mari Aika Hikari Sakura Kaede Natsume Rin Fuuka Yuka
 
 last_names = %w[Watanabe Fujita Nakamura Ohtani Izumi Nakamura Mori Tanaka Suzuki Honda]
 
+
 puts 'Creating 10 boy students...'
 
 boy_avatars.each do |path|
@@ -67,7 +68,13 @@ boy_avatars.each do |path|
     learning_style: %w[visual aural reading kinesthetic].sample,
     email: Faker::Internet.email,
     password: 'password',
-    teacher: false
+    teacher: false,
+    score: {
+      'Ice Breakers' => rand(0..5),
+      'Oral Communication II' => rand(0..5),
+      'Social Science' => rand(0..5),
+      'Language Arts' => rand(0..5)
+    }
   )
   file = File.open(Rails.root.join(path))
   student.photo.attach(io: file, filename: 'user.jpg', content_type: 'image/jpg')
@@ -89,7 +96,13 @@ girl_avatars.each do |path|
     learning_style: %w[visual aural reading kinesthetic].sample,
     email: Faker::Internet.email,
     password: 'password',
-    teacher: false
+    teacher: false,
+    score: {
+      'Ice Breakers' => rand(0..5),
+      'Oral Communication II' => rand(0..5),
+      'Social Science' => rand(0..5),
+      'Language Arts' => rand(0..5)
+    }
   )
   file = File.open(Rails.root.join(path))
   student.photo.attach(io: file, filename: 'user.jpg', content_type: 'image/jpg')

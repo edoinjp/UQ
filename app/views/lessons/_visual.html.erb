@@ -1,40 +1,45 @@
 <div class="lesson-show">
-  <div class="reveal" data-controller="slides">
-    <div class="slides">
-      <section data-markdown>
-      <textarea data-template>
-        <%= @lesson.content %>
-      </textarea>
-      </section>
-    </div>
-  </div>
-
-  <% if false %>
-  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-
-    <div class="carousel-inner">
-    <% if @visual.files.exists? %>
+  <% if @visual.files.exists? %>
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">
-        <% @visual.files.each_with_index do |file, index| %>
-          <div class="carousel-item <%= 'active' if index.zero? %>">
-            <%= cl_image_tag file.key, class: "slide-img" %>
+        <% if @visual.files.exists? %>
+          <div class="carousel-inner">
+            <% @visual.files.each_with_index do |file, index| %>
+              <div class="carousel-item <%= 'active' if index.zero? %>">
+                <%= cl_image_tag file.key, class: "slide-img" %>
+              </div>
+            <% end %>
           </div>
+        <% else %>
+          <!-- Handle the case where there are no files -->
+          <p>No visual aids are available for this lesson.</p>
         <% end %>
       </div>
-    <% else %>
-      <!-- Handle the case where there are no files -->
-      <p>No visual aids are available for this lesson.</p>
-    <% end %>
+      <a class="carousel-control-prev arrows" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next arrows" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
     </div>
-    <a class="carousel-control-prev arrows" href="#carouselExampleControls" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next arrows" href="#carouselExampleControls" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-  </div>
-
+  <% else %>
+    <div class="reveal" data-controller="slides">
+      <div class="slides">
+        <section data-markdown>
+          <textarea data-template>
+        <%= @lesson.content %>
+      </textarea>
+        </section>
+        <% if @visual.images.attached? %>
+          <section>
+            <% @visual.images.each do |image| %>
+              <%= image_tag image, class: "slide-img" %>
+            <% end %>
+          </section>
+        <% end %>
+      </div>
+    </div>
   <% end %>
 </div>
