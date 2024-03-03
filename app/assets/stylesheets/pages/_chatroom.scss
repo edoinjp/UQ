@@ -1,0 +1,183 @@
+// messeges styling @@@@@@@@@@@@
+.chatroom{
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+
+  justify-content: center;
+  // background-color: brown;
+  // align-items: center;
+  // text-align: center;
+  // margin: 0 auto;
+  width: 100%;
+}
+.chatsize{
+  width: 80%;
+}
+#messages{
+  width: 90%;
+  margin: auto;
+
+  // padding: 20px;
+}
+
+.clasname {
+  width: 80%;
+  margin: 0 auto; // This centers the element horizontally
+}
+.messages-container {
+  min-height: 100%; /* Set a minimum height for the container */
+}
+
+.sticky-bottom {
+  position: sticky;
+  bottom: 0;
+  background-color: #333F66;
+  padding: 10px;
+  width: 100%;
+  margin: 0 auto;
+
+}
+
+.message-input {
+  width: 100%;
+  border: 3px solid #8f8f8fcc;
+}
+#message_content{
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  // border-radius: 15px;
+  border: 1px solid #cccccc;
+}
+
+.messages {
+  // your existing styles
+
+  .message {
+    text-align: right; // Default alignment for all messages
+
+    &.sent {
+      text-align: left; // Align to the right if the sender is the current user
+    }
+
+    // additional styling as needed
+  }
+}
+.messegedate{
+  font-size: 12px;
+  color: gray;
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+}
+.messige {
+  margin: 0 auto;
+  height: auto;
+  margin-top: 15px;
+  padding: 15px;
+  border-radius: 0 15px 15px 15px;
+  border: 1px solid #93a3d6;
+  background-color: rgba(144, 185, 240, 0.252); /* Adjust the alpha value for transparency */
+}
+.sent .messige {
+  background-color: #5eadfba1; /* Dark blue background for sender's messages */
+  color: white; /* Adjust text color for better visibility */
+}
+// chatroom students
+.chatstudentsbox {
+
+  text-align: center;
+  // padding: 20px;
+  width: 20%;
+  // width: 280px;
+  max-height: 100%; /* Set the maximum height you desire */
+  overflow-y: auto;
+  border: 1px solid #3b4154;
+  border-left: 0px;
+}
+.studentlist {
+  display: flex;
+  align-items: center;
+  margin: 0; /* Reset margin */
+  padding: 0; /* Reset padding */
+  // justify-content: space-around;
+  // background-color: gray;
+  // max-width: 280px;
+  justify-content: center;
+  // padding-left: 10px;
+  // text-decoration: none;
+
+}
+.studentlist input[type="submit"] {
+  background: none;
+  width: 70%;
+  height: 70px;
+  outline: inherit;
+  font: inherit;
+  margin: 0;
+  font-size: 16px;
+  display: inline;
+  text-decoration: none; /* Remove text decoration */
+  color: #26325A; /* Set font color */
+  font-family: 'Arial', sans-serif;
+  // padding: 5px;
+
+  text-align: left;
+
+  /* Add any additional styles you need */
+}
+.studentlist:hover {
+  background-color: rgba(129, 181, 255, 0.479); /* Change this to the desired background color on hover */
+}
+
+.chatstudentsbox p{
+  display: none;
+  padding-left: 20px;
+  padding-right: 20px;
+
+
+}
+.studentlist img {
+  height: 60px;
+  width: 60px;
+  margin-top: 0px;
+
+}
+
+.leftchatbox{
+  border: 1px  solid #3b4154;
+  width: 80%;
+  height: 100%;
+  overflow: auto;
+  // margin-bottom: 20px;
+}
+.generalcahtname{
+    z-index: 1; /* Ensure it's on top of other content */
+  padding-top: 15px;
+  width: 100%;
+  height: 50px;
+  background-color: #333F66;
+  position: sticky;
+  top: 0; /* Stick to the top of the viewport */
+
+  /* Additional styling if needed */
+  // color: white;
+  text-align: center;
+}
+h4.text-info {
+  /* Add a background color if needed */
+  z-index: 1; /* Ensure it's on top of other content */
+  padding-top: 15px;
+  width: 100%;
+  height: 50px;
+  background-color: #333F66;
+  position: sticky;
+  top: 0; /* Stick to the top of the viewport */
+
+  /* Additional styling if needed */
+  // color: white;
+  text-align: center;
+}
+
+// chatroom page end

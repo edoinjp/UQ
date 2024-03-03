@@ -1,35 +1,33 @@
-<div class="container chatroom p-4 rounded" style="max-height: 95vh; overflow-y: auto; width: 100%; max-width: 100vw;"
+<div class=" chatroom " style="overflow-y: auto; width: 100%; "
   data-controller="chatroom-subscription"
   data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>">
 
-  <div d class="row">
-      </div>
-    <div class="col-md-8">
-      <h3 class="text-info mb-4"><%= @classroom.name %> general chat</h3>
-     <% if @chatroom %>
-        <h3 class="text-info mb-4">Direct chat with <%= @chatroom.name %></h3>
-      <% else %>
-        <h3 class="text-info mb-4"><%= @classroom.name %> general chat</h3>
-      <% end %>
-
-      <div class="messages mt-4 text-dark" id="messages" data-chatroom-subscription-target="messages">
+    <div class="leftchatbox">
         <% if @chatroom %>
-          <%= render partial: "messages/message", collection: @chatroom.messages %>
+      <h3 class="text-info mb-4 generalcahtname">
+        <i class="fas fa-comments"></i>
+        <%= @chatroom.name %></h3>
         <% else %>
-          <p class="alert alert-warning">No associated chatroom found.</p>
+          <h3 class="text-info mb-4 generalcahtname"><%= @classroom.name %> general chat</h3>
         <% end %>
-      </div>
+        <div class="messages-container mt-4 text-dark" id="messages" data-chatroom-subscription-target="messages">
+      <% if @chatroom %>
+        <%= render partial: "messages/message", collection: @chatroom.messages %>
+      <% else %>
+        <p class="alert alert-warning">No associated chatroom found.</p>
+      <% end %>
+    </div>
 
       <div class="sticky-bottom">
         <% if @chatroom %>
           <%= simple_form_for [@chatroom, @message], html: { class: "d-flex" } do |f| %>
-            <div class="input-group" style="width: 600px; position: relative; background-color: rgba(24, 119, 242, 0.7); border-radius: 20px; padding: 1px;">
+            <div class="input-group">
               <%= f.input :content,
                 label: false,
                 placeholder: "Type a message...",
-                wrapper_html: { class: "message-input form-control", style: "resize: none; height: 120px; color: white; border: none; padding: 10px; width: calc(100% - 80px); background-color: transparent;" }
+                wrapper_html: { class: "message-input ", style: "resize: none; height: 70px;  border-radius: 20px ; " }
               %>
-              <div class="send-button" style="position: absolute; top: 50%; right: 0; transform: translateY(-50%); padding: 15px;">
+              <div class="send-button" style="position: absolute; top: 75%; right: 0; transform: translateY(-50%);">
                 <%= f.submit "Send", class: "btn btn-primary send", style: "border: none; background-color: transparent; color: #1877f2; height: 100%;" %>
               </div>
             </div>
@@ -39,22 +37,29 @@
 
     </div>
 
-         <div class="col-md-4">
-          <h4 class="text-info mb-4">Students in <%= @classroom.name %></h4>
-           <p data-target="chatroom-subscription.teacherId" data-action="click->chatroom-subscription#switchToDirectMessage" data-id="<%= @teacher.id %>" style="color: black;">
-              <%= simple_form_for [@teacher, Chatroom.new] do |f| %>
-              <%= f.input :classroom_id, input_html: {value: @classroom.id}, as: :hidden %>
-              <%= f.submit "Talk to #{@teacher.full_name}" %>
-            <% end %>
-          </p>
-          <% @students.each do |student| %>
-           <p data-target="chatroom-subscription.studentId" data-action="click->chatroom-subscription#switchToDirectMessage" data-id="<%= student.id %>" style="color: black;">
-              <%= simple_form_for [student, Chatroom.new] do |f| %>
-              <%= f.input :classroom_id, input_html: {value: @classroom.id}, as: :hidden %>
-              <%= f.submit "Talk to #{student.full_name}" %>
-            <% end %>
-          </p>
+        <div class="chatstudentsbox">
+        <h4 class="text-info">Students in <%= @classroom.name %></h4>
+        <p data-target="chatroom-subscription.teacherId" data-action="click->chatroom-subscription#switchToDirectMessage" data-id="<%= @teacher.id %>" style="color: black;">
+          <%= simple_form_for [@teacher, Chatroom.new] do |f| %>
+            <%= f.input :classroom_id, input_html: { value: @classroom.id }, as: :hidden %>
+            <div class="studentlist  align-items-center">
+              <%= cl_image_tag @teacher.photo.key, class: "studentimg rounded-circle", style: "60;" %>
+              <%= f.submit "#{@teacher.full_name}", class: "ml-2 btn btn-link" %>
+            </div>
           <% end %>
+        </p>
+        <% @students.each do |student| %>
+          <p data-target="chatroom-subscription.studentId" data-action="click->chatroom-subscription#switchToDirectMessage" data-id="<%= student.id %>" style="color: black;">
+            <%= simple_form_for [student, Chatroom.new] do |f| %>
+              <%= f.input :classroom_id, input_html: { value: @classroom.id }, as: :hidden %>
+              <div class="studentlist align-items-center">
+                <%= cl_image_tag student.photo.key, class: "studentimg rounded-circle", style: "max-width: 60px;" %>
+                <%= f.submit "#{student.full_name}", class: "ml-2 btn btn-link" %>
+              </div>
+            <% end %>
+          </p>
+        <% end %>
         </div>
+
   </div>
 </div>

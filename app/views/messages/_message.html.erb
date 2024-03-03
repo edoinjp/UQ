@@ -1,4 +1,4 @@
-<div id="message-<%= message.id %>" style="width: 100%;">
+<div id="message-<%= message.id %>" style="width:auto;">
   <br>
   <small class="text-muted">
     <% if current_user.teacher? %>
@@ -9,5 +9,5 @@
   </small>
   <p class="messige mb-0 text-dark"><br><%= message.content %></p>
   <br>
-  <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
+  <div class="messegedate"><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></div>
 </div>

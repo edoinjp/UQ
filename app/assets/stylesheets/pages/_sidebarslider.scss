@@ -1,0 +1,119 @@
+// sidebar slider/
+.sidebar {
+  width: auto;
+  transition: margin-left 0.5s;
+  margin-left: 0;
+  overflow-x: hidden;
+}
+
+/* Adjust main content when sidebar is hidden */
+.maincontent-hidden {
+  transition: margin-left 0.5s;
+  width: 100%;
+  margin-left: 0; /* Adjusted to 0 */
+}
+.sidebar-hidden {
+
+  transition: margin-left 0.5s;
+  margin-left: -280px; /* Adjust the value based on your sidebar width */
+}
+
+.maincontent-hidden {
+  transition: margin-left 0.5s;
+ /* Adjust the value based on your sidebar width */
+  margin-left: 220px;
+}
+// slider end
+// sidebar ******
+
+.sidebar{
+  color: white;
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  height: 80%;
+  align-items: center;
+  // padding: 50px;
+  }
+.username{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  background-color: orange;
+  border-radius: 5px;
+
+}
+.username h2 {
+  text-align: center;
+  margin: 0;
+  font-size: 30px;
+  align-items: center;
+  color: #26325A;
+}
+.sidebarul {
+  display: flex;
+  flex-direction: column;
+
+  width: 250px;
+  // text-align: center;
+
+  margin-top:50px;
+  justify-content: space-evenly;
+
+}
+
+.sidebarul a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s;
+  height: 40px; /* Set a fixed height for all links */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.sidebarul li{
+  margin-top: 40px;
+}
+
+.sidebarul li.active {
+  height: 40px;
+  background-color: #ffffff;
+  border-radius: 190px 0px 0px 190px;
+
+}
+
+.sidebarul li.active a {
+  color: orange !important;
+}
+
+.sidebarul li:not(.active):hover a {
+  color: orange;
+}
+
+
+// sidebar end *
+
+
+// sidebar togle
+#sidebarToggle{
+  font-size: 15px;
+  width: 8px;
+  height: 45px;
+  color: orange;
+  // background-color: #26325A;
+  border: none;
+  border-radius: 0px 11px 11px 0px;
+  // margin-left: -12.5px;
+  // margin-bottom: 15px;
+  z-index: 999;
+}
+#sidebarToggle:active {
+  color: orange;
+}
+
+.goback-button:hover {
+  color: orange;
+}
