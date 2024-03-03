@@ -67,23 +67,61 @@
 .messegedate{
   font-size: 12px;
   color: gray;
-  margin: 0 auto;
-  text-align: center;
-  width: 100%;
+
 }
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
 .messige {
-  margin: 0 auto;
-  height: auto;
+  width: 100%;
+
+}
+.sender-info {
+  margin-bottom: 5px; /* Adjust the spacing between sender info and message content */
+}
+
+.message-content {
+  display: flex;
+  flex-direction: column;
+}
+.messegecontent{
+  max-width: 80%;
   margin-top: 15px;
   padding: 15px;
   border-radius: 0 15px 15px 15px;
   border: 1px solid #93a3d6;
-  background-color: rgba(144, 185, 240, 0.252); /* Adjust the alpha value for transparency */
+  background-color: rgba(144, 185, 240, 0.252);
 }
-.sent .messige {
-  background-color: #5eadfba1; /* Dark blue background for sender's messages */
-  color: white; /* Adjust text color for better visibility */
+
+
+.sent {
+  @extend .messige;
+  align-self: flex-start;
+
+  .messegecontent {
+    // color: white; /* Change the text color for sent messages */
+    background-color: #5ec7fba1; /* Change the background color for sent messages */
+  }
+
 }
+
+.received {
+  @extend .messige;
+  align-self: flex-end;
+
+  .messegecontent {
+    color: black; /* Change the text color for received messages */
+    background-color: #f0f0f0; /* Change the background color for received messages */
+  }
+}
+
+
+
+
+
+
 // chatroom students
 .chatstudentsbox {
 

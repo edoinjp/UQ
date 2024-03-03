@@ -1,13 +1,19 @@
-<div id="message-<%= message.id %>" style="width:auto;">
-  <br>
-  <small class="text-muted">
-    <% if current_user.teacher? %>
-      <strong><%= message.user.first_name %></strong>
-    <% elsif message.user.teacher? %>
-      <strong style="color: orange;">Teacher</strong> <!-- Display a generic label for non-teacher users -->
-    <% end %>
-  </small>
-  <p class="messige mb-0 text-dark"><br><%= message.content %></p>
-  <br>
-  <div class="messegedate"><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></div>
+<div class="container">
+  <div id="message-<%= message.id %>" class="<%= current_user == message.user ? 'sent' : 'received' %> messige" style="width: fit-content; max-width: calc(100% + 30px);">
+    <div class="sender-info">
+      <small class="text-muted ">
+        <% if current_user.teacher? %>
+          <strong><%= message.user.first_name %></strong>
+        <% elsif message.user.teacher? %>
+          <strong style="color: orange;">Teacher</strong>
+        <% end %>
+      </small>
+    </div>
+    <div class="message-content">
+      <p class="messegecontent" style="color:black;"><br><%= message.content %></p>
+    </div>
+      <br>
+      <div class="messegedate"><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></div>
+      <br>
+  </div>
 </div>

@@ -18,22 +18,38 @@
       <% end %>
     </div>
 
-      <div class="sticky-bottom">
-        <% if @chatroom %>
-          <%= simple_form_for [@chatroom, @message], html: { class: "d-flex" } do |f| %>
-            <div class="input-group">
-              <%= f.input :content,
-                label: false,
-                placeholder: "Type a message...",
-                wrapper_html: { class: "message-input ", style: "resize: none; height: 70px;  border-radius: 20px ; " }
-              %>
-              <div class="send-button" style="position: absolute; top: 75%; right: 0; transform: translateY(-50%);">
-                <%= f.submit "Send", class: "btn btn-primary send", style: "border: none; background-color: transparent; color: #1877f2; height: 100%;" %>
+       <div class="sticky-bottom">
+          <% if @chatroom %>
+            <%= simple_form_for [@chatroom, @message], html: { class: "d-flex", id: "message-form" } do |f| %>
+              <div class="input-group">
+                <%= f.input :content,
+                  label: false,
+                  placeholder: "Type a message...",
+                  wrapper_html: { class: "message-input ", style: "resize: none; height: 70px;  border-radius: 20px ; " }
+                %>
+                <div class="send-button" style="position: absolute; top: 75%; right: 0; transform: translateY(-50%);">
+                  <%= f.submit "Send", class: "btn btn-primary send", style: "border: none; background-color: transparent; color: #1877f2; height: 100%;" %>
+                </div>
               </div>
-            </div>
+            <% end %>
           <% end %>
-        <% end %>
-      </div>
+        </div>
+
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            var messageForm = document.getElementById('message-form');
+
+            if (messageForm) {
+              messageForm.addEventListener('submit', function() {
+                // Delay the reset to ensure the form submission has completed
+                setTimeout(function() {
+                  messageForm.reset(); // Reset the form to clear the input field
+                }, 0);
+              });
+            }
+          });
+        </script>
+
 
     </div>
 
