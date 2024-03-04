@@ -9,7 +9,6 @@
           <%= message.user.first_name %>
         </strong>
       </div>
-
           <% elsif message.user.teacher? %>
         <div class="user-info chatimg">
           <strong style="color: orange;">
@@ -19,8 +18,7 @@
         </div>
 
       <% else %>
-        <% if @chatroom%>
-        <%# users.count == 2  %>
+        <% if @chatroom.users.count == 2 %>
           <div class="user-info chatimg">
             <strong>
               <%= message.user.first_name %>

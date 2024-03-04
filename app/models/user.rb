@@ -6,11 +6,12 @@ class User < ApplicationRecord
   has_many :participations, dependent: :destroy
   has_many :students, class_name: 'User', through: :participations, source: :user
   has_many :lessons, through: :classrooms
+  has_many :sent_direct_messages, class_name: 'DirectMessage', foreign_key: 'sender_id', dependent: :destroy
+  has_many :received_direct_messages, class_name: 'DirectMessage', foreign_key: 'recipient_id', dependent: :destroy
   has_many :chatroom_users
   has_many :chatrooms, through: :chatroom_users
   has_many :messages
   has_many :responses, dependent: :destroy
-
 
   # To attach avatar photos to all user seeds
   has_one_attached :photo
