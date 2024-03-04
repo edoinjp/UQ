@@ -159,7 +159,7 @@ class ResponsesController < ApplicationController
       {name: 'Reading', data: {'Ice Breakers': reading_l1_avg, 'Oral Communication II': reading_l2_avg, 'Social Science': reading_l3_avg, 'Language Arts': reading_l4_avg}},
       {name: 'Kinesthetic', data: {'Ice Breakers': kinesthetic_l1_avg, 'Oral Communication II': kinesthetic_l2_avg, 'Social Science': kinesthetic_l3_avg, 'Language Arts': kinesthetic_l4_avg}}
     ]
-    
+
   end
 
   private
