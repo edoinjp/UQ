@@ -40,8 +40,13 @@ export default class extends Controller {
   handleChatroomData(data) {
     this.messagesTarget.insertAdjacentHTML("beforeend", data);
     const lastMessage = this.messagesTarget.lastElementChild;
+
+    // Check if the last message is a sent message (customize this condition based on your HTML structure)
+    if (lastMessage.classList.contains("sent")) {
+      lastMessage.classList.add("sent"); // Add the 'sent' class
+      lastMessage.querySelector('.messegecontent').style.backgroundColor = '#5ec7fba1'; // Apply background color
+    }
+
     lastMessage.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }
-
-
 }
