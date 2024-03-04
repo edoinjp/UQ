@@ -18,23 +18,21 @@
       <div class="text-light mt-5"><%= "#{participant.first_name} #{participant.last_name}" %></div>
     </div>
   </button>
-
-<!-- Modal -->
-<div class="modal fade" id="<%= participant.first_name %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel"><%= 'Check Up' %></h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-
-        <div class="profile-card">
-          <%= cl_image_tag participant.photo.key, alt: participant.full_name, class: "avatar-large" %>
-          <div class="profile-card-content">
-            <div class="profile-content-info">
-              <h1><%= participant.full_name %>'s Profile</h1>
-            </div>
+  <!-- Modal -->
+  <div class="modal fade" id="<%= participant.first_name %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel"><%= 'Check Up' %></h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="profile-card">
+            <%= cl_image_tag participant.photo.key, alt: participant.full_name, class: "avatar-large" %>
+            <div class="profile-card-content">
+              <div class="profile-content-info">
+                <h1><%= participant.full_name %>'s Profile</h1>
+              </div>
               <% stu_style_color = "#{
                 if participant.learning_style === 'visual'
                   'blue'
@@ -50,78 +48,67 @@
               <button class="student-style" style="background-color: <%= stu_style_color %>">
                 <%= participant.learning_style.capitalize %>
               </button>
+            </div>
+          </div>
+          <div class="profile-lesson-container">
+            <div class="profile-lesson">
+              <% if @lessons_with_scores.any? %>
+                <table>
+                  <thead>
+                    <tr>
+                      <th class="lesson-name-header">Lesson Name</th>
+                      <th class="quiz-score-header">Quiz Score</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="lesson-row">
+                      <td class="lesson-name-cell">
+                        <%= participant.score.keys.dig(0) %>
+                      </td>
+                      <td class="quiz-score-cell">
+                        <%= participant.score.values.dig(0) %> / 5
+                      </td>
+                    </tr>
+                    <tr class="lesson-row">
+                      <td class="lesson-name-cell">
+                        <%= participant.score.keys.dig(1) %>
+                      </td>
+                      <td class="quiz-score-cell">
+                        <%= participant.score.values.dig(1) %> / 5
+                      </td>
+                    </tr>
+                    <tr class="lesson-row">
+                      <td class="lesson-name-cell">
+                        <%= participant.score.keys.dig(2) %>
+                      </td>
+                      <td class="quiz-score-cell">
+                        <%= participant.score.values.dig(2) %> / 5
+                      </td>
+                    </tr>
+                    <tr class="lesson-row">
+                      <td class="lesson-name-cell">
+                        <%= participant.score.keys.dig(3) %>
+                      </td>
+                      <td class="quiz-score-cell">
+                        <%= participant.score.values.dig(3) %> / 5
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              <% else %>
+                <p>This user has no lessons.</p>
+              <% end %>
+            </div>
+            <div class="student-chart">
+              <%= line_chart(participant.score, max: 5)%>
+            </div>
           </div>
         </div>
-
-        <div class="profile-lesson-container">
-          <div class="profile-lesson">
-            <% if @lessons_with_scores.any? %>
-              <table>
-                <thead>
-                  <tr>
-                    <th class="lesson-name-header">Lesson Name</th>
-                    <th class="quiz-score-header">Quiz Score</th>
-                  </tr>
-                </thead>
-                <tbody>
-
-                  <tr class="lesson-row">
-                    <td class="lesson-name-cell">
-                      <%= participant.scores.keys.dig(0) %>
-                    </td>
-                    <td class="quiz-score-cell">
-                      <%= participant.scores.values.dig(0) %> / 5
-                    </td>
-                  </tr>
-
-                  <tr class="lesson-row">
-                    <td class="lesson-name-cell">
-                      <%= participant.scores.keys.dig(1) %>
-                    </td>
-                    <td class="quiz-score-cell">
-                      <%= participant.scores.values.dig(1) %> / 5
-                    </td>
-                  </tr>
-
-                  <tr class="lesson-row">
-                    <td class="lesson-name-cell">
-                      <%= participant.scores.keys.dig(2) %>
-                    </td>
-                    <td class="quiz-score-cell">
-                      <%= participant.scores.values.dig(2) %> / 5
-                    </td>
-                  </tr>
-
-                  <tr class="lesson-row">
-                    <td class="lesson-name-cell">
-                      <%= participant.scores.keys.dig(3) %>
-                    </td>
-                    <td class="quiz-score-cell">
-                      <%= participant.scores.values.dig(3) %> / 5
-                    </td>
-                  </tr>
-
-                </tbody>
-              </table>
-            <% else %>
-              <p>This user has no lessons.</p>
-            <% end %>
-          </div>
-
-
-        <div class="student-chart">
-          <%= line_chart(participant.scores, max: 5)%>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
-
-
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
-</div>
-
 <% end %>

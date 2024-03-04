@@ -45,50 +45,50 @@ class ResponsesController < ApplicationController
 
       # Lesson 1 Totals Filtered by Style
       if student.learning_style == 'visual'
-        visual_l1_total += student.scores.values.slice(0)
+        visual_l1_total += student.score.values.slice(0)
         visual_student_total += 1
       elsif student.learning_style == 'aural'
-        aural_l1_total += student.scores.values.slice(0)
+        aural_l1_total += student.score.values.slice(0)
         aural_student_total += 1
       elsif student.learning_style == 'reading'
-        reading_l1_total += student.scores.values.slice(0)
+        reading_l1_total += student.score.values.slice(0)
         reading_student_total += 1
       else
-        kinesthetic_l1_total += student.scores.values.slice(0)
+        kinesthetic_l1_total += student.score.values.slice(0)
         kinesthetic_student_total += 1
       end
 
       # Lesson 2 Totals Filtered by Style
       if student.learning_style == 'visual'
-        visual_l2_total += student.scores.values.slice(1)
+        visual_l2_total += student.score.values.slice(1)
       elsif student.learning_style == 'aural'
-        aural_l2_total += student.scores.values.slice(1)
+        aural_l2_total += student.score.values.slice(1)
       elsif student.learning_style == 'reading'
-        reading_l2_total += student.scores.values.slice(1)
+        reading_l2_total += student.score.values.slice(1)
       else
-        kinesthetic_l2_total += student.scores.values.slice(1)
+        kinesthetic_l2_total += student.score.values.slice(1)
       end
 
       # Lesson 3 Totals Filtered by Style
       if student.learning_style == 'visual'
-        visual_l3_total += student.scores.values.slice(2)
+        visual_l3_total += student.score.values.slice(2)
       elsif student.learning_style == 'aural'
-        aural_l3_total += student.scores.values.slice(2)
+        aural_l3_total += student.score.values.slice(2)
       elsif student.learning_style == 'reading'
-        reading_l3_total += student.scores.values.slice(2)
+        reading_l3_total += student.score.values.slice(2)
       else
-        kinesthetic_l3_total += student.scores.values.slice(2)
+        kinesthetic_l3_total += student.score.values.slice(2)
       end
 
       # Lesson 4 Totals Filtered by Style
       if student.learning_style == 'visual'
-        visual_l4_total += student.scores.values.slice(3)
+        visual_l4_total += student.score.values.slice(3)
       elsif student.learning_style == 'aural'
-        aural_l4_total += student.scores.values.slice(3)
+        aural_l4_total += student.score.values.slice(3)
       elsif student.learning_style == 'reading'
-        reading_l4_total += student.scores.values.slice(3)
+        reading_l4_total += student.score.values.slice(3)
       else
-        kinesthetic_l4_total += student.scores.values.slice(3)
+        kinesthetic_l4_total += student.score.values.slice(3)
       end
 
     end
