@@ -6,11 +6,22 @@
         <div class="response-image">
           <% score_percentage = (score_data[:correct_count].to_f / score_data[:total_questions]) * 100 %>
           <div class="response-image">
-            <% border_color = score_percentage > 50 ? 'green' : 'red' %> <!-- Dark green and dark red -->
+            <% border_color = "#{
+              if student.learning_style === 'visual'
+                'blue'
+              elsif student.learning_style === 'aural'
+                'red'
+              elsif student.learning_style === 'reading'
+                'orange'
+              else
+                student.learning_style === 'kinesthetic'
+                'green'
+              end
+            }" %> <!-- Generate a hex color according to their learning style-->
             <%= cl_image_tag student.photo.key, alt: student.full_name, class: "response-img", style: "border-color: #{border_color};" %>
           </div>
         </div>
-        
+
         <div class="response-list-content">
           <div class="response-list-name">
             <%= student.full_name %> /

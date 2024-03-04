@@ -13,7 +13,7 @@
           participant.learning_style === 'kinesthetic'
           '#1EDD88'
         end
-      }" %> <!-- Generate a random hex color -->
+      }" %> <!-- Generate a hex color according to their learning style-->
       <%= cl_image_tag participant.photo.key, alt: "#", class: "studentimg", style: "border-color: #{border_color};" %>
       <div class="text-light mt-5"><%= "#{participant.first_name} #{participant.last_name}" %></div>
     </div>
