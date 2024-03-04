@@ -2,7 +2,18 @@
 <% @participants.each do |participant| %>
   <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#<%= participant.first_name %>">
     <div class="participant-card">
-      <% border_color = "##{SecureRandom.hex(3)}" %> <!-- Generate a random hex color -->
+      <% border_color = "#{
+        if participant.learning_style === 'visual'
+          '#0D6EFD'
+        elsif participant.learning_style === 'aural'
+          '#FD1015'
+        elsif participant.learning_style === 'reading'
+          '#E67E22'
+        else
+          participant.learning_style === 'kinesthetic'
+          '#1EDD88'
+        end
+      }" %> <!-- Generate a random hex color -->
       <%= cl_image_tag participant.photo.key, alt: "#", class: "studentimg", style: "border-color: #{border_color};" %>
       <div class="text-light mt-5"><%= "#{participant.first_name} #{participant.last_name}" %></div>
     </div>
