@@ -6,22 +6,37 @@ require 'uri'
 require 'net/http'
 
 # Clear previous records
-puts "delete all messeges"
+puts "delete all messages"
 Message.destroy_all
 
 puts 'Destroying all previous records'
 Participation.destroy_all
 puts 'All participations are destroyed'
+
+# Destroy associated chatroom_users before deleting chatrooms
+ChatroomUser.destroy_all
+puts 'All chatroom_users are destroyed'
+
+# Destroy chatrooms
+Chatroom.destroy_all
+puts 'All chatrooms are destroyed'
+
+# Destroy classrooms
 Classroom.destroy_all
 puts 'All classrooms are destroyed'
+
 User.destroy_all
 puts 'All users are destroyed'
+
 Lesson.destroy_all
 puts 'All lessons are destroyed'
+
 Question.destroy_all
 puts 'All questions are destroyed'
+
 Choice.destroy_all
 puts 'All choices are destroyed'
+
 
 # Seed Teacher
 puts 'Creating teacher...'

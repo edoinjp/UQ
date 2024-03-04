@@ -67,37 +67,37 @@
 
                   <tr class="lesson-row">
                     <td class="lesson-name-cell">
-                      <%= participant.scores.keys.dig(0) %>
+                      <%= participant.score.keys.dig(0) %>
                     </td>
                     <td class="quiz-score-cell">
-                      <%= participant.scores.values.dig(0) %> / 5
+                      <%= participant.score.values.dig(0) %> / 5
                     </td>
                   </tr>
 
                   <tr class="lesson-row">
                     <td class="lesson-name-cell">
-                      <%= participant.scores.keys.dig(1) %>
+                      <%= participant.score.keys.dig(1) %>
                     </td>
                     <td class="quiz-score-cell">
-                      <%= participant.scores.values.dig(1) %> / 5
+                      <%= participant.score.values.dig(1) %> / 5
                     </td>
                   </tr>
 
                   <tr class="lesson-row">
                     <td class="lesson-name-cell">
-                      <%= participant.scores.keys.dig(2) %>
+                      <%= participant.score.keys.dig(2) %>
                     </td>
                     <td class="quiz-score-cell">
-                      <%= participant.scores.values.dig(2) %> / 5
+                      <%= participant.score.values.dig(2) %> / 5
                     </td>
                   </tr>
 
                   <tr class="lesson-row">
                     <td class="lesson-name-cell">
-                      <%= participant.scores.keys.dig(3) %>
+                      <%= participant.score.keys.dig(3) %>
                     </td>
                     <td class="quiz-score-cell">
-                      <%= participant.scores.values.dig(3) %> / 5
+                      <%= participant.score.values.dig(3) %> / 5
                     </td>
                   </tr>
 
@@ -110,7 +110,7 @@
 
 
         <div class="student-chart">
-          <%= line_chart(participant.scores, max: 5)%>
+          <%= line_chart(participant.score, max: 5)%>
         </div>
 
 

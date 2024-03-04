@@ -42,4 +42,6 @@ export default class extends Controller {
     const lastMessage = this.messagesTarget.lastElementChild;
     lastMessage.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }
+
+
 }
