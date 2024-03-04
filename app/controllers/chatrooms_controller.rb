@@ -8,10 +8,18 @@ class ChatroomsController < ApplicationController
 
     if @chatroom.nil?
       @classroom = Classroom.find(chatroom_params[:classroom_id])
-      @chatroom = Chatroom.create(name: "#{@other_user.full_name}-#{current_user.full_name}", classroom: @classroom )
+
+      # Check if the chatroom should be anonymous
+      if @classroom.users.count == 2
+        @chatroom = Chatroom.create(name: "#{current_user.full_name}-#{@other_user.full_name}", classroom: @classroom)
+      else
+        @chatroom = Chatroom.create(name: "Anonymous Chat", classroom: @classroom)
+      end
+
       ChatroomUser.create(user: current_user, chatroom: @chatroom)
       ChatroomUser.create(user: @other_user, chatroom: @chatroom)
     end
+
     redirect_to chatroom_path(@chatroom)
   end
 

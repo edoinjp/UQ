@@ -16,7 +16,8 @@
 }
 #messages{
   width: 90%;
-  margin: auto;
+  margin: 0 auto;
+  // margin: auto;
 
   // padding: 20px;
 }
@@ -82,12 +83,9 @@
   margin-bottom: 5px; /* Adjust the spacing between sender info and message content */
 }
 
-.message-content {
-  display: flex;
-  flex-direction: column;
-}
+
 .messegecontent{
-  max-width: 80%;
+  // max-width: 80%;
   margin-top: 15px;
   padding: 15px;
   border-radius: 0 15px 15px 15px;
@@ -101,24 +99,35 @@
   align-self: flex-start;
 
   .messegecontent {
-    // color: white; /* Change the text color for sent messages */
-    background-color: #5ec7fba1; /* Change the background color for sent messages */
+    background-color: #5ec7fba1;
   }
-
 }
-
 .received {
   @extend .messige;
   align-self: flex-end;
 
   .messegecontent {
-    color: black; /* Change the text color for received messages */
-    background-color: #f0f0f0; /* Change the background color for received messages */
+    color: black;
+    width: 100%;
+    background-color: #f0f0f0;
+    border-radius: 15px 0px 15px 15px;
+  }
+
+  .user-info.chatimg {
+    align-self: flex-end;
+    text-align: end;
+
+    justify-content: end;
+
+
+  }
+
+  .sender-info {
+    justify-content: end;
+    text-align: end;
+
   }
 }
-
-
-
 
 
 
@@ -216,6 +225,16 @@ h4.text-info {
   /* Additional styling if needed */
   // color: white;
   text-align: center;
+}
+
+
+.user-info.chatimg {
+  display: flex;
+  align-items: center;
+}
+
+.user-info.chatimg strong {
+  margin-left: 10px; /* Adjust the margin as needed */
 }
 
 // chatroom page end

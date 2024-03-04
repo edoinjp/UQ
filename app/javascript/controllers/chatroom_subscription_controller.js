@@ -8,19 +8,11 @@ export default class extends Controller {
   connect() {
     console.log("Connected to the chatroom subscription controller.");
 
-    // Connect to ChatroomChannel for scrolling
-    this.channelWithScroll = createConsumer().subscriptions.create(
+    // Connect to ChatroomChannel
+    this.chatroomChannel = createConsumer().subscriptions.create(
       { channel: "ChatroomChannel", id: this.chatroomIdValue },
       {
-        received: data => this.insertMessageAndScrollDown(data),
-      }
-    );
-
-    // Connect to ChatroomChannel for additional logic
-    this.channelWithAdditionalLogic = createConsumer().subscriptions.create(
-      { channel: "ChatroomChannel", id: this.chatroomIdValue },
-      {
-        received: data => this.messagesTarget.insertAdjacentHTML("beforeend", data),
+        received: data => this.handleReceivedMessage(data),
       }
     );
 
@@ -30,14 +22,11 @@ export default class extends Controller {
   disconnect() {
     console.log("Disconnected from the chatroom subscription controller.");
 
-    // Disconnect from ChatroomChannel for scrolling
-    this.channelWithScroll.unsubscribe();
-
-    // Disconnect from ChatroomChannel for additional logic
-    this.channelWithAdditionalLogic.unsubscribe();
+    // Disconnect from ChatroomChannel
+    this.chatroomChannel.unsubscribe();
   }
 
-  insertMessageAndScrollDown(data) {
+  handleReceivedMessage(data) {
     this.messagesTarget.insertAdjacentHTML("beforeend", data);
     const lastMessage = this.messagesTarget.lastElementChild;
     lastMessage.scrollIntoView({ behavior: 'smooth', block: 'end' });
