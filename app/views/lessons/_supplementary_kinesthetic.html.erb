@@ -1,0 +1,5 @@
+<div class="video-card">
+  <% kinesthetic.files.each do |video| %>
+    <%= cl_video_tag video.key, controls: "", class: "video-display" %>
+  <% end %>
+</div>

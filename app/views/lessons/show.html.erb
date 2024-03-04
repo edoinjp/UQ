@@ -1,63 +1,82 @@
 <h1 class="header m-3"><%= params[:query] ? "#{params[:query].capitalize} Focused Lesson" : @lesson.title %></h2>
 <p><%= @paragraph %></p>
 <br>
+<!-- Switch Button -->
 <div class="toggle-switch">
   <button data-action="click->lesson#toggleSupplementaryContent" class="btn btn-info">Switch to Supplementary Lessons</button>
 </div>
-<div class="lesson-container">
-  <!-- Nav tabs -->
-  <ul class="lesson lesson-tabs">
-    <%= link_to lesson_path(@lesson) + "?query=visual" do %>
-      <li class="lesson-item ">
-        <%= image_tag "visual_icon.jpg", class: "filter-icons" %>
-      </li>
-    <% end %>
-    <%= link_to lesson_path(@lesson) + "?query=aural" do %>
-      <li class="lesson-item">
-        <%= image_tag "audio_icon.jpg", class: "filter-icons" %>
-      </li>
-    <% end %>
-    <%= link_to lesson_path(@lesson) + "?query=reading" do %>
-      <li class="lesson-item">
-        <%= image_tag "reading_icon.jpg", class: "filter-icons" %>
-      </li>
-    <% end %>
-    <%= link_to lesson_path(@lesson) + "?query=kinesthetic" do %>
-      <li class="lesson-item">
-        <%= image_tag "video_icon.jpg", class: "filter-icons" %>
-      </li>
-    <% end %>
-    <!-- Help Chat Button -->
-    <li class="lesson-item">
-      <div class="btn-group dropstart">
-        <button type="button" class="help-btn" data-bs-toggle="dropdown" aria-expanded="false">
-          <%= image_tag "help_icon.jpg", class: "filter-icons" %>
-        </button>
-        <div class="dropdown-menu">
-          <%= render 'help_chat' %>
-        </div>
-      </div>
-    </li>
-    <!--Dummy Quiz Button-->
-    <li class="lesson-item">
-      <%= image_tag "quiz_icon.jpg", class: "filter-icons quiz-btn" %>
-    </li>
-  </ul>
-  <!-- Tab panes -->
-  <div class="lesson-content">
-    <div class="lesson-pane">
-      <% if params[:query] == 'visual' && @visual.present?%>
-        <%= render 'visual' %>
-      <% elsif params[:query] == 'aural' && @aural.present? %>
-        <%= render 'aural' %>
-      <% elsif params[:query] == 'reading' && @reading.present?%>
-        <%= render 'reading' %>
-      <% else %>
-        <%= render 'kinesthetic' if @kinesthetic.present? %>
+<!-- Main Content Container -->
+<div data-lesson-target="mainContent">
+  <div class="lesson-container">
+    <!-- Nav tabs -->
+    <ul class="lesson lesson-tabs">
+      <%= link_to lesson_path(@lesson) + "?query=visual" do %>
+        <li class="lesson-item ">
+          <%= image_tag "visual_icon.jpg", class: "filter-icons" %>
+        </li>
       <% end %>
+      <%= link_to lesson_path(@lesson) + "?query=aural" do %>
+        <li class="lesson-item">
+          <%= image_tag "audio_icon.jpg", class: "filter-icons" %>
+        </li>
+      <% end %>
+      <%= link_to lesson_path(@lesson) + "?query=reading" do %>
+        <li class="lesson-item">
+          <%= image_tag "reading_icon.jpg", class: "filter-icons" %>
+        </li>
+      <% end %>
+      <%= link_to lesson_path(@lesson) + "?query=kinesthetic" do %>
+        <li class="lesson-item">
+          <%= image_tag "video_icon.jpg", class: "filter-icons" %>
+        </li>
+      <% end %>
+      <!-- Help Chat Button -->
+      <li class="lesson-item">
+        <div class="btn-group dropstart">
+          <button type="button" class="help-btn" data-bs-toggle="dropdown" aria-expanded="false">
+            <%= image_tag "help_icon.jpg", class: "filter-icons" %>
+          </button>
+          <div class="dropdown-menu">
+            <%= render 'help_chat' %>
+          </div>
+        </div>
+      </li>
+      <!--Dummy Quiz Button-->
+      <li class="lesson-item">
+        <%= image_tag "quiz_icon.jpg", class: "filter-icons quiz-btn" %>
+      </li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="lesson-content">
+      <div class="lesson-pane">
+        <% if params[:query] == 'visual' && @visual.present?%>
+          <%= render 'visual' %>
+        <% elsif params[:query] == 'aural' && @aural.present? %>
+          <%= render 'aural' %>
+        <% elsif params[:query] == 'reading' && @reading.present?%>
+          <%= render 'reading' %>
+        <% else %>
+          <%= render 'kinesthetic' if @kinesthetic.present? %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
+<!-- Supplementary Content Container (Initially Hidden) -->
+<div data-lesson-target="supplementaryContent" class="d-none">
+  <div class="lesson-container">
+    <% if params[:query] == 'visual' && @supplementaryVisual.present? %>
+      <%= render 'supplementary_visual', visual: @supplementaryVisual %>
+    <% elsif params[:query] == 'aural' && @supplementaryAural.present? %>
+      <%= render 'supplementary_aural', aural: @supplementaryAural %>
+    <% elsif params[:query] == 'reading' && @supplementaryReading.present? %>
+      <%= render 'supplementary_reading', reading: @supplementaryReading %>
+    <% else %>
+      <%= render 'supplementary_kinesthetic', kinesthetic: @supplementaryKinesthetic if @supplementaryKinesthetic.present? %>
+    <% end %>
+  </div>
+</div>
+<!-- Teacher & Student containers -->
 <div class="teacher-container">
   <%= image_tag "profile.png" %>
   <div class="teacher-container-infos">

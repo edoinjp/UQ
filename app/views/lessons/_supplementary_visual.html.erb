@@ -1,0 +1,5 @@
+<div class="visual-content">
+  <% visual.files.each do |file| %>
+    <%= cl_image_tag file.key, class: "slide-img" %>
+  <% end %>
+</div>
