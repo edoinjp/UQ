@@ -1,7 +1,9 @@
 <h1 class="header m-3"><%= params[:query] ? "#{params[:query].capitalize} Focused Lesson" : @lesson.title %></h2>
 <p><%= @paragraph %></p>
 <br>
-
+<div class="toggle-switch">
+  <button data-action="click->lesson#toggleSupplementaryContent" class="btn btn-info">Switch to Supplementary Lessons</button>
+</div>
 <div class="lesson-container">
   <!-- Nav tabs -->
   <ul class="lesson lesson-tabs">
@@ -22,10 +24,9 @@
     <% end %>
     <%= link_to lesson_path(@lesson) + "?query=kinesthetic" do %>
       <li class="lesson-item">
-          <%= image_tag "video_icon.jpg", class: "filter-icons" %>
+        <%= image_tag "video_icon.jpg", class: "filter-icons" %>
       </li>
     <% end %>
-
     <!-- Help Chat Button -->
     <li class="lesson-item">
       <div class="btn-group dropstart">
@@ -37,13 +38,11 @@
         </div>
       </div>
     </li>
-
-      <!--Dummy Quiz Button-->
-      <li class="lesson-item">
-        <%= image_tag "quiz_icon.jpg", class: "filter-icons quiz-btn" %>
-      </li>
+    <!--Dummy Quiz Button-->
+    <li class="lesson-item">
+      <%= image_tag "quiz_icon.jpg", class: "filter-icons quiz-btn" %>
+    </li>
   </ul>
-
   <!-- Tab panes -->
   <div class="lesson-content">
     <div class="lesson-pane">
@@ -59,7 +58,6 @@
     </div>
   </div>
 </div>
-
 <div class="teacher-container">
   <%= image_tag "profile.png" %>
   <div class="teacher-container-infos">
@@ -67,7 +65,6 @@
     <p>In this lesson, <strong>you'll</strong> be introduced to...</p>
   </div>
 </div>
-
 <div class="student-container">
   <%= render "stdPopUpLesson", students: @students %>
 </div>
