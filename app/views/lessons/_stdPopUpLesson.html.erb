@@ -61,12 +61,43 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <% @lessons_with_scores.each do |lesson_with_score| %>
-                      <tr class="lesson-row">
-                        <td class="lesson-name-cell"><%= lesson_with_score[:lesson].title %></td>
-                        <td class="quiz-score-cell"><%= lesson_with_score[:quiz_score] %> / 5</td>
-                      </tr>
-                    <% end %>
+
+                    <tr class="lesson-row">
+                      <td class="lesson-name-cell">
+                        <%= student.scores.keys.dig(0) %>
+                      </td>
+                      <td class="quiz-score-cell">
+                        <%= student.scores.values.dig(0) %> / 5
+                      </td>
+                    </tr>
+
+                    <tr class="lesson-row">
+                      <td class="lesson-name-cell">
+                        <%= student.scores.keys.dig(1) %>
+                      </td>
+                      <td class="quiz-score-cell">
+                        <%= student.scores.values.dig(1) %> / 5
+                      </td>
+                    </tr>
+
+                    <tr class="lesson-row">
+                      <td class="lesson-name-cell">
+                        <%= student.scores.keys.dig(2) %>
+                      </td>
+                      <td class="quiz-score-cell">
+                        <%= student.scores.values.dig(2) %> / 5
+                      </td>
+                    </tr>
+
+                    <tr class="lesson-row">
+                      <td class="lesson-name-cell">
+                        <%= student.scores.keys.dig(3) %>
+                      </td>
+                      <td class="quiz-score-cell">
+                        <%= student.scores.values.dig(3) %> / 5
+                      </td>
+                    </tr>
+
                   </tbody>
                 </table>
               <% else %>
@@ -76,7 +107,7 @@
 
 
           <div class="student-chart">
-            <%= line_chart(@chart_data, max: 5)%>
+            <%= line_chart(student.scores, max: 5)%>
           </div>
 
 
