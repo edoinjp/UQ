@@ -35,17 +35,4 @@ class Lesson < ApplicationRecord
       end
     end
   end
-
-  # def content
-  #   Rails.cache.fetch("#{cache_key_with_version}/content") do
-  #     client = OpenAI::Client.new
-  #     response = client.chat(parameters: {
-  #       model: "gpt-3.5-turbo-0125",
-  #       messages: [{ role: "user", content: "What is the difference between past perfect and past progressive in English?"
-  #       }]
-  #     })
-  #     response["choices"][0]["message"]["content"]
-  #   end
-  # end
-
 end
