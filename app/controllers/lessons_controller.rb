@@ -2,6 +2,7 @@ class LessonsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_classroom, only: [:index, :new, :create]
   before_action :set_lesson, only: [:show]
+  include ActionController::Live # Allows AI chat streaming
 
   def index
     @lessons = policy_scope(Lesson)
@@ -48,6 +49,17 @@ class LessonsController < ApplicationController
 
     # @openai_api = OpenaiApi.new
     # @paragraph = @openai_api.generate_content(@lesson.title)
+  end
+
+
+  def generate_response
+    question = params[:question] || 'Hi'
+    @response = OpenaiApi.new.generate_response(question)
+
+    respond_to do |format|
+      format.html # Follow regular flow of Rails
+      format.text { render partial: 'lessons/response', locals: {response: @response}, formats: [:html] }
+    end
   end
 
   def new
