@@ -28,7 +28,7 @@
             <%= student.learning_style.capitalize %>
           </div>
           <div class="response-list-answer">
-            correct <%= score_data[:correct_count] %> / <%= score_data[:total_questions] %>
+            correct <%= student.scores.values.dig(0) %> / 5 
           </div>
         </div>
       </div>
@@ -71,7 +71,7 @@
 
           <div class="profile-lesson-container">
             <div class="profile-lesson">
-              <% if @lessons_with_scores.any? %>
+              <% if student.scores.any? %>
                 <table>
                   <thead>
                     <tr>
