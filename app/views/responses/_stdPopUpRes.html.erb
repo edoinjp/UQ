@@ -27,7 +27,7 @@
             <%= student.learning_style.capitalize %>
           </div>
           <div class="response-list-answer">
-            correct <%= student.scores.values.dig(0) %> / 5
+            correct <%= student.score.values.dig(0) %> / 5
           </div>
         </div>
       </div>
@@ -70,7 +70,7 @@
 
           <div class="profile-lesson-container">
             <div class="profile-lesson">
-              <% if student.scores.any? %>
+              <% if student.score.any? %>
                 <table>
                   <thead>
                     <tr>
@@ -82,37 +82,37 @@
 
                     <tr class="lesson-row">
                       <td class="lesson-name-cell">
-                        <%= student.scores.keys.dig(0) %>
+                        <%= student.score.keys.dig(0) %>
                       </td>
                       <td class="quiz-score-cell">
-                        <%= student.scores.values.dig(0) %> / 5
+                        <%= student.score.values.dig(0) %> / 5
                       </td>
                     </tr>
 
                     <tr class="lesson-row">
                       <td class="lesson-name-cell">
-                        <%= student.scores.keys.dig(1) %>
+                        <%= student.score.keys.dig(1) %>
                       </td>
                       <td class="quiz-score-cell">
-                        <%= student.scores.values.dig(1) %> / 5
+                        <%= student.score.values.dig(1) %> / 5
                       </td>
                     </tr>
 
                     <tr class="lesson-row">
                       <td class="lesson-name-cell">
-                        <%= student.scores.keys.dig(2) %>
+                        <%= student.score.keys.dig(2) %>
                       </td>
                       <td class="quiz-score-cell">
-                        <%= student.scores.values.dig(2) %> / 5
+                        <%= student.score.values.dig(2) %> / 5
                       </td>
                     </tr>
 
                     <tr class="lesson-row">
                       <td class="lesson-name-cell">
-                        <%= student.scores.keys.dig(3) %>
+                        <%= student.score.keys.dig(3) %>
                       </td>
                       <td class="quiz-score-cell">
-                        <%= student.scores.values.dig(3) %> / 5
+                        <%= student.score.values.dig(3) %> / 5
                       </td>
                     </tr>
 
@@ -124,7 +124,7 @@
             </div>
 
           <div class="student-chart">
-            <%= line_chart(student.scores, max: 5)%>
+            <%= line_chart(student.score, max: 5)%>
           </div>
 
           </div>
