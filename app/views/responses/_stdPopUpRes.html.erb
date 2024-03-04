@@ -51,7 +51,21 @@
               <div class="profile-content-info">
                 <h1><%= student.full_name %>'s Profile</h1>
               </div>
-              <button type="button" class="btn btn-light rounded" style="width: 162px;"><%= student.learning_style.capitalize %></button>
+              <% stu_style_color = "#{
+                if student.learning_style === 'visual'
+                  'blue'
+                elsif student.learning_style === 'aural'
+                  'red'
+                elsif student.learning_style === 'reading'
+                  'orange'
+                else
+                  student.learning_style === 'kinesthetic'
+                  'green'
+                end
+              }" %> <!-- Generate a hex color according to their learning style-->
+              <button class="student-style" style="background-color: <%= stu_style_color %>">
+                <%= student.learning_style.capitalize %>
+              </button>
             </div>
           </div>
 
