@@ -110,3 +110,14 @@
   border-color: #003973;
   color: rgb(234, 233, 233);
 }
+
+.lesson-switcher {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-left: 67%;
+}
+
+.lesson-switcher-slider{
+ margin-bottom: 8px;
+}

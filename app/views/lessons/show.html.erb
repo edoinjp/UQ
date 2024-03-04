@@ -1,9 +1,14 @@
-<h1 class="header m-3"><%= params[:query] ? "#{params[:query].capitalize} Focused Lesson" : @lesson.title %></h2>
+<h1 class="header"><%= params[:query] ? "#{params[:query].capitalize} Focused Lesson" : @lesson.title %></h2>
 <p><%= @paragraph %></p>
 <br>
 <!-- Switch Button -->
-<div class="toggle-switch">
-  <button data-action="click->lesson#toggleSupplementaryContent" class="btn btn-info">Switch to Supplementary Lessons</button>
+<div class="toggle-switch form-check form-switch lesson-switcher" data-controller="lesson">
+  <div class="lesson-switcher-slider">
+    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" data-action="change->lesson#toggleSupplementaryContent">
+  </div>
+  <div class="lesson-switcher-slider-text">
+    <label class="form-check-label" for="flexSwitchCheckDefault">Supplementary</label>
+  </div>
 </div>
 <!-- Main Content Container -->
 <div data-lesson-target="mainContent">
