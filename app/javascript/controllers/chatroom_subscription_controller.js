@@ -1,39 +1,45 @@
-// app/javascript/controllers/chatroom_subscriptions_controller.js
-import { Controller } from "@hotwired/stimulus"
-import { createConsumer } from "@rails/actioncable"
+import { Controller } from "@hotwired/stimulus";
+import { createConsumer } from "@rails/actioncable";
 
 export default class extends Controller {
-  static values = { chatroomId: Number }
-  static targets = ["messages", "form"]
+  static values = { chatroomId: Number };
+  static targets = ["messages", "form", "content"];
 
   connect() {
+    console.log("Connected to the chatroom subscription controller.");
+
+    // Connect to ChatroomChannel
     this.channel = createConsumer().subscriptions.create(
       { channel: "ChatroomChannel", id: this.chatroomIdValue },
       {
-        received: data => this.insertMessageAndScrollDown(data),
+        received: data => this.handleChatroomData(data),
       }
     );
-    console.log(`Subscribed to the chatroom with the id ${this.chatroomIdValue}.`);
   }
 
   disconnect() {
-    console.log("Unsubscribed from the chatroom");
+    console.log("Disconnected from the chatroom subscription controller.");
+
+    // Disconnect from ChatroomChannel
     this.channel.unsubscribe();
   }
-  insertMessageAndScrollDown(data) {
-    this.messagesTarget.insertAdjacentHTML("beforeend", data);
 
-    // Get the last message element
-    const lastMessage = this.messagesTarget.lastElementChild;
-    // Scroll the last message into view
-    lastMessage.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  // Handle form submission
+  submitForm(event) {
+    event.preventDefault();
+    const content = this.contentTarget.value.trim();
+
+    if (content !== "") {
+      // Insert logic to send content to the server using ActionCable
+      this.channel.send({ content });
+      this.contentTarget.value = ""; // Clear input after submission
+    }
   }
 
-
-
-
-
-  resetForm() {
-    this.formTarget.reset();
+  // Handle received message from ActionCable
+  handleChatroomData(data) {
+    this.messagesTarget.insertAdjacentHTML("beforeend", data);
+    const lastMessage = this.messagesTarget.lastElementChild;
+    lastMessage.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }
 }

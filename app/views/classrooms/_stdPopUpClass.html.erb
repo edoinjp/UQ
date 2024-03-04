@@ -2,7 +2,18 @@
 <% @participants.each do |participant| %>
   <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#<%= participant.first_name %>">
     <div class="participant-card">
-      <% border_color = "##{SecureRandom.hex(3)}" %> <!-- Generate a random hex color -->
+      <% border_color = "#{
+        if participant.learning_style === 'visual'
+          '#0D6EFD'
+        elsif participant.learning_style === 'aural'
+          '#FD1015'
+        elsif participant.learning_style === 'reading'
+          '#E67E22'
+        else
+          participant.learning_style === 'kinesthetic'
+          '#1EDD88'
+        end
+      }" %> <!-- Generate a hex color according to their learning style-->
       <%= cl_image_tag participant.photo.key, alt: "#", class: "studentimg", style: "border-color: #{border_color};" %>
       <div class="text-light mt-5"><%= "#{participant.first_name} #{participant.last_name}" %></div>
     </div>
@@ -24,7 +35,21 @@
             <div class="profile-content-info">
               <h1><%= participant.full_name %>'s Profile</h1>
             </div>
-            <button type="button" class="btn btn-light rounded" style="width: 162px;"><%= participant.learning_style.capitalize %></button>
+              <% stu_style_color = "#{
+                if participant.learning_style === 'visual'
+                  'blue'
+                elsif participant.learning_style === 'aural'
+                  'red'
+                elsif participant.learning_style === 'reading'
+                  'orange'
+                else
+                  participant.learning_style === 'kinesthetic'
+                  'green'
+                end
+              }" %> <!-- Generate a hex color according to their learning style-->
+              <button class="student-style" style="background-color: <%= stu_style_color %>">
+                <%= participant.learning_style.capitalize %>
+              </button>
           </div>
         </div>
 
@@ -39,12 +64,43 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <% @lessons_with_scores.each do |lesson_with_score| %>
-                    <tr class="lesson-row">
-                      <td class="lesson-name-cell"><%= lesson_with_score[:lesson].title %></td>
-                      <td class="quiz-score-cell"><%= lesson_with_score[:quiz_score] %> / 5</td>
-                    </tr>
-                  <% end %>
+
+                  <tr class="lesson-row">
+                    <td class="lesson-name-cell">
+                      <%= participant.scores.keys.dig(0) %>
+                    </td>
+                    <td class="quiz-score-cell">
+                      <%= participant.scores.values.dig(0) %> / 5
+                    </td>
+                  </tr>
+
+                  <tr class="lesson-row">
+                    <td class="lesson-name-cell">
+                      <%= participant.scores.keys.dig(1) %>
+                    </td>
+                    <td class="quiz-score-cell">
+                      <%= participant.scores.values.dig(1) %> / 5
+                    </td>
+                  </tr>
+
+                  <tr class="lesson-row">
+                    <td class="lesson-name-cell">
+                      <%= participant.scores.keys.dig(2) %>
+                    </td>
+                    <td class="quiz-score-cell">
+                      <%= participant.scores.values.dig(2) %> / 5
+                    </td>
+                  </tr>
+
+                  <tr class="lesson-row">
+                    <td class="lesson-name-cell">
+                      <%= participant.scores.keys.dig(3) %>
+                    </td>
+                    <td class="quiz-score-cell">
+                      <%= participant.scores.values.dig(3) %> / 5
+                    </td>
+                  </tr>
+
                 </tbody>
               </table>
             <% else %>
@@ -54,7 +110,7 @@
 
 
         <div class="student-chart">
-          <%= column_chart(@chart_data, max: 5)%>
+          <%= line_chart(participant.scores, max: 5)%>
         </div>
 
 

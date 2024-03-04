@@ -25,6 +25,23 @@
           <%= image_tag "video_icon.jpg", class: "filter-icons" %>
       </li>
     <% end %>
+
+    <!-- Help Chat Button -->
+    <li class="lesson-item">
+      <div class="btn-group dropstart">
+        <button type="button" class="help-btn" data-bs-toggle="dropdown" aria-expanded="false">
+          <%= image_tag "help_icon.jpg", class: "filter-icons" %>
+        </button>
+        <div class="dropdown-menu">
+          <%= render 'help_chat' %>
+        </div>
+      </div>
+    </li>
+
+      <!--Dummy Quiz Button-->
+      <li class="lesson-item">
+        <%= image_tag "quiz_icon.jpg", class: "filter-icons quiz-btn" %>
+      </li>
   </ul>
 
   <!-- Tab panes -->

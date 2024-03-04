@@ -1,0 +1,100 @@
+.help-chat-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 30rem;
+  width: 20rem;
+  background-color: #FF9A6C;
+  box-shadow: 10px 10px 18px -6px rgba(0, 0, 0, 0.75);
+  border-radius: 2rem;
+  overflow: hidden;
+}
+
+.help-response-container {
+  width: 90%;
+  height: 100%;
+  margin: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 1rem;
+}
+
+.help-answer {
+  background-color: white;
+  color: black;
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.help-question-container {
+  display: flex;
+  justify-content: center;
+}
+
+.question-box {
+  border-radius: 1rem;
+  width: 100%;
+}
+
+.help-ask {
+  background-color: #052c65;
+  color: #fff;
+  border: none;
+  width: 18rem;
+  margin-bottom: -2rem;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-family: inherit;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.help-ask:hover{
+  background-color: #04adc4;
+}
+
+.help-ask:focus{
+  outline: none;
+  background-color: #44b927;
+}
+
+// Custom overide button to eliminate padding from bootstrap
+.help-btn{
+    --bs-btn-font-family: ;
+    --bs-btn-font-size: 1rem;
+    --bs-btn-font-weight: 400;
+    --bs-btn-line-height: 1.5;
+    --bs-btn-color: var(--bs-body-color);
+    --bs-btn-bg: transparent;
+    --bs-btn-border-width: var(--bs-border-width);
+    --bs-btn-border-color: transparent;
+    --bs-btn-border-radius: var(--bs-border-radius);
+    --bs-btn-hover-border-color: transparent;
+    --bs-btn-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);
+    --bs-btn-disabled-opacity: 0.65;
+    --bs-btn-focus-box-shadow: 0 0 0 0.25rem rgba(var(--bs-btn-focus-shadow-rgb), .5);
+    display: inline-block;
+    padding: var(--bs-btn-padding-y) var(--bs-btn-padding-x);
+    font-family: var(--bs-btn-font-family);
+    font-size: var(--bs-btn-font-size);
+    font-weight: var(--bs-btn-font-weight);
+    line-height: var(--bs-btn-line-height);
+    color: var(--bs-btn-color);
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    border: var(--bs-btn-border-width) solid var(--bs-btn-border-color);
+    border-radius: var(--bs-btn-border-radius);
+    background-color: var(--bs-btn-bg);
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.quiz-btn{
+  cursor: pointer;
+}

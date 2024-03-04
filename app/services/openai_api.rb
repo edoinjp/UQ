@@ -3,6 +3,18 @@ class OpenaiApi
     @client = OpenAI::Client.new
   end
 
+  def generate_response(question)
+    cache_key = "openai_response_#{Digest::SHA1.hexdigest(question)}"
+    Rails.cache.fetch(cache_key, expires_in: 12.hours) do
+     # prompt = "Generate a #{style} lesson abstract for this #{text}"
+      response = @client.chat(parameters: {
+        model: "gpt-3.5-turbo",
+        messages: [{ role: "user", content: question}]
+      })
+      response["choices"].first["message"]["content"]
+    end
+  end
+
   def generate_content(text, style:)
     cache_key = "openai_content_#{style}_#{Digest::SHA1.hexdigest(text)}"
     Rails.cache.fetch(cache_key, expires_in: 12.hours) do

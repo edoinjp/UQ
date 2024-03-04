@@ -1,12 +1,22 @@
 <!-- Button trigger modal -->
-<% @student_scores.each do |student, score_data| %>
+<% @students.each do |student| %>
   <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#<%= student.first_name %>">
     <div class="response-column">
       <div class="response-list">
         <div class="response-image">
-          <% score_percentage = (score_data[:correct_count].to_f / score_data[:total_questions]) * 100 %>
           <div class="response-image">
-            <% border_color = score_percentage > 50 ? 'green' : 'red' %> <!-- Dark green and dark red -->
+            <% border_color = "#{
+              if student.learning_style === 'visual'
+                'blue'
+              elsif student.learning_style === 'aural'
+                'red'
+              elsif student.learning_style === 'reading'
+                'orange'
+              else
+                student.learning_style === 'kinesthetic'
+                'green'
+              end
+            }" %> <!-- Generate a hex color according to their learning style-->
             <%= cl_image_tag student.photo.key, alt: student.full_name, class: "response-img", style: "border-color: #{border_color};" %>
           </div>
         </div>
@@ -16,7 +26,7 @@
             <%= student.learning_style.capitalize %>
           </div>
           <div class="response-list-answer">
-            Quiz results: <%= score_data[:correct_count] %> / <%= score_data[:total_questions] %>
+            correct <%= student.scores.values.dig(0) %> / 5
           </div>
         </div>
       </div>
@@ -37,12 +47,26 @@
               <div class="profile-content-info">
                 <h1><%= student.full_name %>'s Profile</h1>
               </div>
-              <button type="button" class="btn btn-light rounded" style="width: 162px;"><%= student.learning_style.capitalize %></button>
+              <% stu_style_color = "#{
+                if student.learning_style === 'visual'
+                  'blue'
+                elsif student.learning_style === 'aural'
+                  'red'
+                elsif student.learning_style === 'reading'
+                  'orange'
+                else
+                  student.learning_style === 'kinesthetic'
+                  'green'
+                end
+              }" %> <!-- Generate a hex color according to their learning style-->
+              <button class="student-style" style="background-color: <%= stu_style_color %>">
+                <%= student.learning_style.capitalize %>
+              </button>
             </div>
           </div>
           <div class="profile-lesson-container">
             <div class="profile-lesson">
-              <% if score_data[:history].present? %>
+              <% if student.scores.any? %>
                 <table>
                   <thead>
                     <tr>
@@ -51,12 +75,38 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <% score_data[:history].each do |lesson, score| %>
-                      <tr class="lesson-row">
-                        <td class="lesson-name-cell"><%= lesson %></td>
-                        <td class="quiz-score-cell"><%= score %> / 5</td>
-                      </tr>
-                    <% end %>
+                    <tr class="lesson-row">
+                      <td class="lesson-name-cell">
+                        <%= student.scores.keys.dig(0) %>
+                      </td>
+                      <td class="quiz-score-cell">
+                        <%= student.scores.values.dig(0) %> / 5
+                      </td>
+                    </tr>
+                    <tr class="lesson-row">
+                      <td class="lesson-name-cell">
+                        <%= student.scores.keys.dig(1) %>
+                      </td>
+                      <td class="quiz-score-cell">
+                        <%= student.scores.values.dig(1) %> / 5
+                      </td>
+                    </tr>
+                    <tr class="lesson-row">
+                      <td class="lesson-name-cell">
+                        <%= student.scores.keys.dig(2) %>
+                      </td>
+                      <td class="quiz-score-cell">
+                        <%= student.scores.values.dig(2) %> / 5
+                      </td>
+                    </tr>
+                    <tr class="lesson-row">
+                      <td class="lesson-name-cell">
+                        <%= student.scores.keys.dig(3) %>
+                      </td>
+                      <td class="quiz-score-cell">
+                        <%= student.scores.values.dig(3) %> / 5
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
               <% else %>
@@ -64,7 +114,7 @@
               <% end %>
             </div>
             <div class="student-chart">
-              <%= column_chart(@chart_data, max: 5)%>
+              <%= line_chart(student.scores, max: 5)%>
             </div>
           </div>
         </div>
