@@ -1,0 +1,86 @@
+// classrooms index page for now here
+.classs2{
+  color: #2e3c68ba;
+  font-size: 2rem;
+  margin-left: 3.5rem;
+}
+.classroomspage{
+  padding: 50px;
+  position: relative;
+  height: 100%;
+  text-decoration: none;
+  color:#333F66;
+
+  overflow-x: hidden;
+  justify-content: center;
+}
+.allclasses {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  gap: 25px; /* Adjust the gap between items as needed */
+  text-decoration: none;
+  max-width: 100%; /* Set a maximum width to prevent stretching */
+  // justify-content: space-between; /* Distribute items evenly along the main axis */
+}
+
+.classimg{
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  margin-right: 20px;
+  object-fit: cover;
+  border: 2px solid #ff7c01;
+
+}
+
+
+.classroombox{
+  display: flex;
+  height: 250px;
+  width: 330px;
+  background-color: #333F66;
+  padding: 30px;
+  border-radius: 20px;
+  text-decoration: none;
+  box-sizing: border-box;
+
+  /* 3D effect */
+  box-shadow: 0 3px 6px rgba(0, 17, 166, 0.391);
+  &:hover {
+    transform: scale(1.02); /* Zoom in on hover */
+  }
+}
+
+
+
+.createclass{
+  text-decoration: none;
+
+}
+.classinfo1{
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  align-items: center;
+
+}
+.createnewclass{
+  margin-top: 200px;
+  justify-content: center;
+  background-color: #ff8800;
+  height: 40px;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  width: 180px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+a{
+  color: white;
+}
+.classroombox {
+  position: relative;
+}

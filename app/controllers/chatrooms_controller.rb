@@ -8,13 +8,15 @@ class ChatroomsController < ApplicationController
 
     if @chatroom.nil?
       @classroom = Classroom.find(chatroom_params[:classroom_id])
-      @chatroom = Chatroom.create(name: "#{@other_user.full_name}-#{current_user.full_name}", classroom: @classroom )
+      @chatroom = Chatroom.create(name: "#{@other_user.full_name}-#{current_user.full_name}", classroom: @classroom)
       ChatroomUser.create(user: current_user, chatroom: @chatroom)
       ChatroomUser.create(user: @other_user, chatroom: @chatroom)
     end
+
+    Rails.logger.debug("Chatroom created: #{@chatroom.inspect}")
+
     redirect_to chatroom_path(@chatroom)
   end
-
 
 
   def show
