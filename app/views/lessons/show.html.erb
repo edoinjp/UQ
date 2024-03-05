@@ -7,22 +7,22 @@
   <ul class="lesson lesson-tabs">
     <%= link_to lesson_path(@lesson) + "?query=visual" do %>
       <li class="lesson-item ">
-        <%= image_tag "visual_icon.jpg", class: "filter-icons" %>
+        <%= image_tag "visual_icon.jpg", class: "filter-icons", id: "visual-icon" %>
       </li>
     <% end %>
     <%= link_to lesson_path(@lesson) + "?query=aural" do %>
       <li class="lesson-item">
-        <%= image_tag "audio_icon.jpg", class: "filter-icons" %>
+        <%= image_tag "audio_icon.jpg", class: "filter-icons", id: "aural-icon" %>
       </li>
     <% end %>
     <%= link_to lesson_path(@lesson) + "?query=reading" do %>
       <li class="lesson-item">
-        <%= image_tag "reading_icon.jpg", class: "filter-icons" %>
+        <%= image_tag "reading_icon.jpg", class: "filter-icons", id: "reading-icon" %>
       </li>
     <% end %>
     <%= link_to lesson_path(@lesson) + "?query=kinesthetic" do %>
       <li class="lesson-item">
-          <%= image_tag "video_icon.jpg", class: "filter-icons" %>
+          <%= image_tag "video_icon.jpg", class: "filter-icons", id: "kinesthetic-icon" %>
       </li>
     <% end %>
 

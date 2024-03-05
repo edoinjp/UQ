@@ -23,6 +23,22 @@
   margin-bottom: 1rem;
 }
 
+#visual-icon {
+  box-shadow: 10px 10px 18px -6px rgba(23, 3, 246, 0.75);
+}
+
+#aural-icon {
+  box-shadow: 10px 10px 18px -6px rgba(246, 4, 4, 0.75);
+}
+
+#reading-icon {
+  box-shadow: 10px 10px 18px -6px rgba(248, 182, 3, 0.75);
+}
+
+#kinesthetic-icon {
+  box-shadow: 10px 10px 18px -6px rgba(48, 245, 4, 0.75);
+}
+
 .lesson-tabs {
   width: 7rem;
   height: 20rem;
