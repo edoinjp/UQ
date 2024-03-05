@@ -2,15 +2,7 @@
 <p><%= @paragraph %></p>
 <br>
 <!-- Switch Button -->
-<div class="toggle-switch form-check form-switch lesson-switcher" data-controller="lesson">
-  <div class="supp-switch">
-    <div class="lesson-switcher-slider">
-      <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" data-action="change->lesson#toggleSupplementaryContent">
-    </div>
-    <div class="lesson-switcher-slider-text">
-      <label class="form-check-label" for="flexSwitchCheckDefault">Supplementary</label>
-    </div>
-  </div>
+<div class="toggle-switch" data-controller="lesson">
   <!-- Main Content Container -->
   <div data-lesson-target="mainContent">
     <div class="lesson-container">
@@ -36,9 +28,9 @@
             <i class="fa-solid fa-microphone filter-icons" id="kinesthetic-icon"></i>
           </li>
         <% end %>
-        <%= link_to lesson_path(@lesson) do %>
+        <%= link_to '#', data: { action: "click->lesson#toggleSupplementaryContent" } do %>
           <li class="lesson-items">
-            <i class="fa-solid fa-head-side-gear filter-icons" id="supplementary-icon"></i>
+            <i class="fa-solid fa-graduation-cap filter-icons" id="supplementary-icon"></i>
           </li>
         <% end %>
         <!-- Help Chat Button -->
@@ -98,9 +90,9 @@
             <i class="fa-solid fa-microphone filter-icons" id="kinesthetic-icon"></i>
           </li>
         <% end %>
-        <%= link_to lesson_path(@lesson) do %>
+        <%= link_to '#', data: { action: "click->lesson#toggleSupplementaryContent" } do %>
           <li class="lesson-items">
-            <i class="fa-solid fa-head-side-gear filter-icons" id="supplementary-icon"></i>
+            <i class="fa-solid fa-graduation-cap filter-icons" id="supplementary-icon"></i>
           </li>
         <% end %>
         <!-- Help Chat Button -->

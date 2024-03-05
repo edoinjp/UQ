@@ -1,5 +1,15 @@
-<div class="visual-content">
-  <% visual.images.each do |file| %>
-    <%= cl_image_tag file.key, class: "slide-img" %>
-  <% end %>
+<div class="reveal" data-controller="slides">
+  <div class="slides">
+    <% if visual.images.attached? %>
+      <% visual.images.each do |image| %>
+        <section data-background-image="<%= url_for(image) %>">
+        </section>
+      <% end %>
+    <% end %>
+    <section data-markdown>
+      <textarea data-template>
+        <%= visual.content %>
+      </textarea>
+    </section>
+  </div>
 </div>

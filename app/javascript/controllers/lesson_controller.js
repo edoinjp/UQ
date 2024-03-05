@@ -3,10 +3,24 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["mainContent", "supplementaryContent"]
 
-  toggleSupplementaryContent(event) {
-    const isChecked = event.target.checked;
+  connect() {
+    this.toggleState = sessionStorage.getItem('supplementaryToggle') === 'true';
+    this.updateContentVisibility();
+  }
 
-    if (isChecked) {
+  toggleSupplementaryContent(event) {
+    // Prevent the default anchor behavior
+    event.preventDefault();
+    // Toggle the state
+    this.toggleState = !this.toggleState;
+    // Save the new state in session storage
+    sessionStorage.setItem('supplementaryToggle', this.toggleState.toString());
+    // Update the visibility of content based on the new state
+    this.updateContentVisibility();
+  }
+
+  updateContentVisibility() {
+    if (this.toggleState) {
       this.mainContentTarget.classList.add("d-none");
       this.supplementaryContentTarget.classList.remove("d-none");
     } else {
