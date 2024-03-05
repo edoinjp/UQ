@@ -36,6 +36,11 @@
             <%= image_tag "video_icon.jpg", class: "response-icons", id: "kinesthetic-icon" %>
         </li>
       <% end %>
+      <%= link_to lesson_responses_path(@lesson) do %>
+        <li class="response-items">
+            <%= image_tag "school_icon.png", class: "response-icons", id: "school-icon" %>
+        </li>
+      <% end %>
       </ul>
   </div>
 
