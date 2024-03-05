@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   get 'vark', to: 'users#test'
   post 'vark', to: 'users#submit'
   resources :lessons, only: %i[show] do
+    patch "create_supplementary", on: :member
+    get "new_supplementary", on: :member
+
     resources :questions, only: [:index]
     resources :responses, only: [:index]
     get 'generate_content', on: :member

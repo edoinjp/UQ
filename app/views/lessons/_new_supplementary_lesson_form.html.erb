@@ -1,0 +1,14 @@
+<%= simple_form_for([@lesson], url: create_supplementary_lesson_path(id: @lesson.id), html: { class: 'lesson-form' }) do |form| %>
+  <div class="lesson-form-group">
+    <%= form.input :title, input_html: { class: "form-control" } %>
+  </div>
+  <div class="lesson-form-group">
+    <%= form.input :content, input_html: { class: "form-control" } %>
+    <div class="form-control-instruction">
+      <p>Please use "#" for main headings</p>
+      <p>Please use "##" for sub headings</p>
+      <p>Please use "---" for slide seperation</p>
+    </div>
+  </div>
+  <%= form.button :submit, class: "btn btn-lesson" %>
+<% end %>

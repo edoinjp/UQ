@@ -1,0 +1,16 @@
+<div class="reveal" data-controller="slides">
+  <div class="slides">
+    <section data-markdown>
+      <textarea data-template>
+        <%= @lesson.content %>
+      </textarea>
+    </section>
+    <% if @visual.images.attached? %>
+      <section>
+        <% @visual.images.each do |image| %>
+          <%= image_tag image, class: "slide-img" %>
+        <% end %>
+      </section>
+    <% end %>
+  </div>
+</div>

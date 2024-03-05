@@ -23,7 +23,7 @@
 .my-lessons-index {
   display: flex;
   justify-content: space-between;
-  max-width: 80%;
+  max-width: 95%;
 }
 
 .your-lessons {
@@ -113,4 +113,21 @@
 .new-lesson{
   margin: 0 auto;
   max-width: 100px; /* Adjust the max-width value as needed */
+}
+
+.lesson-switcher {
+  display: flex;
+}
+
+.lesson-switcher-slider{
+ margin-bottom: 8px;
+}
+
+.kinesthetic-preview {
+  color: rgb(236, 235, 235);
+  padding: 5%;
+}
+
+.reading-preview {
+  color: rgb(236, 235, 235);
 }
