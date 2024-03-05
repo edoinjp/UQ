@@ -19,6 +19,7 @@ class LessonsController < ApplicationController
     @classroom = @lesson.classroom
 
     authorize(@lesson)
+
     # Assigns a variable for each styled_lesson style type for main content
     @visual = @lesson.styled_lessons.find { |x| x['style'] == 'visual' }
     @aural = @lesson.styled_lessons.find { |x| x['style'] == 'aural' }

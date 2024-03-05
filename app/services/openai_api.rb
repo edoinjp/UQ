@@ -26,7 +26,7 @@ class OpenaiApi
   end
 
   def generate_images(text)
-    prompt = "Convert this text to images: #{text}"
+    prompt = "You are a teacher and would like to use pictures to display in your slides for your students, generate a educational picture base on this: #{text}"
     response = @client.images.generate(parameters: {
       prompt: prompt, size: "256x256"
     })
