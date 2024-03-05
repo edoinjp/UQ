@@ -10,6 +10,7 @@ class LessonsController < ApplicationController
     @lessons = @classroom.lessons
     @classrooms = [@classroom]
     @active_tab = "classroom_lessons"
+    @lesson = Lesson.new
   end
 
   # Authorizes show action through current lesson through prarams
