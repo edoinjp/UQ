@@ -3,16 +3,18 @@
 <br>
 <!-- Switch Button -->
 <div class="toggle-switch form-check form-switch lesson-switcher" data-controller="lesson">
-  <div class="lesson-switcher-slider">
-    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" data-action="change->lesson#toggleSupplementaryContent">
-  </div>
-  <div class="lesson-switcher-slider-text">
-    <label class="form-check-label" for="flexSwitchCheckDefault">Supplementary</label>
-  </div>
   <!-- Main Content Container -->
   <div data-lesson-target="mainContent">
     <div class="lesson-container">
       <!-- Nav tabs -->
+      <div class="supp-switch">
+        <div class="lesson-switcher-slider">
+          <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" data-action="change->lesson#toggleSupplementaryContent">
+        </div>
+        <div class="lesson-switcher-slider-text">
+          <label class="form-check-label" for="flexSwitchCheckDefault">Supplementary</label>
+        </div>
+      </div>
       <ul class="lesson lesson-tabs">
         <%= link_to lesson_path(@lesson) + "?query=visual" do %>
           <li class="lesson-item ">
@@ -69,15 +71,19 @@
   <!-- Supplementary Content Container (Initially Hidden) -->
   <div data-lesson-target="supplementaryContent" class="d-none">
     <div class="lesson-container">
-      <% if params[:query] == 'visual' && @supplementaryVisual.present? %>
-        <%= render 'supplementary_visual', visual: @supplementaryVisual %>
-      <% elsif params[:query] == 'aural' && @supplementaryAural.present? %>
-        <%= render 'supplementary_aural', aural: @supplementaryAural %>
-      <% elsif params[:query] == 'reading' && @supplementaryReading.present? %>
-        <%= render 'supplementary_reading', reading: @supplementaryReading %>
-      <% else %>
-        <%= render 'supplementary_kinesthetic', kinesthetic: @supplementaryKinesthetic if @supplementaryKinesthetic.present? %>
-      <% end %>
+      <div class="lesson-content">
+        <div class="lesson-pane">
+          <% if params[:query] == 'visual' && @supplementaryVisual.present? %>
+            <%= render 'supplementary_visual', visual: @supplementaryVisual %>
+          <% elsif params[:query] == 'aural' && @supplementaryAural.present? %>
+            <%= render 'supplementary_aural', aural: @supplementaryAural %>
+          <% elsif params[:query] == 'reading' && @supplementaryReading.present? %>
+            <%= render 'supplementary_reading', reading: @supplementaryReading %>
+          <% else %>
+            <%= render 'supplementary_kinesthetic', kinesthetic: @supplementaryKinesthetic if @supplementaryKinesthetic.present? %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
