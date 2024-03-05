@@ -6,23 +6,23 @@
   <!-- Nav tabs -->
   <ul class="lesson lesson-tabs">
     <%= link_to lesson_path(@lesson) + "?query=visual" do %>
-      <li class="lesson-item ">
-        <%= image_tag "visual_icon.jpg", class: "filter-icons" %>
+      <li class="lesson-items">
+        <i class="fa-regular fa-image filter-icons" id="visual-icon"></i>
       </li>
     <% end %>
     <%= link_to lesson_path(@lesson) + "?query=aural" do %>
-      <li class="lesson-item">
-        <%= image_tag "audio_icon.jpg", class: "filter-icons" %>
+      <li class="lesson-items">
+        <i class="fa-solid fa-headphones-simple filter-icons" id="aural-icon"></i>
       </li>
     <% end %>
     <%= link_to lesson_path(@lesson) + "?query=reading" do %>
-      <li class="lesson-item">
-        <%= image_tag "reading_icon.jpg", class: "filter-icons" %>
+      <li class="lesson-items">
+        <i class="fa-solid fa-book filter-icons" id="reading-icon"></i>
       </li>
     <% end %>
     <%= link_to lesson_path(@lesson) + "?query=kinesthetic" do %>
-      <li class="lesson-item">
-          <%= image_tag "video_icon.jpg", class: "filter-icons" %>
+      <li class="lesson-items">
+        <i class="fa-solid fa-microphone filter-icons" id="kinesthetic-icon"></i>
       </li>
     <% end %>
 
@@ -30,9 +30,9 @@
     <li class="lesson-item">
       <div class="btn-group dropstart">
         <button type="button" class="help-btn" data-bs-toggle="dropdown" aria-expanded="false">
-          <%= image_tag "help_icon.jpg", class: "filter-icons" %>
+          <i class="fa-solid fa-chalkboard-user filter-icons" id="help-icon"></i>
         </button>
-        <div class="dropdown-menu">
+        <div class="dropdown-menu help-pop">
           <%= render 'help_chat' %>
         </div>
       </div>
@@ -40,7 +40,7 @@
 
       <!--Dummy Quiz Button-->
       <li class="lesson-item">
-        <%= image_tag "quiz_icon.jpg", class: "filter-icons quiz-btn" %>
+        <i class="fa-solid fa-list-check filter-icons" id="quiz-icon"></i>
       </li>
   </ul>
 
