@@ -1,6 +1,8 @@
 <div class=" chatroom " style="overflow-y: auto; width: 100%; "
   data-controller="chatroom-subscription"
-  data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>">
+  data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>"
+  data-chatroom-subscription-user-id-value="<%= current_user.id %>">
+
 
     <div class="leftchatbox">
         <% if @chatroom %>
