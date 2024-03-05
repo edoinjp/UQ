@@ -3,21 +3,29 @@
 }
 
 .response-columns {
-  display: grid; // Switch to grid display
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); // This will create as many 300px columns as can fit
-  gap: 1rem;
+  box-sizing: border-box;
+  margin: auto;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 20px;
+  width: 95%;
 }
 
-.response-column {
-  flex: 0 0 calc(33.333% - 20px); // Subtract the gap size to account for spacing
-  max-width: calc(33.333% - 20px);
-}
+// .response-column {
+//   flex: 0 0 calc(33.333% - 20px); // Subtract the gap size to account for spacing
+//   max-width: calc(33.333% - 20px);
+// }
 
 .score  {
   margin: 0 auto;
   padding: 0 24px;
   display: flex;
   flex-direction: column;
+  // background-color: gray;
+  width: 95%;
+  margin: 0 auto;
+  padding-top: 30px;
 }
 
 .score h1{
@@ -83,6 +91,20 @@
   color: #000;
   margin-top: 7px;
   font: 500 16px Poppins, sans-serif;
+}
+
+.response-tabs-container{
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+.quiz-title {
+  padding-top: 20px;
+  color: #2e3c68ba;
+  font-size: 2rem;
+  margin: 0 auto;
+
 }
 
 

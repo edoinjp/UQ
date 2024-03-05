@@ -1,13 +1,16 @@
-<div class="lesson-new-index">
+<div class="lesson-new-index lessonsindexpage">
+
 
      <h1 class="your-lessons">My Lessons</h1>
 
-      <div class="new-lesson">
-        <i class="fa-solid fa-plus fa-fade "></i>
-        <%= link_to "Lesson", new_classroom_lesson_path(@classroom), class: "new-lesson-button" %>
+      <div class="index-container ">
+         <% if current_user.teacher? %>
+            <div class="container-card">
+            <%= link_to new_classroom_lesson_path(@classroom), class: "new-lesson-button" do %>
+              <i class="fas fa-plus"></i> New Lesson
+            <% end %>
+          <% end %>
       </div>
-
-      <div class="row row-cols-1 row-cols-md-3 g-4 index-container">
         <!-- Existing lessons go here -->
         <% @lessons.each do |lesson| %>
           <div class="col container-card">
@@ -97,6 +100,4 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
+ </div>

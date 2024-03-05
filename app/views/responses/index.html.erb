@@ -1,15 +1,19 @@
 <div class="score">
-  <h1 class="quiz-title m-3">Quiz Results for <%= @lesson.title %></h1>
 
+    <h2 class="quiz-title">Quiz Results for <%= @lesson.title %></h2>
   <div class="average-chart w-100">
     <%= line_chart @chart_data_all.map { |style|
       {name: style[:name], data: style[:data]}
     } %>
   </div>
-
   <!-- Nav tabs -->
   <div class="response-tabs-container">
     <ul class="response-tabs">
+      <%= link_to lesson_responses_path(@lesson) do %>
+        <li class="response-items">
+            <i class="fa-solid fa-school filter-icons" id="school-icon"></i>
+        </li>
+      <% end %>
       <%= link_to lesson_responses_path(@lesson) + "?query=visual" do %>
         <li class="response-items">
           <i class="fa-regular fa-image filter-icons" id="visual-icon"></i>
@@ -30,13 +34,9 @@
             <i class="fa-solid fa-microphone filter-icons" id="kinesthetic-icon"></i>
         </li>
       <% end %>
-      <%= link_to lesson_responses_path(@lesson) do %>
-        <li class="response-items">
-            <i class="fa-solid fa-school filter-icons" id="school-icon"></i>
-        </li>
-      <% end %>
       </ul>
   </div>
+
 
   <div class="response-columns">
     <%# Student Index Iteration with Pop-Ups %>
