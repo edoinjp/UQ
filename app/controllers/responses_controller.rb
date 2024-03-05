@@ -91,6 +91,11 @@ class ResponsesController < ApplicationController
         kinesthetic_l4_total += student.score.values.slice(3)
       end
 
+      # Logic to have student avatars appear according to the style filter
+      if params[:query].present?
+        @students = @students.where(learning_style: params[:query])
+      end
+
     end
 
     # Creates the class response score averages

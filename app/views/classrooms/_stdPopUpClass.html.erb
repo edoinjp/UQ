@@ -14,7 +14,24 @@
           '#1EDD88'
         end
       }" %> <!-- Generate a hex color according to their learning style-->
+
+    <div class="position-relative">
       <%= cl_image_tag participant.photo.key, alt: "#", class: "studentimg", style: "border-color: #{border_color};" %>
+      <span class="position-absolute bottom-0 start-100 translate-middle p-1 border border-light rounded-circle" style="background-color: <%= border_color %>">
+        <span class="text-light fs-6">
+          <% if participant.learning_style == 'visual' %>
+              <i class="fa-regular fa-image"></i>
+          <% elsif participant.learning_style == 'aural' %>
+              <i class="fa-solid fa-headphones-simple"></i>
+          <% elsif participant.learning_style == 'reading' %>
+              <i class="fa-solid fa-book"></i>
+          <% elsif participant.learning_style == 'kinesthetic' %>
+              <i class="fa-solid fa-microphone"></i>
+          <% end %>
+        </span>
+      </span>
+    </div>
+
       <div class="text-light mt-5"><%= "#{participant.first_name} #{participant.last_name}" %></div>
     </div>
   </button>

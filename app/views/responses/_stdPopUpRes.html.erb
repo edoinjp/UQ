@@ -17,7 +17,24 @@
                 'green'
               end
             }" %> <!-- Generate a hex color according to their learning style-->
-            <%= cl_image_tag student.photo.key, alt: student.full_name, class: "response-img", style: "border-color: #{border_color};" %>
+
+            <div class="position-relative">
+              <%= cl_image_tag student.photo.key, alt: "#", class: "studentimg", style: "border-color: #{border_color};" %>
+              <span class="position-absolute bottom-0 start-100 translate-middle p-1 border border-light rounded-circle" style="background-color: <%= border_color %>">
+                <span class="text-light fs-6">
+                  <% if student.learning_style == 'visual' %>
+                      <i class="fa-regular fa-image"></i>
+                  <% elsif student.learning_style == 'aural' %>
+                      <i class="fa-solid fa-headphones-simple"></i>
+                  <% elsif student.learning_style == 'reading' %>
+                      <i class="fa-solid fa-book"></i>
+                  <% elsif student.learning_style == 'kinesthetic' %>
+                      <i class="fa-solid fa-microphone"></i>
+                  <% end %>
+                </span>
+              </span>
+            </div>
+
           </div>
         </div>
         <div class="response-list-content">
