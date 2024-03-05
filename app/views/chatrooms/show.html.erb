@@ -54,28 +54,34 @@
     </div>
 
         <div class="chatstudentsbox">
-        <h4 class="text-info">Students in <%= @classroom.name %></h4>
-        <p data-target="chatroom-subscription.teacherId" data-action="click->chatroom-subscription#switchToDirectMessage" data-id="<%= @teacher.id %>" style="color: black;">
-          <%= simple_form_for [@teacher, Chatroom.new] do |f| %>
-            <%= f.input :classroom_id, input_html: { value: @classroom.id }, as: :hidden %>
-            <div class="studentlist  align-items-center">
-              <%= cl_image_tag @teacher.photo.key, class: "studentimg rounded-circle", style: "60;" %>
-              <%= f.submit "#{@teacher.full_name}", class: "ml-2 btn btn-link" %>
-            </div>
-          <% end %>
-        </p>
-        <% @students.each do |student| %>
-          <p data-target="chatroom-subscription.studentId" data-action="click->chatroom-subscription#switchToDirectMessage" data-id="<%= student.id %>" style="color: black;">
-            <%= simple_form_for [student, Chatroom.new] do |f| %>
-              <%= f.input :classroom_id, input_html: { value: @classroom.id }, as: :hidden %>
-              <div class="studentlist align-items-center">
-                <%= cl_image_tag student.photo.key, class: "studentimg rounded-circle", style: "max-width: 60px;" %>
-                <%= f.submit "#{student.full_name}", class: "ml-2 btn btn-link" %>
-              </div>
-            <% end %>
-          </p>
-        <% end %>
+  <h4 class="text-info">Students in <%= @classroom.name %></h4>
+
+  <!-- Teacher -->
+  <p data-target="chatroom-subscription.teacherId" data-action="click->chatroom-subscription#switchToDirectMessage" data-id="<%= @teacher.id %>" style="color: black;">
+    <%= simple_form_for [@teacher, Chatroom.new] do |f| %>
+      <%= f.input :classroom_id, input_html: { value: @classroom.id }, as: :hidden %>
+      <div class="studentlist align-items-center">
+        <%= cl_image_tag @teacher.photo.key, class: "studentimg rounded-circle", style: "max-width: 60px; border: 2px solid black;" %>
+        <%= f.submit "#{@teacher.full_name}", class: "ml-2 btn btn-link" %>
+      </div>
+    <% end %>
+  </p>
+
+  <!-- Students -->
+  <% @students.each do |student| %>
+    <% stu_style_color = learning_style_color(student.learning_style) %>
+    <p data-target="chatroom-subscription.studentId" data-action="click->chatroom-subscription#switchToDirectMessage" data-id="<%= student.id %>" style="color: <%= stu_style_color %>;">
+      <%= simple_form_for [student, Chatroom.new] do |f| %>
+        <%= f.input :classroom_id, input_html: { value: @classroom.id }, as: :hidden %>
+        <div class="studentlist align-items-center">
+          <%= cl_image_tag student.photo.key, class: "studentimg rounded-circle", style: "max-width: 60px; border: 2px solid #{stu_style_color};" %>
+          <%= f.submit "#{student.full_name}", class: "ml-2 btn btn-link" %>
         </div>
+      <% end %>
+    </p>
+  <% end %>
+</div>
+
 
   </div>
 </div>
