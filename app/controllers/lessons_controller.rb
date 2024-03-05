@@ -29,7 +29,7 @@ class LessonsController < ApplicationController
     @supplementaryAural = @lesson.styled_lessons.supplementary.find_by(style: 'aural')
     @supplementaryReading = @lesson.styled_lessons.supplementary.find_by(style: 'reading')
     @supplementaryKinesthetic = @lesson.styled_lessons.supplementary.find_by(style: 'kinesthetic')
-
+    # debugger
     # Logic to have student avatars appear according the the lesson style
     @students = @classroom.students
     if params[:query].present?
@@ -76,7 +76,8 @@ class LessonsController < ApplicationController
 
   def create_supplementary
     authorize(@lesson)
-    @lesson.create_styled_lessons(supplementary: true)
+    styles = @lesson.missing_styles
+    @lesson.create_styled_lessons(supplementary: true, styles: styles)
     redirect_to classroom_lessons_path(@lesson.classroom, @lesson), notice: 'Lesson was successfully created.'
   end
 
@@ -91,7 +92,7 @@ class LessonsController < ApplicationController
     authorize(@lesson)
 
     if @lesson.save
-      @lesson.create_styled_lessons
+      @lesson.create_styled_lessons(styles: %w[visual aural reading kinesthetic])
       redirect_to classroom_lessons_path(@lesson.classroom, @lesson), notice: 'Lesson was successfully created.'
     else
       render :new

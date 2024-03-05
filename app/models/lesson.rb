@@ -9,18 +9,23 @@ class Lesson < ApplicationRecord
     @openai_api ||= OpenaiApi.new
   end
 
+  def missing_styles
+    all_styles = %w[visual aural reading kinesthetic]
+    available_styles = styled_lessons.where(supplementary: true).map(&:style).uniq
+    all_styles - available_styles
+  end
 
-  def create_styled_lessons(supplementary: false)
-    styles = %w[aural kinesthetic reading visual]
+  def create_styled_lessons(supplementary: false, styles: )
+    return if styles.empty?
+
     @openai_api = OpenaiApi.new
     # @image_service = GenerateImages.new
     styles.each do |style|
       styled_lesson = styled_lessons.create(style: style, supplementary: supplementary)
 
       if style == 'visual'
-
-        # image_file = openai_api.generate_images(self.content)
-        # styled_lesson.images.attach(io: image_file, filename: "#{self.title.parameterize}-#{style}.jpg") if image_file.present?
+        image_file = openai_api.generate_images(self.content)
+        styled_lesson.images.attach(io: image_file, filename: "#{self.title.parameterize}-#{style}.jpg") if image_file.present?
       elsif style == 'aural'
         audio_file = @openai_api.generate_audio(self.content)
         styled_lesson.files.attach(io: StringIO.new(audio_file), filename: "#{self.title.parameterize}-#{style}.mp3")
