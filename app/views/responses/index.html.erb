@@ -7,6 +7,52 @@
     } %>
   </div>
 
+
+
+
+
+
+
+  <!-- Nav tabs -->
+  <div class="response-tabs-container">
+    <ul class="response-tabs">
+      <%= link_to lesson_responses_path(@lesson) + "?query=visual" do %>
+        <li class="response-items">
+          <%= image_tag "visual_icon.jpg", class: "response-icons", id: "visual-icon" %>
+        </li>
+      <% end %>
+      <%= link_to lesson_responses_path(@lesson) + "?query=aural" do %>
+        <li class="response-items">
+          <%= image_tag "audio_icon.jpg", class: "response-icons", id: "aural-icon" %>
+        </li>
+      <% end %>
+      <%= link_to lesson_responses_path(@lesson) + "?query=reading" do %>
+        <li class="response-items">
+          <%= image_tag "reading_icon.jpg", class: "response-icons", id: "reading-icon" %>
+        </li>
+      <% end %>
+      <%= link_to lesson_responses_path(@lesson) + "?query=kinesthetic" do %>
+        <li class="response-items">
+            <%= image_tag "video_icon.jpg", class: "response-icons", id: "kinesthetic-icon" %>
+        </li>
+      <% end %>
+      </ul>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <div class="response-columns">
     <%# Student Index Iteration with Pop-Ups %>
     <%= render "stdPopUpRes", student_scores: @student_scores %>

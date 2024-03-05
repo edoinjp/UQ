@@ -47,14 +47,33 @@
   align-self: center;
 }
 
+.response-tabs-container {
+  height: 5rem;
+  width: 100%;
+}
+
+.response-tabs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.response-icons {
+  width: 3.5rem;
+  height: auto;
+  border-radius: 50%;
+}
+
+.response-items {
+  justify-content: space-around;
+}
+
 .header {
   color: black;
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
 }
-
-
 
 .teacher-container {
   overflow: hidden;
