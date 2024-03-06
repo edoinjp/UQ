@@ -3,25 +3,39 @@
 }
 
 .modal-header {
-  background-color: #26325A;
   color: white;
 }
 
-.modal-body {
-  background-color: #26325A;
+.profile-content-info{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
 }
-
-.modal-footer {
-  background-color: #26325A;
+.avatar-large{
+  margin-right: 20px;
 }
 
 .student-chart {
   background-color: white;
   border-radius: 0.5rem;
+  height: 80%;
+  padding-top: 50px;
 }
-
+.quziscorex{
+  padding-top: 50px;
+  height: 80%;
+}
+.profile-lesson{
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
 .student-style {
   color: white;
   padding: 1rem;
+  border: 0.7px solid;
   border-radius: 1rem;
+
 }
