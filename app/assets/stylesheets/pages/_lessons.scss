@@ -1,10 +1,22 @@
-.index-container {
+.lessonsindexpage{
+  width: 95%;
+  margin-top: 50px;
   margin: 0 auto;
-  display: grid; // Switch to grid display
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); // This will create as many 300px columns as can fit
-  gap: 1rem; // This will create a gap between grid items
-  text-decoration: none;
-  max-width: 97%;
+  padding-top: 50px;
+}
+.index-container {
+  box-sizing: border-box;
+  margin: auto;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 20px;
+  // width: 95%; /* Adjusted to 100% for full-width container */
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
+  padding: 5px;
+
+
 }
 
 
@@ -12,35 +24,31 @@
   transform: scale(1.02);
 }
 
-.new-lesson {
-  border-radius: 10px;
-  background-color: #004080;
-  border: 1px solid #004080;
-  color: white;
-  padding: 8px;
-}
-
 .my-lessons-index {
   display: flex;
-  justify-content: space-between;
-  max-width: 95%;
+  justify-content: space-evenly;
+  max-width: 80%;
 }
 
 .your-lessons {
   color: #2e3c68ba;
   font-size: 2rem;
-  margin-left: 3.5rem;
+  margin-left: 1.5rem;
+  margin-bottom: 40px;
 
 }
 
 .container-card {
   box-shadow: 0 3px 6px rgba(0, 17, 166, 0.391);
-  height: 19rem;
-  width: 320px;
+  height: 260px;
+  width: 330px;
   background-color: #2e3c68;
   border-radius: 20px;
   display: flex;
   justify-content: center;
+  text-decoration: none;
+  box-sizing: border-box;
+
 }
 
 .content-card {
@@ -50,7 +58,7 @@
 .lesson-img {
   border-radius: 15px;
   width: 19rem;
-  height: 180px;
+  height: 160px;
 }
 
 
@@ -110,9 +118,12 @@
   border-color: #003973;
   color: rgb(234, 233, 233);
 }
-.new-lesson{
-  margin: 0 auto;
-  max-width: 100px; /* Adjust the max-width value as needed */
+.new-lesson-button{
+  margin-top: 30px;
+  // font-size: 17px;
+  // background-color: gray;
+  width: 80%;
+  height: 90%;
 }
 
 .lesson-switcher {
