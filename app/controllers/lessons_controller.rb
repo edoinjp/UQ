@@ -109,6 +109,7 @@ class LessonsController < ApplicationController
 
       )
       @lesson.create_styled_lessons
+      # @lesson.create_styled_lessons(supplementary: false, styles: @lesson.attributes)
       redirect_to classroom_lessons_path(@lesson.classroom, @lesson), notice: 'Lesson was successfully created.'
     else
       render :new
