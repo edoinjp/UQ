@@ -15,7 +15,6 @@
     }" %> <!-- Generate a hex color according to their learning style-->
     <%= cl_image_tag student.photo.key, alt: "#", class: "studentimg", style: "border-color: #{border_color};" %>
   </span>
-
   <!-- Modal -->
   <div class="modal fade" id="<%= student.first_name %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
@@ -24,7 +23,6 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-
           <div class="profile-card">
             <%= cl_image_tag student.photo.key, alt: student.full_name, class: "avatar-large" %>
             <div class="profile-card-content">
@@ -48,7 +46,6 @@
               </button>
             </div>
           </div>
-
           <div class="profile-lesson-container">
             <div class="profile-lesson">
               <% if @lessons_with_scores.any? %>
@@ -60,7 +57,6 @@
                     </tr>
                   </thead>
                   <tbody>
-
                     <tr class="lesson-row">
                       <td class="lesson-name-cell">
                         <%= student.score.keys.dig(0) %>
@@ -69,7 +65,6 @@
                         <%= student.score.values.dig(0) %> / 5
                       </td>
                     </tr>
-
                     <tr class="lesson-row">
                       <td class="lesson-name-cell">
                         <%= student.score.keys.dig(1) %>
@@ -78,7 +73,6 @@
                         <%= student.score.values.dig(1) %> / 5
                       </td>
                     </tr>
-
                     <tr class="lesson-row">
                       <td class="lesson-name-cell">
                         <%= student.score.keys.dig(2) %>
@@ -87,7 +81,6 @@
                         <%= student.score.values.dig(2) %> / 5
                       </td>
                     </tr>
-
                     <tr class="lesson-row">
                       <td class="lesson-name-cell">
                         <%= student.score.keys.dig(3) %>
@@ -96,24 +89,18 @@
                         <%= student.score.values.dig(3) %> / 5
                       </td>
                     </tr>
-
                   </tbody>
                 </table>
               <% else %>
                 <p>This user has no lessons.</p>
               <% end %>
             </div>
-
-
-          <div class="student-chart">
-            <%= line_chart(student.score, max: 5)%>
-          </div>
-
-
+            <div class="student-chart">
+              <%= line_chart(student.score, max: 5)%>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
 <% end %>

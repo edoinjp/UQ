@@ -2,7 +2,6 @@
 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
   <%= cl_image_tag @user.photo.key, alt: @user.full_name, class: "avatar-large" %>
 </button>
-
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
@@ -12,7 +11,6 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-
         <div class="profile-card">
           <%= cl_image_tag @user.photo.key, alt: @user.full_name, class: "avatar-large" %>
           <div class="profile-card-content">
@@ -22,10 +20,9 @@
             <button type="button" class="btn btn-light rounded" style="width: 162px;"><%= @user.learning_style.capitalize %></button>
           </div>
         </div>
-
         <div class="profile-lesson-container">
           <div class="profile-lesson">
-            <% if @lessons_with_scores.any? %>
+            <% if @lessons_with_scores.present? %>
               <table>
                 <thead>
                   <tr>

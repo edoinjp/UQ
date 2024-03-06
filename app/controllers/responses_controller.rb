@@ -1,5 +1,5 @@
 class ResponsesController < ApplicationController
-  before_action :set_lesson, only: :index
+  before_action :set_lesson, only: [:index, :create_supplementary_lessons]
 
   def index
     @active_tab = "responses"

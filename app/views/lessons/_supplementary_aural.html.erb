@@ -1,0 +1,7 @@
+<div class="sound-container">
+  <div class="sound-card">
+    <% @aural.files.each do |audio| %>
+      <%= cl_video_tag audio.key, controls:"", class:"sound-bar" %>
+    <% end %>
+  </div>
+</div>
