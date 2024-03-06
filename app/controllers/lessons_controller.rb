@@ -108,8 +108,10 @@ class LessonsController < ApplicationController
         }
 
       )
-      @lesson.create_styled_lessons
+      # @lesson.create_styled_lessons
       # @lesson.create_styled_lessons(supplementary: false, styles: @lesson.attributes)
+      # @lesson.create_styled_lessons(styles: @lesson.styles)
+      @lesson.create_styled_lessons(styles: %w[visual aural reading kinesthetic])
       redirect_to classroom_lessons_path(@lesson.classroom, @lesson), notice: 'Lesson was successfully created.'
     else
       render :new
