@@ -17,24 +17,22 @@
                 'green'
               end
             }" %> <!-- Generate a hex color according to their learning style-->
-
             <div class="position-relative">
               <%= cl_image_tag student.photo.key, alt: "#", class: "studentimg", style: "border-color: #{border_color};" %>
               <span class="position-absolute bottom-0 start-100 translate-middle p-1 border border-light rounded-circle" style="background-color: <%= border_color %>">
                 <span class="text-light fs-6">
                   <% if student.learning_style == 'visual' %>
-                      <i class="fa-regular fa-image"></i>
+                    <i class="fa-regular fa-image"></i>
                   <% elsif student.learning_style == 'aural' %>
-                      <i class="fa-solid fa-headphones-simple"></i>
+                    <i class="fa-solid fa-headphones-simple"></i>
                   <% elsif student.learning_style == 'reading' %>
-                      <i class="fa-solid fa-book"></i>
+                    <i class="fa-solid fa-book"></i>
                   <% elsif student.learning_style == 'kinesthetic' %>
-                      <i class="fa-solid fa-microphone"></i>
+                    <i class="fa-solid fa-microphone"></i>
                   <% end %>
                 </span>
               </span>
             </div>
-
           </div>
         </div>
         <div class="response-list-content">
@@ -43,7 +41,13 @@
             <%= student.learning_style.capitalize %>
           </div>
           <div class="response-list-answer">
-            correct <%= student.score.values.dig(0) %> / 5
+            <% score = student.score.values.dig(0) %>
+            <% total = 5 %>
+            <% percentage = score.to_f / total %>
+            Quiz results:
+            <span class="<%= 'low-score' if percentage <= 0.5 %>">
+              <%= score %> / <%= total %>
+            </span>
           </div>
         </div>
       </div>
@@ -92,38 +96,18 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="lesson-row">
-                      <td class="lesson-name-cell">
-                        <%= student.score.keys.dig(0) %>
-                      </td>
-                      <td class="quiz-score-cell">
-                        <%= student.score.values.dig(0) %> / 5
-                      </td>
-                    </tr>
-                    <tr class="lesson-row">
-                      <td class="lesson-name-cell">
-                        <%= student.score.keys.dig(1) %>
-                      </td>
-                      <td class="quiz-score-cell">
-                        <%= student.score.values.dig(1) %> / 5
-                      </td>
-                    </tr>
-                    <tr class="lesson-row">
-                      <td class="lesson-name-cell">
-                        <%= student.score.keys.dig(2) %>
-                      </td>
-                      <td class="quiz-score-cell">
-                        <%= student.score.values.dig(2) %> / 5
-                      </td>
-                    </tr>
-                    <tr class="lesson-row">
-                      <td class="lesson-name-cell">
-                        <%= student.score.keys.dig(3) %>
-                      </td>
-                      <td class="quiz-score-cell">
-                        <%= student.score.values.dig(3) %> / 5
-                      </td>
-                    </tr>
+                    <% student.score.each_with_index do |(lesson_name, score), index| %>
+                      <% total = 5 %> <!-- Replace with the actual total per lesson if necessary -->
+                      <% percentage = score.to_f / total %>
+                      <tr class="lesson-row <%= 'low-score' if percentage <= 0.5 %>">
+                        <td class="lesson-name-cell">
+                          <%= lesson_name %>
+                        </td>
+                        <td class="quiz-score-cell">
+                          <%= score %> / <%= total %>
+                        </td>
+                      </tr>
+                    <% end %>
                   </tbody>
                 </table>
               <% else %>
