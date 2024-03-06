@@ -79,22 +79,35 @@
 }
 
 .lesson-form {
-  max-width: 400px;
-  margin: 0 auto;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 
 .lesson-form-group {
-  margin-bottom: 20px;
-  margin-top: 8px;
+  margin-bottom: 25px;
 }
 
-.form-control{
+.form-control,
+.form-control-content {
+  width: 100%;
   margin-top: 10px;
-  margin-bottom: 8px;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px;
+  border-radius: 4px;
 }
 
 .form-control-instruction {
-  color: rgb(168, 168, 168);
+  color: rgb(120, 120, 120);
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.form-control-content {
+  height: 400px;
 }
 
 
