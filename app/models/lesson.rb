@@ -4,9 +4,12 @@ class Lesson < ApplicationRecord
   has_many :styled_lessons, dependent: :destroy
   # after_create :create_styled_lessons
 
-
   def openai_api
     @openai_api ||= OpenaiApi.new
+  end
+
+  def has_supplementary_lessons?
+    styled_lessons.supplementary.exists?
   end
 
   def missing_styles
