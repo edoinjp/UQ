@@ -2,12 +2,12 @@ import { Controller } from "@hotwired/stimulus";
 import { createConsumer } from "@rails/actioncable";
 
 export default class extends Controller {
-  static values = { chatroomId: Number };
-  static targets = ["messages", "form", "content"];
+  static values = { chatroomId: Number, userId: Number , teacherId: Number };
+  static targets = ["messages", "form", "content" ];
 
   connect() {
     console.log("Connected to the chatroom subscription controller.");
-
+    console.log(this.userIdValue);
     // Connect to ChatroomChannel
     this.channel = createConsumer().subscriptions.create(
       { channel: "ChatroomChannel", id: this.chatroomIdValue },
@@ -34,19 +34,54 @@ export default class extends Controller {
       this.channel.send({ content });
       this.contentTarget.value = ""; // Clear input after submission
     }
+
   }
 
   // Handle received message from ActionCable
   handleChatroomData(data) {
-    this.messagesTarget.insertAdjacentHTML("beforeend", data);
-    const lastMessage = this.messagesTarget.lastElementChild;
+    this.messagesTarget.insertAdjacentHTML("beforeend", data.message);
+    const lastMessage = this.messagesTarget.lastElementChild.firstElementChild;
+    console.log(lastMessage);
+    if (this.currentUserIsSender(data.user_id)) {
 
-    // Check if the last message is a sent message (customize this condition based on your HTML structure)
-    if (lastMessage.classList.contains("sent")) {
-      lastMessage.classList.add("sent"); // Add the 'sent' class
-      lastMessage.querySelector('.messegecontent').style.backgroundColor = '#5ec7fba1'; // Apply background color
+      lastMessage.classList.add("sent");
+      lastMessage.classList.remove("received");
+
+    } else {
+      lastMessage.classList.add("received");
+      lastMessage.classList.remove("sent");
+    }
+    if (this.isAnonymous(data.user_id)) {
+      lastMessage.querySelector(".chatimg").innerHTML = "anonymous"
     }
 
     lastMessage.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  }
+  // Logic to know if the sender is the current_user
+  currentUserIsSender(senderId) {
+    return this.userIdValue === senderId;
+
+  }
+  // Creating the whole message from the `message` String
+  justifyClass(currentUserIsSender) {
+    return currentUserIsSender ? "justify-content-end" : "justify-content-start"
+  }
+
+  isAnonymous(senderId){
+    console.log(this.userIdValue, this.teacherIdValue, senderId, this.userIdValue != this.teacherIdValue && !this.currentUserIsSender(senderId) && senderId != this.teacherIdValue);
+    return this.userIdValue != this.teacherIdValue && !this.currentUserIsSender(senderId) && senderId != this.teacherIdValue
+  }
+
+  userStyleClass(currentUserIsSender) {
+    return currentUserIsSender ? "sender-style" : "receiver-style"
+  }
+  buildMessageElement(currentUserIsSender, message) {
+    return `
+    <div class="message-row d-flex ${this.justifyContentClass(currentUserIsSender)}">
+    <div class="${this.userStyleClass(currentUserIsSender)}">
+    ${message}
+    </div>
+    </div>
+    `;
   }
 }
