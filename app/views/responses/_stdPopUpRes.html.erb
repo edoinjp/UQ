@@ -34,8 +34,6 @@
     </span>
   </span>
 </div>
-
-
           </div>
         </div>
         <div class="response-list-content">
@@ -44,7 +42,13 @@
             <%= student.learning_style.capitalize %>
           </div>
           <div class="response-list-answer">
-            correct <%= student.score.values.dig(0) %> / 5
+            <% score = student.score.values.dig(0) %>
+            <% total = 5 %>
+            <% percentage = score.to_f / total %>
+            Quiz results:
+            <span class="<%= 'low-score' if percentage <= 0.5 %>">
+              <%= score %> / <%= total %>
+            </span>
           </div>
         </div>
       </div>
@@ -91,40 +95,19 @@
                       <th class="quiz-score-header">Quiz Score</th>
                     </tr>
                   </thead>
-                  <tbody >
-
-                    <tr class="lesson-row">
-                      <td class="lesson-name-cell">
-                        <%= student.score.keys.dig(0) %>
-                      </td>
-                      <td class="quiz-score-cell">
-                        <%= student.score.values.dig(0) %> / 5
-                      </td>
-                    </tr>
-                    <tr class="lesson-row">
-                      <td class="lesson-name-cell">
-                        <%= student.score.keys.dig(1) %>
-                      </td>
-                      <td class="quiz-score-cell">
-                        <%= student.score.values.dig(1) %> / 5
-                      </td>
-                    </tr>
-                    <tr class="lesson-row">
-                      <td class="lesson-name-cell">
-                        <%= student.score.keys.dig(2) %>
-                      </td>
-                      <td class="quiz-score-cell">
-                        <%= student.score.values.dig(2) %> / 5
-                      </td>
-                    </tr>
-                    <tr class="lesson-row">
-                      <td class="lesson-name-cell">
-                        <%= student.score.keys.dig(3) %>
-                      </td>
-                      <td class="quiz-score-cell">
-                        <%= student.score.values.dig(3) %> / 5
-                      </td>
-                    </tr>
+                  <tbody>
+                    <% student.score.each_with_index do |(lesson_name, score), index| %>
+                      <% total = 5 %> <!-- Replace with the actual total per lesson if necessary -->
+                      <% percentage = score.to_f / total %>
+                      <tr class="lesson-row <%= 'low-score' if percentage <= 0.5 %>">
+                        <td class="lesson-name-cell">
+                          <%= lesson_name %>
+                        </td>
+                        <td class="quiz-score-cell">
+                          <%= score %> / <%= total %>
+                        </td>
+                      </tr>
+                    <% end %>
                   </tbody>
                 </table>
               <% else %>
@@ -136,7 +119,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
