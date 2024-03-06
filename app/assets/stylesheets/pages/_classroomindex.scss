@@ -1,25 +1,29 @@
 // classrooms index page for now here
+.classroomindex {
+  height: 90%;
+  margin-top: 50px;
+  width: 100%;
+}
+
 .classs2{
   color: #2e3c68ba;
   font-size: 2rem;
   margin-left: 3.5rem;
 }
-.classroomspage{
-  padding: 50px;
-  position: relative;
-  height: 100%;
-  text-decoration: none;
-  color:#333F66;
 
-  overflow-x: hidden;
-  justify-content: center;
-}
 .allclasses {
-  display: flex;
-  flex-wrap: wrap; /* Allow items to wrap to the next line */
-  gap: 25px; /* Adjust the gap between items as needed */
-  text-decoration: none;
-  max-width: 100%; /* Set a maximum width to prevent stretching */
+  box-sizing: border-box;
+  margin: auto;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 20px;
+  width: 95%; /* Adjusted to 100% for full-width container */
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
+  padding: 5px;
+  margin-top: 40px;
+ /* Set a maximum width to prevent stretching */
   // justify-content: space-between; /* Distribute items evenly along the main axis */
 }
 
@@ -36,7 +40,7 @@
 
 .classroombox{
   display: flex;
-  height: 250px;
+  height: 260px;
   width: 330px;
   background-color: #333F66;
   padding: 30px;

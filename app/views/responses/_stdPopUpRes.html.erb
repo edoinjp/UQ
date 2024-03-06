@@ -17,10 +17,27 @@
                 'green'
               end
             }" %> <!-- Generate a hex color according to their learning style-->
-            <%= cl_image_tag student.photo.key, alt: student.full_name, class: "response-img", style: "border-color: #{border_color};" %>
+
+           <div class="position-relative">
+  <%= cl_image_tag student.photo.key, alt: "#", class: "studentimg", style: "border-color: #{border_color};" %>
+  <span class="position-absolute bottom-0 start-100 translate-middle p-1 border border-light rounded-circle" style="background-color: <%= border_color %>; width: 30px; height: 30px;">
+    <span class="text-light fs-6">
+      <% if student.learning_style == 'visual' %>
+        <i class="fa-regular fa-image" style="width: 100%; height: 100%; border-radius: 50%;"></i>
+      <% elsif student.learning_style == 'aural' %>
+        <i class="fa-solid fa-headphones-simple" style="width: 100%; height: 100%; border-radius: 50%;"></i>
+      <% elsif student.learning_style == 'reading' %>
+        <i class="fa-solid fa-book" style="width: 100%; height: 100%; border-radius: 50%;"></i>
+      <% elsif student.learning_style == 'kinesthetic' %>
+        <i class="fa-solid fa-microphone" style="width: 100%; height: 100%; border-radius: 50%;"></i>
+      <% end %>
+    </span>
+  </span>
+</div>
+
+
           </div>
         </div>
-
         <div class="response-list-content">
           <div class="response-list-name">
             <%= student.full_name %> /
@@ -33,22 +50,19 @@
       </div>
     </div>
   </button>
-
   <!-- Modal -->
   <div class="modal fade" id="<%= student.first_name %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel"><%= 'Check Up' %></h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-
           <div class="profile-card">
-            <%= cl_image_tag student.photo.key, alt: student.full_name, class: "avatar-large" %>
             <div class="profile-card-content">
               <div class="profile-content-info">
-                <h1><%= student.full_name %>'s Profile</h1>
+               <%= cl_image_tag student.photo.key, alt: student.full_name, class: "avatar-large" %>
+                <%= student.full_name %>
               </div>
               <% stu_style_color = "#{
                 if student.learning_style === 'visual'
@@ -67,18 +81,17 @@
               </button>
             </div>
           </div>
-
           <div class="profile-lesson-container">
             <div class="profile-lesson">
               <% if student.score.any? %>
-                <table>
+                <table class="quziscorex">
                   <thead>
                     <tr>
                       <th class="lesson-name-header">Lesson Name</th>
                       <th class="quiz-score-header">Quiz Score</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody >
 
                     <tr class="lesson-row">
                       <td class="lesson-name-cell">
@@ -88,7 +101,6 @@
                         <%= student.score.values.dig(0) %> / 5
                       </td>
                     </tr>
-
                     <tr class="lesson-row">
                       <td class="lesson-name-cell">
                         <%= student.score.keys.dig(1) %>
@@ -97,7 +109,6 @@
                         <%= student.score.values.dig(1) %> / 5
                       </td>
                     </tr>
-
                     <tr class="lesson-row">
                       <td class="lesson-name-cell">
                         <%= student.score.keys.dig(2) %>
@@ -106,7 +117,6 @@
                         <%= student.score.values.dig(2) %> / 5
                       </td>
                     </tr>
-
                     <tr class="lesson-row">
                       <td class="lesson-name-cell">
                         <%= student.score.keys.dig(3) %>
@@ -115,26 +125,19 @@
                         <%= student.score.values.dig(3) %> / 5
                       </td>
                     </tr>
-
                   </tbody>
                 </table>
               <% else %>
                 <p>This user has no lessons.</p>
               <% end %>
             </div>
-
-          <div class="student-chart">
-            <%= line_chart(student.score, max: 5)%>
-          </div>
-
+            <div class="student-chart">
+              <%= line_chart(student.score, max: 5)%>
+            </div>
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
+
       </div>
     </div>
   </div>
-
 <% end %>

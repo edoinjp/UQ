@@ -1,7 +1,8 @@
+<div class="classroomindex" >
 <h1 class="classs2">My Classrooms</h1>
-<div class="classroomspage">
+
   <% if @classrooms.any? %>
-    <ul class="allclasses">
+    <div class="allclasses">
       <% if current_user.teacher? %>
         <div class="createclass">
           <div class="classroombox addclassroom">
@@ -13,7 +14,7 @@
       <% end %>
 
       <% @classrooms.each do |classroom| %>
-        <li class="classroombox">
+        <div class="classroombox">
           <div class="classinfo1">
             <img class="classimg" src="https://www.thoughtco.com/thmb/MbIK8VYZIuh5AUctOSpqh-q4Dyg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-846997320-9ebc9320dd0e4d9aad3cb2a0dafbb8b4.jpg" alt="#">
             <%= link_to classroom.name, classroom_lessons_path(classroom) %>
@@ -31,9 +32,9 @@
             </div>
           </div>
           <!-- End dropdown -->
-        </li>
+        </div>
       <% end %>
-    </ul>
+    </div>
   <% else %>
     <p>No classrooms found.</p>
   <% end %>

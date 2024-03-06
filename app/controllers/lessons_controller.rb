@@ -1,7 +1,7 @@
 class LessonsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_classroom, only: [:index, :new, :create]
-  before_action :set_lesson, only: [:show]
+  before_action :set_lesson, only: [:show, :create_supplementary, :new_supplementary]
   include ActionController::Live # Allows AI chat streaming
 
   def index
@@ -19,12 +19,19 @@ class LessonsController < ApplicationController
     @classroom = @lesson.classroom
 
     authorize(@lesson)
-    # Assigns a variable for each styled_lesson style type
+
+    # Assigns a variable for each styled_lesson style type for main content
     @visual = @lesson.styled_lessons.find { |x| x['style'] == 'visual' }
     @aural = @lesson.styled_lessons.find { |x| x['style'] == 'aural' }
     @reading = @lesson.styled_lessons.find { |x| x['style'] == 'reading' }
     @kinesthetic = @lesson.styled_lessons.find { |x| x['style'] == 'kinesthetic' }
 
+    # Assigns a variable for each Supplementary styled_lesson style type for main content
+    @supplementaryVisual = @lesson.styled_lessons.supplementary.find_by(style: 'visual')
+    @supplementaryAural = @lesson.styled_lessons.supplementary.find_by(style: 'aural')
+    @supplementaryReading = @lesson.styled_lessons.supplementary.find_by(style: 'reading')
+    @supplementaryKinesthetic = @lesson.styled_lessons.supplementary.find_by(style: 'kinesthetic')
+    # debugger
     # Logic to have student avatars appear according the the lesson style
     @students = @classroom.students
     if params[:query].present?
@@ -69,6 +76,16 @@ class LessonsController < ApplicationController
     authorize(@lesson)
   end
 
+  def create_supplementary
+    authorize(@lesson)
+    styles = @lesson.missing_styles
+    @lesson.create_styled_lessons(supplementary: true, styles: styles)
+    redirect_to classroom_lessons_path(@lesson.classroom, @lesson), notice: 'Lesson was successfully created.'
+  end
+
+  def new_supplementary
+    authorize(@lesson)
+  end
 
   def create
     @lesson = Lesson.new(lesson_params)

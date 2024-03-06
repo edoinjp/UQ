@@ -1,5 +1,5 @@
 class ResponsesController < ApplicationController
-  before_action :set_lesson, only: :index
+  before_action :set_lesson, only: [:index, :create_supplementary_lessons]
 
   def index
     @active_tab = "responses"
@@ -89,6 +89,11 @@ class ResponsesController < ApplicationController
         reading_l4_total += student.score.values.slice(3)
       else
         kinesthetic_l4_total += student.score.values.slice(3)
+      end
+
+      # Logic to have student avatars appear according to the style filter
+      if params[:query].present?
+        @students = @students.where(learning_style: params[:query])
       end
 
     end

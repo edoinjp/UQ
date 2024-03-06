@@ -14,8 +14,16 @@ class LessonPolicy < ApplicationPolicy
     user.teacher?
   end
 
+  def new_supplementary?
+    new?
+  end
+
   def create?
     user.teacher?
+  end
+
+  def create_supplementary?
+    create?
   end
 
   def download_pdf?
