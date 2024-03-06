@@ -2,8 +2,8 @@ import { Controller } from "@hotwired/stimulus";
 import { createConsumer } from "@rails/actioncable";
 
 export default class extends Controller {
-  static values = { chatroomId: Number, userId: Number };
-  static targets = ["messages", "form", "content"];
+  static values = { chatroomId: Number, userId: Number , teacherId: Number };
+  static targets = ["messages", "form", "content" ];
 
   connect() {
     console.log("Connected to the chatroom subscription controller.");
@@ -40,16 +40,20 @@ export default class extends Controller {
   // Handle received message from ActionCable
   handleChatroomData(data) {
     this.messagesTarget.insertAdjacentHTML("beforeend", data.message);
-    const lastMessage = this.messagesTarget.lastElementChild;
+    const lastMessage = this.messagesTarget.lastElementChild.firstElementChild;
     console.log(lastMessage);
     if (this.currentUserIsSender(data.user_id)) {
 
       lastMessage.classList.add("sent");
+      lastMessage.classList.remove("received");
 
     } else {
       lastMessage.classList.add("received");
+      lastMessage.classList.remove("sent");
     }
-
+    if (this.isAnonymous(data.user_id)) {
+      lastMessage.querySelector(".chatimg").innerHTML = "anonymous"
+    }
 
     lastMessage.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }
@@ -61,6 +65,11 @@ export default class extends Controller {
   // Creating the whole message from the `message` String
   justifyClass(currentUserIsSender) {
     return currentUserIsSender ? "justify-content-end" : "justify-content-start"
+  }
+
+  isAnonymous(senderId){
+    console.log(this.userIdValue, this.teacherIdValue, senderId, this.userIdValue != this.teacherIdValue && !this.currentUserIsSender(senderId) && senderId != this.teacherIdValue);
+    return this.userIdValue != this.teacherIdValue && !this.currentUserIsSender(senderId) && senderId != this.teacherIdValue
   }
 
   userStyleClass(currentUserIsSender) {

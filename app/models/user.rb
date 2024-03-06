@@ -25,4 +25,11 @@ class User < ApplicationRecord
   def student?
     !teacher?
   end
+  def safe_firstname(user)
+    user.teacher? || user == self || teacher? ? first_name : "anonymous"
+
+  end
+  def safe_image?(user)
+    user.teacher? || user == self || teacher?
+  end
 end

@@ -2,34 +2,12 @@
   <div id="message-<%= message.id %>" class="<%= current_user == message.user ? 'sent' : 'received' %> messige" style="width: fit-content; max-width: calc(100% + 30px);">
     <div class="sender-info">
       <small class="text-muted">
-        <% if current_user.teacher? %>
-          <div class="user-info chatimg">
-            <%= cl_image_tag message.user.photo.key, class: "user-img rounded-circle", style: "max-width: 30px;" if message.user.photo %>
-            <strong>
-              <%= message.user.first_name %>
-            </strong>
-          </div>
-        <% elsif message.user.teacher? %>
-          <div class="user-info chatimg">
-            <strong style="color: orange;">
-              <%= message.user.first_name %>
-              <%= cl_image_tag message.user.photo.key, class: "user-img rounded-circle", style: "max-width: 30px;" if message.user.photo %>
-            </strong>
-          </div>
-        <% else %>
-          <% if @chatroom.users.count == 2 %>
-            <div class="user-info chatimg">
-              <strong>
-                <%= message.user.first_name %>
-                <%= cl_image_tag message.user.photo.key, class: "user-img rounded-circle", style: "max-width: 30px;" if message.user.photo %>
-              </strong>
-            </div>
-          <% else %>
-            <div class="user-info chatimg">
-              <strong><i class="fas fa-user"></i> Anonymous</strong>
-            </div>
-          <% end %>
-        <% end %>
+        <div class="user-info chatimg">
+          <%= cl_image_tag message.user.photo.key, class: "user-img rounded-circle", style: "max-width: 30px;" if message.user.photo && message.user.safe_image?(current_user) %>
+          <strong>
+            <%= message.user.safe_firstname(current_user) %>
+          </strong>
+        </div>
       </small>
       <div class="message-content">
         <p class="messegecontent" style="color: black;"><br><%= message.content %></p>
