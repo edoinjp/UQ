@@ -1,4 +1,4 @@
-<h1 class="header"><%= params[:query] ? "#{params[:query].capitalize} Focused Lesson" : @lesson.title %></h2>
+<h1 class="lesson-header"><%= params[:query] ? "#{params[:query].capitalize} Focused Lesson" : @lesson.title %></h2>
 <p><%= @paragraph %></p>
 <br>
 <!-- Switch Button -->
@@ -28,11 +28,11 @@
             <i class="fa-solid fa-microphone filter-icons" id="kinesthetic-icon"></i>
           </li>
         <% end %>
-        <%#= link_to '#', data: { action: "click->lesson#toggleSupplementaryContent" } do %>
+        <%= link_to '#', data: { action: "click->lesson#toggleSupplementaryContent" } do %>
           <li class="lesson-items">
             <i class="fa-solid fa-graduation-cap filter-icons" id="supplementary-icon"></i>
           </li>
-        <%# end %>
+        <% end %>
         <!-- Help Chat Button -->
         <li class="lesson-item">
           <div class="btn-group dropstart">
