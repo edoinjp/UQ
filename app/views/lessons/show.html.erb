@@ -1,5 +1,5 @@
 <div class="lesson-show" data-controller="lesson">
-  <h1 class="header" data-lesson-target="title">
+  <h1 class="header titlelesson" data-lesson-target="title">
     <%= params[:query] ? "#{params[:query].capitalize} Focused Lesson" : @lesson.title %>
   </h1>
   <p><%= @paragraph %></p>
@@ -136,14 +136,28 @@
     </div>
     <!-- Teacher & Student containers -->
   </div>
+  <!-- Teacher & Student containers -->
+  <br>
   <div class="teacher-container">
-    <%= image_tag "profile.png" %>
     <div class="teacher-container-infos">
+      <div class="teacherandstudent">
+        <div class="teacher1">
+
+       <%= image_tag "profile.png" %>
+        </div>
+        <div class="student1">
+
+        <%= render "stdPopUpLesson", students: @students %>
+        </div>
+
+      </div>
+      <br>
       <h2><%= @lesson.title %></h2>
-      <p>In this lesson, <strong>you'll</strong> be introduced to...</p>
+      <p>The present perfect tense is one of the common verb tenses in English, used to show an action that <strong> happened in the <br>
+          past that is directly related to the present </strong>, such as actions that are still continuing or that indicate a change over time.</p>
     </div>
+
   </div>
-  <div class="student-container">
-    <%= render "stdPopUpLesson", students: @students %>
   </div>
+
 </div>

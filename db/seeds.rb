@@ -78,17 +78,17 @@ puts 'Creating 10 boy students...'
 
 boy_avatars.each do |path|
   student = User.create!(
-    first_name: boy_first_names.sample,
+    first_name: boy_first_names.shift,
     last_name: last_names.sample,
     learning_style: %w[visual aural reading kinesthetic].sample,
     email: Faker::Internet.email,
     password: 'password',
     teacher: false,
     score: {
-      'Ice Breakers' => rand(0..5),
-      'Oral Communication II' => rand(0..5),
-      'Social Science' => rand(0..5),
-      'Language Arts' => rand(0..5)
+      'Present Tense' => rand(0..5),
+      'Past Tense' => rand(0..5),
+      'Conditionals' => rand(0..5),
+      'Present Perfect' => rand(0..5)
     }
   )
   file = File.open(Rails.root.join(path))
@@ -106,17 +106,17 @@ puts 'Creating 10 girl students...'
 
 girl_avatars.each do |path|
   student = User.create!(
-    first_name: girl_first_names.sample,
+    first_name: girl_first_names.shift,
     last_name: last_names.sample,
     learning_style: %w[visual aural reading kinesthetic].sample,
     email: Faker::Internet.email,
     password: 'password',
     teacher: false,
     score: {
-      'Ice Breakers' => rand(0..5),
-      'Oral Communication II' => rand(0..5),
-      'Social Science' => rand(0..5),
-      'Language Arts' => rand(0..5)
+      'Present Tense' => rand(0..5),
+      'Past Tense' => rand(0..5),
+      'Conditionals' => rand(0..5),
+      'Present Perfect' => rand(0..5)
     }
   )
   file = File.open(Rails.root.join(path))
@@ -130,6 +130,31 @@ girl_avatars.each do |path|
   puts "User #{student.first_name} has been created..."
 end
 
+puts 'Creating Osama...'
+osama = User.create!(
+  first_name: 'Osama',
+  last_name: 'Suleiman',
+  learning_style: %w[visual aural reading kinesthetic].sample,
+  email: Faker::Internet.email,
+  password: 'password',
+  teacher: false,
+  score: {
+    'Present Tense' => rand(0..5),
+    'Past Tense' => rand(0..5),
+    'Conditionals' => rand(0..5),
+    'Present Perfect' => rand(0..5)
+  }
+)
+file = File.open(Rails.root.join('app/assets/images/students/Osama.jpg'))
+osama.photo.attach(io: file, filename: 'user.jpg', content_type: 'image/jpg')
+osama.save
+
+Participation.create!(
+  user: osama,
+  classroom: classroom
+)
+puts "User #{osama.first_name} has been created..."
+
 puts 'All students have been created!'
 
 Chatroom.create!(
@@ -140,7 +165,7 @@ Chatroom.create!(
 puts 'Creating a lesson...'
 lesson = Lesson.create!(
   classroom: classroom,
-  title: 'Ice Breakers'
+  title: 'Present Perfect'
 )
 puts "The #{lesson.title} seed lesson has been created!"
 
@@ -167,15 +192,6 @@ visual_lesson.files.attach(io: file4, filename: 'visual_4.jpg')
 
 file5 = File.open(Rails.root.join('db/files/visual_lesson/lessonimg_5.jpg'))
 visual_lesson.files.attach(io: file5, filename: 'visual_5.jpg')
-
-file6 = File.open(Rails.root.join('db/files/visual_lesson/lessonimg_6.jpg'))
-visual_lesson.files.attach(io: file6, filename: 'visual_6.jpg')
-
-file7 = File.open(Rails.root.join('db/files/visual_lesson/lessonimg_7.jpg'))
-visual_lesson.files.attach(io: file7, filename: 'visual_7.jpg')
-
-file8 = File.open(Rails.root.join('db/files/visual_lesson/lessonimg_8.jpg'))
-visual_lesson.files.attach(io: file8, filename: 'visual_8.jpg')
 visual_lesson.save
 
 puts 'Visual lesson has been created!'

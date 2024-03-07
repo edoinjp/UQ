@@ -1,7 +1,6 @@
 <div class="student-profiles">
-
   <div class="learning-style mt-3">
-   <p><%= @user.learning_style.capitalize %> type</p>
+    <p><%= @user.learning_style.capitalize %> type</p>
   </div>
   <div class="profile-card">
     <%= render 'stdPopUpUsers' %>
@@ -12,7 +11,6 @@
       <button type="button" class="btn btn-light rounded" style="width: 162px;">vark test</button>
     </div>
   </div>
-
   <div class="profile-lesson-container">
     <div class="profile-lesson">
       <% if @lessons_with_scores.any? %>
@@ -36,15 +34,8 @@
         <p>This user has no lessons.</p>
       <% end %>
     </div>
-
-
-  <div class="student-chart">
-    <%= column_chart(@chart_data, max: 5)%>
+    <div class="student-chart">
+      <%= column_chart(@chart_data, max: 5)%>
+    </div>
   </div>
-
-
-  </div>
-
-
-
 </div>
