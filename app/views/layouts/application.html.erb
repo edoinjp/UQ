@@ -10,13 +10,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/theme/black.min.css">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_importmap_tags %>
-     <%# <%= javascript_include_tag 'todos' %>
+    <%# <%= javascript_include_tag 'todos' %>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </head>
-
   <body class="mainbody " class="<%= controller_name %>">
     <!-- Sidebar -->
     <div class="sidebar">
@@ -26,320 +25,303 @@
           <!-- Add logic to dynamically set the first letter of the username later -->
         </a>
       </div>
-
-        <style>
-          /* style to display none sidebar selection */
-         <% if controller_name == 'classrooms' && action_name == 'index' %>
-            #students, #responses, #content , #chatroom{
-              display: none;
-            }
+      <style>
+        /* style to display none sidebar selection */
+                 <% if controller_name == 'classrooms' && action_name == 'index' %>
+          #students, #responses, #content , #chatroom{
+            display: none;
+          }
+        <% end %>
+      </style>
+      <div class="sidebar d-flex flex-column">
+        <ul class="sidebarul ">
+          <%# classrooms %>
+          <li id="classes" class="<%= 'active' if @active_tab == "classrooms"%>">
+            <%= link_to classrooms_path do %>
+              <i class="fas fa-graduation-cap"></i>
+              &nbsp;Classrooms
+            <% end %>
+          </li>
+          <%# lessons %>
+          <% if @classroom.present? && @classroom.lessons.any? %>
+            <li id="classroom-lessons" class="<%= 'active' if @active_tab == 'classroom_lessons' %>">
+              <%= link_to classroom_lessons_path(@classroom) do %>
+                <i class="fa-solid fa-book-open"></i>
+                &nbsp;Lessons
+              <% end %>
+            </li>
           <% end %>
-
-        </style>
-        <div class="sidebar d-flex flex-column">
-            <ul class="sidebarul ">
-                   <%# classrooms %>
-                 <li id="classes" class="<%= 'active' if @active_tab == "classrooms"%>">
-                  <%= link_to classrooms_path do %>
-                    <i class="fas fa-graduation-cap"></i>
-                    &nbsp;Classrooms
-                  <% end %>
-                </li>
-                  <%# lessons %>
-                 <% if @classroom.present? && @classroom.lessons.any? %>
-                    <li id="classroom-lessons" class="<%= 'active' if @active_tab == 'classroom_lessons' %>">
-                      <%= link_to classroom_lessons_path(@classroom) do %>
-                       <i class="fa-solid fa-book-open"></i>
-                       &nbsp;Lessons
-                      <% end %>
-                    </li>
-                  <% end %>
-                 <%# students %>
-              <% if @classroom.present? && action_name != 'new' && current_user.teacher? %>
-                <li id="students-<%= @classroom.id %>" class="<%= 'active' if @active_tab == "students" %>">
-                  <%= link_to classroom_path(@classroom) do %>
-                    <i class="fa-solid fa-user"></i>
-                    &nbsp;Students
-                  <% end %>
-                </li>
+          <%# students %>
+          <% if @classroom.present? && action_name != 'new' && current_user.teacher? %>
+            <li id="students-<%= @classroom.id %>" class="<%= 'active' if @active_tab == "students" %>">
+              <%= link_to classroom_path(@classroom) do %>
+                <i class="fa-solid fa-user"></i>
+                &nbsp;Students
               <% end %>
-
-              <%# responses %>
-              <% if @classroom.present? && @lesson.present? && @lesson.persisted? && current_user.teacher? %>
-                <li id="responses" class="<%= 'active' if @active_tab == 'responses' %>">
-                  <%= link_to lesson_responses_path(@lesson) do %>
-                    <i class="fas fa-chart-bar"></i>
-                    &nbsp;Responses
-                  <% end %>
-                </li>
+            </li>
+          <% end %>
+          <%# responses %>
+          <% if @classroom.present? && @lesson.present? && @lesson.persisted? && current_user.teacher? %>
+            <li id="responses" class="<%= 'active' if @active_tab == 'responses' %>">
+              <%= link_to lesson_responses_path(@lesson) do %>
+                <i class="fas fa-chart-bar"></i>
+                &nbsp;Responses
               <% end %>
+            </li>
+          <% end %>
+          <%# chat %>
+          <% if @classroom.present? && (current_classroom_chatroom = @classroom.chatroom).present? %>
+            <li id="chatroom" class="<%= 'active' if @active_tab == 'chatroom' %>">
+              <%= link_to chatroom_path(current_classroom_chatroom) do %>
+                <i class="fa-solid fa-comment-dots"></i>
+                &nbsp;Chat
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+        <%# sidebar hidden @@@@@@@@@@@@@@@@ %>
+        <script>
+          $(document).ready(function () {
+            $("#sidebarToggle").on("click", function () {
+              $(".sidebar").toggleClass("sidebar-hidden");
+              $(".maincontent").toggleClass("maincontent-hidden");
 
-             <%# chat %>
-                <% if @classroom.present? && (current_classroom_chatroom = @classroom.chatroom).present? %>
-                <li id="chatroom" class="<%= 'active' if @active_tab == 'chatroom' %>">
-                  <%= link_to chatroom_path(current_classroom_chatroom) do %>
-                 <i class="fa-solid fa-comment-dots"></i>
-                    &nbsp;Chat
-                  <% end %>
-         <% end %>
-            </ul>
-       </div>
-          <%# sidebar hidden @@@@@@@@@@@@@@@@ %>
-          <script>
-
-            $(document).ready(function () {
-              $("#sidebarToggle").on("click", function () {
-                $(".sidebar").toggleClass("sidebar-hidden");
-                $(".maincontent").toggleClass("maincontent-hidden");
-
-              });
             });
-          </script>
-
-         </div>
-    <!-- Main Content @@@@@@@@@@@@@@@@@@@@ -->
-        <div class="maincontent ">
-         <button class="btn btn-white mt-auto d-block" id="sidebarToggle" style="position: absolute;">
-        <i class="fas fa-chevron-left rotate-icon goback"></i>
-      </button>
-
-
-          <%= render "shared/flashes" %>
-          <%= link_to raw('<i class="fa-solid fa-angles-left"></i> </i>'), :back, class: 'goback-button' %>
-
-
-                  <%# todo list @@@@@@@@@@@@@@@@@@@ %>
-                 <div class="todolist dropup">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      To-Do
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <h1 >My to-do ist</h1>
-                      <div class="dropdown-divider"></div>
-                      <div class="dropdown-item">
-                        <div class="input-group addbuttonlist">
-                          <input type="text" class="form-control" placeholder="Add a new to-do" id="newTodoInput">
-                          <div class="input-group-append">
-                            <button class="btn btn-outline-secondary todobutton" type="button" onclick="addTodo()">Add</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-             <%# yield @@@@@@@@@@@@@@@@@@@@@@@%>
-              <%= yield %>
-
-              <p class="notice"><%= notice %></p>
-              <p class="alert"><%= alert %></p>
-               <%# todo styling %>
-                    <style>
-                        .todolist {
-                          position: fixed;
-                          bottom: 55px;
-                          right: 45px;
-                          z-index: 9999;
-                        }
-                        .dropdown-menu p {
-                            text-align: center;
-                          margin:0 auto;
-                          color: #ffffff;
-                          /* font-size: 14px; */
-                        }
-                        .addbuttonlist{
-                          align-items:center;
-                        }
-
-                        .todolist.dropup .btn-primary {
-                          border-radius: 10px;
-                          background-color: #004080;
-                          border: 0.2px solid #004080;
-                          color: #fff;
-                          margin-bottom: -10px;
-                        }
-
-                        .todolist.dropup .dropdown-menu {
-                          width: 350px;
-                          right: 0;
-                          left: auto;
-                          padding: 10px;
-                          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-                          border: 1px solid #004080;
-                          /* background-color: #gray; */
-                          border-radius: 20px;
-                          color:black;
-                        }
-
-                        .todo-item {
-                           /* color:white; */
-                          display: flex;
-                          align-items: center;
-                          margin-bottom: 5px;
-                          font-size: 14px;
-                          word-wrap: break-word; /* Allow text to wrap within words */
-                          overflow-wrap: break-word; /* Handle overflow situations */
-                          max-width: 100%; /* Limit the maximum width to 100% of the container */
-                        }
-
-                        .todo-item input[type="checkbox"] {
-                          margin-right: 10px;
-                          transform: scale(1.5);
-
-                        }
-
-                        .todo-item:hover {
-                          background-color: #e9ecef;
-                        }
-
-                        .checked {
-                          text-decoration: line-through;
-                        }
-                        .todo-link {
-                          white-space: normal; /* Allow text to wrap within the box */
-                          overflow-wrap: break-word; /* Break words to prevent overflow */
-                          word-wrap: break-word; /* Additional property for older browsers */
-                          display: flex;
-                          align-items: center;
-                          padding-right: 1rem; /* Adjust as needed */
-
-                        }
-
-                        .todo-link input[type="checkbox"] {
-                          margin-right: 10px;
-                          transform: scale(1.5);
-                           background-color: #5eadfba1;
-                        }
-
-                        .todo-link:hover {
-                           background-color: #5eadfba1;
-                        }
-
-                        .checked {
-                          text-decoration: line-through;
-                           background-color: #5eadfba1;
-                        }
-
-                        .dropdown-item:hover {
-                            /* background-color: #26325A; */
-                        }
-                        .todobutton{
-                           background-color: orange;
-                           /* color:white; */
-
-                        }
-                    </style>
-
-                  <%# todolist script %>
-               <script>
-                    // Function to create a new todo item
-                    function createTodoItem(text, checked) {
-                      var newTodo = document.createElement('a');
-                      newTodo.classList.add('dropdown-item', 'todo-item','todo-link');
-                      newTodo.innerHTML = '<input type="checkbox">' + text;
-
-                      if (checked) {
-                        newTodo.classList.add('checked');
-                        addDeleteButton(newTodo);
-                      }
-
-                      newTodo.addEventListener('click', toggleTodo);
-
-                      return newTodo;
-                    }
-
-                    // Function to add a delete button to a todo item
-                    function addDeleteButton(todoItem) {
-                      var deleteButton = document.createElement('button');
-                      deleteButton.innerHTML = '&times;'; // Unicode multiplication sign
-                      deleteButton.classList.add('btn', 'btn-danger', 'btn-sm', 'ml-2');
-                      deleteButton.addEventListener('click', deleteTodo);
-
-                      todoItem.appendChild(deleteButton);
-                    }
-
-                    // Function to add a new todo item
-                    function addTodo() {
-                      var newTodoValue = document.getElementById('newTodoInput').value.trim();
-
-                      if (newTodoValue !== '') {
-                        var dropdownMenu = document.querySelector('.dropdown-menu');
-                        var newTodo = createTodoItem(newTodoValue, false);
-                        dropdownMenu.insertBefore(newTodo, dropdownMenu.lastElementChild);
-
-                        document.getElementById('newTodoInput').value = '';
-
-                        // Store the updated todo list in localStorage
-                        updateLocalStorage();
-                      }
-                    }
-
-                    // Function to delete a todo item
-                    function deleteTodo(event) {
-                      var todoItem = event.currentTarget.parentElement; // Get the parent element (todo item)
-                      todoItem.remove();
-
-                      // Store the updated todo list in localStorage
-                      updateLocalStorage();
-                    }
-
-                    // Function to toggle the 'checked' class
-                    function toggleTodo(event) {
-                      var todoItem = event.currentTarget;
-                      todoItem.classList.toggle('checked');
-
-                      // If the item is checked, add or remove the delete button
-                      if (todoItem.classList.contains('checked')) {
-                        addDeleteButton(todoItem);
-                      } else {
-                        var deleteButton = todoItem.querySelector('button');
-                        if (deleteButton) {
-                          deleteButton.remove();
-                        }
-                      }
-
-                      // Store the updated todo list in localStorage
-                      updateLocalStorage();
-                    }
-
-                    // Function to update the todo list in localStorage
-                    function updateLocalStorage() {
-                      var todoListItems = document.querySelectorAll('.todo-item');
-                      var todoListData = [];
-
-                      todoListItems.forEach(function (item) {
-                        todoListData.push({
-                          text: item.textContent.trim(),
-                          checked: item.classList.contains('checked'),
-                        });
-                      });
-
-                      localStorage.setItem('todoList', JSON.stringify(todoListData));
-                    }
-
-                    // Function to retrieve the todo list from localStorage
-                    function retrieveLocalStorage() {
-                      var todoListData = localStorage.getItem('todoList');
-
-                      if (todoListData) {
-                        todoListData = JSON.parse(todoListData);
-
-                        todoListData.forEach(function (itemData) {
-                          var newTodo = createTodoItem(itemData.text, itemData.checked);
-
-                          var dropdownMenu = document.querySelector('.dropdown-menu');
-                          dropdownMenu.insertBefore(newTodo, dropdownMenu.lastElementChild);
-                        });
-                      }
-                    }
-
-                    // Call the retrieveLocalStorage function when the document is ready
-                    document.addEventListener('DOMContentLoaded', retrieveLocalStorage);
-                     retrieveLocalStorage();
-                </script>
-
-
+          });
+        </script>
       </div>
+      <!-- Main Content @@@@@@@@@@@@@@@@@@@@ -->
+      <div class="maincontent ">
+        <button class="btn btn-white mt-auto d-block" id="sidebarToggle" style="position: absolute;">
+          <i class="fas fa-chevron-left rotate-icon goback"></i>
+        </button>
+        <%= render "shared/flashes" %>
+        <%= link_to raw('<i class="fa-solid fa-angles-left"></i> </i>'), :back, class: 'goback-button' %>
+        <%# todo list @@@@@@@@@@@@@@@@@@@ %>
+        <div class="todolist dropup">
+          <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            To-Do
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <h1 >My to-do ist</h1>
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-item">
+              <div class="input-group addbuttonlist">
+                <input type="text" class="form-control" placeholder="Add a new to-do" id="newTodoInput">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary todobutton" type="button" onclick="addTodo()">Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%# yield @@@@@@@@@@@@@@@@@@@@@@@%>
+        <%= yield %>
+        <%# <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%# todo styling %>
+      <style>
+        .todolist {
+          position: fixed;
+          bottom: 55px;
+          right: 45px;
+          z-index: 9999;
+        }
+        .dropdown-menu p {
+            text-align: center;
+          margin:0 auto;
+          color: #ffffff;
+          /* font-size: 14px; */
+        }
+        .addbuttonlist{
+          align-items:center;
+        }
 
+        .todolist.dropup .btn-primary {
+          border-radius: 10px;
+          background-color: #004080;
+          border: 0.2px solid #004080;
+          color: #fff;
+          margin-bottom: -10px;
+        }
+
+        .todolist.dropup .dropdown-menu {
+          width: 350px;
+          right: 0;
+          left: auto;
+          padding: 10px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+          border: 1px solid #004080;
+          /* background-color: #gray; */
+          border-radius: 20px;
+          color:black;
+        }
+
+        .todo-item {
+           /* color:white; */
+          display: flex;
+          align-items: center;
+          margin-bottom: 5px;
+          font-size: 14px;
+          word-wrap: break-word; /* Allow text to wrap within words */
+          overflow-wrap: break-word; /* Handle overflow situations */
+          max-width: 100%; /* Limit the maximum width to 100% of the container */
+        }
+
+        .todo-item input[type="checkbox"] {
+          margin-right: 10px;
+          transform: scale(1.5);
+
+        }
+
+        .todo-item:hover {
+          background-color: #e9ecef;
+        }
+
+        .checked {
+          text-decoration: line-through;
+        }
+        .todo-link {
+          white-space: normal; /* Allow text to wrap within the box */
+          overflow-wrap: break-word; /* Break words to prevent overflow */
+          word-wrap: break-word; /* Additional property for older browsers */
+          display: flex;
+          align-items: center;
+          padding-right: 1rem; /* Adjust as needed */
+
+        }
+
+        .todo-link input[type="checkbox"] {
+          margin-right: 10px;
+          transform: scale(1.5);
+           background-color: #5eadfba1;
+        }
+
+        .todo-link:hover {
+           background-color: #5eadfba1;
+        }
+
+        .checked {
+          text-decoration: line-through;
+           background-color: #5eadfba1;
+        }
+
+        .dropdown-item:hover {
+            /* background-color: #26325A; */
+        }
+        .todobutton{
+           background-color: orange;
+           /* color:white; */
+
+        }
+      </style>
+      <%# todolist script %>
+      <script>
+        // Function to create a new todo item
+        function createTodoItem(text, checked) {
+          var newTodo = document.createElement('a');
+          newTodo.classList.add('dropdown-item', 'todo-item','todo-link');
+          newTodo.innerHTML = '<input type="checkbox">' + text;
+
+          if (checked) {
+            newTodo.classList.add('checked');
+            addDeleteButton(newTodo);
+          }
+
+          newTodo.addEventListener('click', toggleTodo);
+
+          return newTodo;
+        }
+
+        // Function to add a delete button to a todo item
+        function addDeleteButton(todoItem) {
+          var deleteButton = document.createElement('button');
+          deleteButton.innerHTML = '&times;'; // Unicode multiplication sign
+          deleteButton.classList.add('btn', 'btn-danger', 'btn-sm', 'ml-2');
+          deleteButton.addEventListener('click', deleteTodo);
+
+          todoItem.appendChild(deleteButton);
+        }
+
+        // Function to add a new todo item
+        function addTodo() {
+          var newTodoValue = document.getElementById('newTodoInput').value.trim();
+
+          if (newTodoValue !== '') {
+            var dropdownMenu = document.querySelector('.dropdown-menu');
+            var newTodo = createTodoItem(newTodoValue, false);
+            dropdownMenu.insertBefore(newTodo, dropdownMenu.lastElementChild);
+
+            document.getElementById('newTodoInput').value = '';
+
+            // Store the updated todo list in localStorage
+            updateLocalStorage();
+          }
+        }
+
+        // Function to delete a todo item
+        function deleteTodo(event) {
+          var todoItem = event.currentTarget.parentElement; // Get the parent element (todo item)
+          todoItem.remove();
+
+          // Store the updated todo list in localStorage
+          updateLocalStorage();
+        }
+
+        // Function to toggle the 'checked' class
+        function toggleTodo(event) {
+          var todoItem = event.currentTarget;
+          todoItem.classList.toggle('checked');
+
+          // If the item is checked, add or remove the delete button
+          if (todoItem.classList.contains('checked')) {
+            addDeleteButton(todoItem);
+          } else {
+            var deleteButton = todoItem.querySelector('button');
+            if (deleteButton) {
+              deleteButton.remove();
+            }
+          }
+
+          // Store the updated todo list in localStorage
+          updateLocalStorage();
+        }
+
+        // Function to update the todo list in localStorage
+        function updateLocalStorage() {
+          var todoListItems = document.querySelectorAll('.todo-item');
+          var todoListData = [];
+
+          todoListItems.forEach(function (item) {
+            todoListData.push({
+              text: item.textContent.trim(),
+              checked: item.classList.contains('checked'),
+            });
+          });
+
+          localStorage.setItem('todoList', JSON.stringify(todoListData));
+        }
+
+        // Function to retrieve the todo list from localStorage
+        function retrieveLocalStorage() {
+          var todoListData = localStorage.getItem('todoList');
+
+          if (todoListData) {
+            todoListData = JSON.parse(todoListData);
+
+            todoListData.forEach(function (itemData) {
+              var newTodo = createTodoItem(itemData.text, itemData.checked);
+
+              var dropdownMenu = document.querySelector('.dropdown-menu');
+              dropdownMenu.insertBefore(newTodo, dropdownMenu.lastElementChild);
+            });
+          }
+        }
+
+        // Call the retrieveLocalStorage function when the document is ready
+        document.addEventListener('DOMContentLoaded', retrieveLocalStorage);
+         retrieveLocalStorage();
+      </script>
+    </div>
   </body>
-
 </html>

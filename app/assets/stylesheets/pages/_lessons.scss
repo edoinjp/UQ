@@ -1,21 +1,24 @@
 .lessonsindexpage{
-  width: 95%;
+  width: 85%;
   margin-top: 50px;
   margin: 0 auto;
   padding-top: 50px;
+  // @media (min-width: 1475px) {
+  //   width: 95%; /* Override width for screens wider than 1200px */
+  //   max-width: none; /* Remove the maximum width for screens wider than 1200px */
+  // }
+
 }
 .index-container {
+  margin: 0 auto;
+  // background-color: gray;
   box-sizing: border-box;
   margin: auto;
   overflow: hidden;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-  gap: 20px;
-  // width: 95%; /* Adjusted to 100% for full-width container */
-  justify-content: center; /* Center items horizontally */
-  align-items: center; /* Center items vertically */
-  padding: 5px;
-
+  gap: 15px;
+  padding: 10px;
 
 }
 
