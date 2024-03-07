@@ -1,6 +1,6 @@
 <!-- Button trigger modal -->
 <% @students.each do |student| %>
-  <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#<%= student.first_name %>">
+  <button type="button" class="btn res-card" data-bs-toggle="modal" data-bs-target="#<%= student.first_name %>">
     <div class="response-column">
       <div class="response-list">
         <div class="response-image">
@@ -38,14 +38,13 @@
         </div>
         <div class="response-list-content">
           <div class="response-list-name">
-            <%= student.full_name %> /
-            <%= student.learning_style.capitalize %>
+            <%= student.full_name %>
           </div>
           <div class="response-list-answer">
             <% score = student.score.values.dig(0) %>
             <% total = 5 %>
             <% percentage = score.to_f / total %>
-            Quiz results:
+            Result:
             <span class="<%= 'low-score' if percentage <= 0.5 %>">
               <%= score %> / <%= total %>
             </span>
@@ -90,7 +89,7 @@
               <% if student.score.any? %>
                 <table class="quziscorex">
                   <thead>
-                    <tr>
+                    <tr class="student-header">
                       <th class="lesson-name-header">Lesson Name</th>
                       <br>
                       <th class="quiz-score-header">Quiz Score</th>

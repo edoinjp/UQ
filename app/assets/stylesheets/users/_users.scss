@@ -5,7 +5,7 @@
   align-items: center;
   margin-bottom: 8px;
   background-image: url("profile_card.png");
-  padding: 40px 58px;
+  padding: 25px 58px;
   border: 1px solid rgb(235,235,235);
   border-radius: 20px;
   width: 100%;
@@ -109,4 +109,22 @@
 .student-chart {
   width: 50%;
   height: auto;
+}
+
+.lesson-name-header {
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.quiz-score-header {
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.lesson-name-cell {
+  font-size: larger;
+}
+
+.quiz-score-cell {
+  font-size: larger;
 }
