@@ -5,16 +5,18 @@ import RevealMarkdown from "https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdo
 // Connects to data-controller="slides"
 export default class extends Controller {
   connect() {
-    const deck = new Reveal({
+    console.log("ki");
+    const deck = new Reveal(this.element ,{
       plugins: [ RevealMarkdown ]
-  })
-  deck.initialize({
-    embedded: true,
-    maxScale: 1,
-})
-  // Change the size of our presentation
-  document.querySelector( '.reveal' ).style.width = '720px';
-  document.querySelector( '.reveal' ).style.height = '400px';
-  // Make reveal.js aware of the size change
-  deck.layout();
-}}
+    })
+    deck.initialize({
+      embedded: true,
+      maxScale: 1,
+    })
+    // Change the size of our presentation
+    this.element.style.width = '720px';
+    this.element.style.height = '400px';
+    // Make reveal.js aware of the size change
+    deck.layout();
+}
+}

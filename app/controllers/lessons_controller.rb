@@ -37,7 +37,6 @@ class LessonsController < ApplicationController
     if params[:query].present?
       @students = @students.where(learning_style: params[:query])
     end
-
     # Creates quiz scores for each seeded lesson
     @lessons_with_scores = [@classroom].map(&:lessons).flatten.map do |lesson|
       {lesson: lesson, quiz_score: rand(0..5)}
@@ -54,7 +53,7 @@ class LessonsController < ApplicationController
     @lessons_with_scores.each do |lesson_result|
       @chart_data[lesson_result[:lesson].title] = lesson_result[:quiz_score]
     end
-
+    # raise
     # @openai_api = OpenaiApi.new
     # @paragraph = @openai_api.generate_content(@lesson.title)
   end
