@@ -134,15 +134,15 @@ puts 'Creating Osama...'
 osama = User.create!(
   first_name: 'Osama',
   last_name: 'Suleiman',
-  learning_style: %w[visual aural reading kinesthetic].sample,
+  learning_style: 'reading',
   email: Faker::Internet.email,
   password: 'password',
   teacher: false,
   score: {
-    'Present Tense' => rand(0..5),
-    'Past Tense' => rand(0..5),
-    'Conditionals' => rand(0..5),
-    'Present Perfect' => rand(0..5)
+    'Present Tense' => 4,
+    'Past Tense' => 3,
+    'Conditionals' => 2,
+    'Present Perfect' => 0
   }
 )
 file = File.open(Rails.root.join('app/assets/images/students/Osama.jpg'))
