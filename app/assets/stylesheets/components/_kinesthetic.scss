@@ -1,11 +1,9 @@
 .video-card {
-  width: 55vw;
-  height: 67vh;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 10px 10px 5px -1px rgba(0,0,0,0.75);
-  border-radius: 2rem;
+  margin: 0 auto;
 }
 
 .vid-display {

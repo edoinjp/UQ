@@ -1,12 +1,10 @@
 .reading-container {
   display: flex;
   flex-direction: row;
-  width: 55vw;
-  height: 67vh;
+  width: 800px;
   justify-content: space-around;
   align-items: center;
-  box-shadow: 10px 10px 5px -1px rgba(0,0,0,0.75);
-  border-radius: 2rem;
+
 }
 
 .preview-img {

@@ -1,18 +1,40 @@
+.lesson-show{
+  width: 95%;
+
+  margin:auto;
+  margin-top: 50px;
+}
+  .titlelesson{
+  margin: 0 auto;
+  width: 100%;
+
+  text-align: center;
+  color: #2e3c68ba;
+  font-size: 2rem;
+
+  }
 .lesson-container {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: column;
   justify-content: space-around;
+  // background-color: gray;
+  width: auto;
+
 }
 
 .lesson-content {
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  margin: 1rem;
-  width: 55vw;
-  height: 100%;
+  flex-direction: row;
+  // justify-content: space-around;
   border-radius: 2rem;
   background-color: #052c65;
+  justify-content: center;
+  width: 800px;
+  margin: 0 auto;
+  align-items: center;
+  padding: 1rem;
+  height: 450px;
+
 }
 
 .filter-icons {
@@ -101,9 +123,12 @@
 
 .lesson-tabs {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-self: center;
-  margin-right: 5rem;
+  justify-content: space-evenly;
+  width: 50%;
+  margin-top: 20px;
+
 }
 
 .response-tabs-container {
@@ -142,6 +167,11 @@
   align-items: center;
   margin-top: 1rem;
   margin-left: 3rem;
+  // background-color: gray;
+  width: 65%;
+  height: 150px;
+  padding-bottom: 20px;
+  margin: 0 auto;
 }
 
 .teacher-container img {
@@ -169,11 +199,28 @@
   padding: 16px;
 }
 
-.student-container {
-  margin-left: 3rem;
-  margin-right: 1.5rem;
-}
+// .student-container {
+//   // margin-left: 1rem;
 
+
+//   // background-color: gray;
+// }
+.teacherandstudent{
+  display: flex;
+  flex-direction: row;
+  // background-color: gray;
+  align-items: center;
+  justify-content: space-evenly;
+  // background-color: gray;
+
+
+}
+.student1{
+  width: 80%;
+}
+.teacher1{
+  width: 20%;
+}
 .student-avatars {
   margin-top: -1.5rem;
 }
@@ -194,3 +241,21 @@
 .reading-preview {
   margin: 1rem;
 }
+// span next previous
+  .carousel-control-prev,
+  .carousel-control-next {
+    font-size: 14px; /* Adjust the font size as needed */
+    width: 40px; /* Adjust the width as needed */
+    height: 40px; /* Adjust the height as needed */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+  }
+  .carousel-control-prev {
+    left: 0;
+  }
+
+  .carousel-control-next {
+    right: 0;
+  }
