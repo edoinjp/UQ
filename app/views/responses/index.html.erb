@@ -1,22 +1,28 @@
 <div class="score">
-
-    <h2 class="quiz-title">Quiz Results for <%= @lesson.title %></h2>
-    <br>
+  <h2 class="quiz-title">Quiz Results for <%= @lesson.title %></h2>
+  <br>
   <%#= link_to 'Create Supplementary Lessons', create_supplementary_lessons_lessons_path(lesson_id: @lesson.id), method: :post, class: "btn btn-primary" %>
-  <div class="average-chart w-100">
-    <%= line_chart @chart_data_all.map { |style|
-      {name: style[:name], data: style[:data]}
-    } %>
+  <div class="container4">
+    <div class="chart-container">
+      <!-- Your chart content goes here -->
+      <%= line_chart @chart_data_all.map { |style|
+          {name: style[:name], data: style[:data]}
+        } %>
+    </div>
+    <div class="form-container">
+      <%= simple_form_for([@lesson], url: create_supplementary_lesson_path(id: @lesson.id), html: { class: 'lesson-form formx' }) do |form| %>
+          <h2 class="text-center bg-light-blue mb-3">Supplementary Lesson</h2>
+        <%= form.input :title, input_html: { class: "form-control" } %>
+        <%= form.input :content, as: :text, input_html: { class: "form-control xclass", rows: 5, placeholder: "# Main headings\n --- \n ## Sub heading\n Content information \n---\n ##2nd Sub-heading\n Content information " } %>
+        <div class="d-flex justify-content-end">
+          <%= form.button :submit, "Generate Lesson", class: "btn btn-lesson" %>
+        </div>
+      <% end %>
+    </div>
   </div>
-  <%= link_to 'Create Supplementary Lesson', new_supplementary_lesson_path(id: @lesson.id), class: "btn btn-primary" %>
   <!-- Nav tabs -->
   <div class="response-tabs-container">
     <ul class="response-tabs">
-      <%= link_to lesson_responses_path(@lesson) do %>
-        <li class="response-items">
-            <i class="fa-solid fa-school filter-icons" id="school-icon"></i>
-        </li>
-      <% end %>
       <%= link_to lesson_responses_path(@lesson) + "?query=visual" do %>
         <li class="response-items">
           <i class="fa-regular fa-image filter-icons" id="visual-icon"></i>
@@ -26,6 +32,11 @@
         <li class="response-items">
           <i class="fa-solid fa-headphones-simple filter-icons" id="aural-icon"></i>
         </li>
+        <%= link_to lesson_responses_path(@lesson) do %>
+          <li class="response-items">
+            <i class="fa-solid fa-school filter-icons" id="school-icon"></i>
+          </li>
+        <% end %>
       <% end %>
       <%= link_to lesson_responses_path(@lesson) + "?query=reading" do %>
         <li class="response-items">
@@ -35,11 +46,6 @@
       <%= link_to lesson_responses_path(@lesson) + "?query=kinesthetic" do %>
         <li class="response-items">
           <i class="fa-solid fa-microphone filter-icons" id="kinesthetic-icon"></i>
-        </li>
-      <% end %>
-      <%= link_to lesson_responses_path(@lesson) do %>
-        <li class="response-items">
-          <i class="fa-solid fa-school filter-icons" id="school-icon"></i>
         </li>
       <% end %>
     </ul>

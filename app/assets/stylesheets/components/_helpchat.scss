@@ -2,16 +2,13 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 30rem;
+  height: 25rem;
   width: 20rem;
-  background-color: #FF9A6C;
-  box-shadow: 10px 10px 18px -6px rgba(0, 0, 0, 0.75);
-  border-radius: 2rem;
   overflow: hidden;
 }
 
 .help-response-container {
-  width: 90%;
+  // width: 90%;
   height: 100%;
   margin: 1rem;
   display: flex;
@@ -101,4 +98,8 @@
 
 .help-pop{
   border-radius: 2rem;
+  background-color: #FF9A6C;
+}
+.help-btn, .quiz-btn {
+  outline: none; /* Remove the default focus outline */
 }

@@ -1,56 +1,51 @@
 <div class="classroomstudentsshow">
-<div class="header-container">
-  <h1><%= @classroom.name %></h1>
-  <% if current_user.teacher? %>
-    <div class="teacher-info">
+  <div class="header-container">
+    <h1><%= @classroom.name %></h1>
+    <% if current_user.teacher? %>
+      <div class="teacher-info">
         <%= image_tag "profile.png" %><!-- Replace with the actual path to the teacher's image -->
-      <%= "#{current_user.first_name} #{current_user.last_name}" %>
-    </div>
-  <% end %>
-</div>
+        <%= "#{current_user.first_name} #{current_user.last_name}" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="participant-container">
+    <%# Student Pop-Ups %>
+    <%= render "stdPopUpClass", participants: @participants%>
+  </div>
+  <%# Add student section for teachers %>
+  <% if current_user.teacher? %>
+    <script>
+      $(document).ready(function () {
+        $('.student-card').click(function () {
+          // Toggle the 'selected' class when a student card is clicked
+          $(this).toggleClass('selected');
 
-<div class="participant-container">
-  <%# Student Pop-Ups %>
-  <%= render "stdPopUpClass", participants: @participants%>
-</div>
-
-<%# Add student section for teachers %>
-<% if current_user.teacher? %>
-  <script>
-    $(document).ready(function () {
-      $('.student-card').click(function () {
-        // Toggle the 'selected' class when a student card is clicked
-        $(this).toggleClass('selected');
-
-        // Toggle the checkbox inside the clicked student card
-        var checkbox = $(this).find(':checkbox');
-        checkbox.prop('checked', !checkbox.prop('checked'));
+          // Toggle the checkbox inside the clicked student card
+          var checkbox = $(this).find(':checkbox');
+          checkbox.prop('checked', !checkbox.prop('checked'));
+        });
       });
-    });
-  </script>
-
-  <%= form_with(model: @classroom, local: true, url: add_students_classroom_path(@classroom), method: :post) do |form| %>
-    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-
-    <div class="participant-container">
-      <!-- Display other students who are not already in the classroom and not the teacher -->
-      <% User.where.not(id: [@classroom.user_id] + [@classroom.students.pluck(:id), current_user.id].flatten).each do |user| %>
-        <%= link_to user_path(user) do %>
-          <div class="student-card">
-            <label>
-              <%= form.check_box :student_ids, { multiple: true }, user.id, nil %>
-              <div class="student-info">
-                <% border_color = "##{SecureRandom.hex(3)}" %>
-                <%= cl_image_tag user.photo.key, class:"studentimg", style: "border-color: #{border_color}" %>
-                <span class="student-name"><%= "#{user.first_name} #{user.last_name}" %></span>
-              </div>
-            </label>
-          </div>
+    </script>
+    <%= form_with(model: @classroom, local: true, url: add_students_classroom_path(@classroom), method: :post) do |form| %>
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <div class="participant-container">
+        <!-- Display other students who are not already in the classroom and not the teacher -->
+        <% User.where.not(id: [@classroom.user_id] + [@classroom.students.pluck(:id), current_user.id].flatten).each do |user| %>
+          <%= link_to user_path(user) do %>
+            <div class="student-card">
+              <label>
+                <%= form.check_box :student_ids, { multiple: true }, user.id, nil %>
+                <div class="student-info">
+                  <% border_color = "##{SecureRandom.hex(3)}" %>
+                  <%= cl_image_tag user.photo.key, class:"studentimg", style: "border-color: #{border_color}" %>
+                  <span class="student-name"><%= "#{user.first_name} #{user.last_name}" %></span>
+                </div>
+              </label>
+            </div>
+          <% end %>
         <% end %>
-      <% end %>
-    </div>
-    <%= form.submit "Add Selected Students", class: "btn btn-add-students mt-3", disabled: @classroom.student_ids.blank? %>
+      </div>
+      <%= form.submit "Add Selected Students", class: "btn btn-add-students mt-3", disabled: @classroom.student_ids.blank? %>
+    <% end %>
   <% end %>
-<% end %>
-
 </div>
