@@ -46,10 +46,15 @@
   font-family: inherit;
   padding: 1rem;
   border-radius: 1rem;
-}
 
-.help-ask:hover{
-  background-color: #04adc4;
+  &:hover {
+    background-color: #04adc4;
+  }
+
+  &:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
 }
 
 .help-ask:focus{

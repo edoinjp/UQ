@@ -45,6 +45,15 @@
   margin-bottom: 1rem;
 }
 
+.filter-icons:hover {
+  transform: scale(1.2); /* Adjust the scale factor for zoom effect on hover */
+}
+
+.filter-icons:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
 #visual-icon {
   box-shadow: 10px 10px 18px -6px rgba(23, 3, 246, 0.75);
   background-color: blue;
@@ -52,6 +61,10 @@
   justify-content: center;
   align-items: center;
   font-size: 1.8rem;
+}
+
+#visual-icon:hover{
+  background-color: #04adc4;
 }
 
 #aural-icon {
@@ -63,6 +76,10 @@
   font-size: 1.8rem;
 }
 
+#aural-icon:hover{
+  background-color: rgb(182, 0, 0);
+}
+
 #reading-icon {
   box-shadow: 10px 10px 18px -6px rgba(248, 182, 3, 0.75);
   background-color: orange;
@@ -70,6 +87,10 @@
   justify-content: center;
   align-items: center;
   font-size: 1.8rem;
+}
+
+#reading-icon:hover{
+  background-color: rgb(153, 100, 0);
 }
 
 #kinesthetic-icon {
@@ -81,6 +102,10 @@
   font-size: 1.8rem;
 }
 
+#kinesthetic-icon:hover{
+  background-color: rgb(0, 255, 0);
+}
+
 #supplementary-icon {
     box-shadow: 10px 10px 18px -6px rgba(217, 245, 4, 0.75);
   background-color: rgb(106, 151, 0);
@@ -88,6 +113,10 @@
   justify-content: center;
   align-items: center;
   font-size: 1.8rem;
+}
+
+#supplementary-icon:hover{
+  background-color: rgb(179, 255, 2);
 }
 
 #help-icon {
@@ -98,6 +127,10 @@
   align-items: center;
   font-size: 1.8rem;
   color: white;
+}
+
+#help-icon:hover{
+  background-color: #04adc4;
 }
 
 #quiz-icon {
@@ -111,6 +144,10 @@
   cursor: pointer;
 }
 
+#quiz-icon:hover{
+  background-color: #04adc4;
+}
+
 #school-icon {
   box-shadow: 10px 10px 18px -6px rgba(0, 0, 0, 0.75);
   background-color: #052c65;
@@ -119,6 +156,10 @@
   align-items: center;
   font-size: 1.8rem;
   color: white;
+}
+
+#school-icon:hover{
+  background-color: #04adc4;
 }
 
 .lesson-tabs {

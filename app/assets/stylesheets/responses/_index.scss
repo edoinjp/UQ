@@ -76,8 +76,8 @@
   flex-direction: column;
   font-family: Poppins, sans-serif;
   align-items: flex-start;
-
 }
+
 .response-list-name {
   justify-content: space-between;
   display: flex;
@@ -171,4 +171,15 @@
 }
 .bg-light-blue{
   color: rgba(0, 0, 255, 0.584);
+}
+
+.res-card{
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
 }
