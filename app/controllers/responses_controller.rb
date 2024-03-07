@@ -121,10 +121,10 @@ class ResponsesController < ApplicationController
 
     # Class Averages Chart
     @chart_data_all = [
-      {name: 'Visual', data: {'Ice Breakers': visual_l1_avg, 'Oral Communication II': visual_l2_avg, 'Social Science': visual_l3_avg, 'Language Arts': visual_l4_avg}},
-      {name: 'Aural', data: {'Ice Breakers': aural_l1_avg, 'Oral Communication II': aural_l2_avg, 'Social Science': aural_l3_avg, 'Language Arts': aural_l4_avg}},
-      {name: 'Reading', data: {'Ice Breakers': reading_l1_avg, 'Oral Communication II': reading_l2_avg, 'Social Science': reading_l3_avg, 'Language Arts': reading_l4_avg}},
-      {name: 'Kinesthetic', data: {'Ice Breakers': kinesthetic_l1_avg, 'Oral Communication II': kinesthetic_l2_avg, 'Social Science': kinesthetic_l3_avg, 'Language Arts': kinesthetic_l4_avg}}
+      {name: 'Visual', data: {'Present Tense': visual_l1_avg, 'Past Tense': visual_l2_avg, 'Conditionals': visual_l3_avg, 'Present Perfect': visual_l4_avg}},
+      {name: 'Aural', data: {'Present Tense': aural_l1_avg, 'Past Tense': aural_l2_avg, 'Conditionals': aural_l3_avg, 'Present Perfect': aural_l4_avg}},
+      {name: 'Reading', data: {'Present Tense': reading_l1_avg, 'Past Tense': reading_l2_avg, 'Conditionals': reading_l3_avg, 'Present Perfect': reading_l4_avg}},
+      {name: 'Kinesthetic', data: {'Present Tense': kinesthetic_l1_avg, 'Past Tense': kinesthetic_l2_avg, 'Conditionals': kinesthetic_l3_avg, 'Present Perfect': kinesthetic_l4_avg}}
     ]
 
   end

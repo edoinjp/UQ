@@ -41,7 +41,7 @@
             <%= student.full_name %>
           </div>
           <div class="response-list-answer">
-            <% score = student.score.values.dig(0) %>
+            <% score = student.score.values.dig(3) %>
             <% total = 5 %>
             <% percentage = score.to_f / total %>
             Result:
@@ -96,7 +96,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <% student.score.each_with_index do |(lesson_name, score), index| %>
+                    <% student.score.to_a.reverse_each do |(lesson_name, score)| %>
                       <% total = 5 %> <!-- Replace with the actual total per lesson if necessary -->
                       <% percentage = score.to_f / total %>
                       <tr class="lesson-row <%= 'low-score' if percentage <= 0.5 %>">
