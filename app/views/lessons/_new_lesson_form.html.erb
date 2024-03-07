@@ -3,7 +3,7 @@
     <%= form.input :title, input_html: { class: "form-control" } %>
   </div>
   <div class="lesson-form-group">
-    <%= form.input :content, input_html: { class: "form-control" } %>
+    <%= form.input :content, as: :text, input_html: { class: "form-control form-control-content", rows: 10, placeholder: "# Main headings\n --- \n ## Sub heading\n Content information \n---\n ##2nd Sub-heading\n Content information " } %>
     <div class="form-control-instruction">
       <p>Please use "#" for main headings</p>
       <p>Please use "##" for sub headings</p>

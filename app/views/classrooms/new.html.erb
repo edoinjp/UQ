@@ -1,7 +1,9 @@
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-9 mx-auto">
-        <div><h1 class="mb-8" style="color: navy;">Create New Classroom</h1></div>
+      <div>
+        <h1 class="mb-8" style="color: navy;">Create New Classroom</h1>
+      </div>
       <%= form_with(model: @classroom, url: classrooms_path, method: :post, class: 'my-4') do |form| %>
         <% if @classroom.errors.any? %>
           <div id="error_explanation" class="alert alert-danger">
@@ -13,17 +15,14 @@
             </ul>
           </div>
         <% end %>
-
         <div class="mb-3">
           <%= form.label :name, class: 'form-label' %>
           <%= form.text_field :name, class: 'form-control' %>
         </div>
-
         <div class="mb-3">
           <%= form.label :title, class: 'form-label' %>
           <%= form.text_field :title, class: 'form-control' %>
         </div>
-
         <div class="d-grid">
           <%= form.submit 'Create Classroom', class: 'btn btn-primary' %>
         </div>

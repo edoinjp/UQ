@@ -30,13 +30,12 @@
 }
 
 .navul{
-  width: 250px;
+  width: 130px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   list-style: none;
-
 }
 .navul a{
   color: whitesmoke;
@@ -179,7 +178,7 @@
   margin-top: -27px;
 
 }
-.container h3{
+.container2 h3{
   font-size: 12px;
 }
 .infocusbox{
@@ -229,7 +228,7 @@ a{
 }
 /* focus section end */
 /* reviews section */
-.container {
+.container2 {
   font-family:inherit;
   font-weight: 100;
   display: grid;
@@ -246,7 +245,7 @@ a{
 .divhover:hover {
   transform: scale(1.01); /* Scale up by 20% on hover */
 }
-.container .div1, .div2, .div3, .div4, .div5, .div6{
+.container2 .div1, .div2, .div3, .div4, .div5, .div6{
   width: 400px;
   height: 300px;
   border-radius: 12px;
@@ -290,7 +289,7 @@ a{
   margin-right: 15px;
 }
 
-.container p{
+.container2 p{
   height: auto;
   color: rgba(255, 255, 255, 0.799);
   font-weight: 100;
@@ -299,11 +298,11 @@ a{
    font-family: 'Arial', sans-serif;
    padding-bottom: 50px;
 }
-.container h2{
+.container2 h2{
   margin-top: 30px;
 }
 
-.container figure{
+.container2 figure{
   width: 90%;
   margin: 0 auto;
   display: flex;
@@ -332,13 +331,30 @@ a{
 /* footer */
 
 .footer{
-  height: 540px;
+  height: 250px;
   background-color: #30364D;
   border-style: solid;
   border-width: 0.9px 0;
   border-color: #ffffff30;
   margin-top: 120px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 80px;
 
+}
+.footer h1{
+  color: #FB6D3A;
+  font-size: 32px;
+
+  padding-right: 100px;
+
+}
+.footer li {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #ffffffdd; /* White font color */
+  font-family: Poppins, sans-serif;
 }
 
 

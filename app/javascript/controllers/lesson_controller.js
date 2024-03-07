@@ -1,11 +1,12 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["mainContent", "supplementaryContent"]
+  static targets = ["mainContent", "supplementaryContent", "title"]
 
   connect() {
     this.toggleState = sessionStorage.getItem('supplementaryToggle') === 'true';
     this.updateContentVisibility();
+    console.log(this.titleTarget);
   }
 
   toggleSupplementaryContent(event) {
@@ -27,5 +28,12 @@ export default class extends Controller {
       this.mainContentTarget.classList.remove("d-none");
       this.supplementaryContentTarget.classList.add("d-none");
     }
+    this.updateTitle();
+  }
+
+  updateTitle() {
+    const titleElement = this.titleTarget;
+    const isSupplementary = this.toggleState;
+    titleElement.textContent = isSupplementary ? `${titleElement.textContent} - Supplementary` : titleElement.textContent.replace(' - Supplementary', '');
   }
 }

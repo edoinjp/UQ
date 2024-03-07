@@ -93,7 +93,24 @@ class LessonsController < ApplicationController
     @lesson.classroom = @classroom
     authorize(@lesson)
 
+    @chatroom = @classroom.chatroom
     if @lesson.save
+      # @content = "<em>new lesson is created! #{@lesson.title}</em>"
+      @content = render_to_string(partial: "messages/lessonnotification", locals: { lesson: @lesson })
+
+
+      @message = Message.create(content: @content , chatroom: @chatroom , user: current_user)
+      ChatroomChannel.broadcast_to(
+        @chatroom,
+        {
+          user_id: current_user.id,
+          message: render_to_string(partial: "messages/message", locals: { message: @message })
+        }
+
+      )
+      # @lesson.create_styled_lessons
+      # @lesson.create_styled_lessons(supplementary: false, styles: @lesson.attributes)
+      # @lesson.create_styled_lessons(styles: @lesson.styles)
       @lesson.create_styled_lessons(styles: %w[visual aural reading kinesthetic])
       redirect_to classroom_lessons_path(@lesson.classroom, @lesson), notice: 'Lesson was successfully created.'
     else
