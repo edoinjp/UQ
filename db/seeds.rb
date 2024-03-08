@@ -160,14 +160,34 @@ puts 'All students have been created!'
 Chatroom.create!(
   classroom: classroom
 )
+lesson_content = <<-MARKDOWN
+# Ice Breaker Supplementary
+
+---
+
+## Why are they needed
+
+At the start of a new semester, teachers around the world turn their attention to the very first class. With a new group of students to integrate and make comfortable, icebreakers are an activity that are essential to those first days.
+
+---
+
+## Good activity
+
+But what makes a good activity? Ideally, teachers need icebreakers that are low in social risk, matched to your class’s proficiency level, and perhaps just a bit silly. A good activity will encourage bonding, participation, motivation, and allow students to relax both mentally and physically. Of course, it’s an added bonus if they can be easily adapted as warm ups or speaking activities during the year.
+MARKDOWN
 
 # Seed Lesson
 puts 'Creating a lesson...'
 lesson = Lesson.create!(
   classroom: classroom,
-  title: 'Present Perfect'
+  title: 'Present Perfect',
+  content: lesson_content,
+  date: '2024-03-01'
 )
 puts "The #{lesson.title} seed lesson has been created!"
+
+# Seed Styled Lesson
+
 
 # Seed Styled Lesson [Visual]
 puts 'Creating visual lesson...'
@@ -196,7 +216,6 @@ visual_lesson.save
 
 puts 'Visual lesson has been created!'
 
-# Seed Styled Lesson [Aural]
 puts 'Creating aural lesson...'
 aural_lesson = StyledLesson.create!(
   lesson: lesson,

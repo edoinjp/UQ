@@ -1,6 +1,8 @@
 class Lesson < ApplicationRecord
   belongs_to :classroom
   has_many :questions, dependent: :destroy
+  has_many :choices, through: :questions
+  has_many :responses, through: :choices
   has_many :styled_lessons, dependent: :destroy
   # after_create :create_styled_lessons
 
@@ -27,8 +29,8 @@ class Lesson < ApplicationRecord
       styled_lesson = styled_lessons.create(style: style, supplementary: supplementary)
 
       if style == 'visual'
-        image_file = openai_api.generate_images(self.content)
-        styled_lesson.images.attach(io: image_file, filename: "#{self.title.parameterize}-#{style}.jpg") if image_file.present?
+        # image_file = openai_api.generate_images(self.content)
+        # styled_lesson.images.attach(io: image_file, filename: "#{self.title.parameterize}-#{style}.jpg") if image_file.present?
       elsif style == 'aural'
         audio_file = @openai_api.generate_audio(self.content)
         styled_lesson.files.attach(io: StringIO.new(audio_file), filename: "#{self.title.parameterize}-#{style}.mp3")

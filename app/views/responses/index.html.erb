@@ -11,9 +11,9 @@
     </div>
     <div class="form-container">
       <%= simple_form_for([@lesson], url: create_supplementary_lesson_path(id: @lesson.id), html: { class: 'lesson-form formx' }) do |form| %>
-          <h2 class="text-center bg-light-blue mb-3">Supplementary Lesson</h2>
+        <h2 class="text-center bg-light-blue mb-3">Supplementary Lesson</h2>
         <%= form.input :title, input_html: { class: "form-control" } %>
-        <%= form.input :content, as: :text, input_html: { class: "form-control xclass", rows: 5, placeholder: "# Main headings\n --- \n ## Sub heading\n Content information \n---\n ##2nd Sub-heading\n Content information " } %>
+        <%= form.input :content, as: :text, input_html: { class: "form-control xclass", rows: 10, placeholder: "# Main headings\n --- \n ## Sub heading\n Content information \n---\n ##2nd Sub-heading\n Content information " } %>
         <div class="d-flex justify-content-end">
           <%= form.button :submit, "Generate Lesson", class: "btn btn-lesson" %>
         </div>

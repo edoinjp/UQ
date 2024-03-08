@@ -1,6 +1,6 @@
 class LessonsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_classroom, only: [:index, :new, :create]
+  before_action :set_classroom, only: [:index, :new, :create ]
   before_action :set_lesson, only: [:show, :create_supplementary, :new_supplementary]
   include ActionController::Live # Allows AI chat streaming
 
@@ -21,16 +21,16 @@ class LessonsController < ApplicationController
     authorize(@lesson)
 
     # Assigns a variable for each styled_lesson style type for main content
-    @visual = @lesson.styled_lessons.find { |x| x['style'] == 'visual' }
-    @aural = @lesson.styled_lessons.find { |x| x['style'] == 'aural' }
-    @reading = @lesson.styled_lessons.find { |x| x['style'] == 'reading' }
-    @kinesthetic = @lesson.styled_lessons.find { |x| x['style'] == 'kinesthetic' }
+    @visual = @lesson.styled_lessons.find { |x| x['style'] == 'visual' && !x.supplementary }
+    @aural = @lesson.styled_lessons.find { |x| x['style'] == 'aural' && !x.supplementary }
+    @reading = @lesson.styled_lessons.find { |x| x['style'] == 'reading' && !x.supplementary }
+    @kinesthetic = @lesson.styled_lessons.find { |x| x['style'] == 'kinesthetic' && !x.supplementary }
 
     # Assigns a variable for each Supplementary styled_lesson style type for main content
-    @supplementaryVisual = @lesson.styled_lessons.supplementary.find_by(style: 'visual')
-    @supplementaryAural = @lesson.styled_lessons.supplementary.find_by(style: 'aural')
-    @supplementaryReading = @lesson.styled_lessons.supplementary.find_by(style: 'reading')
-    @supplementaryKinesthetic = @lesson.styled_lessons.supplementary.find_by(style: 'kinesthetic')
+    @supplementaryVisual = @lesson.styled_lessons.supplementary.find_by(style: 'visual', supplementary: true)
+    @supplementaryAural = @lesson.styled_lessons.supplementary.find_by(style: 'aural', supplementary: true)
+    @supplementaryReading = @lesson.styled_lessons.supplementary.find_by(style: 'reading', supplementary: true)
+    @supplementaryKinesthetic = @lesson.styled_lessons.supplementary.find_by(style: 'kinesthetic', supplementary: true)
     # debugger
     # Logic to have student avatars appear according the the lesson style
     @students = @classroom.students
@@ -78,8 +78,32 @@ class LessonsController < ApplicationController
   def create_supplementary
     authorize(@lesson)
     styles = @lesson.missing_styles
-    @lesson.create_styled_lessons(supplementary: true, styles: styles)
-    redirect_to classroom_lessons_path(@lesson.classroom, @lesson), notice: 'Lesson was successfully created.'
+    #  @classroom = Classroom.find(params[:classroom_id])
+    # @lesson.create_styled_lessons(supplementary: true, styles: styles)
+    # redirect_to classroom_lessons_path(@lesson.classroom, @lesson), notice: 'Lesson was successfully created.'
+    @chatroom = @lesson.classroom.chatroom
+
+    if @lesson.create_styled_lessons(supplementary: true, styles: styles)
+      @content = render_to_string(partial: "messages/lessonnotification", locals: { lesson: @lesson })
+      # @content.styled_lesson.supplementary = render_to_string(partial: "messages/lessonnotification", locals: { lesson: @lesson })
+
+      @message = Message.create(content: @content , chatroom: @chatroom , user: current_user)
+      ChatroomChannel.broadcast_to(
+        @chatroom,
+        {
+          user_id: current_user.id,
+          message: render_to_string(partial: "messages/message", locals: { message: @message })
+        }
+
+      )
+      # @lesson.create_styled_lessons
+      # @lesson.create_styled_lessons(supplementary: false, styles: @lesson.attributes)
+      # @lesson.create_styled_lessons(styles: @lesson.styles)
+      @lesson.create_styled_lessons(styles: %w[visual aural reading kinesthetic])
+      redirect_to classroom_lessons_path(@lesson.classroom, @lesson), notice: 'Lesson was successfully created.'
+    else
+      render :new
+    end
   end
 
   def new_supplementary
@@ -96,7 +120,6 @@ class LessonsController < ApplicationController
     if @lesson.save
       # @content = "<em>new lesson is created! #{@lesson.title}</em>"
       @content = render_to_string(partial: "messages/lessonnotification", locals: { lesson: @lesson })
-
 
       @message = Message.create(content: @content , chatroom: @chatroom , user: current_user)
       ChatroomChannel.broadcast_to(
@@ -155,7 +178,7 @@ class LessonsController < ApplicationController
 
   # Strong params to help create new lessons
   def lesson_params
-    params.require(:lesson).permit(:title, :content)
+    params.require(:lesson).permit(:title, :content, :date)
   end
 
   def set_classroom
