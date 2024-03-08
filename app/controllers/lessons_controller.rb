@@ -120,9 +120,6 @@ class LessonsController < ApplicationController
     if @lesson.save
       # @content = "<em>new lesson is created! #{@lesson.title}</em>"
       @content = render_to_string(partial: "messages/lessonnotification", locals: { lesson: @lesson })
-      @content.styled_lesson.supplementary = render_to_string(partial: "messages/lessonnotification", locals: { lesson: @lesson })
-
-
 
       @message = Message.create(content: @content , chatroom: @chatroom , user: current_user)
       ChatroomChannel.broadcast_to(
@@ -181,7 +178,7 @@ class LessonsController < ApplicationController
 
   # Strong params to help create new lessons
   def lesson_params
-    params.require(:lesson).permit(:title, :content)
+    params.require(:lesson).permit(:title, :content, :date)
   end
 
   def set_classroom
