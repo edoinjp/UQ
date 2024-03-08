@@ -59,6 +59,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_040836) do
     t.index ["classroom_id"], name: "index_chatrooms_on_classroom_id"
   end
 
+  create_table "chatrooms_users", id: false, force: :cascade do |t|
+    t.bigint "chatroom_id"
+    t.bigint "user_id"
+    t.index ["chatroom_id"], name: "index_chatrooms_users_on_chatroom_id"
+    t.index ["user_id"], name: "index_chatrooms_users_on_user_id"
+  end
+
   create_table "choices", force: :cascade do |t|
     t.boolean "correct"
     t.bigint "question_id", null: false
@@ -75,6 +82,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_040836) do
     t.string "name"
     t.string "title"
     t.index ["user_id"], name: "index_classrooms_on_user_id"
+  end
+
+  create_table "direct_messages", force: :cascade do |t|
+    t.text "content"
+    t.bigint "sender_id"
+    t.bigint "recipient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipient_id"], name: "index_direct_messages_on_recipient_id"
+    t.index ["sender_id"], name: "index_direct_messages_on_sender_id"
   end
 
   create_table "lessons", force: :cascade do |t|
@@ -102,6 +119,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_040836) do
     t.bigint "classroom_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "chatroom_id"
+    t.index ["chatroom_id"], name: "index_participations_on_chatroom_id"
     t.index ["classroom_id"], name: "index_participations_on_classroom_id"
     t.index ["user_id"], name: "index_participations_on_user_id"
   end
@@ -160,9 +179,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_040836) do
   add_foreign_key "chatrooms", "classrooms"
   add_foreign_key "choices", "questions"
   add_foreign_key "classrooms", "users"
+  add_foreign_key "direct_messages", "users", column: "recipient_id"
+  add_foreign_key "direct_messages", "users", column: "sender_id"
   add_foreign_key "lessons", "classrooms"
   add_foreign_key "messages", "chatrooms"
   add_foreign_key "messages", "users"
+  add_foreign_key "participations", "chatrooms"
   add_foreign_key "participations", "classrooms"
   add_foreign_key "participations", "users"
   add_foreign_key "questions", "lessons"

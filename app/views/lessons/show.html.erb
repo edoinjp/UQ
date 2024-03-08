@@ -10,7 +10,7 @@
     <div data-lesson-target="mainContent">
       <div class="lesson-container">
         <!-- Nav tabs -->
-        <ul class="lesson lesson-tabs">
+     <ul class="lesson lesson-tabs">
           <%= link_to lesson_path(@lesson) + "?query=visual" do %>
             <li class="lesson-items">
               <i class="fa-regular fa-image filter-icons" id="visual-icon"></i>
@@ -31,28 +31,6 @@
               <i class="fa-solid fa-microphone filter-icons" id="kinesthetic-icon"></i>
             </li>
           <% end %>
-          <% if @lesson.has_supplementary_lessons? %>
-            <%= link_to '#', data: { action: "click->lesson#toggleSupplementaryContent" } do %>
-              <li class="lesson-items">
-                <i class="fa-solid fa-graduation-cap filter-icons" id="supplementary-icon"></i>
-              </li>
-            <% end %>
-          <% end %>
-          <!-- Help Chat Button -->
-          <li class="lesson-item">
-            <div class="btn-group dropstart">
-              <button type="button" class="help-btn" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa-solid fa-chalkboard-user filter-icons" id="help-icon"></i>
-              </button>
-              <div class="dropdown-menu help-pop">
-                <%= render 'help_chat' %>
-              </div>
-            </div>
-          </li>
-          <!--Dummy Quiz Button-->
-          <li class="lesson-item">
-            <i class="fa-solid fa-list-check filter-icons" id="quiz-icon"></i>
-          </li>
         </ul>
         <!-- Tab panes -->
         <div class="lesson-content">
@@ -68,6 +46,30 @@
             <% end %>
           </div>
         </div>
+        <ul class="lesson lesson-tabs">
+          <!-- Help Chat Button -->
+          <li class="lesson-item">
+            <div class="btn-group dropstart">
+              <button type="button" class="help-btn" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-chalkboard-user filter-icons" id="help-icon"></i>
+              </button>
+              <div class="dropdown-menu help-pop">
+                <%= render 'help_chat' %>
+              </div>
+            </div>
+          </li>
+          <% if @lesson.has_supplementary_lessons? %>
+            <%= link_to '#', data: { action: "click->lesson#toggleSupplementaryContent" } do %>
+              <li class="lesson-items">
+                <i class="fa-solid fa-graduation-cap filter-icons" id="supplementary-icon"></i>
+              </li>
+            <% end %>
+          <% end %>
+          <!--Dummy Quiz Button-->
+          <li class="lesson-item">
+            <i class="fa-solid fa-list-check filter-icons" id="quiz-icon"></i>
+          </li>
+        </ul>
       </div>
     </div>
     <!-- Supplementary Content Container (Initially Hidden) -->
@@ -95,28 +97,6 @@
               <i class="fa-solid fa-microphone filter-icons" id="kinesthetic-icon"></i>
             </li>
           <% end %>
-          <% if @lesson.has_supplementary_lessons? %>
-            <%= link_to '#', data: { action: "click->lesson#toggleSupplementaryContent" } do %>
-              <li class="lesson-items">
-                <i class="fa-solid fa-graduation-cap filter-icons" id="supplementary-icon"></i>
-              </li>
-            <% end %>
-          <% end %>
-          <!-- Help Chat Button -->
-          <li class="lesson-item">
-            <div class="btn-group dropstart">
-              <button type="button" class="help-btn" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa-solid fa-chalkboard-user filter-icons" id="help-icon"></i>
-              </button>
-              <div class="dropdown-menu help-pop">
-                <%= render 'help_chat' %>
-              </div>
-            </div>
-          </li>
-          <!--Dummy Quiz Button-->
-          <li class="lesson-item">
-            <i class="fa-solid fa-list-check filter-icons" id="quiz-icon"></i>
-          </li>
         </ul>
         <!-- Tab panes -->
         <div class="lesson-content">
@@ -132,6 +112,30 @@
             <% end %>
           </div>
         </div>
+         <ul class="lesson lesson-tabs">
+          <!-- Help Chat Button -->
+          <li class="lesson-item">
+            <div class="btn-group dropstart">
+              <button type="button" class="help-btn" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-chalkboard-user filter-icons" id="help-icon"></i>
+              </button>
+              <div class="dropdown-menu help-pop">
+                <%= render 'help_chat' %>
+              </div>
+            </div>
+          </li>
+          <% if @lesson.has_supplementary_lessons? %>
+            <%= link_to '#', data: { action: "click->lesson#toggleSupplementaryContent" } do %>
+              <li class="lesson-items">
+                <i class="fa-solid fa-graduation-cap filter-icons" id="supplementary-icon"></i>
+              </li>
+            <% end %>
+          <% end %>
+          <!--Dummy Quiz Button-->
+          <li class="lesson-item">
+            <i class="fa-solid fa-list-check filter-icons" id="quiz-icon"></i>
+          </li>
+        </ul>
       </div>
     </div>
     <!-- Teacher & Student containers -->
@@ -155,4 +159,7 @@
     </div>
   </div>
 </div>
+    <br>
+    <br>
+    <br>
 </div>
