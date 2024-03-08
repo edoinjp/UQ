@@ -1,6 +1,6 @@
 class LessonsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_classroom, only: [:index, :new, :create]
+  before_action :set_classroom, only: [:index, :new, :create ]
   before_action :set_lesson, only: [:show, :create_supplementary, :new_supplementary]
   include ActionController::Live # Allows AI chat streaming
 
@@ -78,13 +78,14 @@ class LessonsController < ApplicationController
   def create_supplementary
     authorize(@lesson)
     styles = @lesson.missing_styles
-    @lesson.create_styled_lessons(supplementary: true, styles: styles)
-    redirect_to classroom_lessons_path(@lesson.classroom, @lesson), notice: 'Lesson was successfully created.'
+    #  @classroom = Classroom.find(params[:classroom_id])
+    # @lesson.create_styled_lessons(supplementary: true, styles: styles)
+    # redirect_to classroom_lessons_path(@lesson.classroom, @lesson), notice: 'Lesson was successfully created.'
+    @chatroom = @lesson.classroom.chatroom
 
-    @chatroom = @classroom.chatroom
-    if @lesson.styled_lesson.save
-      # @content = "<em>new lesson is created! #{@lesson.title}</em>"
-      @content.styled_lesson.supplementary = render_to_string(partial: "messages/lessonnotification", locals: { lesson: @lesson })
+    if @lesson.create_styled_lessons(supplementary: true, styles: styles)
+      @content = render_to_string(partial: "messages/lessonnotification", locals: { lesson: @lesson })
+      # @content.styled_lesson.supplementary = render_to_string(partial: "messages/lessonnotification", locals: { lesson: @lesson })
 
       @message = Message.create(content: @content , chatroom: @chatroom , user: current_user)
       ChatroomChannel.broadcast_to(
