@@ -135,8 +135,8 @@ osama = User.create!(
   first_name: 'Osama',
   last_name: 'Suleiman',
   learning_style: 'reading',
-  email: Faker::Internet.email,
-  password: 'password',
+  email: 'student@abc.com',
+  password: 'password1',
   teacher: false,
   score: {
     'Present Tense' => 4,
