@@ -23,6 +23,7 @@ export default class extends Controller {
 
   updateContentVisibility() {
     const toggleState = sessionStorage.getItem('supplementaryToggle') === 'true';
+
     if (toggleState) {
       this.mainContentTarget.classList.add("d-none");
       this.supplementaryContentTarget.classList.remove("d-none");
