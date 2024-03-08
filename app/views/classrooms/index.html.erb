@@ -18,7 +18,11 @@
             <%= link_to classroom.name, classroom_lessons_path(classroom) %>
           </div>
           <div class="classroombox-info">
-            <%= classroom.students.count %>
+            <p class="mb-2"> <i class="fa-solid fa-users me-2"> </i><%= classroom.students.count %> students</p>
+            <p class="mb-2"> <i class="fa-solid fa-book-open me-2"> </i> Next lesson: <%= classroom.next_lesson.title %></p>
+          </div>
+          <div class="classroombox-info">
+            <p class="badge rounded-pill" style="background-color: orange; color: #26325A;"> <i class="fa-solid fa-circle-check me-2"></i> Quiz Answer Available</p>
           </div>
           <!-- Three dots dropdown container -->
           <div class="dropdown-container">

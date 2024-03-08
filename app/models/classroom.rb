@@ -6,4 +6,8 @@ class Classroom < ApplicationRecord
   has_many :lessons, dependent: :destroy
   validates :name, presence: true
   validates :title, presence: true
+
+  def next_lesson
+    lessons.order(created_at: :desc).first
+  end
 end

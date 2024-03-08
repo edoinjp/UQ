@@ -1,6 +1,8 @@
 class Lesson < ApplicationRecord
   belongs_to :classroom
   has_many :questions, dependent: :destroy
+  has_many :choices, through: :questions
+  has_many :responses, through: :choices
   has_many :styled_lessons, dependent: :destroy
   # after_create :create_styled_lessons
 

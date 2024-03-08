@@ -49,6 +49,8 @@
 
 .classroombox{
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   height: 260px;
   width: 330px;
   background-color: #333F66;
@@ -67,6 +69,11 @@
     box-shadow: 0 5px #666;
     transform: translateY(4px);
   }
+}
+
+.classroombox-info {
+  margin-left: 16px;
+  color: white;
 }
 
 
