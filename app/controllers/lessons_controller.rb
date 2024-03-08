@@ -21,16 +21,16 @@ class LessonsController < ApplicationController
     authorize(@lesson)
 
     # Assigns a variable for each styled_lesson style type for main content
-    @visual = @lesson.styled_lessons.find { |x| x['style'] == 'visual' }
-    @aural = @lesson.styled_lessons.find { |x| x['style'] == 'aural' }
-    @reading = @lesson.styled_lessons.find { |x| x['style'] == 'reading' }
-    @kinesthetic = @lesson.styled_lessons.find { |x| x['style'] == 'kinesthetic' }
+    @visual = @lesson.styled_lessons.find { |x| x['style'] == 'visual' && !x.supplementary }
+    @aural = @lesson.styled_lessons.find { |x| x['style'] == 'aural' && !x.supplementary }
+    @reading = @lesson.styled_lessons.find { |x| x['style'] == 'reading' && !x.supplementary }
+    @kinesthetic = @lesson.styled_lessons.find { |x| x['style'] == 'kinesthetic' && !x.supplementary }
 
     # Assigns a variable for each Supplementary styled_lesson style type for main content
-    @supplementaryVisual = @lesson.styled_lessons.supplementary.find_by(style: 'visual')
-    @supplementaryAural = @lesson.styled_lessons.supplementary.find_by(style: 'aural')
-    @supplementaryReading = @lesson.styled_lessons.supplementary.find_by(style: 'reading')
-    @supplementaryKinesthetic = @lesson.styled_lessons.supplementary.find_by(style: 'kinesthetic')
+    @supplementaryVisual = @lesson.styled_lessons.supplementary.find_by(style: 'visual', supplementary: true)
+    @supplementaryAural = @lesson.styled_lessons.supplementary.find_by(style: 'aural', supplementary: true)
+    @supplementaryReading = @lesson.styled_lessons.supplementary.find_by(style: 'reading', supplementary: true)
+    @supplementaryKinesthetic = @lesson.styled_lessons.supplementary.find_by(style: 'kinesthetic', supplementary: true)
     # debugger
     # Logic to have student avatars appear according the the lesson style
     @students = @classroom.students

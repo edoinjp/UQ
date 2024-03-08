@@ -17,6 +17,9 @@
             <img class="classimg" src="https://www.thoughtco.com/thmb/MbIK8VYZIuh5AUctOSpqh-q4Dyg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-846997320-9ebc9320dd0e4d9aad3cb2a0dafbb8b4.jpg" alt="#">
             <%= link_to classroom.name, classroom_lessons_path(classroom) %>
           </div>
+          <div class="classroombox-info">
+            <%= classroom.students.count %>
+          </div>
           <!-- Three dots dropdown container -->
           <div class="dropdown-container">
             <!-- Three dots icon (you can replace this with your own icon) -->
