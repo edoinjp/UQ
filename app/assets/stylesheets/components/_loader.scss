@@ -16,8 +16,8 @@
   border-right: 16px solid orange;
   border-bottom: 16px solid #052c65;
   border-left: 16px solid orange;
-  width: 120px;
-  height: 120px;
+  width: 40rem;
+  height: 40rem;
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
 }
@@ -37,4 +37,13 @@
   border-radius: 1rem;
   margin-left: -1rem;
   margin-right: -1rem;
+}
+
+.loader-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: xx-large;
+  color: #052c65;
 }
