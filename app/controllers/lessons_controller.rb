@@ -80,29 +80,6 @@ class LessonsController < ApplicationController
     styles = @lesson.missing_styles
     @lesson.create_styled_lessons(supplementary: true, styles: styles)
     redirect_to classroom_lessons_path(@lesson.classroom, @lesson), notice: 'Lesson was successfully created.'
-
-    @chatroom = @classroom.chatroom
-    if @lesson.styled_lesson.save
-      # @content = "<em>new lesson is created! #{@lesson.title}</em>"
-      @content.styled_lesson.supplementary = render_to_string(partial: "messages/lessonnotification", locals: { lesson: @lesson })
-
-      @message = Message.create(content: @content , chatroom: @chatroom , user: current_user)
-      ChatroomChannel.broadcast_to(
-        @chatroom,
-        {
-          user_id: current_user.id,
-          message: render_to_string(partial: "messages/message", locals: { message: @message })
-        }
-
-      )
-      # @lesson.create_styled_lessons
-      # @lesson.create_styled_lessons(supplementary: false, styles: @lesson.attributes)
-      # @lesson.create_styled_lessons(styles: @lesson.styles)
-      @lesson.create_styled_lessons(styles: %w[visual aural reading kinesthetic])
-      redirect_to classroom_lessons_path(@lesson.classroom, @lesson), notice: 'Lesson was successfully created.'
-    else
-      render :new
-    end
   end
 
   def new_supplementary
@@ -119,9 +96,6 @@ class LessonsController < ApplicationController
     if @lesson.save
       # @content = "<em>new lesson is created! #{@lesson.title}</em>"
       @content = render_to_string(partial: "messages/lessonnotification", locals: { lesson: @lesson })
-      @content.styled_lesson.supplementary = render_to_string(partial: "messages/lessonnotification", locals: { lesson: @lesson })
-
-
 
       @message = Message.create(content: @content , chatroom: @chatroom , user: current_user)
       ChatroomChannel.broadcast_to(
@@ -180,7 +154,7 @@ class LessonsController < ApplicationController
 
   # Strong params to help create new lessons
   def lesson_params
-    params.require(:lesson).permit(:title, :content)
+    params.require(:lesson).permit(:title, :content, :date)
   end
 
   def set_classroom
