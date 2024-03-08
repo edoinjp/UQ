@@ -1,103 +1,108 @@
 <div class="lesson-new-index lessonsindexpage">
-
-
-     <h1 class="your-lessons">My Lessons</h1>
-
-      <div class="index-container ">
-         <% if current_user.teacher? %>
-            <div class="container-card">
-            <%= link_to new_classroom_lesson_path(@classroom), class: "new-lesson-button" do %>
-              <i class="fas fa-plus"></i> New Lesson
-            <% end %>
-                 </div>
-          <% end %>
-        <!-- Existing lessons go here -->
-        <% @lessons.each do |lesson| %>
-          <div class="col container-card">
-            <div class="content-card">
-              <% if lesson.created_at.to_date == Date.today %>
-                <button type="button" class="btn today btn-secondary rounded-pill">Today</button>
-              <% end %>
-              <%= link_to lesson_path(lesson) + "?query=visual" do %>
-                <%= image_tag "lessons/lesson1.jpg", class: "lesson-img" %>
-                <div class="body-card body-card-from-2nd">
-                  <h5 class="lesson-name"><%= lesson.title %></h5>
-                </div>
-              <% end %>
-              <!-- Three dots dropdown container -->
-              <div class="dropdown-container">
-                <!-- Three dots icon (you can replace this with your own icon) -->
-                <div class="dropdown-icon" onclick="toggleDropdown(this)">&#8226;&#8226;&#8226;</div>
-                <!-- Dropdown content (Edit and Copy Link) -->
-                <div class="dropdown-content">
-                  <span class="dropdown-item">Edit</span>
-                  <span class="dropdown-item">delete</span>
-                  <span class="dropdown-item">Copy Link</span>
-                </div>
-              </div>
-            </div>
-          </div>
+  <h1 class="your-lessons">My Lessons</h1>
+  <div class="index-container ">
+    <% if current_user.teacher? %>
+      <div class="container-card">
+        <%= link_to new_classroom_lesson_path(@classroom), class: "new-lesson-button" do %>
+          <i class="fas fa-plus"></i> New Lesson
         <% end %>
-
-        <!-- Lesson 2 -->
-        <div class="col container-card">
-          <div class="content-card">
-            <%= image_tag "lessons/lesson2.jpg", class:"lesson-img" %>
+      </div>
+    <% end %>
+    <!-- Existing lessons go here -->
+    <% @lessons.each do |lesson| %>
+      <div class="col container-card">
+        <div class="content-card">
+          <% if lesson.created_at.to_date == Date.today %>
+            <button type="button" class="btn today btn-secondary rounded-pill">Today</button>
+          <% end %>
+          <%= link_to lesson_path(lesson) + "?query=visual" do %>
+            <%= image_tag "lessons/lesson1.jpg", class: "lesson-img" %>
             <div class="body-card body-card-from-2nd">
-              <h5 class="lesson-name">Conditionals</h5>
+              <h5 class="lesson-name"><%= lesson.title %></h5>
             </div>
-            <!-- Three dots dropdown container -->
-            <div class="dropdown-container">
-              <!-- Three dots icon (you can replace this with your own icon) -->
-              <div class="dropdown-icon" onclick="toggleDropdown(this)">&#8226;&#8226;&#8226;</div>
-              <!-- Dropdown content (Edit and Copy Link) -->
-              <div class="dropdown-content">
-                <span class="dropdown-item">Edit</span>
-                <span class="dropdown-item">delete</span>
-                <span class="dropdown-item">Copy Link</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Lesson 3 -->
-        <div class="col container-card">
-          <div class="content-card">
-            <%= image_tag "lessons/lesson3.jpg", class:"lesson-img" %>
-            <div class="body-card body-card-from-2nd">
-              <h5 class="lesson-name">Past Tense</h5>
-            </div>
-            <!-- Three dots dropdown container -->
-            <div class="dropdown-container">
-              <!-- Three dots icon (you can replace this with your own icon) -->
-              <div class="dropdown-icon" onclick="toggleDropdown(this)">&#8226;&#8226;&#8226;</div>
-              <!-- Dropdown content (Edit and Copy Link) -->
-              <div class="dropdown-content">
-                <span class="dropdown-item">Edit</span>
-                <span class="dropdown-item">delete</span>
-                <span class="dropdown-item">Copy Link</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Lesson 4 -->
-        <div class="col container-card">
-          <div class="content-card">
-            <%= image_tag "lessons/lesson4.jpg", class:"lesson-img" %>
-            <div class="body-card body-card-from-2nd">
-              <h5 class="lesson-name">Present Tense</h5>
-            </div>
-            <!-- Three dots dropdown container -->
-            <div class="dropdown-container">
-              <!-- Three dots icon (you can replace this with your own icon) -->
-              <div class="dropdown-icon" onclick="toggleDropdown(this)">&#8226;&#8226;&#8226;</div>
-              <!-- Dropdown content (Edit and Copy Link) -->
-              <div class="dropdown-content">
-                <span class="dropdown-item">Edit</span>
-                <span class="dropdown-item">delete</span>
-                <span class="dropdown-item">Copy Link</span>
-              </div>
+          <% end %>
+          <!-- Three dots dropdown container -->
+          <div class="dropdown-container">
+            <!-- Three dots icon (you can replace this with your own icon) -->
+            <div class="dropdown-icon" onclick="toggleDropdown(this)">&#8226;&#8226;&#8226;</div>
+            <!-- Dropdown content (Edit and Copy Link) -->
+            <div class="dropdown-content">
+              <span class="dropdown-item">Edit</span>
+              <span class="dropdown-item">delete</span>
+              <span class="dropdown-item">Copy Link</span>
             </div>
           </div>
         </div>
       </div>
- </div>
+    <% end %>
+    <!-- Lesson 2 -->
+    <div class="col container-card">
+      <div class="content-card">
+        <%= image_tag "lessons/lesson2.jpg", class:"lesson-img" %>
+        <div class="body-card body-card-from-2nd">
+          <h5 class="lesson-name">Conditionals</h5>
+        </div>
+        <div class="container-card-info">
+          <p> <i class="fa-solid fa-calendar-days me-2"> </i> Lesson Date: 2024/3/16 </p>
+        </div>
+        <!-- Three dots dropdown container -->
+        <div class="dropdown-container">
+          <!-- Three dots icon (you can replace this with your own icon) -->
+          <div class="dropdown-icon" onclick="toggleDropdown(this)">&#8226;&#8226;&#8226;</div>
+          <!-- Dropdown content (Edit and Copy Link) -->
+          <div class="dropdown-content">
+            <span class="dropdown-item">Edit</span>
+            <span class="dropdown-item">delete</span>
+            <span class="dropdown-item">Copy Link</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Lesson 3 -->
+    <div class="col container-card">
+      <div class="content-card">
+        <%= image_tag "lessons/lesson3.jpg", class:"lesson-img" %>
+        <div class="body-card body-card-from-2nd">
+          <h5 class="lesson-name">Past Tense</h5>
+        </div>
+        <div class="container-card-info">
+          <p> <i class="fa-solid fa-calendar-days me-2"> </i> Lesson Date: 2024/3/9 </p>
+        </div>
+        <!-- Three dots dropdown container -->
+        <div class="dropdown-container">
+          <!-- Three dots icon (you can replace this with your own icon) -->
+          <div class="dropdown-icon" onclick="toggleDropdown(this)">&#8226;&#8226;&#8226;</div>
+          <!-- Dropdown content (Edit and Copy Link) -->
+          <div class="dropdown-content">
+            <span class="dropdown-item">Edit</span>
+            <span class="dropdown-item">delete</span>
+            <span class="dropdown-item">Copy Link</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Lesson 4 -->
+    <div class="col container-card">
+      <div class="content-card">
+        <%= image_tag "lessons/lesson4.jpg", class:"lesson-img" %>
+        <div class="body-card body-card-from-2nd">
+          <h5 class="lesson-name">Present Tense</h5>
+        </div>
+        <div class="container-card-info">
+          <p> <i class="fa-solid fa-calendar-days me-2"> </i> Lesson Date: 2024/3/2 </p>
+        </div>
+        <!-- Three dots dropdown container -->
+        <div class="dropdown-container">
+          <!-- Three dots icon (you can replace this with your own icon) -->
+          <div class="dropdown-icon" onclick="toggleDropdown(this)">&#8226;&#8226;&#8226;</div>
+          <!-- Dropdown content (Edit and Copy Link) -->
+          <div class="dropdown-content">
+            <span class="dropdown-item">Edit</span>
+            <span class="dropdown-item">delete</span>
+            <span class="dropdown-item">Copy Link</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

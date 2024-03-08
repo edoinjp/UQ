@@ -181,7 +181,8 @@ puts 'Creating a lesson...'
 lesson = Lesson.create!(
   classroom: classroom,
   title: 'Present Perfect',
-  content: lesson_content
+  content: lesson_content,
+  date: '2024-03-01'
 )
 puts "The #{lesson.title} seed lesson has been created!"
 

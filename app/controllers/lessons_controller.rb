@@ -180,7 +180,7 @@ class LessonsController < ApplicationController
 
   # Strong params to help create new lessons
   def lesson_params
-    params.require(:lesson).permit(:title, :content)
+    params.require(:lesson).permit(:title, :content, :date)
   end
 
   def set_classroom
