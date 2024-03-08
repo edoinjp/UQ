@@ -12,7 +12,7 @@
     <% @lessons.each do |lesson| %>
       <div class="col container-card">
         <div class="content-card">
-          <% if lesson.created_at.to_date == Date.today %>
+          <% if lesson.date.to_date == Date.today %>
             <button type="button" class="btn today btn-secondary rounded-pill">Today</button>
           <% end %>
           <%= link_to lesson_path(lesson) + "?query=visual" do %>
@@ -21,7 +21,7 @@
               <h5 class="lesson-name"><%= lesson.title %></h5>
             </div>
             <div class="body-card body-card-from-2nd">
-              <h5 class="lesson-date"><i class="fa-solid fa-calendar-days me-2"> </i>Lesson Date: <%= lesson.date %></h5>
+              <h5 class="lesson-date"><i class="fa-solid fa-calendar-days me-2"> </i><%= lesson.date %></h5>
             </div>
           <% end %>
           <!-- Three dots dropdown container -->
@@ -46,7 +46,7 @@
           <h5 class="lesson-name">Conditionals</h5>
         </div>
         <div class="container-card-info">
-          <p> <i class="fa-solid fa-calendar-days me-2"> </i> Lesson Date: 2024-03-16 </p>
+          <p> <i class="fa-solid fa-calendar-days me-2"> </i> 2024-02-16 </p>
         </div>
         <!-- Three dots dropdown container -->
         <div class="dropdown-container">
@@ -69,7 +69,7 @@
           <h5 class="lesson-name">Past Tense</h5>
         </div>
         <div class="container-card-info">
-          <p> <i class="fa-solid fa-calendar-days me-2"> </i> Lesson Date: 2024-03-09 </p>
+          <p> <i class="fa-solid fa-calendar-days me-2"> </i> 2024-02-09 </p>
         </div>
         <!-- Three dots dropdown container -->
         <div class="dropdown-container">
@@ -92,7 +92,7 @@
           <h5 class="lesson-name">Present Tense</h5>
         </div>
         <div class="container-card-info">
-          <p> <i class="fa-solid fa-calendar-days me-2"> </i> Lesson Date: 2024-03-02 </p>
+          <p> <i class="fa-solid fa-calendar-days me-2"> </i> 2024-02-02 </p>
         </div>
         <!-- Three dots dropdown container -->
         <div class="dropdown-container">
