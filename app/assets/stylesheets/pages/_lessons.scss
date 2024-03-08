@@ -104,10 +104,10 @@
 }
 
 .lesson-form {
-  max-width: 600px;
+  max-width: 65%;
   margin: 20px auto;
   padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
 }
 
@@ -180,4 +180,10 @@ em {
   /* Your styles here */
   color: blue; /* Change color to your preference */
   font-weight: bold; /* Add or change styles as needed */
+}
+
+.lesson-new-index h1 {
+  color: #2e3c68ba;
+  font-size: 2rem;
+  margin-top: 16px;
 }

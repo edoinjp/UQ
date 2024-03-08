@@ -161,19 +161,27 @@ Chatroom.create!(
   classroom: classroom
 )
 lesson_content = <<-MARKDOWN
-# Ice Breaker Supplementary
+# Present Perfect Tense supplementary
 
 ---
 
-## Why are they needed
+## What they are
 
-At the start of a new semester, teachers around the world turn their attention to the very first class. With a new group of students to integrate and make comfortable, icebreakers are an activity that are essential to those first days.
+The present perfect tense is an English verb tense used for past actions that are related to or continue into the present. It’s easily recognized by the auxiliary verbs (or helper verbs) have and has, as in, “I have gone fishing since I was a child.”
 
 ---
 
-## Good activity
+## Let's dive in
 
-But what makes a good activity? Ideally, teachers need icebreakers that are low in social risk, matched to your class’s proficiency level, and perhaps just a bit silly. A good activity will encourage bonding, participation, motivation, and allow students to relax both mentally and physically. Of course, it’s an added bonus if they can be easily adapted as warm ups or speaking activities during the year.
+The present perfect tense is one of the common verb tenses in English, used to show an action that happened in the past that is directly related to the present, such as actions that are still continuing or that indicate a change over time.
+
+---
+
+In the present perfect tense, the main verbs always use the auxiliary verbs (helper verbs) has or have. The main verb takes a participle form, specifically the past participle. The past participle is often the same form as the simple past form of the verb, unless it’s an irregular verb, which each have their own unique past participle form. We explain in more detail how to form them in our guide to participles.
+
+---
+
+Only the auxiliary verbs are conjugated to fit the subject-verb agreement in the present perfect tense; the past participle of the main verb remains the same no matter what the subject is. Generally, you use have for all subjects except the singular third-person, which instead uses has.
 MARKDOWN
 
 # Seed Lesson
