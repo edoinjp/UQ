@@ -9,7 +9,7 @@
       </div>
     <% end %>
     <!-- Existing lessons go here -->
-    <% @lessons.each do |lesson| %>
+    <% @lessons.reverse_each do |lesson| %>
       <div class="col container-card">
         <div class="content-card">
           <% if lesson.date.to_date == Date.today %>
