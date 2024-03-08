@@ -6,7 +6,9 @@ export default class extends Controller {
     console.log('Sup')
   }
 
+  static targets = ["loadcircle"]
+
   spinner(event) {
-    
+    this.loadcircleTarget.classList.toggle("d-none");
   }
 }

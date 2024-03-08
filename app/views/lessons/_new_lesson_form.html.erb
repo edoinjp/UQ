@@ -11,10 +11,12 @@
         <p>Please use "---" for slide seperation</p>
       </div>
     </div>
-    <button data-action="click->loader#spinner">
+    <button class="creation-button" data-action="click->loader#spinner">
       <%= form.button :submit, class: "btn btn-lesson" %>
     </button>
   <% end %>
-</div>
 
-<div class="loader"></div>
+  <div class="loader-frame d-none" data-loader-target="loadcircle">
+    <div class="loader"></div>
+  </div>
+</div>
